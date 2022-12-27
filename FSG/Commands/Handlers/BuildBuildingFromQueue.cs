@@ -2,18 +2,21 @@
 using FSG.Core;
 using FSG.Entities;
 
-// TODO: Should we process building logic here? (costs, etc)
-
 namespace FSG.Commands.Handlers
 {
-    public class BuildBuilding : CommandHandler<Commands.BuildBuilding>
+    public class BuildBuildingFromQueue : CommandHandler<Commands.BuildBuildingFromQueue>
     {
-        public BuildBuilding(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public BuildBuildingFromQueue(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.BuildBuilding command)
+        public override void Handle(Commands.BuildBuildingFromQueue command)
         {
             var land = _serviceProvider.GlobalState.Entities.Get(command.LandId);
-            land.Buildings.Add(command.BuildingName);
+            var building = land.BuildingQueue.Dequeue();
+            _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuilding
+            {
+                LandId = land.Id,
+                BuildingName = building.Name
+            });
         }
     }
 }

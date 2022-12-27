@@ -1,11 +1,15 @@
 ﻿using System;
+using FSG.Entities;
+
 namespace FSG.Commands
 {
-	public struct CreateEmpire : ICommand
+	public struct BuildBuilding : ICommand
 	{
-		public string Action { get => "CREATE_EMPIRE"; }
+		public string Action { get => "BUILD_BUILDING"; }
 
-		public string Name { get; init; }
+		public string BuildingName { get; init; }
+
+		public EntityId<Land> LandId { get; init; }
 	}
 }
 

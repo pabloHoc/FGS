@@ -4,14 +4,14 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class SetLocation<T> : CommandHandler<Commands.SetLocation<T>> where T : IEntity<T>, IEntityWithLocation
+    public class SetOwnerEmpire<T> : CommandHandler<Commands.SetOwnerEmpire<T>> where T : IEntity<T>, IEntityWithOwner
     {
-        public SetLocation(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public SetOwnerEmpire(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        override public void Handle(Commands.SetLocation<T> command)
+        public override void Handle(Commands.SetOwnerEmpire<T> command)
         {
             var entity = _serviceProvider.GlobalState.Entities.Get(command.EntityId);
-            entity.RegionId = command.RegionId;
+            entity.EmpireId = command.EmpireId;
         }
     }
 }

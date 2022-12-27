@@ -4,18 +4,14 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class CreateEmpire : CommandHandler<Commands.CreateEmpire>
+    public class SetLocation<T> : CommandHandler<Commands.SetLocation<T>> where T : IEntity<T>, IEntityWithLocation
     {
-        public CreateEmpire(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public SetLocation(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        override public void Handle(Commands.CreateEmpire command)
+        public override void Handle(Commands.SetLocation<T> command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Empire
-            {
-                Id = new EntityId<Empire>(),
-                Name = command.Name
-            });
+            var entity = _serviceProvider.GlobalState.Entities.Get(command.EntityId);
+            entity.RegionId = command.RegionId;
         }
     }
 }
-

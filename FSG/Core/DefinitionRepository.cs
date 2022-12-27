@@ -12,7 +12,7 @@ namespace FSG.Core
           where TDefinition : IDefinition
         { }
 
-        private Dictionary<Type, IDefinitionDictionary> _definitions =
+        private readonly Dictionary<Type, IDefinitionDictionary> _definitions =
           new Dictionary<Type, IDefinitionDictionary>(){
             { typeof(LandDefinition), new DefinitionDictionary<LandDefinition>() },
             { typeof(BuildingDefinition), new DefinitionDictionary<BuildingDefinition>() },

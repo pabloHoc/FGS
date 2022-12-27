@@ -3,11 +3,15 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public struct CreateAgent: ICommand
+	public struct CreateArmy: ICommand
 	{
-		public string Action { get => "CREATE_AGENT"; }
+		public string Action { get => "CREATE_ARMY"; }
 
-		public string Name { get; init; }
+		public int Size { get; init; }
+
+		public int Attack { get; init; }
+
+		public int Defense { get; init; }
 
 		public EntityId<Empire> EmpireId { get; init; }
 

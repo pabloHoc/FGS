@@ -5,19 +5,20 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class CreateLand : CommandHandler<Commands.CreateLand>
+    public class CreateAgent : CommandHandler<Commands.CreateAgent>
     {
-        public CreateLand(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public CreateAgent(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        override public void Handle(Commands.CreateLand command)
+        public override void Handle(Commands.CreateAgent command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Land
+            _serviceProvider.GlobalState.Entities.Add(new Agent
             {
-                Id = new EntityId<Land>(),
+                Id = new EntityId<Agent>(),
                 Name = command.Name,
+                EmpireId = command.EmpireId,
                 RegionId = command.RegionId,
-                Buildings = new List<string>(),
-                Modifiers = new List<Modifier>()
+                Modifiers = new List<Modifier>(),
+                Actions = new Queue<ActionQueueItem>()
             });
         }
     }

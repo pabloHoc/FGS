@@ -3,13 +3,13 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public struct CreateAgent: ICommand
+	public class SetLocation<T>: ICommand where T : IEntity<T>, IEntityWithLocation
 	{
-		public string Action { get => "CREATE_AGENT"; }
+		public string Action { get => "SET_LOCATION"; }
 
-		public string Name { get; init; }
+		public EntityType EntityType { get; init; }
 
-		public EntityId<Empire> EmpireId { get; init; }
+		public EntityId<T> EntityId { get; init; }
 
 		public EntityId<Region> RegionId { get; init; }
 	}

@@ -1,4 +1,5 @@
 using FSG.Commands;
+using FSG.Commands.Handlers;
 
 namespace FSG.Core
 {

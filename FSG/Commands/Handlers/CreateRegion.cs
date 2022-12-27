@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class CreateEmpire : CommandHandler<Commands.CreateEmpire>
+    public class CreateRegion : CommandHandler<Commands.CreateRegion>
     {
-        public CreateEmpire(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public CreateRegion(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        override public void Handle(Commands.CreateEmpire command)
+        public override void Handle(Commands.CreateRegion command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Empire
+            _serviceProvider.GlobalState.Entities.Add(new Region
             {
-                Id = new EntityId<Empire>(),
-                Name = command.Name
+                Id = new EntityId<Region>(),
+                Name = command.Name,
+                EmpireId = command.EmpireId,
+                X = command.X,
+                Y = command.Y,
+                ConnectedTo = new List<EntityId<Region>>()
             });
         }
     }

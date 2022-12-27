@@ -3,16 +3,11 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class CreatePlayerHandler : ICommandHandler<CreatePlayer>
+    public class CreatePlayer : CommandHandler<Commands.CreatePlayer>
     {
-        private ServiceProvider _serviceProvider { get; }
+        public CreatePlayer(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public CreatePlayerHandler(ServiceProvider serviceProvider)
-        {
-            this._serviceProvider = serviceProvider;
-        }
-
-        public void Handle(CreatePlayer command)
+        public override void Handle(Commands.CreatePlayer command)
         {
             this._serviceProvider.GlobalState.Entities.Add(new Player
             {
