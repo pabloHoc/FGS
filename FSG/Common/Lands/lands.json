@@ -1,0 +1,26 @@
+[
+  {
+    "name": "forest",
+    "resources": {
+      "production": {
+        "wood": 1
+      }
+    }
+  },
+  {
+    "name": "grassland",
+    "resources": {
+      "production": {
+        "food": 1
+      }
+    }
+  },
+  {
+    "name": "mountain",
+    "resources": {
+      "production": {
+        "iron": 1
+      }
+    }
+  }
+]

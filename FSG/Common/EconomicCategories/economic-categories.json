@@ -1,0 +1,12 @@
+[
+  {
+    "name": "empire"
+  },
+  {
+    "name": "region",
+    "parent": "empire"
+  },
+  {
+    "name": "buildings"
+  }
+]

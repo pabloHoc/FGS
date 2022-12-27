@@ -1,0 +1,46 @@
+[
+  {
+    "name": "farm",
+    "baseBuildtime": 2,
+    "resources": {
+      "category": "buildings",
+      "cost": {
+        "food": 5
+      },
+      "production": {
+        "food": 1
+      }
+    }
+  },
+  {
+    "name": "mill",
+    "baseBuildtime": 2,
+    "conditions": {
+      "land": {
+        "is_land_type": "forest"
+      }
+    },
+    "resources": {
+      "category": "buildings",
+      "cost": {
+        "wood": 5
+      },
+      "production": {
+        "wood": 2
+      }
+    }
+  },
+  {
+    "name": "mine",
+    "baseBuildtime": 2,
+    "resources": {
+      "category": "buildings",
+      "cost": {
+        "iron": 5
+      },
+      "production": {
+        "iron": 1
+      }
+    }
+  }
+]
