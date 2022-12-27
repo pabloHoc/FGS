@@ -18,7 +18,6 @@ namespace FSG.Core
             { typeof(Empire), new EntityDictionary<Empire>() },
             { typeof(Region), new EntityDictionary<Region>() },
             { typeof(Land), new EntityDictionary<Land>() },
-            { typeof(BuildingQueueItem), new EntityDictionary<BuildingQueueItem>() },
             { typeof(Agent), new EntityDictionary<Agent>() },
             { typeof(Army), new EntityDictionary<Army>() },
             { typeof(ActionQueueItem), new EntityDictionary<ActionQueueItem>() },
@@ -26,9 +25,12 @@ namespace FSG.Core
             { typeof(Modifier), new EntityDictionary<Modifier>() }
         };
 
+        private IEntityId _lastAddedEntityId;
+
         public void Add<T>(IEntity<T> entity) where T : IEntity<T>
         {
             ((EntityDictionary<T>)_entities[typeof(T)]).Add(entity.Id, (T)entity);
+            _lastAddedEntityId = entity.Id;
         }
 
         public T Get<T>(IEntityId<T> entityId) where T : IEntity<T>
@@ -44,6 +46,13 @@ namespace FSG.Core
         public void Remove<T>(IEntityId<T> entityId) where T : IEntity<T>
         {
             ((EntityDictionary<T>)_entities[typeof(T)]).Remove(entityId);
+        }
+
+        // WARNING: Use inmmediately after dispatch create entity command only,
+        // otherwise cast could be wrong
+        public EntityId<T> GetLastAddedEntityId<T>() where T : IEntity<T>
+        {
+            return (EntityId<T>)_lastAddedEntityId;
         }
     }
 }
