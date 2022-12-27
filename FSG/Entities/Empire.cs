@@ -4,7 +4,7 @@ namespace FSG.Entities
 {
     public class Empire : IEntity<Empire>
     {
-        public string Type { get => "EMPIRE"; }
+        public EntityType Type { get; } = EntityType.Empire;
 
         public EntityId<Empire> Id { get; init; }
 

@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Agent : IEntity<Agent>
+    public class Agent : IEntity<Agent>, IEntityWithLocation, IEntityWithOwner
     {
-        public string Type { get => "AGENT"; }
+        public EntityType Type { get; } = EntityType.Agent;
 
         public EntityId<Agent> Id { get; init; }
 
         public string Name { get; init; }
 
-        public EntityId<Empire> EmpireId { get; init; }
+        public EntityId<Empire>? EmpireId { get; set; }
 
-        public EntityId<Region> RegionId { get; init; }
+        public EntityId<Region> RegionId { get; set; }
 
         public List<Modifier> Modifiers { get; init; }
 

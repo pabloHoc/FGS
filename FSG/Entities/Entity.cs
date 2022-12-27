@@ -1,16 +1,42 @@
 namespace FSG.Entities
 {
-    public interface IBaseEntity { }
+    public enum EntityType
+    {
+        ActionQueueItem,
+        Agent,
+        Army,
+        BuildingQueueItem,
+        Empire,
+        Land,
+        Modifier,
+        Player,
+        Region,
+        Spell
+    }
+
+    public interface IBaseEntity
+    {
+        public EntityType Type { get; }
+    }
 
     public interface IEntity<T> : IBaseEntity where T : IEntity<T>
     {
-        public string Type { get; }
 
         public EntityId<T> Id { get; }
     }
 
-    public interface IEntityWithTurns<T> : IEntity<T> where T : IEntity<T>
+    public interface IEntityWithTurns: IBaseEntity
     {
         public int RemainingTurns { get; set; }
+    }
+
+    public interface IEntityWithLocation : IBaseEntity
+    {
+        public EntityId<Region> RegionId { get; set; }
+    }
+
+    public interface IEntityWithOwner : IBaseEntity
+    {
+        public EntityId<Empire>? EmpireId { get; set; }
     }
 }

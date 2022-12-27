@@ -4,7 +4,7 @@ namespace FSG.Entities
 {
     public class Player : IEntity<Player>
     {
-        public string Type { get => "PLAYER"; }
+        public EntityType Type { get; } = EntityType.Player;
 
         public EntityId<Player> Id { get; init; }
 

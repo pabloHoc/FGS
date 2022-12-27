@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Region : IEntity<Region>
+    public class Region : IEntity<Region>, IEntityWithOwner
     {
-        public string Type { get => "REGION"; }
+        public EntityType Type { get; } = EntityType.Region;
 
         public EntityId<Region> Id { get; init; }
 
         public string Name { get; init; }
 
-        public EntityId<Empire> EmpireId { get; init; }
+        public EntityId<Empire>? EmpireId { get; set; }
 
-        public int X { get; init; }
+        public int X { get; init; } // TODO: Change to a struct with { x, y } (Coords, Location) 
 
         public int Y { get; init; }
 

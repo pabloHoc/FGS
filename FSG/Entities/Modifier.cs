@@ -7,9 +7,9 @@ namespace FSG.Entities
         Reduction
     }
 
-    public class Modifier : IEntityWithTurns<Modifier>
+    public class Modifier : IEntity<Modifier>, IEntityWithTurns
     {
-        public string Type { get => "MODIFIER"; }
+        public EntityType Type { get; } = EntityType.Modifier;
 
         public EntityId<Modifier> Id { get; init; }
 

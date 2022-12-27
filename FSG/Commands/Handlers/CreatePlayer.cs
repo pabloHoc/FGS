@@ -1,7 +1,7 @@
 using FSG.Core;
 using FSG.Entities;
 
-namespace FSG.Commands
+namespace FSG.Commands.Handlers
 {
     public class CreatePlayerHandler : ICommandHandler<CreatePlayer>
     {

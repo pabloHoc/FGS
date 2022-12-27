@@ -4,7 +4,7 @@ namespace FSG.Entities
 {
     public class Land : IEntity<Land>
     {
-        public string Type { get => "LAND"; }
+        public EntityType Type { get; } = EntityType.Land;
 
         public EntityId<Land> Id { get; init; }
 
@@ -14,6 +14,8 @@ namespace FSG.Entities
 
         public EntityId<Region> RegionId { get; init; }
 
-        public List<Modifier> Modifiers { get; init; } 
+        public List<Modifier> Modifiers { get; init; }
+
+        public Queue<BuildingQueueItem> BuildingQueue { get; init; }
     }
 }

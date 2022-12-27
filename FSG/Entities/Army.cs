@@ -1,8 +1,8 @@
 namespace FSG.Entities
 {
-    public class Army : IEntity<Army>
+    public class Army : IEntity<Army>, IEntityWithLocation, IEntityWithOwner
     {
-        public string Type { get => "ARMY"; }
+        public EntityType Type { get; } = EntityType.Army;
 
         public EntityId<Army> Id { get; init; }
 
@@ -12,8 +12,8 @@ namespace FSG.Entities
 
         public int Defense { get; init; }
 
-        public EntityId<Empire> EmpireId { get; init; }
+        public EntityId<Empire>? EmpireId { get; set; }
 
-        public EntityId<Region> RegionId { get; init; }
+        public EntityId<Region> RegionId { get; set; }
     }
 }

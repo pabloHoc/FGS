@@ -1,8 +1,8 @@
 namespace FSG.Entities
 {
-    public class Spell : IEntityWithTurns<Spell>
+    public class Spell : IEntity<Spell>, IEntityWithTurns
     {
-        public string Type { get => "SPELL"; }
+        public EntityType Type { get; } = EntityType.Spell;
 
         public EntityId<Spell> Id { get; init; }
 
