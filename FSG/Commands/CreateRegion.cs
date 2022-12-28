@@ -10,7 +10,7 @@ namespace FSG.Commands
 
 		public string Name { get; init; }
 
-		public EntityId<Empire> EmpireId { get; init; }
+		public EntityId<Empire>? EmpireId { get; init; }
 
 		public int X { get; init; }
 

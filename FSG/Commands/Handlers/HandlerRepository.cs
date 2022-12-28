@@ -25,6 +25,8 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.CreateLand),  new CreateLand(serviceProvider) },
                 { typeof(Commands.CreatePlayer), new CreatePlayer(serviceProvider) },
                 { typeof(Commands.CreateRegion), new CreateRegion(serviceProvider) },
+                { typeof(Commands.GenerateWorld), new GenerateWorld(serviceProvider) },
+                { typeof(Commands.ProcessBuildingQueues), new ProcessBuildingQueues(serviceProvider) },
                 { typeof(Commands.SetLocation<Agent>), new SetLocation<Agent>(serviceProvider) },
                 { typeof(Commands.SetLocation<Army>), new SetLocation<Army>(serviceProvider) },
                 { typeof(Commands.SetOwnerEmpire<Agent>), new SetOwnerEmpire<Agent>(serviceProvider) },
