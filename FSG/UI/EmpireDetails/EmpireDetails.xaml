@@ -1,0 +1,6 @@
+﻿<Project>
+    <!-- EMPIRE DETAILS -->
+    <Panel Id="EmpireDetailsPanel" Width="300" Background="#000000" Padding="10">
+        <Label Id="EmpireNameLabel" />
+    </Panel>
+</Project>

@@ -1,20 +1,28 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.IO;
+using FSG.UI;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Myra;
+using Myra.Assets;
 using Myra.Graphics2D.UI;
+using Myra.Utility;
 
 namespace FSG;
 
-public class GameApp : Game
+public class GameApp : Microsoft.Xna.Framework.Game
 {
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Desktop _desktop;
+    private readonly FSG.Core.Game _game;
+    private FSG.UI.UI _ui;
 
     public GameApp()
     {
+        _game = new FSG.Core.Game();
         _graphics = new GraphicsDeviceManager(this);
+
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
@@ -31,12 +39,16 @@ public class GameApp : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
-        CreateUI();
+        MyraEnvironment.Game = this;
+
+        _ui = new FSG.UI.UI(_game.ServiceProviderDebug);
+        _ui.Initialize();
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+            Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
         // TODO: Add your update logic here
@@ -46,57 +58,11 @@ public class GameApp : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Black);
-        _desktop.Render();
-
+        GraphicsDevice.Clear(Color.LightGray);
         // TODO: Add your drawing code here
 
         base.Draw(gameTime);
-    }
-
-    private void CreateUI()
-    {
-        MyraEnvironment.Game = this;
-
-        var grid = new Grid
-        {
-            RowSpacing = 8,
-            ColumnSpacing = 8
-        };
-
-        grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
-        grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
-        grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
-        grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
-
-        // Label
-        var helloWorld = new Label
-        {
-            Id = "label",
-            Text = "Hello, World!"
-        };
-
-        grid.Widgets.Add(helloWorld);
-
-        // Button
-        var button = new TextButton
-        {
-            GridColumn = 0,
-            GridRow = 1,
-            Text = "Show"
-        };
-
-        button.Click += (s, a) =>
-        {
-            var messageBox = Dialog.CreateMessageBox("Message", "Some message!");
-            messageBox.ShowModal(_desktop);
-        };
-
-        grid.Widgets.Add(button);
-
-        // Add it to the desktop
-        _desktop = new Desktop();
-        _desktop.Root = grid;
+        _ui.Draw();
     }
 }
 
