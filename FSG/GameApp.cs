@@ -22,6 +22,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
     {
         _game = new FSG.Core.Game();
         _graphics = new GraphicsDeviceManager(this);
+        _graphics.PreferredBackBufferHeight = 768;
+        _graphics.PreferredBackBufferWidth = 1024;
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -41,7 +43,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         // TODO: use this.Content to load your game content here
         MyraEnvironment.Game = this;
 
-        _ui = new FSG.UI.UI(_game.ServiceProviderDebug);
+        _ui = new FSG.UI.UI(_game.ServiceProvider);
         _ui.Initialize();
     }
 

@@ -16,6 +16,12 @@ namespace FSG.UI
         public UI(ServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            _serviceProvider.Dispatcher.CommandDispatched += OnCommandDispatched;
+        }
+
+        private void OnCommandDispatched(object sender, Commands.ICommand e)
+        {
+            Update();
         }
 
         public void Initialize()
@@ -24,6 +30,7 @@ namespace FSG.UI
             var assetManager = new AssetManager(assetResolver);
 
             _controllers.Add(new EmpireDetailsController(_serviceProvider, _desktop, assetManager));
+            _controllers.Add(new TurnPanelController(_serviceProvider, _desktop, assetManager));
         }
 
         public void Draw()
@@ -31,7 +38,7 @@ namespace FSG.UI
             _desktop.Render();
         }
 
-        public void Update()
+        private void Update()
         {
             foreach(var controller in _controllers)
             {

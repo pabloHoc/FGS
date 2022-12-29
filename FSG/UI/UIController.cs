@@ -16,7 +16,7 @@ namespace FSG.UI
             _serviceProvider = serviceProvider;
             _desktop = desktop;
 
-            string data = File.ReadAllText("../../../UI/EmpireDetails/EmpireDetails.xaml");
+            string data = File.ReadAllText(xmlPath);
             Project project = Project.LoadFromXml(data, assetManager);
             _root = project.Root;
 

@@ -1,3 +1,4 @@
+using System;
 using FSG.Commands;
 using FSG.Commands.Handlers;
 
@@ -5,6 +6,8 @@ namespace FSG.Core
 {
     public class CommandDispatcher
     {
+        public event EventHandler<ICommand> CommandDispatched;
+
         private HandlerRepository _handlerRepository { get; }
 
         public CommandDispatcher(ServiceProvider serviceProvider)
@@ -15,6 +18,7 @@ namespace FSG.Core
         public void Dispatch<T>(T command) where T : ICommand
         {
             this._handlerRepository.Get<T>().Handle(command);
+            CommandDispatched.Invoke(this, command);
         }
     }
 }

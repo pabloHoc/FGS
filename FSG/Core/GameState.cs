@@ -4,6 +4,11 @@ namespace FSG.Core
     {
         public EntityRepository Entities { get; } = new EntityRepository();
 
-        public int Turn { get; set; } = 0;
+        public int Turn { get; private set; } = 0;
+
+        public void nextTurn()
+        {
+            Turn++;
+        }
     }
 }
