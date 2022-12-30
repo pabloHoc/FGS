@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace FSG.Commands
 {
 	public struct WorldGenerationOptions

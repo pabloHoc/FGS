@@ -1,0 +1,27 @@
+﻿<Project>
+    <VerticalStackPanel Id="EmpireListPanel" Background="#000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="300" Top="350">
+        <VerticalStackPanel.Proportions>
+          <Proportion Type="Auto" />
+          <Proportion Type="Auto" />
+        </VerticalStackPanel.Proportions>
+        <!-- HEADER -->
+        <Panel Margin="0, 0, 10, 0" Background="Grey" Padding="10">
+            <Grid ColumnSpacing="8" RowSpacing="8">
+                <Grid.ColumnsProportions>
+                    <Proportion />
+                    <Proportion />
+                </Grid.ColumnsProportions>
+                <Label Id="EmpireListTitle" Text="Empires" GridColumn="1" />
+                <TextButton Id="EmpireListToggleBtn" Text="Toggle" GridColumn="2" HorizontalAlignment="Right" />
+            </Grid>
+        </Panel>
+        <ScrollViewer Id="EmpireListScrollViewer" Padding="10" Height="300">
+            <Grid ColumnSpacing="8" RowSpacing="8" Id="EmpireListGrid">
+                <Grid.DefaultRowProportion Type="Auto" />
+                <Grid.ColumnsProportions>
+                    <Proportion Type="Fill" />
+                </Grid.ColumnsProportions>
+            </Grid>
+        </ScrollViewer>
+    </VerticalStackPanel>
+</Project>

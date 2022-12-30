@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FSG.Core;
+using FSG.Commands;
 using Myra;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
@@ -19,9 +20,9 @@ namespace FSG.UI
             _serviceProvider.Dispatcher.CommandDispatched += OnCommandDispatched;
         }
 
-        private void OnCommandDispatched(object sender, Commands.ICommand e)
+        private void OnCommandDispatched(object sender, ICommand command)
         {
-            Update();
+            Update(command);
         }
 
         public void Initialize()
@@ -29,7 +30,9 @@ namespace FSG.UI
             var assetResolver = new FileAssetResolver("../../../UI");
             var assetManager = new AssetManager(assetResolver);
 
-            _controllers.Add(new EmpireDetailsController(_serviceProvider, _desktop, assetManager));
+            _controllers.Add(new EmpireInfoController(_serviceProvider, _desktop, assetManager));
+            _controllers.Add(new CommandLogController(_serviceProvider, _desktop, assetManager));
+            _controllers.Add(new EmpireListController(_serviceProvider, _desktop, assetManager));
             _controllers.Add(new TurnPanelController(_serviceProvider, _desktop, assetManager));
         }
 
@@ -38,11 +41,11 @@ namespace FSG.UI
             _desktop.Render();
         }
 
-        private void Update()
+        private void Update(ICommand command)
         {
             foreach(var controller in _controllers)
             {
-                controller.Update();
+                controller.Update(command);
             }
         }
     }

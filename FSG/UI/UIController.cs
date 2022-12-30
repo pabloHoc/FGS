@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using FSG.Core;
+using FSG.Commands;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
 
@@ -33,7 +34,7 @@ namespace FSG.UI
             _desktop.Widgets.Remove(_root);
         }
 
-        public abstract void Update();
+        public abstract void Update(ICommand command);
     }
 }
 

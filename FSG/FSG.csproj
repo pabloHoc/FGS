@@ -20,8 +20,8 @@
     <None Remove="UI\" />
     <None Remove="Noesis.GUI" />
     <None Remove="Noesis.App" />
-    <None Remove="UI\EmpireDetails\" />
     <None Remove="UI\TurnPanel\" />
+    <None Remove="UI\CommandLog\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -34,8 +34,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
-    <Folder Include="UI\EmpireDetails\" />
     <Folder Include="UI\TurnPanel\" />
+    <Folder Include="UI\CommandLog\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

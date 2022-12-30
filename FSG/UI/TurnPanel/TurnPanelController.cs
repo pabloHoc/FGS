@@ -20,7 +20,7 @@ namespace FSG.UI
             _serviceProvider.Dispatcher.Dispatch(new EndTurn());
         }
 
-        public override void Update()
+        public override void Update(ICommand command)
         {
             var turnLabel = (Label)_root.FindWidgetById("TurnLabel");
             var turn = _serviceProvider.GlobalState.Turn;

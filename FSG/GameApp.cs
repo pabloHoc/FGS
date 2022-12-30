@@ -34,6 +34,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         // TODO: Add your initialization logic here
 
         base.Initialize();
+        _game.Initialize();
     }
 
     protected override void LoadContent()

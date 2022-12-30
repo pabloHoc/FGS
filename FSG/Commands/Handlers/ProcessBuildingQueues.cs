@@ -14,15 +14,18 @@ namespace FSG.Commands.Handlers
 
             foreach(var land in lands)
             {
-                var buildingQueueItem = land.BuildingQueue.Peek();
-                buildingQueueItem.RemainingTurns--;
-
-                if (buildingQueueItem.RemainingTurns == 0)
+                BuildingQueueItem buildingQueueItem = null;
+                if (land.BuildingQueue.TryPeek(out buildingQueueItem))
                 {
-                    _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuildingFromQueue
+                    buildingQueueItem.RemainingTurns--;
+
+                    if (buildingQueueItem.RemainingTurns == 0)
                     {
-                        LandId = land.Id
-                    });
+                        _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuildingFromQueue
+                        {
+                            LandId = land.Id
+                        });
+                    }
                 }
             }
         }
