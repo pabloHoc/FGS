@@ -3,7 +3,7 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public class SetOwnerEmpire<T>: ICommand where T : IEntity<T>, IEntityWithOwner
+	public class SetOwnerEmpire<T>: ICommand where T : IEntity<T>, IOwneableEntity
 	{
 		public string Action { get => "SET_OWNER_EMPIRE"; }
 

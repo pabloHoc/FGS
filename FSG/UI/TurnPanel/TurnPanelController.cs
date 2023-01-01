@@ -8,10 +8,13 @@ namespace FSG.UI
 {
     public class TurnPanelController : UIController
     {
-        public TurnPanelController(ServiceProvider serviceProvider, Desktop desktop, AssetManager assetManager)
-            : base("../../../UI/TurnPanel/TurnPanel.xaml", serviceProvider, desktop, assetManager)
+        private readonly Label _turnLabel;
+
+        public TurnPanelController(ServiceProvider serviceProvider, Desktop desktop, UIEventManager eventManager, AssetManager assetManager)
+            : base("../../../UI/TurnPanel/TurnPanel.xaml", serviceProvider, desktop, eventManager, assetManager)
         {
-            var endTurnBtn= (TextButton)_root.FindWidgetById("EndTurnButton");
+            _turnLabel = (Label)Root.FindWidgetById("TurnLabel");
+            var endTurnBtn= (TextButton)Root.FindWidgetById("EndTurnButton");
             endTurnBtn.Click += HandleEndTurn;
         }
 
@@ -22,9 +25,8 @@ namespace FSG.UI
 
         public override void Update(ICommand command)
         {
-            var turnLabel = (Label)_root.FindWidgetById("TurnLabel");
             var turn = _serviceProvider.GlobalState.Turn;
-            turnLabel.Text = $"Turn #{turn}";
+            _turnLabel.Text = $"Turn #{turn}";
         }
     }
 }

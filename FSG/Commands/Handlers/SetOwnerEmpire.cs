@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class SetOwnerEmpire<T> : CommandHandler<Commands.SetOwnerEmpire<T>> where T : IEntity<T>, IEntityWithOwner
+    public class SetOwnerEmpire<T> : CommandHandler<Commands.SetOwnerEmpire<T>> where T : IEntity<T>, IOwneableEntity
     {
         public SetOwnerEmpire(ServiceProvider serviceProvider) : base(serviceProvider) { }
 

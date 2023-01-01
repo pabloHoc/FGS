@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class SetLocation<T> : CommandHandler<Commands.SetLocation<T>> where T : IEntity<T>, IEntityWithLocation
+    public class SetLocation<T> : CommandHandler<Commands.SetLocation<T>> where T : IEntity<T>, ILocatableEntity
     {
         public SetLocation(ServiceProvider serviceProvider) : base(serviceProvider) { }
 

@@ -13,6 +13,7 @@ namespace FSG.UI
         private readonly Desktop _desktop = new Desktop();
         private readonly List<UIController> _controllers = new List<UIController>();
         private readonly ServiceProvider _serviceProvider;
+        private readonly UIEventManager _eventManager = new UIEventManager();
 
         public UI(ServiceProvider serviceProvider)
         {
@@ -30,10 +31,9 @@ namespace FSG.UI
             var assetResolver = new FileAssetResolver("../../../UI");
             var assetManager = new AssetManager(assetResolver);
 
-            _controllers.Add(new EmpireInfoController(_serviceProvider, _desktop, assetManager));
-            _controllers.Add(new CommandLogController(_serviceProvider, _desktop, assetManager));
-            _controllers.Add(new EmpireListController(_serviceProvider, _desktop, assetManager));
-            _controllers.Add(new TurnPanelController(_serviceProvider, _desktop, assetManager));
+            _controllers.Add(new EmpireInfoController(_serviceProvider, _desktop, _eventManager, assetManager));
+            _controllers.Add(new DebugPanelController(_serviceProvider, _desktop, _eventManager, assetManager));
+            _controllers.Add(new TurnPanelController(_serviceProvider, _desktop, _eventManager, assetManager));
         }
 
         public void Draw()
@@ -43,7 +43,7 @@ namespace FSG.UI
 
         private void Update(ICommand command)
         {
-            foreach(var controller in _controllers)
+            foreach (var controller in _controllers)
             {
                 controller.Update(command);
             }

@@ -8,30 +8,38 @@ namespace FSG.UI
 {
     public abstract class UIController
     {
+        protected readonly UI _ui;
         protected readonly ServiceProvider _serviceProvider;
         protected readonly Desktop _desktop;
-        protected readonly Widget _root;
+        protected readonly UIEventManager _eventManager;
+        public Widget Root { get; init; }
 
-        public UIController(string xmlPath, ServiceProvider serviceProvider, Desktop desktop, AssetManager assetManager)
+        public UIController(
+            string xmlPath,
+            ServiceProvider serviceProvider,
+            Desktop desktop,
+            UIEventManager eventManager,
+            AssetManager assetManager)
         {
             _serviceProvider = serviceProvider;
             _desktop = desktop;
+            _eventManager = eventManager;
 
             string data = File.ReadAllText(xmlPath);
             Project project = Project.LoadFromXml(data, assetManager);
-            _root = project.Root;
+            Root = project.Root;
 
             Show();
         }
 
-        public void Show()
+        public virtual void Show()
         {
-            _desktop.Widgets.Add(_root);
+            _desktop.Widgets.Add(Root);
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
-            _desktop.Widgets.Remove(_root);
+            _desktop.Widgets.Remove(Root);
         }
 
         public abstract void Update(ICommand command);

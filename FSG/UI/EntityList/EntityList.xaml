@@ -1,6 +1,6 @@
 ﻿<Project>
-    <ScrollViewer Id="CommandLogScrollViewer" Padding="10">
-        <Grid ColumnSpacing="8" RowSpacing="8" Id="CommandLogGrid">
+    <ScrollViewer Id="EntityListScrollViewer" Padding="10" Height="300">
+        <Grid ColumnSpacing="8" RowSpacing="8" Id="EntityListGrid">
             <Grid.DefaultRowProportion Type="Auto" />
             <Grid.ColumnsProportions>
                 <Proportion Type="Fill" />

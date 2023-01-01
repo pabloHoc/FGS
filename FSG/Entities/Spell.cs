@@ -1,6 +1,6 @@
 namespace FSG.Entities
 {
-    public class Spell : IEntity<Spell>, IEntityWithTurns
+    public class Spell : IEntity<Spell>, ITemporaryEntity
     {
         public EntityType Type { get; } = EntityType.Spell;
 

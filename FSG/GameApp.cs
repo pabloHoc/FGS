@@ -22,8 +22,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
     {
         _game = new FSG.Core.Game();
         _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferHeight = 768;
-        _graphics.PreferredBackBufferWidth = 1024;
+        _graphics.PreferredBackBufferWidth = 1280;
+        _graphics.PreferredBackBufferHeight = 800;
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;

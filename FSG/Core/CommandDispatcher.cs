@@ -17,8 +17,8 @@ namespace FSG.Core
 
         public void Dispatch<T>(T command) where T : ICommand
         {
-            this._handlerRepository.Get<T>().Handle(command);
             CommandDispatched.Invoke(this, command);
+            this._handlerRepository.Get<T>().Handle(command);
         }
     }
 }

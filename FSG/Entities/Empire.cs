@@ -2,7 +2,7 @@
 
 namespace FSG.Entities
 {
-    public class Empire : IEntity<Empire>
+    public class Empire : IEntity<Empire>, INameableEntity
     {
         public EntityType Type { get; } = EntityType.Empire;
 

@@ -8,7 +8,7 @@ namespace FSG.Entities
         Spell
     }
 
-    public class ActionQueueItem : IEntity<ActionQueueItem>, IEntityWithTurns
+    public class ActionQueueItem : IEntity<ActionQueueItem>, ITemporaryEntity
     {
         public EntityType Type { get; } = EntityType.ActionQueueItem;
 

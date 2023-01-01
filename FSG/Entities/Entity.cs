@@ -25,18 +25,23 @@ namespace FSG.Entities
         public EntityId<T> Id { get; }
     }
 
-    public interface IEntityWithTurns: IBaseEntity
+    public interface ITemporaryEntity: IBaseEntity
     {
         public int RemainingTurns { get; set; }
     }
 
-    public interface IEntityWithLocation : IBaseEntity
+    public interface ILocatableEntity : IBaseEntity
     {
         public EntityId<Region> RegionId { get; set; }
     }
 
-    public interface IEntityWithOwner : IBaseEntity
+    public interface IOwneableEntity : IBaseEntity
     {
         public EntityId<Empire>? EmpireId { get; set; }
+    }
+
+    public interface INameableEntity : IBaseEntity
+    {
+        public string Name { get; init; }
     }
 }

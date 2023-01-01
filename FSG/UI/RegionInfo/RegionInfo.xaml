@@ -1,5 +1,5 @@
 ﻿<Project>
     <Panel Width="400" Background="#000000" Padding="10">
-        <Label Id="EmpireNameLabel" />
+        <Label Id="RegionNameLabel" />
     </Panel>
 </Project>

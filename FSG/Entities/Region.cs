@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Region : IEntity<Region>, IEntityWithOwner
+    public class Region : IEntity<Region>, IOwneableEntity, INameableEntity
     {
         public EntityType Type { get; } = EntityType.Region;
 

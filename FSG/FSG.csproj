@@ -22,6 +22,7 @@
     <None Remove="Noesis.App" />
     <None Remove="UI\TurnPanel\" />
     <None Remove="UI\CommandLog\" />
+    <None Remove="UI\Sidebar\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -36,6 +37,7 @@
     <Folder Include="UI\" />
     <Folder Include="UI\TurnPanel\" />
     <Folder Include="UI\CommandLog\" />
+    <Folder Include="UI\Sidebar\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

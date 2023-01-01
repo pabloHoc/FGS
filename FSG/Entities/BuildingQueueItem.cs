@@ -2,7 +2,7 @@
 
 namespace FSG.Entities
 {
-    public class BuildingQueueItem : IEntity<BuildingQueueItem>, IEntityWithTurns
+    public class BuildingQueueItem : IEntity<BuildingQueueItem>, ITemporaryEntity
     {
         public EntityType Type { get; } = EntityType.BuildingQueueItem;
 
