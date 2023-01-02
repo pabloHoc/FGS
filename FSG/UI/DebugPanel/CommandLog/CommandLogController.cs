@@ -13,8 +13,8 @@ namespace FSG.UI
         private readonly ScrollViewer _content;
         private int _count = 1;
 
-        public CommandLogController(ServiceProvider serviceProvider, Desktop desktop, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/CommandLog/CommandLog.xaml", serviceProvider, desktop, eventManager, assetManager)
+        public CommandLogController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
+            : base("../../../UI/DebugPanel/CommandLog/CommandLog.xaml", serviceProvider, eventManager, assetManager)
         {
             _commandLog = (Grid)Root.FindWidgetById("CommandLogGrid");
             _content = (ScrollViewer)Root.FindWidgetById("CommandLogScrollViewer");
@@ -27,16 +27,6 @@ namespace FSG.UI
             commandLabel.GridRow = _count;
             _commandLog.AddChild(commandLabel);
             _count++;
-        }
-
-        public override void Show()
-        {
-
-        }
-
-        public override void Hide()
-        {
-
         }
     }
 }

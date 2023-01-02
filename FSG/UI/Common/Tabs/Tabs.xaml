@@ -1,0 +1,8 @@
+﻿<Project>
+    <VerticalStackPanel>
+        <HorizontalStackPanel Id="Tabs"></HorizontalStackPanel>
+        <ScrollViewer>
+            <Panel Id="TabItems"></Panel>
+        </ScrollViewer>
+    </VerticalStackPanel>
+</Project>

@@ -6,7 +6,8 @@ namespace FSG.Core
 {
     public class CommandDispatcher
     {
-        public event EventHandler<ICommand> CommandDispatched;
+        public event EventHandler<ICommand> OnCommandDispatched;
+        public event EventHandler<ICommand> OnCommandProcessed;
 
         private HandlerRepository _handlerRepository { get; }
 
@@ -17,8 +18,9 @@ namespace FSG.Core
 
         public void Dispatch<T>(T command) where T : ICommand
         {
-            CommandDispatched.Invoke(this, command);
+            OnCommandDispatched.Invoke(this, command);
             this._handlerRepository.Get<T>().Handle(command);
+            OnCommandProcessed.Invoke(this, command);
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿<Project>
+    <VerticalStackPanel Background="#000000">
+        <Label Id="RegionNameLabel" />
+        <Label Text="Lands" />
+        <VerticalStackPanel Id="LandList" />
+    </VerticalStackPanel>
+</Project>

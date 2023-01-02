@@ -1,16 +1,4 @@
 ﻿<Project>
-    <VerticalStackPanel Id="Tabs" Background="#000000" HorizontalAlignment="Right" VerticalAlignment="Top" TabSelectorPosition="Top" Width="350" Height="260" >
-        <VerticalStackPanel.Proportions>
-            <Proportion Type="Auto" />
-            <Proportion Type="Fill" />
-        </VerticalStackPanel.Proportions>
-        <HorizontalStackPanel Spacing="8">
-            <TextButton Id="CommandsTab" Text="Commands"></TextButton>
-            <TextButton Id="EmpiresTab" Text="Empires"></TextButton>
-            <TextButton Id="RegionsTab" Text="Regions"></TextButton>
-            <TextButton Id="AgentsTab" Text="Agents"></TextButton>
-        </HorizontalStackPanel>
-        <Panel Id="TabItems">
-        </Panel>
-    </VerticalStackPanel>
+    <Panel Id="DebugPanel" Background="#000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="350" Height="260" >
+    </Panel>
 </Project>

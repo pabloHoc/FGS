@@ -1,0 +1,5 @@
+﻿<Project>
+    <VerticalStackPanel Background="#000000">
+        <Label Id="AgentNameLabel" />
+    </VerticalStackPanel>
+</Project>

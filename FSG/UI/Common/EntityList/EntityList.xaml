@@ -1,0 +1,8 @@
+﻿<Project>
+    <Grid ColumnSpacing="8" RowSpacing="8" Id="EntityListGrid">
+        <Grid.DefaultRowProportion Type="Auto" />
+        <Grid.ColumnsProportions>
+            <Proportion Type="Fill" />
+        </Grid.ColumnsProportions>
+    </Grid>
+</Project>

@@ -10,8 +10,8 @@ namespace FSG.UI
     {
         private readonly Label _turnLabel;
 
-        public TurnPanelController(ServiceProvider serviceProvider, Desktop desktop, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/TurnPanel/TurnPanel.xaml", serviceProvider, desktop, eventManager, assetManager)
+        public TurnPanelController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
+            : base("../../../UI/TurnPanel/TurnPanel.xaml", serviceProvider, eventManager, assetManager)
         {
             _turnLabel = (Label)Root.FindWidgetById("TurnLabel");
             var endTurnBtn= (TextButton)Root.FindWidgetById("EndTurnButton");

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Land : IEntity<Land>
+    public class Land : IEntity<Land>, INameableEntity
     {
         public EntityType Type { get; } = EntityType.Land;
 
