@@ -4,6 +4,11 @@ using FSG.Entities;
 
 namespace FSG.Core
 {
+    public interface IQuery<T> where T : IEntity<T>
+    {
+        public Predicate<T> GetPredicate();
+    }
+
     public class EntityRepository
     {
         private interface IEntityDictionary { }
@@ -36,6 +41,11 @@ namespace FSG.Core
         public T Get<T>(IEntityId<T> entityId) where T : IEntity<T>
         {
             return ((EntityDictionary<T>)_entities[typeof(T)])[entityId];
+        }
+
+        public List<T> Query<T>(IQuery<T> query) where T : IEntity<T>
+        {
+            return GetAll<T>().FindAll(query.GetPredicate());
         }
 
         public List<T> GetAll<T>() where T : IEntity<T>

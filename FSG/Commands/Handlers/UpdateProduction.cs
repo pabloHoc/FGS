@@ -2,6 +2,7 @@
 using FSG.Core;
 using FSG.Data;
 using FSG.Entities;
+using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -31,7 +32,7 @@ namespace FSG.Commands.Handlers
         private void ComputeProduction(Empire empire)
         {
             var empireRegions = _serviceProvider.GlobalState.Entities
-                .GetAll<Region>().FindAll(region => region.EmpireId.Equals(empire.Id));
+                .Query(new GetEmpireRegions(empire.Id));
 
             foreach (var region in empireRegions)
             {
@@ -42,7 +43,7 @@ namespace FSG.Commands.Handlers
         private void ComputeRegionProduction(Region region, Empire empire)
         {
             var regionLands = _serviceProvider.GlobalState.Entities
-                .GetAll<Land>().FindAll(land => land.RegionId.Equals(region.Id));
+                .Query(new GetRegionLands(region.Id));
 
             foreach (var land in regionLands)
             {

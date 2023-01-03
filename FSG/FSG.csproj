@@ -31,6 +31,7 @@
     <None Remove="UI\Common\" />
     <None Remove="UI\Common\Tabs\" />
     <None Remove="UI\Common\EntityList\" />
+    <None Remove="Entities\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -53,6 +54,7 @@
     <Folder Include="UI\Common\" />
     <Folder Include="UI\Common\Tabs\" />
     <Folder Include="UI\Common\EntityList\" />
+    <Folder Include="Entities\Queries\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
