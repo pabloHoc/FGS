@@ -6,7 +6,7 @@ namespace FSG.Data
 {
     public class DefinitionLoader
     {
-        private DefinitionRepository _repository;
+        private readonly DefinitionRepository _repository;
 
         public DefinitionLoader(DefinitionRepository repository)
         {
@@ -22,10 +22,10 @@ namespace FSG.Data
 
         public void LoadDefinitions()
         {
-            this.LoadDefinition<ResourceDefinition>("../../../Common/Resources/resources.json");
-            this.LoadDefinition<BuildingDefinition>("../../../Common/Buildings/buildings.json");
-            this.LoadDefinition<LandDefinition>("../../../Common/Lands/lands.json");
-            this.LoadDefinition<EconomicCategoryDefinition>("../../../Common/EconomicCategories/economic-categories.json");
+            this.LoadDefinition<ResourceDefinition>("../../../Assets/Definitions/Resources/resources.json");
+            this.LoadDefinition<BuildingDefinition>("../../../Assets/Definitions/Buildings/buildings.json");
+            this.LoadDefinition<LandDefinition>("../../../Assets/Definitions/Lands/lands.json");
+            this.LoadDefinition<EconomicCategoryDefinition>("../../../Assets/Definitions/EconomicCategories/economic-categories.json");
         }
     }
 }

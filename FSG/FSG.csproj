@@ -32,6 +32,14 @@
     <None Remove="UI\Common\Tabs\" />
     <None Remove="UI\Common\EntityList\" />
     <None Remove="Entities\Queries\" />
+    <None Remove="Conditions\" />
+    <None Remove="Scopes\" />
+    <None Remove="Assets\Definitions\" />
+    <None Remove="Assets\Definitions\Buildings\" />
+    <None Remove="Assets\Definitions\EconomicCategories\" />
+    <None Remove="Assets\Definitions\Lands\" />
+    <None Remove="Assets\Definitions\Resources\" />
+    <None Remove="Common\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -55,6 +63,14 @@
     <Folder Include="UI\Common\Tabs\" />
     <Folder Include="UI\Common\EntityList\" />
     <Folder Include="Entities\Queries\" />
+    <Folder Include="Conditions\" />
+    <Folder Include="Scopes\" />
+    <Folder Include="Assets\Definitions\" />
+    <Folder Include="Assets\Definitions\Buildings\" />
+    <Folder Include="Assets\Definitions\EconomicCategories\" />
+    <Folder Include="Assets\Definitions\Lands\" />
+    <Folder Include="Assets\Definitions\Resources\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
