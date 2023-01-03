@@ -24,8 +24,14 @@ namespace FSG.Commands.Handlers
             });
 
             // Apply building costs
+            // TODO: add economic category modifiers
 
             var empire = _serviceProvider.GlobalState.Entities.Get(command.EmpireId);
+
+            foreach (var resource in buildingDefinition.Resources.Cost)
+            {
+                empire.Resources[resource.Key] -= resource.Value;
+            }
         }
     }
 }

@@ -60,12 +60,16 @@ namespace FSG.UI
             var buildingDefinitions = _serviceProvider.Definitions
                 .GetAll<BuildingDefinition>();
 
+            var empire = _serviceProvider.GlobalState.Entities
+                .Get(new EntityId<Empire>(_eventManager.SelectedEmpireId));
+
             foreach(var building in buildingDefinitions)
             {
                 var buildingBtn = new TextButton
                 {
                     Id = building.Name,
-                    Text = building.Name
+                    Text = building.Name,
+                    Enabled = building.Allow(empire)
                 };
                 buildingBtn.Click += HandleBuildingClick;
                 _buildingList.Widgets.Add(buildingBtn);

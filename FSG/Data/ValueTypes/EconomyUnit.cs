@@ -2,6 +2,13 @@ using System.Collections.Generic;
 
 namespace FSG.Data
 {
+    public enum EconomicType
+    {
+        Cost,
+        Upkeep,
+        Production
+    }
+
     public struct EconomyUnit
     {
         public string Category { get; init; }

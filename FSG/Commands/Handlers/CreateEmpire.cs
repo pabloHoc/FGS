@@ -28,7 +28,8 @@ namespace FSG.Commands.Handlers
                 Id = new EntityId<Empire>(),
                 Name = command.Name,
                 Resources = stored,
-                Production = production
+                Production = production,
+                Modifiers = new List<Entities.Modifier>()
             });
         }
     }

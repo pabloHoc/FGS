@@ -23,9 +23,9 @@ namespace FSG.Commands.Handlers
 
         private void ClearProduction(Empire empire)
         {
-            foreach (var entry in empire.Production)
+            foreach (var resource in empire.Production)
             {
-                empire.Production[entry.Key] = 0;
+                empire.Production[resource.Key] = 0;
             }
         }
 
@@ -60,16 +60,26 @@ namespace FSG.Commands.Handlers
         {
             var landDefinition = _serviceProvider.Definitions.Get<LandDefinition>(land.Name);
 
-            foreach (var entry in landDefinition.Resources.Production)
+            foreach (var resource in landDefinition.Resources.Production)
             {
-                empire.Production[entry.Key] += entry.Value;
+                empire.Production[resource.Key] += resource.Value;
             }
 
         }
 
         private void ComputeBuildingProduction(string building, Region region, Empire empire)
         {
-            
+            var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(building);
+            var economicCategoryDefinition = _serviceProvider.Definitions
+                .Get<EconomicCategoryDefinition>(buildingDefinition.Resources.Category);
+
+            foreach (var resource in buildingDefinition.Resources.Production)
+            {
+                var totalBuildingResourceProduction = economicCategoryDefinition
+                    .Compute(EconomicType.Production, resource.Key, resource.Value, empire.Modifiers, region.Modifiers);
+
+                empire.Production[resource.Key] += totalBuildingResourceProduction;
+            }
         }
     }
 }
