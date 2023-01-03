@@ -27,14 +27,17 @@ namespace FSG.UI
 
         private void HandleRegionSelected(object sender, string regionId)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get<Region>(new EntityId<Region>(regionId));
-            _regionNameLabel.Text = region.Name;
             Update();
         }
 
         public override void Update(ICommand command = null)
         {
-            _landList.Update(command);
+            if (_eventManager.SelectedRegionId != null)
+            {
+                var region = _serviceProvider.GlobalState.Entities.Get<Region>(new EntityId<Region>(_eventManager.SelectedRegionId));
+                _regionNameLabel.Text = region.Name;
+                _landList.Update(command);
+            }
         }
     }
 }

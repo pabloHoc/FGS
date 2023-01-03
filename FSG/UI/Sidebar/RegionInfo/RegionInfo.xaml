@@ -1,6 +1,7 @@
 ﻿<Project>
     <VerticalStackPanel Background="#000000">
         <Label Id="RegionNameLabel" />
+        <HorizontalSeparator />
         <Label Text="Lands" />
         <VerticalStackPanel Id="LandList" />
     </VerticalStackPanel>

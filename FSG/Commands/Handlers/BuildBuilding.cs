@@ -2,8 +2,6 @@
 using FSG.Core;
 using FSG.Entities;
 
-// TODO: Should we process building logic here? (costs, etc)
-
 namespace FSG.Commands.Handlers
 {
     public class BuildBuilding : CommandHandler<Commands.BuildBuilding>

@@ -1,5 +1,14 @@
 ﻿<Project>
     <VerticalStackPanel Background="#000000">
         <Label Id="LandNameLabel" />
+        <HorizontalSeparator />
+        <Label Text="Buildings" />
+        <HorizontalStackPanel Id="BuildingList" Spacing="8"></HorizontalStackPanel>
+        <HorizontalSeparator />
+        <Label Text="Built" />
+        <VerticalStackPanel Id="BuiltBuildingList"></VerticalStackPanel>
+        <HorizontalSeparator />
+        <Label Text="Queue" />
+        <VerticalStackPanel Id="BuildingQueue"></VerticalStackPanel>
     </VerticalStackPanel>
 </Project>

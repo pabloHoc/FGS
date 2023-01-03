@@ -33,14 +33,17 @@ namespace FSG.UI
 
         private void handleEmpireSelected(object sender, string empireId)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(new EntityId<Empire>(empireId));
-            _empireNameLabel.Text = empire.Name;
             Update();
         }
 
         public override void Update(ICommand command = null)
         {
-            _regionList.Update(command);
+            if (_eventManager.SelectedEmpireId != null)
+            {
+                var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(new EntityId<Empire>(_eventManager.SelectedEmpireId));
+                _empireNameLabel.Text = empire.Name;
+                _regionList.Update(command);
+            }
         }
     }
 }

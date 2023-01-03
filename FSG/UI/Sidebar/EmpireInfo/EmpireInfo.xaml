@@ -1,6 +1,7 @@
 ﻿<Project>
     <VerticalStackPanel Background="#000000">
         <Label Id="EmpireNameLabel" />
+        <HorizontalSeparator />
         <Label Text="Owned Regions" />
         <VerticalStackPanel Id="RegionList" />
     </VerticalStackPanel>

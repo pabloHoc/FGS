@@ -9,11 +9,11 @@ namespace FSG.Core
         public event EventHandler<ICommand> OnCommandDispatched;
         public event EventHandler<ICommand> OnCommandProcessed;
 
-        private HandlerRepository _handlerRepository { get; }
+        private HandlerMap _handlerRepository { get; }
 
         public CommandDispatcher(ServiceProvider serviceProvider)
         {
-            this._handlerRepository = new HandlerRepository(serviceProvider);
+            this._handlerRepository = new HandlerMap(serviceProvider);
         }
 
         public void Dispatch<T>(T command) where T : ICommand

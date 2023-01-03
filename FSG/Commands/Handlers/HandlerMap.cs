@@ -9,14 +9,15 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class HandlerRepository
+    public class HandlerMap
     {
         private readonly Dictionary<Type, IBaseCommandHandler> _handlers;
 
-        public HandlerRepository(ServiceProvider serviceProvider)
+        public HandlerMap(ServiceProvider serviceProvider)
         {
             this._handlers = new Dictionary<Type, IBaseCommandHandler>()
             {
+                { typeof(Commands.AddBuildingtoQueue),  new AddBuildingToQueue(serviceProvider) },
                 { typeof(Commands.BuildBuilding),  new BuildBuilding(serviceProvider) },
                 { typeof(Commands.BuildBuildingFromQueue),  new BuildBuildingFromQueue(serviceProvider) },
                 { typeof(Commands.CreateAgent),  new CreateAgent(serviceProvider) },

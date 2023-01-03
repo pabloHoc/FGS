@@ -20,8 +20,16 @@ namespace FSG.UI
 
         private void handleAgentSelected(object sender, string agentId)
         {
-            var agent = _serviceProvider.GlobalState.Entities.Get<Agent>(new EntityId<Agent>(agentId));
-            _agentNameLabel.Text = agent.Name;
+            Update();
+        }
+
+        public override void Update(ICommand command = null)
+        {
+            if (_eventManager.SelectedAgentId != null)
+            {
+                var agent = _serviceProvider.GlobalState.Entities.Get<Agent>(new EntityId<Agent>(_eventManager.SelectedAgentId));
+                _agentNameLabel.Text = agent.Name;
+            }
         }
     }
 }
