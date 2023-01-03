@@ -2,6 +2,9 @@
     <VerticalStackPanel Background="#000000">
         <Label Id="EmpireNameLabel" />
         <HorizontalSeparator />
+        <Label Text="Resources" />
+        <VerticalStackPanel Id="ResourceList" />
+        <HorizontalSeparator />
         <Label Text="Owned Regions" />
         <VerticalStackPanel Id="RegionList" />
     </VerticalStackPanel>

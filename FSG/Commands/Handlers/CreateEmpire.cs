@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
+using FSG.Data;
 using FSG.Entities;
 
 namespace FSG.Commands.Handlers
@@ -10,10 +12,23 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateEmpire command)
         {
+            var resources = _serviceProvider.Definitions.GetAll<ResourceDefinition>();
+
+            var stored = new Dictionary<string, int>();
+            var production = new Dictionary<string, int>();
+
+            foreach(var resource in resources)
+            {
+                stored.Add(resource.Name, 0);
+                production.Add(resource.Name, 0);
+            }
+
             _serviceProvider.GlobalState.Entities.Add(new Empire
             {
                 Id = new EntityId<Empire>(),
-                Name = command.Name
+                Name = command.Name,
+                Resources = stored,
+                Production = production
             });
         }
     }

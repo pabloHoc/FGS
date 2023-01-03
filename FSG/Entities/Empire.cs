@@ -1,4 +1,5 @@
-// TODO: Add resources and production
+using System.Collections.Generic;
+using FSG.Data;
 
 namespace FSG.Entities
 {
@@ -9,5 +10,9 @@ namespace FSG.Entities
         public EntityId<Empire> Id { get; init; }
 
         public string Name { get; init; }
+
+        public Dictionary<string, int> Resources { get; init; }
+
+        public Dictionary<string, int> Production { get; init; }
     }
 }

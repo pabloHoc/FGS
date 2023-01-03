@@ -27,13 +27,16 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.CreatePlayer), new CreatePlayer(serviceProvider) },
                 { typeof(Commands.CreateRegion), new CreateRegion(serviceProvider) },
                 { typeof(Commands.EndTurn), new EndTurn(serviceProvider) },
+                { typeof(Commands.GenerateResources), new GenerateResources(serviceProvider) },
                 { typeof(Commands.GenerateWorld), new GenerateWorld(serviceProvider) },
                 { typeof(Commands.ProcessBuildingQueues), new ProcessBuildingQueues(serviceProvider) },
                 { typeof(Commands.SetLocation<Agent>), new SetLocation<Agent>(serviceProvider) },
                 { typeof(Commands.SetLocation<Army>), new SetLocation<Army>(serviceProvider) },
                 { typeof(Commands.SetOwnerEmpire<Agent>), new SetOwnerEmpire<Agent>(serviceProvider) },
                 { typeof(Commands.SetOwnerEmpire<Army>), new SetOwnerEmpire<Army>(serviceProvider) },
-                { typeof(Commands.SetOwnerEmpire<Region>), new SetOwnerEmpire<Region>(serviceProvider) }
+                { typeof(Commands.SetOwnerEmpire<Region>), new SetOwnerEmpire<Region>(serviceProvider) },
+                { typeof(Commands.StartGame), new StartGame(serviceProvider) },
+                { typeof(Commands.UpdateProduction), new UpdateProduction(serviceProvider) }
             };
         }
 

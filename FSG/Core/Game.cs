@@ -13,6 +13,7 @@ namespace FSG.Core
         {
             LoadDefinitions();
             LoadWorld();
+            Start();
         }
 
         private void LoadDefinitions()
@@ -32,6 +33,11 @@ namespace FSG.Core
             };
 
             ServiceProvider.Dispatcher.Dispatch(new GenerateWorld { Options = options });
+        }
+
+        private void Start()
+        {
+            ServiceProvider.Dispatcher.Dispatch(new StartGame());
         }
     }
 }
