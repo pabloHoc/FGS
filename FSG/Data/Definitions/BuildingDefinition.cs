@@ -1,6 +1,9 @@
 // TODO: Add conditions
 
+using System.Collections.Generic;
+using FSG.Conditions;
 using FSG.Entities;
+using FSG.Scopes;
 
 namespace FSG.Data
 {
@@ -13,6 +16,8 @@ namespace FSG.Data
         public int BaseBuildTime { get; init; }
 
         public EconomyUnit Resources { get; init; }
+
+        public FSG.Conditions.Conditions Conditions { get; init; }
 
         public bool Allow(Empire empire)
         {
