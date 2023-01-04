@@ -1,6 +1,6 @@
 ﻿using System;
 using FSG.Core;
-using FSG.Data;
+using FSG.Definitions;
 using FSG.Entities;
 using FSG.Entities.Queries;
 
@@ -64,7 +64,6 @@ namespace FSG.Commands.Handlers
             {
                 empire.Production[resource.Key] += resource.Value;
             }
-
         }
 
         private void ComputeBuildingProduction(string building, Region region, Empire empire)

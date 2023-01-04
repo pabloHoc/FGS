@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FSG.Core;
-using FSG.Data;
+using FSG.Definitions;
 using FSG.Entities;
 
 namespace FSG.Commands.Handlers

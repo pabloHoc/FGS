@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using FSG.Entities;
 
-namespace FSG.Data
+namespace FSG.Definitions
 {
     public class EconomicCategoryDefinition : IDefinition
     {

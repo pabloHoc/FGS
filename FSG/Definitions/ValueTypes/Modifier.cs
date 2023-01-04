@@ -1,5 +1,6 @@
 ﻿using System;
-namespace FSG.Data
+
+namespace FSG.Definitions
 {
 	public struct Modifier
 	{

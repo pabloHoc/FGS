@@ -1,4 +1,4 @@
-namespace FSG.Data
+namespace FSG.Definitions
 {
     public enum DefinitionType
     {

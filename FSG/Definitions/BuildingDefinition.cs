@@ -1,11 +1,9 @@
-// TODO: Add conditions
-
 using System.Collections.Generic;
 using FSG.Conditions;
 using FSG.Entities;
 using FSG.Scopes;
 
-namespace FSG.Data
+namespace FSG.Definitions
 {
     public struct BuildingDefinition : IDefinition
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FSG.Data
+namespace FSG.Definitions
 {
     public enum EconomicType
     {

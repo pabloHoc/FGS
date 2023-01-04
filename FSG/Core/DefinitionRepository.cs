@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FSG.Data;
+using FSG.Definitions;
 
 namespace FSG.Core
 {
