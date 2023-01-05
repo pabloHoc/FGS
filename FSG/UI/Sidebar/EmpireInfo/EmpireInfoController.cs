@@ -25,7 +25,7 @@ namespace FSG.UI
                 serviceProvider,
                 eventManager,
                 assetManager,
-                ((region) => region.EmpireId.HasValue && region.EmpireId?.Value == eventManager.SelectedEmpireId)
+                ((region) => region.EmpireId?.Value == eventManager.SelectedEmpireId)
             );
             _regionList.EntityClickHandler = eventManager.SelectRegion;
 

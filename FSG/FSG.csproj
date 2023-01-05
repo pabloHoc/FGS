@@ -40,6 +40,10 @@
     <None Remove="Assets\Definitions\Lands\" />
     <None Remove="Assets\Definitions\Resources\" />
     <None Remove="Common\" />
+    <None Remove="Definitions\" />
+    <None Remove="Definitions\ValueTypes\" />
+    <None Remove="Conditions\Land\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -71,6 +75,10 @@
     <Folder Include="Assets\Definitions\Lands\" />
     <Folder Include="Assets\Definitions\Resources\" />
     <Folder Include="Common\" />
+    <Folder Include="Definitions\" />
+    <Folder Include="Definitions\ValueTypes\" />
+    <Folder Include="Conditions\Land\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

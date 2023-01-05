@@ -5,7 +5,7 @@ using FSG.Scopes;
 
 namespace FSG.Definitions
 {
-    public struct BuildingDefinition : IDefinition
+    public class BuildingDefinition : IDefinition
     {
         public DefinitionType Type { get => DefinitionType.Building; }
 
@@ -16,19 +16,5 @@ namespace FSG.Definitions
         public EconomyUnit Resources { get; init; }
 
         public FSG.Conditions.Conditions Conditions { get; init; }
-
-        public bool Allow(Empire empire)
-        {
-            // TODO: if (empire.CanAfford(building))
-            foreach (var resource in Resources.Cost)
-            {
-                if (empire.Resources[resource.Key] < resource.Value)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 }

@@ -92,7 +92,7 @@ namespace FSG.Commands.Handlers
             var count = 0;
             foreach (var region in regions)
             {
-                if (region.EmpireId.HasValue)
+                if (region.EmpireId != null)
                 {
                     _serviceProvider.Dispatcher.Dispatch(new Commands.CreateAgent
                     {

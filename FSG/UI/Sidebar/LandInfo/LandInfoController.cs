@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using FSG.Core;
 using FSG.Commands;
-using FSG.Data;
+using FSG.Definitions;
 using FSG.Entities;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
@@ -69,7 +69,7 @@ namespace FSG.UI
                 {
                     Id = building.Name,
                     Text = building.Name,
-                    Enabled = building.Allow(empire)
+                    Enabled = _serviceProvider.Services.BuildingService.Allow(empire, land, building)
                 };
                 buildingBtn.Click += HandleBuildingClick;
                 _buildingList.Widgets.Add(buildingBtn);

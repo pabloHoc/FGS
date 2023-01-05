@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FSG.Data
 {
@@ -9,7 +10,14 @@ namespace FSG.Data
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions
             {
                 IncludeFields = true,
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
+                Converters =
+                {
+                    new ValueObjectConverterFactory(),
+                    new EntityIdConverterFactory(),
+                    new JsonStringEnumConverter(),
+                    new ObjectToInferredTypesConverter()
+                }   
             });
         }
     }

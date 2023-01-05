@@ -1,6 +1,6 @@
 namespace FSG.Definitions
 {
-    public struct ResourceDefinition : IDefinition
+    public class ResourceDefinition : IDefinition
     {
         public DefinitionType Type { get => DefinitionType.Resource; }
 

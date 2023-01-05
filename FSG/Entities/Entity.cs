@@ -1,3 +1,5 @@
+using System;
+
 namespace FSG.Entities
 {
     public enum EntityType
@@ -37,7 +39,7 @@ namespace FSG.Entities
 
     public interface IOwneableEntity : IBaseEntity
     {
-        public EntityId<Empire>? EmpireId { get; set; }
+        public Nullable<EntityId<Empire>> EmpireId { get; set; }
     }
 
     public interface INameableEntity : IBaseEntity

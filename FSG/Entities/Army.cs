@@ -1,3 +1,5 @@
+using System;
+
 namespace FSG.Entities
 {
     public class Army : IEntity<Army>, ILocatableEntity, IOwneableEntity
@@ -12,7 +14,7 @@ namespace FSG.Entities
 
         public int Defense { get; init; }
 
-        public EntityId<Empire>? EmpireId { get; set; }
+        public Nullable<EntityId<Empire>> EmpireId { get; set; }
 
         public EntityId<Region> RegionId { get; set; }
     }

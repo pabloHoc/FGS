@@ -1,6 +1,6 @@
 namespace FSG.Definitions
 {
-    public struct LandDefinition : IDefinition
+    public class LandDefinition : IDefinition
     {
         public DefinitionType Type { get => DefinitionType.Land; }
 

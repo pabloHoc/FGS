@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FSG.Entities
@@ -10,7 +11,7 @@ namespace FSG.Entities
 
         public string Name { get; init; }
 
-        public EntityId<Empire>? EmpireId { get; set; }
+        public Nullable<EntityId<Empire>> EmpireId { get; set; }
 
         public int X { get; init; } // TODO: Change to a struct with { x, y } (Coords, Location) 
 
