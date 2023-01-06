@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Agent : IEntity<Agent>, ILocatableEntity, IOwneableEntity, INameableEntity
+    public class Agent : IEntity<Agent>, ILocatableEntity, IOwneableEntity, INameableEntity, IActorEntity
     {
         public EntityType Type { get; } = EntityType.Agent;
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FSG.Entities
 {
@@ -45,5 +46,11 @@ namespace FSG.Entities
     public interface INameableEntity : IBaseEntity
     {
         public string Name { get; init; }
+    }
+
+    // TODO: change name
+    public interface IActorEntity : IBaseEntity
+    {
+        public Queue<ActionQueueItem> Actions { get; init; }
     }
 }
