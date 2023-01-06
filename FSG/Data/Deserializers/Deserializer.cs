@@ -16,7 +16,12 @@ namespace FSG.Data
                     new ValueObjectConverterFactory(),
                     new EntityIdConverterFactory(),
                     new JsonStringEnumConverter(),
-                    new ObjectToInferredTypesConverter()
+                    new ObjectToInferredTypesConverter
+                    (
+                        floatFormat : FloatFormat.Double,
+                        unknownNumberFormat : UnknownNumberFormat.Error,
+                        objectFormat : ObjectFormat.Dictionary
+                    )
                 }   
             });
         }

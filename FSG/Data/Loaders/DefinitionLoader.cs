@@ -27,6 +27,7 @@ namespace FSG.Data
             this.LoadDefinition<BuildingDefinition>("../../../Assets/Definitions/Buildings/buildings.json");
             this.LoadDefinition<LandDefinition>("../../../Assets/Definitions/Lands/lands.json");
             this.LoadDefinition<EconomicCategoryDefinition>("../../../Assets/Definitions/EconomicCategories/economic-categories.json");
+            this.LoadDefinition<SpellDefinition>("../../../Assets/Definitions/Spells/spells.json");
         }
     }
 }
