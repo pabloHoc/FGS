@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Conditions
 {
-	public class HasEmpire : ICondition<Region>
+	public class HasEmpire : ICondition
 	{
 		private readonly bool _value;
 
@@ -13,9 +13,9 @@ namespace FSG.Conditions
 			_value = value;
 		}
 
-		public bool IsValid(GameState gameState, Region region)
+		public bool IsValid(GameState gameState, IBaseEntity region)
         {
-			return (region.EmpireId != null) == _value;
+			return (((Region)region).EmpireId != null) == _value;
 		}
     }
 }

@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Conditions
 {
-	public class IsLandType : ICondition<Land>
+	public class IsLandType : ICondition
 	{
 		private readonly string _type;
 
@@ -13,9 +13,9 @@ namespace FSG.Conditions
 			_type = type;
 		}
 
-		public bool IsValid(GameState gameState, Land land)
+		public bool IsValid(GameState gameState, IBaseEntity land)
         {
-			return land.Name == _type;
+			return ((Land)land).Name == _type;
 		}
     }
 }

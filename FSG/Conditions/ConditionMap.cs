@@ -8,12 +8,15 @@ namespace FSG.Conditions
 		private readonly Dictionary<string, Func<object, ICondition>> _conditions =
 			new Dictionary<string, Func<object, ICondition>>
 			{
-				{ "IsLandType", (object value) => new IsLandType((string)value) }
+				// Land Conditions
+				{ "IsLandType", (object value) => new IsLandType((string)value) },
+				// Region Conditions
+				{ "HasEmpire", (object value) => new HasEmpire((bool)value) }
 			};
 
-		public ICondition<T> Get<T>(string condition, object value)
+		public ICondition Get(string condition, object value)
 		{
-			return (ICondition<T>)_conditions[condition](value);
+			return (ICondition)_conditions[condition](value);
 		}
 
 		public bool Has(string condition)

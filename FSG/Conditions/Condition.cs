@@ -4,7 +4,9 @@ using FSG.Entities;
 
 namespace FSG.Conditions
 {
-    public interface ICondition { }
+    public interface ICondition {
+        public bool IsValid(GameState gameState, IBaseEntity entity);
+    }
 
 
     public interface ICondition<T> : ICondition
