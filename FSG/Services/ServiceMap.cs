@@ -7,9 +7,12 @@ namespace FSG.Services
 	{
 		public BuildingService BuildingService { get; }
 
+		public SpellService SpellService { get; }
+
 		public ServiceMap(ServiceProvider serviceProvider)
 		{
 			BuildingService = new BuildingService(serviceProvider);
+            SpellService = new SpellService(serviceProvider);
 		}
 	}
 }

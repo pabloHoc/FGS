@@ -1,5 +1,11 @@
 ﻿<Project>
     <VerticalStackPanel Background="#000000">
         <Label Id="AgentNameLabel" />
+        <HorizontalSeparator />
+        <Label Text="Current Action" />
+        <Label Id="CurrentActionLabel" />
+        <HorizontalSeparator />
+        <Label Text="Spells" />
+        <HorizontalStackPanel Id="SpellPanel" />
     </VerticalStackPanel>
 </Project>

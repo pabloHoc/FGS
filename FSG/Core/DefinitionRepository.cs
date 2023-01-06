@@ -18,7 +18,8 @@ namespace FSG.Core
             { typeof(LandDefinition), new DefinitionDictionary<LandDefinition>() },
             { typeof(BuildingDefinition), new DefinitionDictionary<BuildingDefinition>() },
             { typeof(ResourceDefinition), new DefinitionDictionary<ResourceDefinition>() },
-            { typeof(EconomicCategoryDefinition), new DefinitionDictionary<EconomicCategoryDefinition>() }
+            { typeof(EconomicCategoryDefinition), new DefinitionDictionary<EconomicCategoryDefinition>() },
+            { typeof(SpellDefinition), new DefinitionDictionary<SpellDefinition>() },
           };
 
         public void Add<T>(T definition) where T : IDefinition

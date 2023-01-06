@@ -23,7 +23,7 @@ namespace FSG.UI
         public override void Update(ICommand command)
         {
             var commandLabel = new Label();
-            commandLabel.Text = command.Action;
+            commandLabel.Text = command.Name;
             commandLabel.GridRow = _count;
             _commandLog.AddChild(commandLabel);
             _count++;

@@ -1,9 +1,9 @@
 ﻿using System;
-using FSG.Commands;
 
 namespace FSG.Definitions
 {
-    public class SpellDefinition : IDefinition
+    // TODO: this should be generic (EntityAction) and have a entity
+    public class AgentActionDefinition : IDefinition
     {
         public DefinitionType Type { get => DefinitionType.Building; }
 
@@ -11,11 +11,7 @@ namespace FSG.Definitions
 
         public int BaseExecutionTime { get; init; }
 
-        public int Duration { get; init; }
-
         public FSG.Conditions.Conditions Conditions { get; init; }
-
-        public Actions Actions { get; init; }
     }
 }
 

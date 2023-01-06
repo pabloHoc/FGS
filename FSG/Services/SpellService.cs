@@ -6,35 +6,34 @@ using FSG.Core;
 
 namespace FSG.Services
 {
-	public class BuildingService
-	{
+	public class SpellService
+    {
         private readonly ServiceProvider _serviceProvider;
 
-        public BuildingService(ServiceProvider serviceProvider)
+        public SpellService(ServiceProvider serviceProvider)
 		{
             _serviceProvider = serviceProvider;
 		}
 
-        public bool Allow(Empire empire, Land land, BuildingDefinition definition)
+        public bool Allow(IActorEntity entity, SpellDefinition definition)
         {
-            // TODO: if (empire.CanAfford(building))
-            foreach (var resource in definition.Resources.Cost)
-            {
-                if (empire.Resources[resource.Key] < resource.Value)
-                {
-                    return false;
-                }
-            }
-
             if (definition.Conditions != null)
             {
-                if (!_serviceProvider.ConditionValidator.isValid(definition.Conditions, land))
+                if (!_serviceProvider.ConditionValidator.isValid(definition.Conditions, entity))
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        public void Execute<T>(T entity, SpellDefinition definition) where T : IEntity<T>, IActorEntity
+        {
+            if (definition.Actions != null)
+            {
+                _serviceProvider.ActionProcessor.Process(definition.Actions, entity);
+            }
         }
     }
 }

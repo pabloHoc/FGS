@@ -2,6 +2,7 @@ namespace FSG.Definitions
 {
     public enum DefinitionType
     {
+        AgentAction,
         Building,
         EconomicCategory,
         Land,

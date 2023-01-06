@@ -1,3 +1,4 @@
+using FSG.Commands;
 using FSG.Conditions;
 using FSG.Services;
 
@@ -15,6 +16,8 @@ namespace FSG.Core
 
         public ConditionValidator ConditionValidator { get; }
 
+        public ActionProcessor ActionProcessor { get; }
+
         public ServiceMap Services { get; }
 
         public ServiceProvider()
@@ -24,6 +27,7 @@ namespace FSG.Core
             Dispatcher = new CommandDispatcher(this);
             Scopes = new FSG.Scopes.Scopes(GlobalState);
             ConditionValidator = new ConditionValidator(this);
+            ActionProcessor = new ActionProcessor(this);
             Services = new ServiceMap(this);
         }
     }
