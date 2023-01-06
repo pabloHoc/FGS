@@ -26,12 +26,12 @@ namespace FSG.Commands.Handlers
 
                 _serviceProvider.Dispatcher.Dispatch(new Commands.CreateEmpire
                 {
-                    Name = isPlayer ? "Player Empire" : $"AI #{i} Empire"
+                    EmpireName = isPlayer ? "Player Empire" : $"AI #{i} Empire"
                 });
 
                 _serviceProvider.Dispatcher.Dispatch(new Commands.CreatePlayer
                 {
-                    Name = isPlayer ? "Player" : $"AI #{i}",
+                    PlayerName = isPlayer ? "Player" : $"AI #{i}",
                     EmpireId = _serviceProvider.GlobalState.Entities.GetLastAddedEntityId<Empire>(),
                     IsAI = !isPlayer
                 });
@@ -49,7 +49,7 @@ namespace FSG.Commands.Handlers
                 {
                     _serviceProvider.Dispatcher.Dispatch(new Commands.CreateRegion
                     {
-                        Name = $"Region #{count}",
+                        RegionName = $"Region #{count}",
                         EmpireId = empires.Length > count ? empires[count].Id : null,
                         X = j,
                         Y = i
@@ -79,7 +79,7 @@ namespace FSG.Commands.Handlers
 
                     _serviceProvider.Dispatcher.Dispatch(new Commands.CreateLand
                     {
-                        Name = landDefinition.Name,
+                        LandName = landDefinition.Name,
                         RegionId = region.Id
                     });
                 }
@@ -96,7 +96,7 @@ namespace FSG.Commands.Handlers
                 {
                     _serviceProvider.Dispatcher.Dispatch(new Commands.CreateAgent
                     {
-                        Name = $"Agent #{count}",
+                        AgentName = $"Agent #{count}",
                         RegionId = region.Id,
                         EmpireId = (EntityId<Empire>)region.EmpireId
                     });

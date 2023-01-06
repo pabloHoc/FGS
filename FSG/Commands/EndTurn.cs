@@ -4,7 +4,7 @@ namespace FSG.Commands
 {
 	public struct EndTurn : ICommand
 	{
-		public string Action { get => "END_TURN"; }
+		public string Name { get => "EndTurn"; }
 	}
 }
 

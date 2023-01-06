@@ -4,9 +4,9 @@ namespace FSG.Commands
 {
     public struct CreatePlayer : ICommand
     {
-        public string Action { get => "CREATE_PLAYER"; }
+        public string Name { get => "CreatePlayer"; }
 
-        public string Name { get; init; }
+        public string PlayerName { get; init; }
 
         public EntityId<Empire> EmpireId { get; init; }
 

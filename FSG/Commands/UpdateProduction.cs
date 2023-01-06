@@ -6,7 +6,7 @@ namespace FSG.Commands
 {
 	public struct UpdateProduction : ICommand
 	{
-		public string Action { get => "UPDATE_PRODUCTION"; }
+		public string Name { get => "UpdateProduction"; }
 	}
 }
 

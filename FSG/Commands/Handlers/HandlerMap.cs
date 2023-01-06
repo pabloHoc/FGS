@@ -5,7 +5,8 @@ using FSG.Entities;
 
 // TODO: Check if the Dictionary should be a switch case (or something similar)
 // maybe handlers needs to be static
-// TODO: Change name, is more a map than a repository
+// TODO: review use of generic here, maybe is better to handle it as a switch
+// depending on EntityType inside the handler
 
 namespace FSG.Commands.Handlers
 {
@@ -27,9 +28,13 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.CreatePlayer), new CreatePlayer(serviceProvider) },
                 { typeof(Commands.CreateRegion), new CreateRegion(serviceProvider) },
                 { typeof(Commands.EndTurn), new EndTurn(serviceProvider) },
+                { typeof(Commands.ExecuteCurrentEntityAction<Agent>), new ExecuteCurrentEntityAction<Agent>(serviceProvider) },
+                { typeof(Commands.ExecuteEntityAction<Agent>), new ExecuteEntityAction<Agent>(serviceProvider) },
                 { typeof(Commands.GenerateResources), new GenerateResources(serviceProvider) },
                 { typeof(Commands.GenerateWorld), new GenerateWorld(serviceProvider) },
                 { typeof(Commands.ProcessBuildingQueues), new ProcessBuildingQueues(serviceProvider) },
+                { typeof(Commands.ProcessEntityActions<Agent>), new ProcessEntityActions<Agent>(serviceProvider) },
+                { typeof(Commands.SetEntityCurrentAction<Agent>), new SetEntityCurrentAction<Agent>(serviceProvider) },
                 { typeof(Commands.SetLocation<Agent>), new SetLocation<Agent>(serviceProvider) },
                 { typeof(Commands.SetLocation<Army>), new SetLocation<Army>(serviceProvider) },
                 { typeof(Commands.SetOwnerEmpire<Agent>), new SetOwnerEmpire<Agent>(serviceProvider) },
@@ -40,9 +45,9 @@ namespace FSG.Commands.Handlers
             };
         }
 
-        public CommandHandler<T> Get<T>() where T : ICommand
+        public CommandHandler<T> GetFor<T>(T command) where T : ICommand
         {
-            return (CommandHandler<T>)this._handlers[typeof(T)];
+            return (CommandHandler<T>)this._handlers[command.GetType()];
         }
     }
 }

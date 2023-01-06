@@ -5,7 +5,7 @@ namespace FSG.Commands
 {
 	public struct CreateArmy: ICommand
 	{
-		public string Action { get => "CREATE_ARMY"; }
+		public string Name { get => "CreateArmy"; }
 
 		public int Size { get; init; }
 

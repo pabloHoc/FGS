@@ -6,9 +6,9 @@ namespace FSG.Commands
 {
 	public struct CreateRegion : ICommand
 	{
-		public string Action { get => "CREATE_REGION"; }
+		public string Name { get => "CreateRegion"; }
 
-		public string Name { get; init; }
+		public string RegionName { get; init; }
 
 		public EntityId<Empire>? EmpireId { get; init; }
 

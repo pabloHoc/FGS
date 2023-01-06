@@ -5,7 +5,7 @@ namespace FSG.Commands
 {
 	public struct BuildBuilding : ICommand
 	{
-		public string Action { get => "BUILD_BUILDING"; }
+		public string Name { get => "BuildBuilding"; }
 
 		public string BuildingName { get; init; }
 

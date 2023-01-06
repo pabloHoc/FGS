@@ -12,7 +12,7 @@ namespace FSG.Commands.Handlers
             this._serviceProvider.GlobalState.Entities.Add(new Player
             {
                 Id = new EntityId<Player>(),
-                Name = command.Name,
+                Name = command.PlayerName,
                 EmpireId = command.EmpireId,
                 IsAI = command.IsAI
             });

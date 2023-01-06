@@ -1,0 +1,21 @@
+{
+  "type": "spell",
+  "name": "increase_productivity",
+  "baseExecutionTime": 2,
+  "conditions": {
+    "region": {
+      "has_empire": true
+    }
+  },
+  "duration": 3,
+  "actions": {
+    "modifiers": {
+      "empire": {
+        "production_mult": 1
+      },
+      "region": {
+        "buildings_wood_production_mult": 1
+      }
+    }
+  }
+}

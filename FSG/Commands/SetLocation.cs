@@ -7,7 +7,7 @@ namespace FSG.Commands
 
 	public class SetLocation<T>: ICommand where T : IEntity<T>, ILocatableEntity
 	{
-		public string Action { get => "SET_LOCATION"; }
+		public string Name { get => "SetLocation"; }
 
 		public EntityType EntityType { get; init; }
 

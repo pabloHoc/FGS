@@ -14,7 +14,7 @@ namespace FSG.Commands.Handlers
             _serviceProvider.GlobalState.Entities.Add(new Land
             {
                 Id = new EntityId<Land>(),
-                Name = command.Name,
+                Name = command.LandName,
                 RegionId = command.RegionId,
                 Buildings = new List<string>(),
                 Modifiers = new List<Modifier>(),

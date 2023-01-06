@@ -26,7 +26,7 @@ namespace FSG.Commands.Handlers
             _serviceProvider.GlobalState.Entities.Add(new Empire
             {
                 Id = new EntityId<Empire>(),
-                Name = command.Name,
+                Name = command.EmpireName,
                 Resources = stored,
                 Production = production,
                 Modifiers = new List<Entities.Modifier>()

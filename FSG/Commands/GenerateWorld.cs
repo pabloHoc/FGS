@@ -12,7 +12,7 @@ namespace FSG.Commands
 
 	public struct GenerateWorld : ICommand
 	{
-		public string Action { get => "GENERATE_WORLD"; }
+		public string Name { get => "GenerateWorld"; }
 
 		public WorldGenerationOptions Options { get; init; }
 	}

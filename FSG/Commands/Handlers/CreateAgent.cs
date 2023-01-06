@@ -14,7 +14,7 @@ namespace FSG.Commands.Handlers
             _serviceProvider.GlobalState.Entities.Add(new Agent
             {
                 Id = new EntityId<Agent>(),
-                Name = command.Name,
+                Name = command.AgentName,
                 EmpireId = command.EmpireId,
                 RegionId = command.RegionId,
                 Modifiers = new List<Modifier>(),
