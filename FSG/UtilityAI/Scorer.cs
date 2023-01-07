@@ -6,9 +6,9 @@ namespace FSG.UtilityAI
 	{
 		private readonly Curve _curve;
 
-		private readonly IInputParameter _inputParam;
+		private readonly InputParameter _inputParam;
 
-		public Scorer(IInputParameter inputParam, Curve curve)
+		public Scorer(InputParameter inputParam, Curve curve)
 		{
 			_inputParam = inputParam;
 			_curve = curve;

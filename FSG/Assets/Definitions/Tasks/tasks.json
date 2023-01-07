@@ -1,0 +1,31 @@
+[
+  {
+    "type": "task",
+    "name": "win_game",
+    "taskType": "highest-score",
+    "subtasks": [ "evaluate_regions_to_conquest", "send_agent_to_conquest_region" ],
+    "isRoot": true,
+    "target": "Empire"
+  },
+  {
+    "type": "task",
+    "name": "send_agent_to_conquest_region",
+    "target": "Empire",
+    "weight": 1.0
+  },
+  {
+    "type": "task",
+    "name": "evaluate_regions_to_conquest",
+    "taskType": "highest-score",
+    "subtasks": [ "evaluate_region_to_conquest" ],
+    "target": "Empire",
+    "weight": 0.2
+  },
+  {
+    "type": "task",
+    "name": "evaluate_region_to_conquest",
+    "target": "AllRegions",
+    "scorers": [ "grassland_number" ]
+  }
+
+]

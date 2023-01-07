@@ -6,7 +6,9 @@ namespace FSG.Definitions
         Building,
         EconomicCategory,
         Land,
-        Resource
+        Resource,
+        Scorer,
+        Task
     }
 
     public interface IDefinition

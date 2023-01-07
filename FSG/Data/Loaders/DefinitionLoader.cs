@@ -28,6 +28,8 @@ namespace FSG.Data
             this.LoadDefinition<LandDefinition>("../../../Assets/Definitions/Lands/lands.json");
             this.LoadDefinition<EconomicCategoryDefinition>("../../../Assets/Definitions/EconomicCategories/economic-categories.json");
             this.LoadDefinition<SpellDefinition>("../../../Assets/Definitions/Spells/spells.json");
+            this.LoadDefinition<ScorerDefinition>("../../../Assets/Definitions/Scorers/scorers.json");
+            this.LoadDefinition<TaskDefinition>("../../../Assets/Definitions/Tasks/tasks.json");
         }
     }
 }

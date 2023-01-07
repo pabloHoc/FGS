@@ -1,13 +1,13 @@
 ﻿using System;
 namespace FSG.UtilityAI
 {
-	public interface IInputParameter
+	public struct InputParameter
 	{
-		public string Name { get; }
+		public string Name { get; init; }
 
-		public int Min { get; }
+		public int Min { get; init; }
 
-		public int Max { get; }
+		public int Max { get; init; }
 	}
 }
 
