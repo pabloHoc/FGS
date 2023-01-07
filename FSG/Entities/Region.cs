@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Region : IEntity<Region>, IOwneableEntity, INameableEntity
+    public class Region : IEntity<Region>, IOwneable, INameable
     {
         public EntityType Type { get; } = EntityType.Region;
 
@@ -18,7 +18,5 @@ namespace FSG.Entities
         public int Y { get; init; }
 
         public List<EntityId<Region>> ConnectedTo { get; init; }
-
-        public List<Modifier> Modifiers { get; init; }
     }
 }

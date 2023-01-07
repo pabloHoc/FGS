@@ -7,9 +7,9 @@ namespace FSG.Entities
         Reduction
     }
 
-    public class Modifier : IEntity<Modifier>, ITemporaryEntity
+    public class Modifier : IEntity<Modifier>, ITemporary
     {
-        public EntityType Type { get; } = EntityType.Modifier;
+        public EntityType Type { get => EntityType.Modifier; }
 
         public EntityId<Modifier> Id { get; init; }
 
@@ -19,10 +19,11 @@ namespace FSG.Entities
 
         public int Value { get; init; }
 
-        public IEntityId EntityId { get; init; }
-
         public int RemainingTurns { get; set; }
 
+        public IEntityId TargetId { get; init; }
+
         public IEntityId SourceId { get; init; }
+
     }
 }

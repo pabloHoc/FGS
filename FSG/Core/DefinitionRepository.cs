@@ -2,44 +2,46 @@ using System;
 using System.Collections.Generic;
 using FSG.Data;
 using FSG.Definitions;
+using FSG.Entities;
 
 namespace FSG.Core
 {
     public class DefinitionRepository
     {
-        private interface IDefinitionDictionary { }
+        private class DefinitionDictionaryMap
+        {
+            public Dictionary<string, LandDefinition> LandDefinition { get; } = new Dictionary<string, LandDefinition>();
+            public Dictionary<string, BuildingDefinition> BuildingDefinition { get; } = new Dictionary<string, BuildingDefinition>();
+            public Dictionary<string, ResourceDefinition> ResourceDefinition { get; } = new Dictionary<string, ResourceDefinition>();
+            public Dictionary<string, EconomicCategoryDefinition> EconomicCategoryDefinition { get; } = new Dictionary<string, EconomicCategoryDefinition>();
+            public Dictionary<string, SpellDefinition> SpellDefinition { get; } = new Dictionary<string, SpellDefinition>();
 
-        private class DefinitionDictionary<TDefinition> : Dictionary<string, TDefinition>, IDefinitionDictionary
-          where TDefinition : IDefinition
-        { }
+            public Dictionary<string, T> Get<T>() where T : IDefinition
+            {
+                return (Dictionary<string, T>)this.GetType().GetProperty(typeof(T).Name).GetValue(this);
+            }
+        }
 
-        private readonly Dictionary<Type, IDefinitionDictionary> _definitions =
-          new Dictionary<Type, IDefinitionDictionary>(){
-            { typeof(LandDefinition), new DefinitionDictionary<LandDefinition>() },
-            { typeof(BuildingDefinition), new DefinitionDictionary<BuildingDefinition>() },
-            { typeof(ResourceDefinition), new DefinitionDictionary<ResourceDefinition>() },
-            { typeof(EconomicCategoryDefinition), new DefinitionDictionary<EconomicCategoryDefinition>() },
-            { typeof(SpellDefinition), new DefinitionDictionary<SpellDefinition>() },
-          };
+        private readonly DefinitionDictionaryMap _definitions = new DefinitionDictionaryMap();
 
         public void Add<T>(T definition) where T : IDefinition
         {
-            ((DefinitionDictionary<T>)this._definitions[typeof(T)]).Add(definition.Name, (T)definition);
+            this._definitions.Get<T>().Add(definition.Name, (T)definition);
         }
 
         public T Get<T>(string name) where T : IDefinition
         {
-            return ((DefinitionDictionary<T>)this._definitions[typeof(T)])[name];
+            return this._definitions.Get<T>()[name];
         }
 
         public List<T> GetAll<T>() where T : IDefinition
         {
-            return new List<T>(((DefinitionDictionary<T>)this._definitions[typeof(T)]).Values);
+            return new List<T>(this._definitions.Get<T>().Values);
         }
 
         public void Remove<T>(string name) where T : IDefinition
         {
-            ((DefinitionDictionary<T>)this._definitions[typeof(T)]).Remove(name);
+            this._definitions.Get<T>().Remove(name);
         }
     }
 }

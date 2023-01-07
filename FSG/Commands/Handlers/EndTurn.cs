@@ -10,9 +10,11 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.EndTurn command)
         {
+            // Should we process AI here, and move everythign else to StartTurn?
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessSpells());
             _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessEntityActions<Agent>());
             _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessBuildingQueues());
-            _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateProduction());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeProduction());
             _serviceProvider.Dispatcher.Dispatch(new Commands.GenerateResources());
 
             _serviceProvider.GlobalState.nextTurn();

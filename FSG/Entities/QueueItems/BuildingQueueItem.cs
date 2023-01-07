@@ -2,12 +2,8 @@
 
 namespace FSG.Entities
 {
-    public class BuildingQueueItem : IEntity<BuildingQueueItem>, ITemporaryEntity
+    public class BuildingQueueItem : ITemporary
     {
-        public EntityType Type { get; } = EntityType.BuildingQueueItem;
-
-        public EntityId<BuildingQueueItem> Id { get; init; }
-
         public string Name { get; init; }
 
         public EntityId<Land> LandId { get; }

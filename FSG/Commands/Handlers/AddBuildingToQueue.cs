@@ -18,7 +18,6 @@ namespace FSG.Commands.Handlers
 
             land.BuildingQueue.Enqueue(new BuildingQueueItem
             {
-                Id = new EntityId<BuildingQueueItem>(),
                 Name = buildingDefinition.Name,
                 RemainingTurns = buildingDefinition.BaseBuildTime
             });

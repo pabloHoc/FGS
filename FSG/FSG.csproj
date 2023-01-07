@@ -46,6 +46,7 @@
     <None Remove="Services\" />
     <None Remove="Assets\Definitions\Spells\" />
     <None Remove="Conditions\Region\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -83,6 +84,7 @@
     <Folder Include="Services\" />
     <Folder Include="Assets\Definitions\Spells\" />
     <Folder Include="Conditions\Region\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

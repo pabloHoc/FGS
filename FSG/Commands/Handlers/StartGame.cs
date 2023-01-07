@@ -9,7 +9,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.StartGame command)
         {
-            _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateProduction());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeProduction());
         }
     }
 }

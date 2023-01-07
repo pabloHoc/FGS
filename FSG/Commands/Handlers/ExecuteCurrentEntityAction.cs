@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class ExecuteCurrentEntityAction<T> : CommandHandler<Commands.ExecuteCurrentEntityAction<T>> where T : IEntity<T>, IActorEntity
+    public class ExecuteCurrentEntityAction<T> : CommandHandler<Commands.ExecuteCurrentEntityAction<T>> where T : IEntity<T>, IActor
     {
         public ExecuteCurrentEntityAction(ServiceProvider serviceProvider) : base(serviceProvider) { }
 

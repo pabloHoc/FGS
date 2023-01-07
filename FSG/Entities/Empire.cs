@@ -3,7 +3,7 @@ using FSG.Data;
 
 namespace FSG.Entities
 {
-    public class Empire : IEntity<Empire>, INameableEntity
+    public class Empire : IEntity<Empire>, INameable
     {
         public EntityType Type { get; } = EntityType.Empire;
 
@@ -14,7 +14,5 @@ namespace FSG.Entities
         public Dictionary<string, int> Resources { get; init; }
 
         public Dictionary<string, int> Production { get; init; }
-
-        public List<Modifier> Modifiers { get; init; }
     }
 }

@@ -9,9 +9,9 @@ namespace FSG.Conditions
 			new Dictionary<string, Func<object, ICondition>>
 			{
 				// Land Conditions
-				{ "IsLandType", (object value) => new IsLandType((string)value) },
+				{ "is_land_type", (object value) => new IsLandType((string)value) },
 				// Region Conditions
-				{ "HasEmpire", (object value) => new HasEmpire((bool)value) }
+				{ "has_empire", (object value) => new HasEmpire((bool)value) }
 			};
 
 		public ICondition Get(string condition, object value)

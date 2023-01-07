@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
+using FSG.Extensions;
 using FSG.Scopes;
 
 namespace FSG.Commands
@@ -25,17 +27,24 @@ namespace FSG.Commands
             _serviceProvider = serviceProvider;
         }
 
-        private void ProcessActions<T>(Actions actions, T scope, ScopeContext scopeContext) where T : IBaseEntity
+        private void ProcessActions<T, U, V>(T actions, U scope, ScopeContext scopeContext, V sourceId)
+            where T : Dictionary<string, object>
+            where U : IBaseEntity
+            where V : IEntityId
         {
 			scopeContext.This = scope;
             Scope scopeKey;
 
             foreach (var entry in actions)
             {
-                if (_commandMap.Has<T>(entry.Key))
+                // if it's command
+                if (_commandMap.Has<U>(entry.Key))
                 {
                     var payload = entry.Value;
-                    var scopeContextPayload = scopeContext.GetType().GetProperty((string)payload).GetValue(scopeContext);
+                    var scopeContextPayload = scopeContext
+                        .GetType()
+                        .GetProperty(((string)payload).CapitalizeFirstLetter())
+                        .GetValue(scopeContext);
 
                     // Try to get ScopeContext value and send it as command payload 
                     if (scopeContextPayload != null)
@@ -47,22 +56,58 @@ namespace FSG.Commands
 
                     _serviceProvider.Dispatcher.Dispatch(command);
                 }
-                else if (Enum.TryParse(entry.Key, out scopeKey))
+                // if it's scope
+                else if (Enum.TryParse(entry.Key.CapitalizeFirstLetter(), out scopeKey))
                 {
                     var newScope = _serviceProvider.Scopes.GetFrom(scopeKey, scope);
                     scopeContext.Prev = scope;
-                    ProcessActions((Actions)entry.Value, newScope, scopeContext);
+                    ProcessActions((Dictionary<string, object>)entry.Value, newScope, scopeContext, sourceId);
+                }
+                // if it's modifiers block
+                else if (entry.Key == "modifiers")
+                {
+                    ProcessActions((Dictionary<string, object>)entry.Value, scope, scopeContext, sourceId);
+                }
+                // if it's single modifier
+                else
+                {
+                    // Here we should be inside a modifier's block, but this is 
+                    // not a safe assumption
+
+                    ModifierType modifierType;
+
+                    // e.g.: buildings_wood_production_mult
+                    var modifierParts = entry.Key.Split('_');
+
+                    var name = String.Join('_', modifierParts[..(modifierParts.Length - 1)]);
+                    var type = modifierParts[modifierParts.Length - 1];
+
+                    if (Enum.TryParse(type.CapitalizeFirstLetter(), out modifierType))
+                    {
+                        _serviceProvider.Dispatcher.Dispatch(new CreateModifier
+                        {
+                            ModifierName = name,
+                            ModifierType = modifierType,
+                            Value = (int)entry.Value,
+                            TargetId = ((dynamic)scope).Id,
+                            SourceId = sourceId
+                        });
+                    }
                 }
             }
         }
 
-        public void Process<T>(Actions actions, T scope) where T : IEntity<T>
-		{
-            ProcessActions<T>(actions, scope, new ScopeContext
-            {
-                Root = scope,
-                This = scope
-            });
+        public void Process<T, U>(Actions actions, T scope, U sourceId)
+            where T : IEntity<T>
+            where U : IEntityId
+        {
+            ProcessActions(actions, scope, new ScopeContext
+                {
+                    Root = scope,
+                    This = scope
+                },
+                sourceId
+            );
 		}
 	}
 }

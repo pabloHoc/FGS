@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
+using FSG.Extensions;
 using FSG.Scopes;
 
 namespace FSG.Conditions
@@ -17,7 +18,9 @@ namespace FSG.Conditions
             _serviceProvider = serviceProvider;
         }
 
-        public bool isValid<T, U>(U conditions, T scope) where T: IBaseEntity where U : Dictionary<string, object>
+        public bool isValid<T, U>(U conditions, T scope)
+            where T: IBaseEntity
+            where U : Dictionary<string, object>
         {
             Scope scopeKey;
 
@@ -34,7 +37,7 @@ namespace FSG.Conditions
                         return false;
                     }
                 }
-                else if (Enum.TryParse(entry.Key, out scopeKey))
+                else if (Enum.TryParse(entry.Key.CapitalizeFirstLetter(), out scopeKey))
                 {
                     var newScope = _serviceProvider.Scopes.GetFrom(scopeKey, scope);
                     var result = isValid((Dictionary<string, object>)entry.Value, newScope);

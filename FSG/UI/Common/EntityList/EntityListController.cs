@@ -10,7 +10,7 @@ using System;
 
 namespace FSG.UI
 {
-    public class EntityListController<T> : UIController where T : IEntity<T>, INameableEntity
+    public class EntityListController<T> : UIController where T : IEntity<T>, INameable
     {
         private readonly Grid _list;
         private readonly Predicate<T> _predicate;
@@ -38,9 +38,9 @@ namespace FSG.UI
             foreach (var entity in queriedEntities)
             {
                 var entityLabel = new Label();
-                entityLabel.Id = entity.Id.Value;
+                entityLabel.Id = entity.Id;
                 entityLabel.TouchDown += handleEntityClick;
-                entityLabel.Text = ((INameableEntity)entity).Name;
+                entityLabel.Text = ((INameable)entity).Name;
                 entityLabel.GridRow = count;
                 _list.AddChild(entityLabel);
                 count++;

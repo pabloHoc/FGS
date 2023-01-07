@@ -4,6 +4,7 @@ using FSG.Commands;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace FSG.UI
 {
@@ -23,7 +24,7 @@ namespace FSG.UI
         public override void Update(ICommand command)
         {
             var commandLabel = new Label();
-            commandLabel.Text = command.Name;
+            commandLabel.Text = $"Turn {_serviceProvider.GlobalState.Turn} - {command.Name}";
             commandLabel.GridRow = _count;
             _commandLog.AddChild(commandLabel);
             _count++;

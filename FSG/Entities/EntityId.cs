@@ -18,5 +18,10 @@ namespace FSG.Entities
         {
             Value = value;
         }
+
+        public static implicit operator string(EntityId<T> entityId)
+        {
+            return entityId.Value;
+        }
     }
 }

@@ -7,12 +7,18 @@ namespace FSG.Services
 	{
 		public BuildingService BuildingService { get; }
 
-		public SpellService SpellService { get; }
+		public EconomicCategoryService EconomicCategoryService { get; }
+
+		public ModifierService ModifierService { get; }
+
+        public SpellService SpellService { get; }
 
 		public ServiceMap(ServiceProvider serviceProvider)
 		{
 			BuildingService = new BuildingService(serviceProvider);
-            SpellService = new SpellService(serviceProvider);
+			EconomicCategoryService = new EconomicCategoryService(serviceProvider);
+			ModifierService = new ModifierService(serviceProvider);
+			SpellService = new SpellService(serviceProvider);
 		}
 	}
 }

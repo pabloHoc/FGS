@@ -17,7 +17,6 @@ namespace FSG.Commands.Handlers
                 Name = command.AgentName,
                 EmpireId = command.EmpireId,
                 RegionId = command.RegionId,
-                Modifiers = new List<Modifier>(),
                 Actions = new Queue<ActionQueueItem>()
             });
         }

@@ -5,16 +5,14 @@ namespace FSG.Entities
 {
     public enum EntityType
     {
-        ActionQueueItem,
         Agent,
         Army,
-        BuildingQueueItem,
         Empire,
         Land,
-        Modifier,
         Player,
         Region,
-        Spell
+        Spell,
+        Modifier
     }
 
     public interface IBaseEntity
@@ -28,28 +26,28 @@ namespace FSG.Entities
         public EntityId<T> Id { get; }
     }
 
-    public interface ITemporaryEntity: IBaseEntity
+    public interface ITemporary
     {
         public int RemainingTurns { get; set; }
     }
 
-    public interface ILocatableEntity : IBaseEntity
+    public interface ILocatable
     {
         public EntityId<Region> RegionId { get; set; }
     }
 
-    public interface IOwneableEntity : IBaseEntity
+    public interface IOwneable
     {
         public Nullable<EntityId<Empire>> EmpireId { get; set; }
     }
 
-    public interface INameableEntity : IBaseEntity
+    public interface INameable
     {
         public string Name { get; init; }
     }
 
     // TODO: change name
-    public interface IActorEntity : IBaseEntity
+    public interface IActor
     {
         public Queue<ActionQueueItem> Actions { get; init; }
     }

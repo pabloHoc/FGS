@@ -2,7 +2,7 @@ using System;
 
 namespace FSG.Entities
 {
-    public class Army : IEntity<Army>, ILocatableEntity, IOwneableEntity
+    public class Army : IEntity<Army>, ILocatable, IOwneable
     {
         public EntityType Type { get; } = EntityType.Army;
 

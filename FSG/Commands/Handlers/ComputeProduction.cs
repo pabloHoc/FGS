@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
@@ -6,22 +7,22 @@ using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
-    public class UpdateProduction : CommandHandler<Commands.UpdateProduction>
+    public class ComputeProduction : CommandHandler<Commands.ComputeProduction>
     {
-        public UpdateProduction(ServiceProvider serviceProvider) : base(serviceProvider) { }
+        public ComputeProduction(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.UpdateProduction command)
+        public override void Handle(Commands.ComputeProduction command)
         {
             var empires = _serviceProvider.GlobalState.Entities.GetAll<Empire>();
 
             foreach (var empire in empires)
             {
-                ClearProduction(empire);
-                ComputeProduction(empire);
+                ClearEmpireProduction(empire);
+                ComputeEmpireProduction(empire);
             }
         }
 
-        private void ClearProduction(Empire empire)
+        private void ClearEmpireProduction(Empire empire)
         {
             foreach (var resource in empire.Production)
             {
@@ -29,7 +30,7 @@ namespace FSG.Commands.Handlers
             }
         }
 
-        private void ComputeProduction(Empire empire)
+        private void ComputeEmpireProduction(Empire empire)
         {
             var empireRegions = _serviceProvider.GlobalState.Entities
                 .Query(new GetEmpireRegions(empire.Id));
@@ -45,13 +46,18 @@ namespace FSG.Commands.Handlers
             var regionLands = _serviceProvider.GlobalState.Entities
                 .Query(new GetRegionLands(region.Id));
 
+            var empireModifiers = _serviceProvider.Services.ModifierService
+                .GetModifiersFor(empire);
+            var regionModifiers = _serviceProvider.Services.ModifierService
+                .GetModifiersFor(region);
+
             foreach (var land in regionLands)
             {
                 ComputeLandProduction(land, empire);
 
                 foreach (var building in land.Buildings)
                 {
-                    ComputeBuildingProduction(building, region, empire);
+                    ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
                 }
             }
         }
@@ -66,7 +72,13 @@ namespace FSG.Commands.Handlers
             }
         }
 
-        private void ComputeBuildingProduction(string building, Region region, Empire empire)
+        private void ComputeBuildingProduction(
+            string building,
+            Region region,
+            Empire empire,
+            List<Modifier> empireModifiers,
+            List<Modifier> regionModifiers
+        )
         {
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(building);
             var economicCategoryDefinition = _serviceProvider.Definitions
@@ -74,8 +86,15 @@ namespace FSG.Commands.Handlers
 
             foreach (var resource in buildingDefinition.Resources.Production)
             {
-                var totalBuildingResourceProduction = economicCategoryDefinition
-                    .Compute(EconomicType.Production, resource.Key, resource.Value, empire.Modifiers, region.Modifiers);
+                var totalBuildingResourceProduction =
+                    _serviceProvider.Services.EconomicCategoryService.Compute(
+                        economicCategoryDefinition,
+                        EconomicType.Production,
+                        resource.Key,
+                        resource.Value,
+                        empireModifiers,
+                        regionModifiers
+                    );
 
                 empire.Production[resource.Key] += totalBuildingResourceProduction;
             }

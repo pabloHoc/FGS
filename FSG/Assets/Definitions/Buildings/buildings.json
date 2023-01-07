@@ -16,7 +16,7 @@
     "name": "mill",
     "baseBuildtime": 2,
     "conditions": {
-      "IsLandType": "forest"
+      "is_land_type": "forest"
     },
     "resources": {
       "category": "buildings",

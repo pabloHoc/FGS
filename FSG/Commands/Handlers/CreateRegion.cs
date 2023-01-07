@@ -18,8 +18,7 @@ namespace FSG.Commands.Handlers
                 EmpireId = command.EmpireId,
                 X = command.X,
                 Y = command.Y,
-                ConnectedTo = new List<EntityId<Region>>(),
-                Modifiers = new List<Modifier>()
+                ConnectedTo = new List<EntityId<Region>>()
             });
         }
     }

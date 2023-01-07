@@ -14,8 +14,8 @@ namespace FSG.Commands
                 {
                     typeof(Agent), new Dictionary<string, Func<IBaseEntity, dynamic, ICommand>>
                     {
-                        { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
-                        { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
+                        { "set_owner_empire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
+                        { "create_agent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
                     }
                 }
             };
@@ -27,7 +27,14 @@ namespace FSG.Commands
 
         public bool Has<T>(string command) where T : IBaseEntity
         {
-            return _commands[typeof(T)].ContainsKey(command);
+            Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> entityCommands;
+
+            if (_commands.TryGetValue(typeof(T), out entityCommands))
+            {
+                return entityCommands.ContainsKey(command);
+            }
+
+            return false;
         }
     }
 }

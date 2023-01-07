@@ -4,7 +4,7 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-	public class ProcessEntityActions<T> : CommandHandler<Commands.ProcessEntityActions<T>> where T : IEntity<T>, IActorEntity
+	public class ProcessEntityActions<T> : CommandHandler<Commands.ProcessEntityActions<T>> where T : IEntity<T>, IActor
 	{
         public ProcessEntityActions(ServiceProvider serviceProvider) : base(serviceProvider) { }
 

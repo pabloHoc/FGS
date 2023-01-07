@@ -18,7 +18,7 @@ namespace FSG.UI
             _regionNameLabel = (Label)Root.FindWidgetById("RegionNameLabel");
             _eventManager.OnRegionSelected += HandleRegionSelected;
 
-            _landList = new EntityListController<Land>(serviceProvider, eventManager, assetManager, ((land) => land.RegionId.Value == eventManager.SelectedRegionId));
+            _landList = new EntityListController<Land>(serviceProvider, eventManager, assetManager, ((land) => land.RegionId == eventManager.SelectedRegionId));
             _landList.EntityClickHandler = eventManager.SelectLand;
 
             var landListPanel = (VerticalStackPanel)Root.FindWidgetById("LandList");

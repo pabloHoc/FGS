@@ -11,7 +11,7 @@ namespace FSG.Core
 
     public class EntityRepository
     {
-        public class EntityDictionaryMap
+        private class EntityDictionaryMap
         {
             public Dictionary<string, Player> Player { get; init; } = new Dictionary<string, Player>();
             public Dictionary<string, Empire> Empire { get; init; } = new Dictionary<string, Empire>();
@@ -19,9 +19,8 @@ namespace FSG.Core
             public Dictionary<string, Land> Land { get; init; } = new Dictionary<string, Land>();
             public Dictionary<string, Agent> Agent { get; init; } = new Dictionary<string, Agent>();
             public Dictionary<string, Army> Army { get; init; } = new Dictionary<string, Army>();
-            public Dictionary<string, ActionQueueItem> ActionQueueItem { get; init; } = new Dictionary<string, ActionQueueItem>();
             public Dictionary<string, Spell> Spell { get; init; } = new Dictionary<string, Spell>();
-            public Dictionary<string, Modifier> SpeModifierll { get; init; } = new Dictionary<string, Modifier>();
+            public Dictionary<string, Modifier> Modifier { get; init; } = new Dictionary<string, Modifier>();
 
             public Dictionary<string, T> Get<T>() where T : IBaseEntity
             {
@@ -36,13 +35,13 @@ namespace FSG.Core
 
         public void Add<T>(IEntity<T> entity) where T : IEntity<T>
         {
-            _entities.Get<T>().Add(entity.Id.Value, (T)entity);
+            _entities.Get<T>().Add(entity.Id, (T)entity);
             _lastAddedEntityId = entity.Id;
         }
 
         public T Get<T>(EntityId<T> entityId) where T : IEntity<T>
         {
-            return _entities.Get<T>()[entityId.Value];
+            return _entities.Get<T>()[entityId];
         }
 
         public List<T> Query<T>(IQuery<T> query) where T : IEntity<T>
@@ -55,9 +54,9 @@ namespace FSG.Core
             return new List<T>(_entities.Get<T>().Values);
         }
 
-        public void Remove<T>(EntityId<T> entityId) where T : IEntity<T>
+        public void Remove<T>(IEntity<T> entity) where T : IEntity<T>
         {
-            _entities.Get<T>().Remove(entityId.Value);
+            _entities.Get<T>().Remove(entity.Id);
         }
 
         // WARNING: Use inmmediately after dispatch create entity command only,

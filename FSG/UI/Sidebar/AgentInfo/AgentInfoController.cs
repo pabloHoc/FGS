@@ -73,13 +73,12 @@ namespace FSG.UI
         {
             if (_eventManager.SelectedAgentId != null)
             {
-                var agent = _serviceProvider.GlobalState.Entities.Get<Agent>(new EntityId<Agent>(_eventManager.SelectedAgentId));
-                _agentNameLabel.Text = agent.Name;
+                var agent = _serviceProvider.GlobalState.Entities
+                    .Get<Agent>(new EntityId<Agent>(_eventManager.SelectedAgentId));
 
-                if (agent.Actions.Count > 0)
-                {
-                    _currentActionLabel.Text = $"{agent.Actions.Peek().Name} ({agent.Actions.Peek().RemainingTurns})";
-                }
+                _agentNameLabel.Text = agent.Name;
+                _currentActionLabel.Text = agent.Actions.Count > 0 ?
+                    $"{agent.Actions.Peek().Name} ({agent.Actions.Peek().RemainingTurns})" : "";
 
                 UpdateSpellList();
             }

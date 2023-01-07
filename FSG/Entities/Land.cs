@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Land : IEntity<Land>, INameableEntity
+    public class Land : IEntity<Land>, INameable
     {
         public EntityType Type { get; } = EntityType.Land;
 
@@ -13,8 +13,6 @@ namespace FSG.Entities
         public List<string> Buildings { get; init; }
 
         public EntityId<Region> RegionId { get; init; }
-
-        public List<Modifier> Modifiers { get; init; }
 
         public Queue<BuildingQueueItem> BuildingQueue { get; init; }
     }

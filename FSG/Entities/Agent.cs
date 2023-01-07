@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FSG.Entities
 {
-    public class Agent : IEntity<Agent>, ILocatableEntity, IOwneableEntity, INameableEntity, IActorEntity
+    public class Agent : IEntity<Agent>, ILocatable, IOwneable, INameable, IActor
     {
         public EntityType Type { get; } = EntityType.Agent;
 
@@ -14,8 +14,6 @@ namespace FSG.Entities
         public Nullable<EntityId<Empire>> EmpireId { get; set; }
 
         public EntityId<Region> RegionId { get; set; }
-
-        public List<Modifier> Modifiers { get; init; }
 
         public Queue<ActionQueueItem> Actions { get; init; }
     }
