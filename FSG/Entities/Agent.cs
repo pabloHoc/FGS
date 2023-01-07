@@ -5,7 +5,7 @@ namespace FSG.Entities
 {
     public class Agent : IEntity<Agent>, ILocatable, IOwneable, INameable, IActor
     {
-        public EntityType Type { get; } = EntityType.Agent;
+        public EntityType Type => EntityType.Agent;
 
         public EntityId<Agent> Id { get; init; }
 

@@ -7,7 +7,7 @@ namespace FSG.Definitions
 {
     public class BuildingDefinition : IDefinition
     {
-        public DefinitionType Type { get => DefinitionType.Building; }
+        public DefinitionType Type => DefinitionType.Building;
 
         public string Name { get; init; }
 

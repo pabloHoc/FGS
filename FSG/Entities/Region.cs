@@ -5,7 +5,7 @@ namespace FSG.Entities
 {
     public class Region : IEntity<Region>, IOwneable, INameable
     {
-        public EntityType Type { get; } = EntityType.Region;
+        public EntityType Type => EntityType.Region;
 
         public EntityId<Region> Id { get; init; }
 

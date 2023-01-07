@@ -9,7 +9,7 @@ namespace FSG.Entities
 
     public class Modifier : IEntity<Modifier>, ITemporary
     {
-        public EntityType Type { get => EntityType.Modifier; }
+        public EntityType Type => EntityType.Modifier;
 
         public EntityId<Modifier> Id { get; init; }
 

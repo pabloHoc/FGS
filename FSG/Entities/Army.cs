@@ -4,7 +4,7 @@ namespace FSG.Entities
 {
     public class Army : IEntity<Army>, ILocatable, IOwneable
     {
-        public EntityType Type { get; } = EntityType.Army;
+        public EntityType Type => EntityType.Army;
 
         public EntityId<Army> Id { get; init; }
 
