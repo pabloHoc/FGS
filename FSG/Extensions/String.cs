@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace FSG.Extensions
 {
     public static class StringExtensions
