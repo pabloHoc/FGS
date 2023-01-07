@@ -2,6 +2,9 @@
     <VerticalStackPanel Background="#000000">
         <Label Id="LandNameLabel" />
         <HorizontalSeparator />
+        <Label Text="Region" />
+        <Label Id="RegionLabel" />
+        <HorizontalSeparator />
         <Label Text="Buildings" />
         <HorizontalStackPanel Id="BuildingList" Spacing="8"></HorizontalStackPanel>
         <HorizontalSeparator />

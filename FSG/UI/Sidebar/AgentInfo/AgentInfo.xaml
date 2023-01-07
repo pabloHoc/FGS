@@ -2,10 +2,16 @@
     <VerticalStackPanel Background="#000000">
         <Label Id="AgentNameLabel" />
         <HorizontalSeparator />
+        <Label Text="Empire" />
+        <Label Id="EmpireLabel" />
+        <HorizontalSeparator />
+        <Label Text="Current Region" />
+        <Label Id="CurrentRegionLabel" />
+        <HorizontalSeparator />
         <Label Text="Current Action" />
         <Label Id="CurrentActionLabel" />
         <HorizontalSeparator />
         <Label Text="Spells" />
-        <HorizontalStackPanel Id="SpellPanel" />
+        <HorizontalStackPanel Id="SpellPanel" Spacing="8" />
     </VerticalStackPanel>
 </Project>

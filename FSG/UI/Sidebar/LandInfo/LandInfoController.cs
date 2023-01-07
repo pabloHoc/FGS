@@ -11,6 +11,7 @@ namespace FSG.UI
     public class LandInfoController : UIController
     {
         private readonly Label _landNameLabel;
+        private readonly Label _regionLabel;
         private readonly VerticalStackPanel _builtBuildingList;
         private readonly HorizontalStackPanel _buildingList;
         private readonly VerticalStackPanel _buildingQueue;
@@ -27,15 +28,22 @@ namespace FSG.UI
         )
         {
             _landNameLabel = (Label)Root.FindWidgetById("LandNameLabel");
+            _regionLabel = (Label)Root.FindWidgetById("RegionLabel");
             _builtBuildingList = (VerticalStackPanel)Root.FindWidgetById("BuiltBuildingList");
             _buildingList = (HorizontalStackPanel)Root.FindWidgetById("BuildingList");
             _buildingQueue = (VerticalStackPanel)Root.FindWidgetById("BuildingQueue");
-            _eventManager.OnLandSelected += handleLandSelected;
+            _eventManager.OnLandSelected += HandleLandSelected;
         }
 
-        private void handleLandSelected(object sender, string landId)
+        private void HandleLandSelected(object sender, string landId)
         {
             Update();
+        }
+
+        private void HandleRegionClick(object sender, System.EventArgs e)
+        {
+            var label = (Label)sender;
+            _eventManager.SelectRegion(label.Id);
         }
 
         private void UpdateBuiltBuildingList(Land land)
@@ -89,6 +97,14 @@ namespace FSG.UI
             }
         }
 
+        private void UpdateRegion(Land land)
+        {
+            var region = _serviceProvider.GlobalState.Entities.Get<Region>(land.RegionId);
+            _regionLabel.Id = region.Id;
+            _regionLabel.Text = region.Name;
+            _regionLabel.TouchDown += HandleRegionClick;
+        }
+
         private void HandleBuildingClick(object sender, System.EventArgs e)
         {
             _serviceProvider.Dispatcher.Dispatch(new AddBuildingtoQueue
@@ -109,6 +125,7 @@ namespace FSG.UI
                 UpdateBuiltBuildingList(land);
                 UpdateBuildingList(land);
                 UpdateBuildingQueue(land);
+                UpdateRegion(land);
             }
         }
     }
