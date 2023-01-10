@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using FSG.Data;
+using FSG.Serialization;
 
 namespace FSG.Entities
 {

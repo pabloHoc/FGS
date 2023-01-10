@@ -3,7 +3,7 @@ using System.IO;
 using FSG.Core;
 using FSG.Definitions;
 
-namespace FSG.Data
+namespace FSG.Serialization
 {
     public class DefinitionLoader
     {

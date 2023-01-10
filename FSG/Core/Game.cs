@@ -1,6 +1,6 @@
 using System;
 using FSG.Commands;
-using FSG.Data;
+using FSG.Serialization;
 using FSG.Entities;
 
 namespace FSG.Core

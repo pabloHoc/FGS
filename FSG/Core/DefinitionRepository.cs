@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using FSG.Data;
+using FSG.Serialization;
 using FSG.Definitions;
 using FSG.Entities;
 

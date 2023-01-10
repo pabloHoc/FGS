@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace FSG.Data
+namespace FSG.Serialization
 {
     public class Deserializer
     {

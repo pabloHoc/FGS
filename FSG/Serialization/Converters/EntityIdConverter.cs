@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using FSG.Entities;
 
-namespace FSG.Data
+namespace FSG.Serialization
 {
     public class EntityIdConverter<T> : JsonConverter<EntityId<T>>
     {
