@@ -64,34 +64,29 @@ namespace FSG.Commands
                     ProcessActions((Dictionary<string, object>)entry.Value, newScope, scopeContext, sourceId);
                 }
                 // if it's modifiers block
-                else if (entry.Key == "modifiers")
+                else if (entry.Key == "Modifiers")
                 {
                     ProcessActions((Dictionary<string, object>)entry.Value, scope, scopeContext, sourceId);
                 }
-                // if it's single modifier
-                else
+                // if it's modifier block type
+                else if(entry.Key == "Add" || entry.Key == "Mult" || entry.Key == "Reduction")
                 {
-                    // Here we should be inside a modifier's block, but this is 
-                    // not a safe assumption
-
                     ModifierType modifierType;
 
-                    // e.g.: buildings_wood_production_mult
-                    var modifierParts = entry.Key.Split('_');
-
-                    var name = String.Join('_', modifierParts[..(modifierParts.Length - 1)]);
-                    var type = modifierParts[modifierParts.Length - 1];
-
-                    if (Enum.TryParse(type.CapitalizeFirstLetter(), out modifierType))
+                    if (Enum.TryParse(entry.Key, out modifierType))
                     {
-                        _serviceProvider.Dispatcher.Dispatch(new CreateModifier
+                        foreach (var modifier in (Dictionary<string, object>)entry.Value)
                         {
-                            ModifierName = name,
-                            ModifierType = modifierType,
-                            Value = (int)entry.Value,
-                            TargetId = ((dynamic)scope).Id,
-                            SourceId = sourceId
-                        });
+                            _serviceProvider.Dispatcher.Dispatch(new CreateModifier
+                            {
+                                ModifierName = modifier.Key,
+                                ModifierType = modifierType,
+                                Value = (int)modifier.Value,
+                                TargetId = ((dynamic)scope).Id,
+                                SourceId = sourceId
+                            });
+                        }
+
                     }
                 }
             }

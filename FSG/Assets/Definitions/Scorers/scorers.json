@@ -1,34 +1,32 @@
 ﻿[
   {
-    "type": "scorer",
-    "name": "grassland_number",
-    "curve": {
-      "type": "Linear",
-      "slope": 1,
-      "exponent": 1,
-      "xShift": 1,
-      "yShift": 1
+    "Name": "GrasslandNumber",
+    "Curve": {
+      "Type": "Linear",
+      "Slope": 1,
+      "Exponent": 1,
+      "XShift": 1,
+      "YShift": 1
     },
-    "input": {
-      "name": "grassland",
-      "min": 0,
-      "max": 5
+    "Input": {
+      "Name": "Grassland",
+      "Min": 0,
+      "Max": 5
     }
   },
   {
-    "type": "scorer",
-    "name": "wood_qty",
-    "curve": {
-      "type": "Linear",
-      "slope": 1,
-      "exponent": 1,
-      "xShift": 1,
-      "yShift": 1
+    "Name": "WoodQty",
+    "Curve": {
+      "Type": "Linear",
+      "Slope": 1,
+      "Exponent": 1,
+      "XShift": 1,
+      "YShift": 1
     },
-    "input": {
-      "name": "wood",
-      "min": 0,
-      "max": 10
+    "Input": {
+      "Name": "Wood",
+      "Min": 0,
+      "Max": 10
     }
   }
 ]

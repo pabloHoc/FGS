@@ -1,12 +1,12 @@
 [
   {
-    "name": "empire"
+    "Name": "Empire"
   },
   {
-    "name": "region",
-    "parent": "empire"
+    "Name": "Region",
+    "Parent": "Empire"
   },
   {
-    "name": "buildings"
+    "Name": "Buildings"
   }
 ]

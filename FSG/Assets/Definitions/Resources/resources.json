@@ -1,11 +1,11 @@
 [
   {
-    "name": "food"
+    "Name": "Food"
   },
   {
-    "name": "wood"
+    "Name": "Wood"
   },
   {
-    "name": "iron"
+    "Name": "Iron"
   }
 ]

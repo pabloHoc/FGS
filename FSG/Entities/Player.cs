@@ -13,5 +13,7 @@ namespace FSG.Entities
         public EntityId<Empire> EmpireId { get; init; }
 
         public bool IsAI { get; init; }
+
+        public FSG.AI.AI AI { get; set; }
     }
 }

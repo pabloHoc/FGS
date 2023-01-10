@@ -11,6 +11,11 @@ autom4te.cache/
 tarballs/
 test-results/
 
+# custom
+.editorconfig
+entities.json
+Test.cs
+
 # Mac bundle stuff
 *.dmg
 *.app

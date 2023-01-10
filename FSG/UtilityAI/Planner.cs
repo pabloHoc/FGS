@@ -28,9 +28,8 @@ namespace FSG.UtilityAI
 				{
 					ProcessPrimitiveTask((PrimitiveTask<Context, Target>)task);
 				}
-
-                if (typeof(ComplexTask<Context, Target>) == task.GetType())
-                {
+				else
+				{
                     ProcessComplexTask((ComplexTask<Context, Target>)task);
                 }
             }

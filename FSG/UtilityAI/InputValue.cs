@@ -16,7 +16,7 @@ namespace FSG.UtilityAI
 
 		public int GetFrom(InputParameter inputParam)
 		{
-			return _context.getInputValue(_target, inputParam.Name);
+			return _context.GetInputValue(_target, inputParam.Name);
 		}
 	}
 }

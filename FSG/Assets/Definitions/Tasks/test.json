@@ -1,0 +1,42 @@
+﻿[
+  {
+    "Name": "root_task",
+    "SubTasks": [ "complex_task_a", "complex_task_b" ],
+    "IsRoot": true,
+    "Scorers": []
+  },
+  {
+    "Name": "complex_task_a",
+    "Weight": 0.4,
+    "SubTasks": [ "primitive_task_a", "primitive_task_b" ],
+    "Scorers": []
+  },
+  {
+    "Name": "complex_task_b",
+    "SubTasks": [ "primitive_task_c", "primitive_task_d" ],
+    "Scorers": [],
+    "Weight": 0.5
+  },
+  {
+    "Name": "primitive_task_a",
+    "Weight": 0.2,
+    "Scorers": []
+  },
+  {
+    "Name": "primitive_task_b",
+    "Weight": 0.3,
+    "Scorers": []
+  },
+  {
+    "Name": "primitive_task_c",
+    "Weight": 0.6,
+    "Scorers": []
+  },
+  {
+    "Type": "task",
+    "Name": "primitive_task_d",
+    "Weight": 0.2,
+    "Scorers": []
+  }
+]
+

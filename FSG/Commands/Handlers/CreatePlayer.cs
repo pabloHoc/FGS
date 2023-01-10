@@ -9,13 +9,20 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreatePlayer command)
         {
-            this._serviceProvider.GlobalState.Entities.Add(new Player
+            var player = new Player
             {
                 Id = new EntityId<Player>(),
                 Name = command.PlayerName,
                 EmpireId = command.EmpireId,
-                IsAI = command.IsAI
-            });
+                IsAI = command.IsAI,
+            };
+
+            if (player.IsAI)
+            {
+                player.AI = new AI.AI(player, _serviceProvider);
+            }
+
+            this._serviceProvider.GlobalState.Entities.Add(player);
         }
     }
 }

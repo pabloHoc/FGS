@@ -10,7 +10,6 @@ namespace FSG.Data
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions
             {
                 IncludeFields = true,
-                PropertyNameCaseInsensitive = true,
                 Converters =
                 {
                     new ValueObjectConverterFactory(),

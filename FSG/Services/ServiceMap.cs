@@ -13,12 +13,15 @@ namespace FSG.Services
 
         public SpellService SpellService { get; }
 
+		public TaskService TaskService { get; }
+
 		public ServiceMap(ServiceProvider serviceProvider)
 		{
 			BuildingService = new BuildingService(serviceProvider);
 			EconomicCategoryService = new EconomicCategoryService(serviceProvider);
 			ModifierService = new ModifierService(serviceProvider);
 			SpellService = new SpellService(serviceProvider);
+			TaskService = new TaskService(serviceProvider);
 		}
 	}
 }

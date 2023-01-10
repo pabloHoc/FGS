@@ -3,7 +3,7 @@ namespace FSG.UtilityAI
 {
 	public interface IState
 	{
-		public int getInputValue<T>(T target, string name);
+		public int GetInputValue<T>(T target, string name);
 	}
 }
 

@@ -14,8 +14,8 @@ namespace FSG.Commands
                 {
                     typeof(Agent), new Dictionary<string, Func<IBaseEntity, dynamic, ICommand>>
                     {
-                        { "set_owner_empire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
-                        { "create_agent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
+                        { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
+                        { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
                     }
                 }
             };

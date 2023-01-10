@@ -52,6 +52,8 @@
     <None Remove="UtilityAI\ComplexTasks\" />
     <None Remove="Assets\Definitions\Tasks\" />
     <None Remove="Assets\Definitions\Scorers\" />
+    <None Remove="AI\" />
+    <None Remove="AI\InputValues\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -95,6 +97,8 @@
     <Folder Include="UtilityAI\ComplexTasks\" />
     <Folder Include="Assets\Definitions\Tasks\" />
     <Folder Include="Assets\Definitions\Scorers\" />
+    <Folder Include="AI\" />
+    <Folder Include="AI\InputValues\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
