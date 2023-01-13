@@ -23,13 +23,13 @@ namespace FSG.Serialization
 
         public void LoadDefinitions()
         {
-            this.LoadDefinition<ResourceDefinition>("../../../Assets/Definitions/Resources/resources.json");
-            this.LoadDefinition<BuildingDefinition>("../../../Assets/Definitions/Buildings/buildings.json");
-            this.LoadDefinition<LandDefinition>("../../../Assets/Definitions/Lands/lands.json");
-            this.LoadDefinition<EconomicCategoryDefinition>("../../../Assets/Definitions/EconomicCategories/economic-categories.json");
-            this.LoadDefinition<SpellDefinition>("../../../Assets/Definitions/Spells/spells.json");
-            this.LoadDefinition<ScorerDefinition>("../../../Assets/Definitions/Scorers/scorers.json");
-            this.LoadDefinition<TaskDefinition>("../../../Assets/Definitions/Tasks/test.json");
+            this.LoadDefinition<ResourceDefinition>("../../../../FSG/Assets/Definitions/Resources/resources.json");
+            this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/buildings.json");
+            this.LoadDefinition<LandDefinition>("../../../../FSG/Assets/Definitions/Lands/lands.json");
+            this.LoadDefinition<EconomicCategoryDefinition>("../../../../FSG/Assets/Definitions/EconomicCategories/economic-categories.json");
+            this.LoadDefinition<SpellDefinition>("../../../../FSG/Assets/Definitions/Spells/spells.json");
+            this.LoadDefinition<ScorerDefinition>("../../../../FSG/Assets/Definitions/Scorers/scorers.json");
+            this.LoadDefinition<TaskDefinition>("../../../../FSG/Assets/Definitions/Tasks/test.json");
         }
     }
 }

@@ -17,20 +17,9 @@
     <None Remove="NUnit" />
     <None Remove="NUnit3TestAdapter" />
     <None Remove="Myra" />
-    <None Remove="UI\" />
     <None Remove="Noesis.GUI" />
     <None Remove="Noesis.App" />
-    <None Remove="UI\TurnPanel\" />
-    <None Remove="UI\Sidebar\" />
     <None Remove="UI\TabComponent\" />
-    <None Remove="UI\Sidebar\LandInfo\" />
-    <None Remove="UI\Sidebar\EmpireInfo\" />
-    <None Remove="UI\Sidebar\RegionInfo\" />
-    <None Remove="UI\Sidebar\AgentInfo\" />
-    <None Remove="UI\DebugPanel\CommandLog\" />
-    <None Remove="UI\Common\" />
-    <None Remove="UI\Common\Tabs\" />
-    <None Remove="UI\Common\EntityList\" />
     <None Remove="Entities\Queries\" />
     <None Remove="Conditions\" />
     <None Remove="Scopes\" />
@@ -54,6 +43,7 @@
     <None Remove="Assets\Definitions\Scorers\" />
     <None Remove="AI\" />
     <None Remove="AI\InputValues\" />
+    <None Remove="MonoGame.Extended.Input" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -62,20 +52,8 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="Myra" Version="1.4.5" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UI\" />
-    <Folder Include="UI\TurnPanel\" />
-    <Folder Include="UI\Sidebar\" />
-    <Folder Include="UI\Sidebar\LandInfo\" />
-    <Folder Include="UI\Sidebar\EmpireInfo\" />
-    <Folder Include="UI\Sidebar\RegionInfo\" />
-    <Folder Include="UI\Sidebar\AgentInfo\" />
-    <Folder Include="UI\DebugPanel\CommandLog\" />
-    <Folder Include="UI\Common\" />
-    <Folder Include="UI\Common\Tabs\" />
-    <Folder Include="UI\Common\EntityList\" />
     <Folder Include="Entities\Queries\" />
     <Folder Include="Conditions\" />
     <Folder Include="Scopes\" />

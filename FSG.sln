@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSG", "FSG\FSG.csproj", "{2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSG.Tests", "FSG.Tests\FSG.Tests.csproj", "{6D9B28D9-7226-4521-8584-2093AADE68AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSG.UI", "FSG.UI\FSG.UI.csproj", "{99A3F979-5821-4E2E-9AEE-1DB206E2B9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6D9B28D9-7226-4521-8584-2093AADE68AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D9B28D9-7226-4521-8584-2093AADE68AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D9B28D9-7226-4521-8584-2093AADE68AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A3F979-5821-4E2E-9AEE-1DB206E2B9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A3F979-5821-4E2E-9AEE-1DB206E2B9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A3F979-5821-4E2E-9AEE-1DB206E2B9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A3F979-5821-4E2E-9AEE-1DB206E2B9BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,13 +9,13 @@ using Myra.Assets;
 using Myra.Graphics2D.UI;
 using Myra.Utility;
 
-namespace FSG;
+namespace FSG.UI;
 
 public class GameApp : Microsoft.Xna.Framework.Game
 {
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private readonly FSG.Core.Game _game;
+    public readonly FSG.Core.Game _game;
     private FSG.UI.UI _ui;
 
     public GameApp()
@@ -44,7 +44,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         // TODO: use this.Content to load your game content here
         MyraEnvironment.Game = this;
 
-        _ui = new FSG.UI.UI(_game.ServiceProvider);
+        _ui = new FSG.UI.UI(_game.ServiceProvider, GraphicsDevice, _spriteBatch);
         _ui.Initialize();
     }
 
@@ -61,11 +61,14 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.LightGray);
-        // TODO: Add your drawing code here
-
         base.Draw(gameTime);
+        GraphicsDevice.Clear(Color.White);
+        _spriteBatch.Begin();
+
+        // Drawing logic
         _ui.Draw();
+
+        _spriteBatch.End();
     }
 }
 
