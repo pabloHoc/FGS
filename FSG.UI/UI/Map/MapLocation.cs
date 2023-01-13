@@ -50,6 +50,13 @@ namespace FSG.UI
 
             _texture = new Texture2D(graphicsDevice, 1, 1);
             _texture.SetData(new Color[] { Color.White });
+
+            _eventManager.OnRegionSelected += HandleRegionSelected;
+        }
+
+        private void HandleRegionSelected(object sender, string e)
+        {
+            _selected = _eventManager.SelectedRegionId == _regionId;
         }
 
         public void Draw()
@@ -79,9 +86,10 @@ namespace FSG.UI
         private void CheckInput()
         {
             var mouseState = MouseExtended.GetState();
-            var worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
 
-            _hovered = worldPosition.X > _position.X - REGION_SIZE / 2 &&
+            var worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X - 400, mouseState.Y));
+
+            _hovered = worldPosition.X  > _position.X - REGION_SIZE / 2 &&
                     worldPosition.X < _position.X + REGION_SIZE / 2 &&
                     worldPosition.Y > _position.Y - REGION_SIZE / 2 &&
                     worldPosition.Y < _position.Y + REGION_SIZE / 2;

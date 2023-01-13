@@ -1,4 +1,4 @@
 ﻿<Project>
-    <Panel Id="DebugPanel" Background="#000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="350" Height="260" >
+    <Panel Id="DebugPanel" Background="#000000" VerticalAlignment="Bottom" Height="260" >
     </Panel>
 </Project>

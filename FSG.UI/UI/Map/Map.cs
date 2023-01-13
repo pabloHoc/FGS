@@ -121,11 +121,19 @@ namespace FSG.UI
 
         public void Update(GameTime gameTime)
         {
-            UpdateCamera(gameTime);
+            var mouseState = MouseExtended.GetState();
 
-            foreach (var location in _locations)
+            if (mouseState.X > 400)
             {
-                location.Update();
+                UpdateCamera(gameTime);
+
+                foreach (var location in _locations)
+                {
+                    location.Update();
+                }   
+            } else
+            {
+                _currentMouseWheelValue = mouseState.ScrollWheelValue;
             }
         }
 

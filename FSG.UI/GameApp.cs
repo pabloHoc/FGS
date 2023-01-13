@@ -42,8 +42,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _graphics.PreferredBackBufferWidth = 1280;
         _graphics.PreferredBackBufferHeight = 800;
 
-        _viewportLeft = new Viewport(0, 0, 800, 800);
-        _viewportRight = new Viewport(800, 0, 480, 800);
+        _viewportLeft = new Viewport(0, 0, 400, 800);
+        _viewportRight = new Viewport(400, 0, 880, 800);
 
         _eventManager = new UIEventManager();
 
@@ -62,7 +62,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         // Initialize UI
         MyraEnvironment.Game = this;
-        _ui = new FSG.UI.UI(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch, _camera);
+        _ui = new FSG.UI.UI(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch);
         _ui.Initialize();
 
         // The game needs to be initialized after the UI is created so the UI
@@ -94,15 +94,15 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         // Draw UI
         GraphicsDevice.Viewport = _viewportLeft;
-        var transformMatrix = _camera.GetViewMatrix();
-        _spriteBatch.Begin(transformMatrix: transformMatrix);
-        _map.Draw();
+        _spriteBatch.Begin();
+        _ui.Draw();
         _spriteBatch.End();
 
         // Draw Map
         GraphicsDevice.Viewport = _viewportRight;
-        _spriteBatch.Begin();
-        _ui.Draw();
+        var transformMatrix = _camera.GetViewMatrix();
+        _spriteBatch.Begin(transformMatrix: transformMatrix);
+        _map.Draw();
         _spriteBatch.End();
 
         GraphicsDevice.Viewport = originalViewport;

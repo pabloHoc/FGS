@@ -1,5 +1,5 @@
 ﻿<Project>
-    <Panel Id="TurnPanel" Background="#000000" Padding="10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+    <Panel Id="TurnPanel" Background="#000000" Padding="10" VerticalAlignment="Bottom">
         <Grid ColumnSpacing="8" RowSpacing="8">
             <Grid.ColumnsProportions>
                 <Proportion/>
