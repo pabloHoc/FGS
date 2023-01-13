@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection.Metadata;
 using FSG.Core;
 using FSG.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Input;
+using MonoGame.Extended.Timers;
 using Myra.Graphics2D;
 
 namespace FSG.UI
 {
-    public class MapController
+    public class Map
     {
         private readonly ServiceProvider _serviceProvider;
 
@@ -18,22 +23,40 @@ namespace FSG.UI
 
         private readonly SpriteBatch _spriteBatch;
 
+        private readonly OrthographicCamera _camera;
+
         private readonly Texture2D _texture;
 
-        public MapController(
+        private readonly List<MapLocation> _locations = new List<MapLocation>();
+
+        private int _currentMouseWheelValue = 0;
+
+        public Map(
             ServiceProvider serviceProvider,
             UIEventManager eventManager,
             GraphicsDevice graphicsDevice,
-            SpriteBatch spriteBatch
+            SpriteBatch spriteBatch,
+            OrthographicCamera camera
         )
         {
             _serviceProvider = serviceProvider;
             _eventManager = eventManager;
             _graphicsDevice = graphicsDevice;
             _spriteBatch = spriteBatch;
-
+            _camera = camera;
             _texture = new Texture2D(_graphicsDevice, 1, 1);
             _texture.SetData(new Color[] { Color.White });
+        }
+
+        public void Initialize()
+        {
+            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+
+            foreach (var region in regions)
+            {
+                _locations.Add(new MapLocation(region, _eventManager, _graphicsDevice, _spriteBatch, _camera));
+            }
+
         }
 
         private void DrawGrid()
@@ -53,15 +76,6 @@ namespace FSG.UI
                 var rectangle = new Rectangle(i * CHUNK_SIZE, 0, 1, COLUMNS * CHUNK_SIZE);
                 _spriteBatch.Draw(_texture, rectangle, Color.Black);
             }
-        }
-
-        private void DrawRegion(Region region)
-        {
-            var REGION_SIZE = 20;
-            var REGION_COLOR = Color.Green;
-
-            var rectangle = new Rectangle(region.X - REGION_SIZE / 2, region.Y - REGION_SIZE / 2, REGION_SIZE, REGION_SIZE);
-            _spriteBatch.Draw(_texture, rectangle, REGION_COLOR);
         }
 
         private void DrawRoads(Region region)
@@ -88,7 +102,7 @@ namespace FSG.UI
             }
         }
 
-        public void Update()
+        public void Draw()
         {
             DrawGrid();
 
@@ -96,9 +110,69 @@ namespace FSG.UI
 
             foreach (var region in regions)
             {
-                DrawRegion(region);
                 DrawRoads(region);
             }
+
+            foreach (var location in _locations)
+            {
+                location.Draw();
+            }
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            UpdateCamera(gameTime);
+
+            foreach (var location in _locations)
+            {
+                location.Update();
+            }
+        }
+
+        private void UpdateCamera(GameTime gameTime)
+        {
+            // Movement
+            const float movementSpeed = 200;
+            _camera.Move(GetCameraMovementDirection() * movementSpeed * gameTime.GetElapsedSeconds());
+
+            // Zoom
+            var mouseState = MouseExtended.GetState();
+
+            var previousMouseWheelValue = _currentMouseWheelValue;
+            _currentMouseWheelValue = MouseExtended.GetState().ScrollWheelValue;
+
+            if (_currentMouseWheelValue > previousMouseWheelValue)
+            {
+                _camera.ZoomIn(1 / 12f);
+            }
+
+            if (_currentMouseWheelValue < previousMouseWheelValue)
+            {
+                _camera.ZoomOut(1 / 12f);
+            }
+        }
+
+        private static Vector2 GetCameraMovementDirection()
+        {
+            var movementDirection = Vector2.Zero;
+            var state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.Down))
+            {
+                movementDirection += Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Up))
+            {
+                movementDirection -= Vector2.UnitY;
+            }
+            if (state.IsKeyDown(Keys.Left))
+            {
+                movementDirection -= Vector2.UnitX;
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                movementDirection += Vector2.UnitX;
+            }
+            return movementDirection;
         }
     }
 }

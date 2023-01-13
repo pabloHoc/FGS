@@ -7,6 +7,7 @@ using Myra.Assets;
 using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace FSG.UI
 {
@@ -16,11 +17,13 @@ namespace FSG.UI
 
         private readonly ServiceProvider _serviceProvider;
 
-        private readonly UIEventManager _eventManager = new UIEventManager();
+        private readonly UIEventManager _eventManager;
 
         private readonly GraphicsDevice _graphicsDevice;
 
         private readonly SpriteBatch _spriteBatch;
+
+        private readonly OrthographicCamera _camera;
 
         // Components
 
@@ -30,15 +33,17 @@ namespace FSG.UI
 
         private TurnPanelController _turnPanel;
 
-        private MapController _map;
+        private Map _map;
 
         // other
 
-        public UI(ServiceProvider serviceProvider, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        public UI(ServiceProvider serviceProvider, UIEventManager eventManager, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, OrthographicCamera camera)
         {
             _serviceProvider = serviceProvider;
+            _eventManager = eventManager;
             _graphicsDevice = graphicsDevice;
             _spriteBatch = spriteBatch;
+            _camera = camera;
 
             _serviceProvider.Dispatcher.OnCommandDispatched += HandleCommandDispatched;
             _serviceProvider.Dispatcher.OnCommandProcessed += HandleCommandProcessed;
@@ -64,7 +69,7 @@ namespace FSG.UI
             _sidebar = new SidebarController(_serviceProvider, _eventManager, assetManager);
             _debugPanel = new DebugPanelController(_serviceProvider, _eventManager, assetManager);
             _turnPanel = new TurnPanelController(_serviceProvider, _eventManager, assetManager);
-            _map = new MapController(_serviceProvider, _eventManager, _graphicsDevice, _spriteBatch);
+            _map = new Map(_serviceProvider, _eventManager, _graphicsDevice, _spriteBatch, _camera);
 
             _desktop.Widgets.Add(_sidebar.Root);
             _desktop.Widgets.Add(_debugPanel.Root);
@@ -73,8 +78,7 @@ namespace FSG.UI
 
         public void Draw()
         {
-            //_desktop.Render();
-            _map.Update();
+            _desktop.Render();
         }
     }
 }
