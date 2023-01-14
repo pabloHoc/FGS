@@ -126,7 +126,7 @@ namespace FSG.UI
 
         public void Draw()
         {
-            DrawGrid();
+            //DrawGrid();
 
             var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
 

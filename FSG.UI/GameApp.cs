@@ -88,7 +88,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
     protected override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
-        GraphicsDevice.Clear(Color.White);
+        GraphicsDevice.Clear(Color.PaleTurquoise);
 
         var originalViewport = GraphicsDevice.Viewport;
 

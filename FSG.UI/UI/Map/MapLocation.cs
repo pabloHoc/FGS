@@ -18,6 +18,8 @@ namespace FSG.UI
 
         private bool _hovered = false;
 
+        private readonly bool _hasEmpire = false;
+
         private readonly UIEventManager _eventManager;
 
         private readonly SpriteBatch _spriteBatch;
@@ -26,11 +28,13 @@ namespace FSG.UI
 
         private readonly Texture2D _texture;
 
-        private readonly Color _defaultColor = Color.Green;
+        private readonly Color _defaultColor = Color.Olive;
 
-        private readonly Color _selectedColor = Color.Red;
+        private readonly Color _selectedColor = Color.DodgerBlue;
 
-        private readonly Color _hoveredColor = Color.Yellow;
+        private readonly Color _conqueredColor = Color.Crimson;
+
+        private readonly Color _hoveredColor = Color.CornflowerBlue;
 
         private const int REGION_SIZE = 20;
 
@@ -44,6 +48,8 @@ namespace FSG.UI
         {
             _position = new Vector2(region.X, region.Y);
             _regionId = region.Id;
+            _hasEmpire = region.EmpireId != null;
+
             _eventManager = eventManager;
             _spriteBatch = spriteBatch;
             _camera = camera;
@@ -68,7 +74,7 @@ namespace FSG.UI
                 REGION_SIZE
             );
 
-            var color = _defaultColor;
+            var color = _hasEmpire ? _conqueredColor : _defaultColor;
 
             if (_hovered)
             {

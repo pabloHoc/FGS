@@ -88,20 +88,102 @@ namespace FSG.Commands.Handlers
             {
                 if (i < chunkIndexes.Count - 1)
                 {
-                    var chunkIndex = chunkIndexes[i];
-                    var nextChunkIndex = chunkIndexes[i + 1];
+                    var chunk = chunkIndexes[i];
+                    var nextChunk = chunkIndexes[i + 1];
 
-                    var sameRow = Math.Floor((double) chunkIndex / columns) == Math.Floor((double) nextChunkIndex / columns);
-                    var close = nextChunkIndex - chunkIndex < 3;
+                    var sameRow = Math.Floor((double)chunk / columns) == Math.Floor((double)nextChunk / columns);
+                    var close = nextChunk - chunk < 3;
 
                     if (sameRow && close)
                     {
-                        var region = _serviceProvider.GlobalState.Entities.Get(_chunks[chunkIndex]);
-                        var nextRegion = _serviceProvider.GlobalState.Entities.Get(_chunks[nextChunkIndex]);
+                        var region = _serviceProvider.GlobalState.Entities.Get(_chunks[chunk]);
+                        var nextRegion = _serviceProvider.GlobalState.Entities.Get(_chunks[nextChunk]);
 
                         region.ConnectedTo.Add(nextRegion.Id);
                         nextRegion.ConnectedTo.Add(region.Id);
                     }
+                }
+            }
+
+            // Vertical roads
+            for (int i = 0; i < chunkIndexes.Count; i++)
+            {
+                var chunk = chunkIndexes[i];
+                var bottomChunk = chunk + columns;
+                var bottomLeftChunk = bottomChunk - 1;
+                var bottomRightChunk = bottomChunk + 1;
+                var twoRowsBottomChunk = chunk + columns * 2;
+                var twoRowsBottomLeftChunk = twoRowsBottomChunk - 1;
+                var twoRowsBottomRightChunk = twoRowsBottomChunk + 1;
+
+                var regionId = _chunks[chunk];
+                var region = _serviceProvider.GlobalState.Entities.Get(_chunks[chunk]);
+
+                var isLeftBorder = chunk % columns == 0;
+                var isRightBorder = (chunk + 1) % columns == 0;
+                var isBorder = isLeftBorder || isRightBorder;
+
+                var chunksToConnect = new List<int>();
+
+                // Try to connect bottom first
+                if (_chunks.ContainsKey(bottomChunk))
+                {
+                    chunksToConnect.Add(bottomChunk);
+                }
+                // If not, try to connect bottom diagonals
+                else if (!isBorder)
+                {
+                    if (_chunks.ContainsKey(bottomLeftChunk))
+                    {
+                        chunksToConnect.Add(bottomLeftChunk);
+                    }
+
+                    if (_chunks.ContainsKey(bottomRightChunk))
+                    {
+                        chunksToConnect.Add(bottomRightChunk);
+                    }
+                }
+                // If left border, connect right diagonal only
+                else if (isLeftBorder && !isRightBorder && _chunks.ContainsKey(bottomRightChunk))
+                {
+                    chunksToConnect.Add(bottomRightChunk);
+                }
+                // If right border, connect left diagonal only
+                else if (!isLeftBorder && isRightBorder && _chunks.ContainsKey(bottomLeftChunk))
+                {
+                    chunksToConnect.Add(bottomLeftChunk);
+                }
+                // Do the same, two rows below
+                else if (_chunks.ContainsKey(twoRowsBottomChunk))
+                {
+                    chunksToConnect.Add(twoRowsBottomChunk);
+                }
+                else if (!isBorder)
+                {
+                    if (_chunks.ContainsKey(twoRowsBottomLeftChunk))
+                    {
+                        chunksToConnect.Add(twoRowsBottomLeftChunk);
+                    }
+
+                    if (_chunks.ContainsKey(twoRowsBottomRightChunk))
+                    {
+                        chunksToConnect.Add(twoRowsBottomRightChunk);
+                    }
+                }
+                else if (isLeftBorder && !isRightBorder && _chunks.ContainsKey(twoRowsBottomRightChunk))
+                {
+                    chunksToConnect.Add(twoRowsBottomRightChunk);
+                }
+                else if (!isLeftBorder && isRightBorder && _chunks.ContainsKey(twoRowsBottomLeftChunk))
+                {
+                    chunksToConnect.Add(twoRowsBottomLeftChunk);
+                }
+
+                foreach (var chunkToConnect in chunksToConnect)
+                {
+                    var nextRegion = _serviceProvider.GlobalState.Entities.Get(_chunks[chunkToConnect]);
+                    region.ConnectedTo.Add(nextRegion.Id);
+                    nextRegion.ConnectedTo.Add(region.Id);
                 }
             }
         }
