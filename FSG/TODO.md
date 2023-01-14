@@ -78,4 +78,4 @@ handle them separately
 
 [] World entity
 
-[] UI -> input manager, primitive drawing, camera, fix lot of DI
+[] UI -> input manager, primitive drawing, camera, fix lot of DI, scene manager

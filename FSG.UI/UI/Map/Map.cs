@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+using FSG.Commands;
 using FSG.Core;
 using FSG.Entities;
 using Microsoft.Xna.Framework;
@@ -46,6 +47,27 @@ namespace FSG.UI
             _camera = camera;
             _texture = new Texture2D(_graphicsDevice, 1, 1);
             _texture.SetData(new Color[] { Color.White });
+
+            _eventManager.OnRegionSecondaryAction += HandleRegionRightClick;
+        }
+
+        private void HandleRegionRightClick(object sender, string e)
+        {
+            if (_eventManager.SelectedAgentId != null)
+            {
+                _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction<Agent>
+                {
+                    EntityId = new EntityId<Agent>(_eventManager.SelectedAgentId),
+                    EntityType = EntityType.Agent,
+                    NewCurrentAction = new ActionQueueItem
+                    {
+                        ActionType = ActionType.Action,
+                        Name = "Move",
+                        RemainingTurns = 1,
+                        Payload = e
+                    }
+                });
+            }
         }
 
         public void Initialize()

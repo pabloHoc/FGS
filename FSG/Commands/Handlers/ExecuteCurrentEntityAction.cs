@@ -16,7 +16,8 @@ namespace FSG.Commands.Handlers
             {
                 EntityId = entity.Id,
                 ActionName = action.Name,
-                ActionType = action.ActionType
+                ActionType = action.ActionType,
+                Payload = action.Payload
             });
         }
     }

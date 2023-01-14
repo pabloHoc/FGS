@@ -7,6 +7,9 @@ namespace FSG.UI
 
         public event EventHandler<string> OnRegionSelected;
 
+        // TODO: change name
+        public event EventHandler<string> OnRegionSecondaryAction;
+
         public event EventHandler<string> OnLandSelected;
 
         public event EventHandler<string> OnAgentSelected;
@@ -30,6 +33,13 @@ namespace FSG.UI
             SelectedRegionId = regionId;
             OnRegionSelected?.Invoke(null, regionId);
         }
+
+        // TODO: change name
+        public void SecondarySelectRegion(string regionId)
+        {
+            OnRegionSecondaryAction?.Invoke(null, regionId);
+        }
+
 
         public void SelectLand(string landId)
         {

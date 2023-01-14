@@ -103,6 +103,11 @@ namespace FSG.UI
             {
                 _eventManager.SelectRegion(_regionId);
             }
+
+            if (_hovered && mouseState.IsButtonDown(MouseButton.Right))
+            {
+                _eventManager.SecondarySelectRegion(_regionId);
+            }
         }
 
         public void Update()

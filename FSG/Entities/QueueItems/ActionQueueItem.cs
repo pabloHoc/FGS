@@ -14,6 +14,8 @@ namespace FSG.Entities
 
         public ActionType ActionType { get; init; }
 
+        public string Payload { get; init; }
+
         public int RemainingTurns { get; set; }
     }
 }
