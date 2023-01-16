@@ -19,7 +19,8 @@ namespace FSG.Commands.Handlers
                 X = command.X,
                 Y = command.Y,
                 ConnectedTo = new List<EntityId<Region>>(),
-                Capital = new Capital()
+                Capital = new Capital(),
+                BuildingQueue = new Queue<BuildingQueueItem>()
             });
         }
     }

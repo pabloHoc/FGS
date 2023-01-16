@@ -17,7 +17,6 @@ namespace FSG.Commands.Handlers
                 Name = command.LandName,
                 RegionId = command.RegionId,
                 Buildings = new List<string>(),
-                BuildingQueue = new Queue<BuildingQueueItem>()
             });
         }
     }

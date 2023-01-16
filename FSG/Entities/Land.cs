@@ -13,7 +13,5 @@ namespace FSG.Entities
         public List<string> Buildings { get; init; }
 
         public EntityId<Region> RegionId { get; init; }
-
-        public Queue<BuildingQueueItem> BuildingQueue { get; init; }
     }
 }

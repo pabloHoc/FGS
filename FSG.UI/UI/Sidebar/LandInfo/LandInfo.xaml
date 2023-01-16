@@ -11,7 +11,5 @@
         <Label Text="Built" />
         <VerticalStackPanel Id="BuiltBuildingList"></VerticalStackPanel>
         <HorizontalSeparator />
-        <Label Text="Queue" />
-        <VerticalStackPanel Id="BuildingQueue"></VerticalStackPanel>
     </VerticalStackPanel>
 </Project>

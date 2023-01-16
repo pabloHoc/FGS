@@ -11,10 +11,12 @@ namespace FSG.UI
     public class LandInfoController : UIController
     {
         private readonly Label _landNameLabel;
+
         private readonly Label _regionLabel;
+
         private readonly VerticalStackPanel _builtBuildingList;
+
         private readonly HorizontalStackPanel _buildingList;
-        private readonly VerticalStackPanel _buildingQueue;
 
         public LandInfoController(
             ServiceProvider serviceProvider,
@@ -31,7 +33,6 @@ namespace FSG.UI
             _regionLabel = (Label)Root.FindWidgetById("RegionLabel");
             _builtBuildingList = (VerticalStackPanel)Root.FindWidgetById("BuiltBuildingList");
             _buildingList = (HorizontalStackPanel)Root.FindWidgetById("BuildingList");
-            _buildingQueue = (VerticalStackPanel)Root.FindWidgetById("BuildingQueue");
             _eventManager.OnLandSelected += HandleLandSelected;
         }
 
@@ -68,6 +69,7 @@ namespace FSG.UI
             var buildingDefinitions = _serviceProvider.Definitions
                 .GetAll<BuildingDefinition>();
 
+            // TODO: check there's an empire selected
             var empire = _serviceProvider.GlobalState.Entities
                 .Get(new EntityId<Empire>(_eventManager.SelectedEmpireId));
 
@@ -84,19 +86,6 @@ namespace FSG.UI
             }
         }
 
-        private void UpdateBuildingQueue(Land land)
-        {
-            _buildingQueue.Widgets.Clear();
-
-            foreach(var building in land.BuildingQueue)
-            {
-                _buildingQueue.Widgets.Add(new Label
-                {
-                    Text = $"{building.Name} ({building.RemainingTurns})"
-                });
-            }
-        }
-
         private void UpdateRegion(Land land)
         {
             var region = _serviceProvider.GlobalState.Entities.Get<Region>(land.RegionId);
@@ -107,10 +96,12 @@ namespace FSG.UI
 
         private void HandleBuildingClick(object sender, System.EventArgs e)
         {
-            _serviceProvider.Dispatcher.Dispatch(new AddBuildingtoQueue
+            _serviceProvider.Dispatcher.Dispatch(new AddBuildingToQueue
             {
                 BuildingName = ((TextButton)sender).Id,
+                BuildingType = BuildingType.LandBuilding,
                 LandId = new EntityId<Land>(_eventManager.SelectedLandId),
+                RegionId = new EntityId<Region>(_eventManager.SelectedRegionId),
                 EmpireId = new EntityId<Empire>(_eventManager.SelectedEmpireId)
             });
         }
@@ -124,7 +115,6 @@ namespace FSG.UI
 
                 UpdateBuiltBuildingList(land);
                 UpdateBuildingList(land);
-                UpdateBuildingQueue(land);
                 UpdateRegion(land);
             }
         }

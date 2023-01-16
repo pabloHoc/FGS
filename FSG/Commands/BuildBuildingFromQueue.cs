@@ -7,7 +7,7 @@ namespace FSG.Commands
 	{
 		public string Name { get => "BuildBuildingFromQueue"; }
 
-		public EntityId<Land> LandId { get; init; }
+		public EntityId<Region> RegionId { get; init; }
 	}
 }
 

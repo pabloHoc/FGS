@@ -10,7 +10,11 @@ namespace FSG.UI
     public class RegionInfoController : UIController
     {
         private readonly Label _regionNameLabel;
+
         private readonly Label _empireLabel;
+
+        private readonly VerticalStackPanel _buildingQueue;
+
         private readonly EntityListController<Land> _landList;
 
         public RegionInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
@@ -18,6 +22,7 @@ namespace FSG.UI
         {
             _regionNameLabel = (Label)Root.FindWidgetById("RegionNameLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");
+            _buildingQueue = (VerticalStackPanel)Root.FindWidgetById("BuildingQueue");
 
             _eventManager.OnRegionSelected += HandleRegionSelected;
 
@@ -50,6 +55,19 @@ namespace FSG.UI
             }
         }
 
+        private void UpdateBuildingQueue(Region region)
+        {
+            _buildingQueue.Widgets.Clear();
+
+            foreach (var building in region.BuildingQueue)
+            {
+                _buildingQueue.Widgets.Add(new Label
+                {
+                    Text = $"{building.Name} ({building.RemainingTurns})"
+                });
+            }
+        }
+
         public override void Update(ICommand command = null)
         {
             if (_eventManager.SelectedRegionId != null)
@@ -58,6 +76,7 @@ namespace FSG.UI
                 _regionNameLabel.Text = region.Name;
                 _landList.Update(command);
                 UpdateEmpire(region);
+                UpdateBuildingQueue(region);
             }
         }
     }

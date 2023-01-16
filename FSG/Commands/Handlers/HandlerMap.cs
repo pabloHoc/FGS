@@ -18,7 +18,7 @@ namespace FSG.Commands.Handlers
         {
             this._handlers = new Dictionary<Type, IBaseCommandHandler>()
             {
-                { typeof(Commands.AddBuildingtoQueue),  new AddBuildingToQueue(serviceProvider) },
+                { typeof(Commands.AddBuildingToQueue),  new AddBuildingToQueue(serviceProvider) },
                 { typeof(Commands.BuildBuilding),  new BuildBuilding(serviceProvider) },
                 { typeof(Commands.BuildBuildingFromQueue),  new BuildBuildingFromQueue(serviceProvider) },
                 { typeof(Commands.ComputeProduction), new ComputeProduction(serviceProvider) },

@@ -1,4 +1,5 @@
 ﻿using System;
+using FSG.Commands;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
@@ -35,11 +36,30 @@ namespace FSG.UI
 
             foreach (var district in districts)
             {
-                _districtList.Widgets.Add(new TextButton
+                var districtBtn = new TextButton
                 {
+                    Id = district.Name,
                     Text = district.Name
-                });
+                };
+                _districtList.Widgets.Add(districtBtn);
+                districtBtn.Click += HandleBuildDistrictClick;
             }
+        }
+
+        private void HandleBuildDistrictClick(object sender, EventArgs e)
+        {
+            var region = _serviceProvider.GlobalState.Entities
+                .Get<Region>(new EntityId<Region>(_eventManager.SelectedRegionId));
+
+            var districtBtn = (TextButton)sender;
+
+            _serviceProvider.Dispatcher.Dispatch(new AddBuildingToQueue
+            {
+                BuildingName = districtBtn.Id,
+                RegionId = region.Id,
+                BuildingType = BuildingType.District,
+                EmpireId = (EntityId<Empire>)region.EmpireId,
+            });
         }
 
         private void UpdateBuiltDistrictList(Region region)
@@ -64,7 +84,7 @@ namespace FSG.UI
             UpdateDistrictList();
         }
 
-        public void Update()
+        public override void Update(ICommand command)
         {
             if (_eventManager.SelectedRegionId != null)
             {

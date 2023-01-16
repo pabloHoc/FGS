@@ -20,5 +20,7 @@ namespace FSG.Entities
         public List<EntityId<Region>> ConnectedTo { get; init; }
 
         public Capital Capital { get; init; }
+
+        public Queue<BuildingQueueItem> BuildingQueue { get; init; }
     }
 }

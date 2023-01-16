@@ -1,5 +1,6 @@
 ﻿using System;
 using FSG.Core;
+using FSG.Definitions;
 using FSG.Entities;
 
 namespace FSG.Commands.Handlers
@@ -10,8 +11,23 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.BuildBuilding command)
         {
-            var land = _serviceProvider.GlobalState.Entities.Get(command.LandId);
-            land.Buildings.Add(command.BuildingName);
+            switch (command.BuildingType)
+            {
+                case BuildingType.LandBuilding:
+                {
+                    var land = _serviceProvider.GlobalState.Entities.Get(command.LandId);
+                    land.Buildings.Add(command.BuildingName);
+                    break;
+                }
+                case BuildingType.District:
+                {
+                    var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+                    region.Capital.Districts.Add(new District {
+                        Name = command.BuildingName,
+                    });
+                    break;
+                }
+            }
         }
     }
 }

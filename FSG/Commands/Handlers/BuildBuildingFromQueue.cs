@@ -10,12 +10,15 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.BuildBuildingFromQueue command)
         {
-            var land = _serviceProvider.GlobalState.Entities.Get(command.LandId);
-            var building = land.BuildingQueue.Dequeue();
+            var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+            var building = region.BuildingQueue.Dequeue();
+
             _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuilding
             {
-                LandId = land.Id,
-                BuildingName = building.Name
+                LandId = building.LandId,
+                RegionId = command.RegionId,
+                BuildingName = building.Name,
+                BuildingType = building.BuildingType
             });
         }
     }

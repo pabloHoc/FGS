@@ -1,4 +1,4 @@
-// TODO: THIS SHOULDN'T BE A ENTITY NOR HAVE ID, SAME FOR MODIFIER AND SPELL
+using FSG.Definitions;
 
 namespace FSG.Entities
 {
@@ -6,7 +6,11 @@ namespace FSG.Entities
     {
         public string Name { get; init; }
 
-        public EntityId<Land> LandId { get; }
+        public BuildingType BuildingType { get; init; }
+
+        public EntityId<Land> LandId { get; init; }
+
+        public EntityId<Region> RegionId { get; init; }
 
         public int RemainingTurns { get; set; }
     }

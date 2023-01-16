@@ -1,6 +1,9 @@
 ﻿using System;
 namespace FSG.UI
 {
+    // TODO: maybe we should store entities instead of ids so we are not searching
+    // for them every time
+
 	public class UIEventManager
 	{
         public event EventHandler<string> OnEmpireSelected;

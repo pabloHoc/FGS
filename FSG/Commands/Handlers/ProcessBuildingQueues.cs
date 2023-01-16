@@ -10,12 +10,12 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessBuildingQueues command)
         {
-            var lands = _serviceProvider.GlobalState.Entities.GetAll<Land>();
+            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
 
-            foreach(var land in lands)
+            foreach(var region in regions)
             {
                 BuildingQueueItem buildingQueueItem = null;
-                if (land.BuildingQueue.TryPeek(out buildingQueueItem))
+                if (region.BuildingQueue.TryPeek(out buildingQueueItem))
                 {
                     buildingQueueItem.RemainingTurns--;
 
@@ -23,7 +23,7 @@ namespace FSG.Commands.Handlers
                     {
                         _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuildingFromQueue
                         {
-                            LandId = land.Id
+                            RegionId = region.Id
                         });
                     }
                 }

@@ -1,11 +1,32 @@
 ﻿[
   {
-    "Name":  "Comercial"
+    "Name": "Comercial",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Districts",
+      "Cost": {
+        "Food": 0
+      }
+    }
   },
   {
-    "Name": "Militar"
+    "Name": "Militar",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Districts",
+      "Cost": {
+        "Food": 0
+      }
+    }
   },
   {
-    "Name": "Research"
+    "Name": "Research",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Districts",
+      "Cost": {
+        "Food": 0
+      }
+    }
   }
 ]
