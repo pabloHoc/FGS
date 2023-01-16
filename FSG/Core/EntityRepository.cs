@@ -11,7 +11,7 @@ namespace FSG.Core
 
     public class EntityRepository
     {
-        private class EntityDictionaryMap
+        public class EntityDictionaryMap
         {
             public Dictionary<string, Player> Player { get; init; } = new Dictionary<string, Player>();
             public Dictionary<string, Empire> Empire { get; init; } = new Dictionary<string, Empire>();
@@ -29,7 +29,7 @@ namespace FSG.Core
             }
         }
 
-        private readonly EntityDictionaryMap _entities = new EntityDictionaryMap();
+        public readonly EntityDictionaryMap _entities = new EntityDictionaryMap();
 
         private IEntityId _lastAddedEntityId;
 

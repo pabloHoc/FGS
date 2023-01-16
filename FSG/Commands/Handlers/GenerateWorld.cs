@@ -61,13 +61,19 @@ namespace FSG.Commands.Handlers
                         var x = random.Next(j * CHUNK_SIZE + BORDER_GAP, (j + 1) * CHUNK_SIZE - BORDER_GAP);
                         var y = random.Next(i * CHUNK_SIZE + BORDER_GAP, (i + 1) * CHUNK_SIZE - BORDER_GAP);
 
-                        _serviceProvider.Dispatcher.Dispatch(new Commands.CreateRegion
+                        var createRegionCommand = new Commands.CreateRegion
                         {
                             RegionName = $"Region #{count}",
-                            EmpireId = empires.Length > count ? empires[count].Id : null,
                             X = x,
                             Y = y
-                        });
+                        };
+
+                        if (empires.Length > count)
+                        {
+                            createRegionCommand.EmpireId = empires[count].Id;
+                        };
+
+                        _serviceProvider.Dispatcher.Dispatch(createRegionCommand);
 
                         var regionId = _serviceProvider.GlobalState.Entities.GetLastAddedEntityId<Region>();
 

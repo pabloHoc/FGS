@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FSG.Entities
 {
@@ -11,7 +12,8 @@ namespace FSG.Entities
 
         public string Name { get; init; }
 
-        public Nullable<EntityId<Empire>> EmpireId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public EntityId<Empire> EmpireId { get; set; }
 
         public int X { get; init; } // TODO: Change to a struct with { x, y } (Coords, Location) 
 

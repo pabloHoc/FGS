@@ -1,5 +1,7 @@
 // TODO: add ai
 
+using System.Text.Json.Serialization;
+
 namespace FSG.Entities
 {
     public class Player : IEntity<Player>
@@ -14,6 +16,7 @@ namespace FSG.Entities
 
         public bool IsAI { get; init; }
 
+        [JsonIgnore]
         public FSG.AI.AI AI { get; set; }
     }
 }

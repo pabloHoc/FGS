@@ -11,7 +11,7 @@ namespace FSG.Entities
 
         public string Name { get; init; }
 
-        public Nullable<EntityId<Empire>> EmpireId { get; set; }
+        public EntityId<Empire> EmpireId { get; set; }
 
         public EntityId<Region> RegionId { get; set; }
 

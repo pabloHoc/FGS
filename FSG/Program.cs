@@ -7,30 +7,31 @@ using FSG.Common;
 using FSG.Serialization;
 using FSG.Entities;
 using static FSG.Core.EntityRepository;
+using FSG.Core;
 
-//using var game = new GameApp();
-//game.Run();
+var game = new Game();
+game.Initialize();
 
 // REPOSITORY SERIALIZATION ----------------------------------- 
 
-//var entities = game._game.ServiceProvider.GlobalState.Entities._entities;
+var entities = game.ServiceProvider.GlobalState.Entities._entities;
 
-//var serializerOptions = new JsonSerializerOptions
-//{
-//    Converters =
-//    {
-//        new ValueObjectConverterFactory(),
-//        new EntityIdConverterFactory(),
-//        new JsonStringEnumConverter()
-//    }
-//};
+var serializerOptions = new JsonSerializerOptions
+{
+    Converters =
+    {
+        new ValueObjectConverterFactory(),
+        new EntityIdConverterFactory(),
+        new JsonStringEnumConverter()
+    }
+};
 
-//// act
-//string json = JsonSerializer.Serialize(entities, serializerOptions);
+// act
+string json = JsonSerializer.Serialize(entities, serializerOptions);
 
-//File.WriteAllText("../../../entities.json", json);
+File.WriteAllText("../../../entities.json", json);
 
-//var deserialized = JsonSerializer.Deserialize<EntityDictionaryMap>(json, serializerOptions);
+var deserialized = JsonSerializer.Deserialize<EntityDictionaryMap>(json, serializerOptions);
 
 // NESTED DICTIONARY SERIALIZATION -----------------------------------
 

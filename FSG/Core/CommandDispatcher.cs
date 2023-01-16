@@ -18,9 +18,9 @@ namespace FSG.Core
 
         public void Dispatch<T>(T command) where T : ICommand
         {
-            OnCommandDispatched.Invoke(this, command);
+            OnCommandDispatched?.Invoke(this, command);
             this._handlerRepository.Handle(command);
-            OnCommandProcessed.Invoke(this, command);
+            OnCommandProcessed?.Invoke(this, command);
         }
     }
 }

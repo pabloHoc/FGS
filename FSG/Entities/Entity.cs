@@ -38,7 +38,7 @@ namespace FSG.Entities
 
     public interface IOwneable
     {
-        public Nullable<EntityId<Empire>> EmpireId { get; set; }
+        public EntityId<Empire> EmpireId { get; set; }
     }
 
     public interface INameable

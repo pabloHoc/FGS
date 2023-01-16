@@ -36,9 +36,9 @@ namespace FSG.Scopes
 
         private Empire GetEmpire(Agent agent)
         {
-            if (agent.EmpireId.HasValue)
+            if (agent.EmpireId != null)
             {
-                return _gameState.Entities.Get((EntityId<Empire>)agent.EmpireId);
+                return _gameState.Entities.Get(agent.EmpireId);
             }
             return null;
         }
