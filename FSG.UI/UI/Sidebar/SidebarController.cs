@@ -12,6 +12,7 @@ namespace FSG.UI
         private readonly EmpireInfoController _empireInfo;
         private readonly RegionInfoController _regionInfo;
         private readonly LandInfoController _landInfo;
+        private readonly CapitalInfoController _capitalInfo;
         private readonly AgentInfoController _agentInfo;
         private readonly TabsController _tabs;
 
@@ -21,6 +22,8 @@ namespace FSG.UI
             _empireInfo = new EmpireInfoController(serviceProvider, eventManager, assetManager);
             _regionInfo = new RegionInfoController(serviceProvider, eventManager, assetManager);
             _landInfo = new LandInfoController(serviceProvider, eventManager, assetManager);
+            _capitalInfo = new CapitalInfoController(serviceProvider, eventManager, assetManager);
+
             _agentInfo = new AgentInfoController(serviceProvider, eventManager, assetManager);
 
             _tabs = new TabsController(serviceProvider, eventManager, assetManager,
@@ -29,6 +32,7 @@ namespace FSG.UI
                     { "Empire", _empireInfo.Root },
                     { "Region", _regionInfo.Root },
                     { "Land", _landInfo.Root },
+                    { "Capital", _capitalInfo.Root },
                     { "Agent", _agentInfo.Root },
                 });
 
@@ -65,6 +69,7 @@ namespace FSG.UI
             _empireInfo.Update(command);
             _regionInfo.Update(command);
             _landInfo.Update(command);
+            _capitalInfo.Update(command);
             _agentInfo.Update(command);
         }
     }

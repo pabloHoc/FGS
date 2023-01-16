@@ -18,5 +18,7 @@ namespace FSG.Entities
         public int Y { get; init; }
 
         public List<EntityId<Region>> ConnectedTo { get; init; }
+
+        public Capital Capital { get; init; }
     }
 }

@@ -23,12 +23,13 @@ namespace FSG.Serialization
 
         public void LoadDefinitions()
         {
-            this.LoadDefinition<ResourceDefinition>("../../../../FSG/Assets/Definitions/Resources/Resources.json");
             this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/Buildings.json");
-            this.LoadDefinition<LandDefinition>("../../../../FSG/Assets/Definitions/Lands/Lands.json");
+            this.LoadDefinition<DistrictDefinition>("../../../../FSG/Assets/Definitions/Districts/Districts.json");
             this.LoadDefinition<EconomicCategoryDefinition>("../../../../FSG/Assets/Definitions/EconomicCategories/EconomicCategories.json");
-            this.LoadDefinition<SpellDefinition>("../../../../FSG/Assets/Definitions/Spells/Spells.json");
+            this.LoadDefinition<LandDefinition>("../../../../FSG/Assets/Definitions/Lands/Lands.json");
             this.LoadDefinition<ScorerDefinition>("../../../../FSG/Assets/Definitions/Scorers/Scorers.json");
+            this.LoadDefinition<SpellDefinition>("../../../../FSG/Assets/Definitions/Spells/Spells.json");
+            this.LoadDefinition<ResourceDefinition>("../../../../FSG/Assets/Definitions/Resources/Resources.json");
             this.LoadDefinition<TaskDefinition>("../../../../FSG/Assets/Definitions/Tasks/test.json");
         }
     }

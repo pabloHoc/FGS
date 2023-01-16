@@ -1,0 +1,10 @@
+﻿<Project>
+    <VerticalStackPanel Background="#000000">
+        <HorizontalSeparator />
+        <Label Text="Districts" />
+        <VerticalStackPanel Id="BuiltDistrictList" Spacing="8"></VerticalStackPanel>
+        <HorizontalSeparator />
+        <Label Text="Build Districts" />
+        <HorizontalStackPanel Id="DistrictList" Spacing="8"></HorizontalStackPanel>
+    </VerticalStackPanel>
+</Project>

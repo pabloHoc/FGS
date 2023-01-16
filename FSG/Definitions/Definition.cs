@@ -4,6 +4,7 @@ namespace FSG.Definitions
     {
         AgentAction,
         Building,
+        District,
         EconomicCategory,
         Land,
         Resource,
