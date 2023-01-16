@@ -26,14 +26,14 @@ namespace FSG.UI
 
             _eventManager.OnRegionSelected += HandleRegionSelected;
 
-            _landList = new EntityListController<Land>(serviceProvider, eventManager, assetManager, ((land) => land.RegionId == eventManager.SelectedRegionId));
+            _landList = new EntityListController<Land>(serviceProvider, eventManager, assetManager, ((land) => land.RegionId == eventManager.SelectedRegion.Id));
             _landList.EntityClickHandler = eventManager.SelectLand;
 
             var landListPanel = (VerticalStackPanel)Root.FindWidgetById("LandList");
             landListPanel.Widgets.Add(_landList.Root);
         }
 
-        private void HandleRegionSelected(object sender, string regionId)
+        private void HandleRegionSelected(object sender, Region region)
         {
             Update();
         }
@@ -68,13 +68,13 @@ namespace FSG.UI
             }
         }
 
-        public override void Update(ICommand command = null)
+        public override void Update()
         {
-            if (_eventManager.SelectedRegionId != null)
+            if (_eventManager.SelectedRegion != null)
             {
-                var region = _serviceProvider.GlobalState.Entities.Get<Region>(new EntityId<Region>(_eventManager.SelectedRegionId));
+                var region = _eventManager.SelectedRegion;
                 _regionNameLabel.Text = region.Name;
-                _landList.Update(command);
+                _landList.Update();
                 UpdateEmpire(region);
                 UpdateBuildingQueue(region);
             }

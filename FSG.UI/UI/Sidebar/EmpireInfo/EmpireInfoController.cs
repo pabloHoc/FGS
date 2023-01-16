@@ -25,7 +25,7 @@ namespace FSG.UI
                 serviceProvider,
                 eventManager,
                 assetManager,
-                ((region) => region.EmpireId == eventManager.SelectedEmpireId)
+                ((region) => region.EmpireId == eventManager.SelectedEmpire.Id)
             );
             _regionList.EntityClickHandler = eventManager.SelectRegion;
 
@@ -33,7 +33,7 @@ namespace FSG.UI
             regionListPanel.Widgets.Add(_regionList.Root);
         }
 
-        private void handleEmpireSelected(object sender, string empireId)
+        private void handleEmpireSelected(object sender, Empire empire)
         {
             Update();
         }
@@ -51,13 +51,13 @@ namespace FSG.UI
             }
         }
 
-        public override void Update(ICommand command = null)
+        public override void Update()
         {
-            if (_eventManager.SelectedEmpireId != null)
+            if (_eventManager.SelectedEmpire != null)
             {
-                var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(new EntityId<Empire>(_eventManager.SelectedEmpireId));
+                var empire = _eventManager.SelectedEmpire;
                 _empireNameLabel.Text = empire.Name;
-                _regionList.Update(command);
+                _regionList.Update();
                 UpdateResources(empire);
             }
         }

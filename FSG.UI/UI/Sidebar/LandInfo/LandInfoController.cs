@@ -36,7 +36,7 @@ namespace FSG.UI
             _eventManager.OnLandSelected += HandleLandSelected;
         }
 
-        private void HandleLandSelected(object sender, string landId)
+        private void HandleLandSelected(object sender, Land land)
         {
             Update();
         }
@@ -70,8 +70,7 @@ namespace FSG.UI
                 .GetAll<BuildingDefinition>();
 
             // TODO: check there's an empire selected
-            var empire = _serviceProvider.GlobalState.Entities
-                .Get(new EntityId<Empire>(_eventManager.SelectedEmpireId));
+            var empire = _eventManager.SelectedEmpire;
 
             foreach(var building in buildingDefinitions)
             {
@@ -100,18 +99,17 @@ namespace FSG.UI
             {
                 BuildingName = ((TextButton)sender).Id,
                 BuildingType = BuildingType.LandBuilding,
-                LandId = new EntityId<Land>(_eventManager.SelectedLandId),
-                RegionId = new EntityId<Region>(_eventManager.SelectedRegionId),
-                EmpireId = new EntityId<Empire>(_eventManager.SelectedEmpireId)
+                LandId = _eventManager.SelectedLand.Id,
+                RegionId = _eventManager.SelectedRegion.Id,
+                EmpireId = _eventManager.SelectedEmpire.Id
             });
         }
 
-        public override void Update(ICommand command = null)
+        public override void Update()
         {
-            if (_eventManager.SelectedLandId != null)
+            if (_eventManager.SelectedLand != null)
             {
-                var land = _serviceProvider.GlobalState.Entities
-                    .Get<Land>(new EntityId<Land>(_eventManager.SelectedLandId));
+                var land = _eventManager.SelectedLand;
 
                 UpdateBuiltBuildingList(land);
                 UpdateBuildingList(land);

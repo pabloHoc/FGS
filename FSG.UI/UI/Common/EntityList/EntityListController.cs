@@ -56,7 +56,7 @@ namespace FSG.UI
             }
         }
 
-        public override void Update(ICommand command)
+        public override void Update()
         {
             GenerateEntityList();
         }

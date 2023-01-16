@@ -45,7 +45,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _viewportLeft = new Viewport(0, 0, 400, 800);
         _viewportRight = new Viewport(400, 0, 880, 800);
 
-        _eventManager = new UIEventManager();
+        _eventManager = new UIEventManager(_game.ServiceProvider);
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;

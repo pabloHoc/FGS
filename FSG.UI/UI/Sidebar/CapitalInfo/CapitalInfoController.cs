@@ -23,7 +23,7 @@ namespace FSG.UI
             eventManager.OnRegionSelected += HandleRegionSelected;
 		}
 
-        private void HandleRegionSelected(object sender, string e)
+        private void HandleRegionSelected(object sender, Region e)
         {
             UpdateDistricts();
         }
@@ -48,8 +48,7 @@ namespace FSG.UI
 
         private void HandleBuildDistrictClick(object sender, EventArgs e)
         {
-            var region = _serviceProvider.GlobalState.Entities
-                .Get<Region>(new EntityId<Region>(_eventManager.SelectedRegionId));
+            var region = _eventManager.SelectedRegion;
 
             var districtBtn = (TextButton)sender;
 
@@ -77,16 +76,15 @@ namespace FSG.UI
 
         private void UpdateDistricts()
         {
-            var region = _serviceProvider.GlobalState.Entities
-                .Get<Region>(new EntityId<Region>(_eventManager.SelectedRegionId));
+            var region = _eventManager.SelectedRegion;
 
             UpdateBuiltDistrictList(region);
             UpdateDistrictList();
         }
 
-        public override void Update(ICommand command)
+        public override void Update()
         {
-            if (_eventManager.SelectedRegionId != null)
+            if (_eventManager.SelectedRegion != null)
             {
                 UpdateDistricts();
             }

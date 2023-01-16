@@ -27,12 +27,12 @@ namespace FSG.UI
             _regionList.EntityClickHandler = eventManager.SelectRegion;
             _agentList.EntityClickHandler = eventManager.SelectAgent;
 
-            var tabs = new TabsController(serviceProvider, eventManager, assetManager, new Dictionary<string, Widget>
+            var tabs = new TabsController(serviceProvider, eventManager, assetManager, new Dictionary<string, UIController>
             {
-                { "Commands", _commandLog.Root },
-                { "Empires", _empireList.Root },
-                { "Regions", _regionList.Root },
-                { "Agents", _agentList.Root },
+                { "Commands", _commandLog },
+                { "Empires", _empireList },
+                { "Regions", _regionList },
+                { "Agents", _agentList },
             });
 
             ((Panel)Root).Widgets.Add(tabs.Root);
@@ -43,11 +43,11 @@ namespace FSG.UI
             _commandLog.Update(command);
         }
 
-        public override void Update(ICommand command)
+        public override void Update()
         {
-            _empireList.Update(command);
-            _regionList.Update(command);
-            _agentList.Update(command);
+            _empireList.Update();
+            _regionList.Update();
+            _agentList.Update();
         }
     }
 }

@@ -51,20 +51,20 @@ namespace FSG.UI
             _eventManager.OnRegionSecondaryAction += HandleRegionRightClick;
         }
 
-        private void HandleRegionRightClick(object sender, string e)
+        private void HandleRegionRightClick(object sender, Region e)
         {
-            if (_eventManager.SelectedAgentId != null)
+            if (_eventManager.SelectedAgent != null)
             {
                 _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction<Agent>
                 {
-                    EntityId = new EntityId<Agent>(_eventManager.SelectedAgentId),
+                    EntityId = _eventManager.SelectedAgent.Id,
                     EntityType = EntityType.Agent,
                     NewCurrentAction = new ActionQueueItem
                     {
                         ActionType = ActionType.Action,
                         Name = "Move",
                         RemainingTurns = 1,
-                        Payload = e
+                        Payload = e.Id
                     }
                 });
             }
@@ -78,7 +78,6 @@ namespace FSG.UI
             {
                 _locations.Add(new MapLocation(region, _eventManager, _graphicsDevice, _spriteBatch, _camera));
             }
-
         }
 
         private void DrawGrid()

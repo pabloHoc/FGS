@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FSG.Commands;
 using FSG.Core;
+using FSG.Entities;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
 
@@ -27,13 +28,13 @@ namespace FSG.UI
             _agentInfo = new AgentInfoController(serviceProvider, eventManager, assetManager);
 
             _tabs = new TabsController(serviceProvider, eventManager, assetManager,
-                new Dictionary<string, Widget>
+                new Dictionary<string, UIController>
                 {
-                    { "Empire", _empireInfo.Root },
-                    { "Region", _regionInfo.Root },
-                    { "Land", _landInfo.Root },
-                    { "Capital", _capitalInfo.Root },
-                    { "Agent", _agentInfo.Root },
+                    { "Empire", _empireInfo },
+                    { "Region", _regionInfo },
+                    { "Land", _landInfo },
+                    { "Capital", _capitalInfo },
+                    { "Agent", _agentInfo },
                 });
 
             ((Panel)Root).Widgets.Add(_tabs.Root);
@@ -44,33 +45,33 @@ namespace FSG.UI
             eventManager.OnAgentSelected += HandleAgentSelected;
         }
 
-        private void HandleEmpireSelected(object sender, string e)
+        private void HandleEmpireSelected(object sender, Empire e)
         {
             _tabs.SwitchTo("Empire");
         }
 
-        private void HandleRegionSelected(object sender, string e)
+        private void HandleRegionSelected(object sender, Region e)
         {
             _tabs.SwitchTo("Region");
         }
 
-        private void HandleLandSelected(object sender, string e)
+        private void HandleLandSelected(object sender, Land e)
         {
             _tabs.SwitchTo("Land");
         }
 
-        private void HandleAgentSelected(object sender, string e)
+        private void HandleAgentSelected(object sender, Agent e)
         {
             _tabs.SwitchTo("Agent");
         }
 
         public override void Update(ICommand command)
         {
-            _empireInfo.Update(command);
-            _regionInfo.Update(command);
-            _landInfo.Update(command);
-            _capitalInfo.Update(command);
-            _agentInfo.Update(command);
+            _empireInfo.Update();
+            _regionInfo.Update();
+            _landInfo.Update();
+            _capitalInfo.Update();
+            _agentInfo.Update();
         }
     }
 }

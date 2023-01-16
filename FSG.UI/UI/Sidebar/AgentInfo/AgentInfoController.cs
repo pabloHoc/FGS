@@ -27,7 +27,7 @@ namespace FSG.UI
             _eventManager.OnAgentSelected += HandleAgentSelected;
         }
 
-        private void HandleAgentSelected(object sender, string agentId)
+        private void HandleAgentSelected(object sender, Agent agentId)
         {
             Update();
         }
@@ -39,7 +39,7 @@ namespace FSG.UI
 
             _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction<Agent>
             {
-                EntityId = new EntityId<Agent>(_eventManager.SelectedAgentId),
+                EntityId = _eventManager.SelectedAgent.Id,
                 EntityType = EntityType.Agent,
                 NewCurrentAction = new ActionQueueItem
                 {
@@ -92,18 +92,17 @@ namespace FSG.UI
 
         private void UpdateEmpire(Agent agent)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get<Empire>((EntityId<Empire>)agent.EmpireId);
+            var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(agent.EmpireId);
             _empireLabel.Id = empire.Id;
             _empireLabel.Text = empire.Name;
             _empireLabel.TouchDown += HandleEmpireClick;
         }
 
-        public override void Update(ICommand command = null)
+        public override void Update()
         {
-            if (_eventManager.SelectedAgentId != null)
+            if (_eventManager.SelectedAgent != null)
             {
-                var agent = _serviceProvider.GlobalState.Entities
-                    .Get<Agent>(new EntityId<Agent>(_eventManager.SelectedAgentId));
+                var agent = _eventManager.SelectedAgent;
 
                 _agentNameLabel.Text = agent.Name;
                 _currentActionLabel.Text = agent.Actions.Count > 0 ?

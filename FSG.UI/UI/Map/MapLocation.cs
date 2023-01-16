@@ -60,9 +60,9 @@ namespace FSG.UI
             _eventManager.OnRegionSelected += HandleRegionSelected;
         }
 
-        private void HandleRegionSelected(object sender, string e)
+        private void HandleRegionSelected(object sender, Region e)
         {
-            _selected = _eventManager.SelectedRegionId == _regionId;
+            _selected = _eventManager.SelectedRegion.Id == _regionId;
         }
 
         public void Draw()
@@ -100,13 +100,9 @@ namespace FSG.UI
                     worldPosition.Y > _position.Y - REGION_SIZE / 2 &&
                     worldPosition.Y < _position.Y + REGION_SIZE / 2;
 
-            if (mouseState.IsButtonDown(MouseButton.Left))
+            if (_hovered && mouseState.IsButtonDown(MouseButton.Left))
             {
                 _selected = _hovered;
-            }
-
-            if (_selected)
-            {
                 _eventManager.SelectRegion(_regionId);
             }
 

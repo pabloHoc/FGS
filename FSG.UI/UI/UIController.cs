@@ -33,6 +33,8 @@ namespace FSG.UI
             Root = project.Root;
         }
 
+        public virtual void Update() { }
+
         public virtual void Update(ICommand command) { }
     }
 }
