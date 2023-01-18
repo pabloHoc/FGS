@@ -13,9 +13,7 @@ namespace FSG.Commands.Handlers
         public override void Handle(Commands.AddBuildingToQueue command)
         {
             var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
-            IBuildingDefinition buildingDefinition = command.BuildingType == BuildingType.LandBuilding
-                ? _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName)
-                : _serviceProvider.Definitions.Get<DistrictDefinition>(command.BuildingName);
+            var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName);
 
             region.BuildingQueue.Enqueue(new BuildingQueueItem
             {

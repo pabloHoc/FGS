@@ -1,6 +1,7 @@
 ﻿[
   {
     "Name": "Comercial",
+    "BuildingType": "District",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Districts",
@@ -11,6 +12,7 @@
   },
   {
     "Name": "Militar",
+    "BuildingType": "District",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Districts",
@@ -21,6 +23,7 @@
   },
   {
     "Name": "Research",
+    "BuildingType": "District",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Districts",

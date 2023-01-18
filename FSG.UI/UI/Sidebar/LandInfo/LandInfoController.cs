@@ -49,8 +49,6 @@ namespace FSG.UI
 
         private void UpdateBuiltBuildingList(Land land)
         {
-            _landNameLabel.Text = land.Name;
-
             _builtBuildingList.Widgets.Clear();
 
             foreach (var building in land.Buildings)
@@ -66,8 +64,8 @@ namespace FSG.UI
         {
             _buildingList.Widgets.Clear();
 
-            var buildingDefinitions = _serviceProvider.Definitions
-                .GetAll<BuildingDefinition>();
+            var buildingDefinitions = _serviceProvider.Definitions.GetAll<BuildingDefinition>()
+                .FindAll(definition => definition.BuildingType == BuildingType.LandBuilding);
 
             // TODO: check there's an empire selected
             var empire = _eventManager.SelectedEmpire;
@@ -105,15 +103,26 @@ namespace FSG.UI
             });
         }
 
+        public void Clear()
+        {
+            _landNameLabel.Text = "";
+            _buildingList.Widgets.Clear();
+            _builtBuildingList.Widgets.Clear();
+        }
+
         public override void Update()
         {
-            if (_eventManager.SelectedLand != null)
+            if (_eventManager.SelectedLand != null && _eventManager.SelectedEmpire != null)
             {
                 var land = _eventManager.SelectedLand;
+                _landNameLabel.Text = land.Name;
 
                 UpdateBuiltBuildingList(land);
                 UpdateBuildingList(land);
                 UpdateRegion(land);
+            } else
+            {
+                Clear();
             }
         }
     }

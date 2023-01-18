@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Farm",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Food": 5
+      },
+      "Production": {
+        "Food": 1
+      }
+    }
+  },
+  {
+    "Name": "Mill",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Conditions": {
+      "IsLandType": "Forest"
+    },
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Wood": 5
+      },
+      "Production": {
+        "Wood": 2
+      }
+    }
+  },
+  {
+    "Name": "Mine",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Iron": 5
+      },
+      "Production": {
+        "Iron": 1
+      }
+    }
+  }
+]

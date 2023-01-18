@@ -51,6 +51,13 @@ namespace FSG.UI
             }
         }
 
+        private void Clear()
+        {
+            _empireNameLabel.Text = "";
+            _regionList.Clear();
+            _resourceList.Widgets.Clear();
+        }
+
         public override void Update()
         {
             if (_eventManager.SelectedEmpire != null)
@@ -59,6 +66,9 @@ namespace FSG.UI
                 _empireNameLabel.Text = empire.Name;
                 _regionList.Update();
                 UpdateResources(empire);
+            } else
+            {
+                
             }
         }
     }

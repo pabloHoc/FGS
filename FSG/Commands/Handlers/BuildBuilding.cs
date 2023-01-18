@@ -19,6 +19,12 @@ namespace FSG.Commands.Handlers
                     land.Buildings.Add(command.BuildingName);
                     break;
                 }
+                case BuildingType.CapitalBuilding:
+                {
+                    var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+                    region.Capital.Buildings.Add(command.BuildingName);
+                    break;
+                }
                 case BuildingType.District:
                 {
                     var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);

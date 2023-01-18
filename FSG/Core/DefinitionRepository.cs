@@ -11,7 +11,6 @@ namespace FSG.Core
         private class DefinitionDictionaryMap
         {
             public Dictionary<string, BuildingDefinition> BuildingDefinition { get; } = new Dictionary<string, BuildingDefinition>();
-            public Dictionary<string, DistrictDefinition> DistrictDefinition { get; } = new Dictionary<string, DistrictDefinition>();
             public Dictionary<string, EconomicCategoryDefinition> EconomicCategoryDefinition { get; } = new Dictionary<string, EconomicCategoryDefinition>();
             public Dictionary<string, LandDefinition> LandDefinition { get; } = new Dictionary<string, LandDefinition>();
             public Dictionary<string, ScorerDefinition> ScorerDefinition { get; } = new Dictionary<string, ScorerDefinition>();

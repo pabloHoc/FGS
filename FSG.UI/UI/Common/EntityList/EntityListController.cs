@@ -39,7 +39,7 @@ namespace FSG.UI
             {
                 var entityLabel = new Label();
                 entityLabel.Id = entity.Id;
-                entityLabel.TouchDown += handleEntityClick;
+                entityLabel.TouchDown += HandleEntityClick;
                 entityLabel.Text = ((INameable)entity).Name;
                 entityLabel.GridRow = count;
                 _list.AddChild(entityLabel);
@@ -47,13 +47,18 @@ namespace FSG.UI
             }
         }
 
-        private void handleEntityClick(object entityLabel, System.EventArgs e)
+        private void HandleEntityClick(object entityLabel, System.EventArgs e)
         {
             if (EntityClickHandler != null)
             {
                 var entityId = ((Label)entityLabel).Id;
                 EntityClickHandler(entityId);
             }
+        }
+
+        public void Clear()
+        {
+            _list.Widgets.Clear();
         }
 
         public override void Update()

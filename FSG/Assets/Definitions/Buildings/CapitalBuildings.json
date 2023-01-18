@@ -1,6 +1,7 @@
 [
   {
-    "Name": "Farm",
+    "Name": "Palace",
+    "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",
@@ -13,7 +14,8 @@
     }
   },
   {
-    "Name": "Mill",
+    "Name": "Gardens",
+    "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
     "Conditions": {
       "IsLandType": "Forest"
@@ -29,7 +31,8 @@
     }
   },
   {
-    "Name": "Mine",
+    "Name": "Market",
+    "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",

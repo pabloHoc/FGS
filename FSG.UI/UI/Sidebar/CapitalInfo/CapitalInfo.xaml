@@ -1,10 +1,16 @@
 ﻿<Project>
     <VerticalStackPanel Background="#000000">
-        <HorizontalSeparator />
+        <!--<HorizontalSeparator />
         <Label Text="Districts" />
         <VerticalStackPanel Id="BuiltDistrictList" Spacing="8"></VerticalStackPanel>
         <HorizontalSeparator />
-        <Label Text="Build Districts" />
+        <Label Text="Build Districts" />-->
         <HorizontalStackPanel Id="DistrictList" Spacing="8"></HorizontalStackPanel>
+        <HorizontalSeparator />
+        <Label Text="Buildings" />
+        <VerticalStackPanel Id="BuiltBuildingList" Spacing="8"></VerticalStackPanel>
+        <HorizontalSeparator />
+        <Label Text="Build Buildings" />
+        <HorizontalStackPanel Id="BuildingList" Spacing="8"></HorizontalStackPanel>
     </VerticalStackPanel>
 </Project>

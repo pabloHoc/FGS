@@ -23,8 +23,9 @@ namespace FSG.Serialization
 
         public void LoadDefinitions()
         {
-            this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/Buildings.json");
-            this.LoadDefinition<DistrictDefinition>("../../../../FSG/Assets/Definitions/Districts/Districts.json");
+            this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/LandBuildings.json");
+            this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/CapitalBuildings.json");
+            this.LoadDefinition<BuildingDefinition>("../../../../FSG/Assets/Definitions/Buildings/Districts.json");
             this.LoadDefinition<EconomicCategoryDefinition>("../../../../FSG/Assets/Definitions/EconomicCategories/EconomicCategories.json");
             this.LoadDefinition<LandDefinition>("../../../../FSG/Assets/Definitions/Lands/Lands.json");
             this.LoadDefinition<ScorerDefinition>("../../../../FSG/Assets/Definitions/Scorers/Scorers.json");
