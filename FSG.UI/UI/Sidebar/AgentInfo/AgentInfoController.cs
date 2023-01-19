@@ -84,7 +84,7 @@ namespace FSG.UI
 
         private void UpdateRegion(Agent agent)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get<Region>(agent.RegionId);
+            var region = _serviceProvider.GlobalState.Entities.Get(agent.RegionId);
             _currentRegionLabel.Id = region.Id;
             _currentRegionLabel.Text = region.Name;
             _currentRegionLabel.TouchDown += HandleRegionClick;
@@ -92,7 +92,7 @@ namespace FSG.UI
 
         private void UpdateEmpire(Agent agent)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(agent.EmpireId);
+            var empire = _serviceProvider.GlobalState.Entities.Get(agent.EmpireId);
             _empireLabel.Id = empire.Id;
             _empireLabel.Text = empire.Name;
             _empireLabel.TouchDown += HandleEmpireClick;

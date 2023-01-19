@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using FSG.Definitions;
 
 namespace FSG.Entities
 {
@@ -24,5 +25,12 @@ namespace FSG.Entities
         public Capital Capital { get; init; }
 
         public Queue<BuildingQueueItem> BuildingQueue { get; init; }
+
+        public ResourceBlock Resources { get; init; }
+
+        public Region()
+        {
+            System.Console.WriteLine();
+        }
     }
 }

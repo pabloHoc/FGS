@@ -5,7 +5,7 @@
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",
-      "Cost": {
+      "Resources": {
         "Wood": 5
       },
       "Production": {
@@ -22,7 +22,7 @@
     },
     "Resources": {
       "Category": "Buildings",
-      "Cost": {
+      "Resources": {
         "Wood": 5
       },
       "Production": {
@@ -36,7 +36,7 @@
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",
-      "Cost": {
+      "Resources": {
         "Wood": 5
       },
       "Production": {

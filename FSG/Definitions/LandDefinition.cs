@@ -6,6 +6,6 @@ namespace FSG.Definitions
 
         public string Name { get; init; }
 
-        public EconomyUnit Resources { get; init; }
+        public ResourceBlock Resources { get; init; }
     }
 }

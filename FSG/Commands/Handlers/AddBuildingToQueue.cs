@@ -29,9 +29,9 @@ namespace FSG.Commands.Handlers
 
             var empire = _serviceProvider.GlobalState.Entities.Get(command.EmpireId);
 
-            foreach (var resource in buildingDefinition.Resources.Cost)
+            foreach (var resource in buildingDefinition.Resources.Resources)
             {
-                empire.Resources[resource.Key] -= resource.Value;
+                empire.Resources.Resources[resource.Key] -= resource.Value;
             }
         }
     }

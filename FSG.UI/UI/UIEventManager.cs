@@ -48,7 +48,7 @@ namespace FSG.UI
             if (SelectedRegion.EmpireId != null && SelectedRegion.EmpireId != SelectedEmpire?.Id)
             {
                 SelectedEmpire = _serviceProvider.GlobalState.Entities
-                    .Get<Empire>(new EntityId<Empire>(SelectedRegion.EmpireId));
+                    .Get(new EntityId<Empire>(SelectedRegion.EmpireId));
             }
             else
             {
@@ -61,7 +61,7 @@ namespace FSG.UI
             if (RegionId != SelectedRegion?.Id)
             {
                 SelectedRegion = _serviceProvider.GlobalState.Entities
-                    .Get<Region>(RegionId);
+                    .Get(RegionId);
 
                 UpdateEmpireFromRegion();
                 ClearLand();
@@ -73,7 +73,7 @@ namespace FSG.UI
             if (empireId != SelectedEmpire?.Id)
             {
                 SelectedEmpire = _serviceProvider.GlobalState.Entities
-                    .Get<Empire>(new EntityId<Empire>(empireId));
+                    .Get(new EntityId<Empire>(empireId));
 
                 // Clear Region and Land
                 if (SelectedRegion.EmpireId != SelectedEmpire.Id)

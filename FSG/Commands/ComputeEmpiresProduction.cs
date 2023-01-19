@@ -4,9 +4,9 @@
 
 namespace FSG.Commands
 {
-	public struct ComputeProduction : ICommand
+	public struct ComputeEmpiresProduction : ICommand
 	{
-		public string Name { get => "ComputeProduction"; }
+		public string Name { get => "ComputeEmpiresProduction"; }
 	}
 }
 

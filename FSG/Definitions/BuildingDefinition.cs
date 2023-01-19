@@ -12,20 +12,7 @@ namespace FSG.Definitions
         District
     }
 
-    public interface IBuildingDefinition
-    {
-        public string Name { get; init; }
-
-        public BuildingType BuildingType { get; }
-
-        public int BaseBuildTime { get; init; }
-
-        public EconomyUnit Resources { get; init; }
-
-        public FSG.Conditions.Conditions Conditions { get; init; }
-    }
-
-    public class BuildingDefinition : IDefinition, IBuildingDefinition
+    public class BuildingDefinition : IDefinition
     {
         public DefinitionType Type => DefinitionType.Building;
 
@@ -35,7 +22,7 @@ namespace FSG.Definitions
 
         public int BaseBuildTime { get; init; }
 
-        public EconomyUnit Resources { get; init; }
+        public ResourceBlock Resources { get; init; }
 
         public FSG.Conditions.Conditions Conditions { get; init; }
     }

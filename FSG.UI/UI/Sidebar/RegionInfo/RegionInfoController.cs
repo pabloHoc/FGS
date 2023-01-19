@@ -13,6 +13,8 @@ namespace FSG.UI
 
         private readonly Label _empireLabel;
 
+        private readonly VerticalStackPanel _resourceList;
+
         private readonly VerticalStackPanel _buildingQueue;
 
         private readonly EntityListController<Land> _landList;
@@ -22,6 +24,7 @@ namespace FSG.UI
         {
             _regionNameLabel = (Label)Root.FindWidgetById("RegionNameLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");
+            _resourceList = (VerticalStackPanel)Root.FindWidgetById("ResourceList");
             _buildingQueue = (VerticalStackPanel)Root.FindWidgetById("BuildingQueue");
 
             _eventManager.OnRegionSelected += HandleRegionSelected;
@@ -48,10 +51,24 @@ namespace FSG.UI
         {
             if (region.EmpireId != null)
             {
-                var empire = _serviceProvider.GlobalState.Entities.Get<Empire>((EntityId<Empire>)region.EmpireId);
+                var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(region.EmpireId);
                 _empireLabel.Id = empire.Id;
                 _empireLabel.Text = empire.Name;
                 _empireLabel.TouchDown += HandleEmpireClick;
+            }
+        }
+
+        private void UpdateResources(Region region)
+        {
+            _resourceList.Widgets.Clear();
+
+            foreach (var entry in region.Resources.Resources)
+            {
+                _resourceList.Widgets.Add(new Label
+                {
+                    Text = $"{entry.Key}: {entry.Value} (+{region.Resources.Production[entry.Key]} " +
+                        $"| -{region.Resources.Upkeep[entry.Key]})"
+                });
             }
         }
 
@@ -77,6 +94,7 @@ namespace FSG.UI
                 _landList.Update();
                 UpdateEmpire(region);
                 UpdateBuildingQueue(region);
+                UpdateResources(region);
             }
         }
     }

@@ -5,6 +5,9 @@
         <Label Text="Empire" />
         <Label Id="EmpireLabel" />
         <HorizontalSeparator />
+        <Label Text="Resources" />
+        <VerticalStackPanel Id="ResourceList" />
+        <HorizontalSeparator />
         <Label Text="Lands" />
         <VerticalStackPanel Id="LandList" />
         <HorizontalSeparator />

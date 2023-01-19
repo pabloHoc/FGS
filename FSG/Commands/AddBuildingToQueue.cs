@@ -6,7 +6,7 @@ namespace FSG.Commands
 {
 	public struct AddBuildingToQueue : ICommand
 	{
-		public string Name { get => "AddBuildingtoQueue"; }
+		public string Name { get => "AddBuildingToQueue"; }
 
 		public BuildingType BuildingType { get; init; }
 

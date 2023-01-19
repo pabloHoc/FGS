@@ -15,8 +15,11 @@ namespace FSG.Commands.Handlers
             _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessSpells());
             _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessEntityActions<Agent>());
             _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessBuildingQueues());
-            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeProduction());
-            _serviceProvider.Dispatcher.Dispatch(new Commands.GenerateResources());
+            // TODO: check orden here
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeEmpiresProduction());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeRegionsProduction());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateEmpiresResources());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateRegionsResources());
 
             _serviceProvider.GlobalState.nextTurn();
         }

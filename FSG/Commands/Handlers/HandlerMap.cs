@@ -21,7 +21,8 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.AddBuildingToQueue),  new AddBuildingToQueue(serviceProvider) },
                 { typeof(Commands.BuildBuilding),  new BuildBuilding(serviceProvider) },
                 { typeof(Commands.BuildBuildingFromQueue),  new BuildBuildingFromQueue(serviceProvider) },
-                { typeof(Commands.ComputeProduction), new ComputeProduction(serviceProvider) },
+                { typeof(Commands.ComputeEmpiresProduction), new ComputeEmpiresProduction(serviceProvider) },
+                { typeof(Commands.ComputeRegionsProduction), new ComputeRegionsProduction(serviceProvider) },
                 { typeof(Commands.CreateAgent),  new CreateAgent(serviceProvider) },
                 { typeof(Commands.CreateArmy),  new CreateArmy(serviceProvider) },
                 { typeof(Commands.CreateEmpire), new CreateEmpire(serviceProvider) },
@@ -34,7 +35,6 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.EndTurn), new EndTurn(serviceProvider) },
                 { typeof(Commands.ExecuteCurrentEntityAction<Agent>), new ExecuteCurrentEntityAction<Agent>(serviceProvider) },
                 { typeof(Commands.ExecuteEntityAction<Agent>), new ExecuteEntityAction<Agent>(serviceProvider) },
-                { typeof(Commands.GenerateResources), new GenerateResources(serviceProvider) },
                 { typeof(Commands.GenerateWorld), new GenerateWorld(serviceProvider) },
                 { typeof(Commands.ProcessBuildingQueues), new ProcessBuildingQueues(serviceProvider) },
                 { typeof(Commands.ProcessEntityActions<Agent>), new ProcessEntityActions<Agent>(serviceProvider) },
@@ -47,6 +47,8 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.SetOwnerEmpire<Army>), new SetOwnerEmpire<Army>(serviceProvider) },
                 { typeof(Commands.SetOwnerEmpire<Region>), new SetOwnerEmpire<Region>(serviceProvider) },
                 { typeof(Commands.StartGame), new StartGame(serviceProvider) },
+                { typeof(Commands.UpdateEmpiresResources), new UpdateEmpiresResources(serviceProvider) },
+                { typeof(Commands.UpdateRegionsResources), new UpdateRegionsResources(serviceProvider) },
             };
         }
 

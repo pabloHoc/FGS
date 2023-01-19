@@ -5,11 +5,25 @@
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",
-      "Cost": {
+      "Resources": {
         "Food": 5
       },
       "Production": {
         "Food": 1
+      }
+    }
+  },
+  {
+    "Name": "Baths",
+    "BuildingType": "CapitalBuilding",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Buildings",
+      "Resources": {
+        "Stone": 3
+      },
+      "Production": {
+        "Growth": 1
       }
     }
   },
@@ -22,7 +36,7 @@
     },
     "Resources": {
       "Category": "Buildings",
-      "Cost": {
+      "Resources": {
         "Wood": 5
       },
       "Production": {

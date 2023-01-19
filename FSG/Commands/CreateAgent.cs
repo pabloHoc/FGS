@@ -16,7 +16,7 @@ namespace FSG.Commands
 		public CreateAgent(dynamic payload)
 		{
             AgentName = ((Agent)payload).Name;
-			EmpireId = (EntityId<Empire>)((Agent)payload).EmpireId;
+			EmpireId = ((Agent)payload).EmpireId;
 			RegionId = ((Agent)payload).RegionId;
 		}
 	}

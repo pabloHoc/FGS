@@ -7,30 +7,34 @@ using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
-    public class ComputeProduction : CommandHandler<Commands.ComputeProduction>
-    {
-        public ComputeProduction(ServiceProvider serviceProvider) : base(serviceProvider) { }
+    // TODO: We should separate upkeep from production
 
-        public override void Handle(Commands.ComputeProduction command)
+    public class ComputeEmpiresProduction : CommandHandler<Commands.ComputeEmpiresProduction>
+    {
+        public ComputeEmpiresProduction(ServiceProvider serviceProvider) : base(serviceProvider) { }
+
+        public override void Handle(Commands.ComputeEmpiresProduction command)
         {
             var empires = _serviceProvider.GlobalState.Entities.GetAll<Empire>();
 
             foreach (var empire in empires)
             {
-                ClearEmpireProduction(empire);
-                ComputeEmpireProduction(empire);
+                ClearProductionAndUpkeep(empire);
+                ComputeProduction(empire);
+                ComputeUpkeep(empire);
             }
         }
 
-        private void ClearEmpireProduction(Empire empire)
+        private void ClearProductionAndUpkeep(Empire empire)
         {
-            foreach (var resource in empire.Production)
+            foreach (var resource in empire.Resources.Production)
             {
-                empire.Production[resource.Key] = 0;
+                empire.Resources.Production[resource.Key] = 0;
+                empire.Resources.Upkeep[resource.Key] = 0;
             }
         }
 
-        private void ComputeEmpireProduction(Empire empire)
+        private void ComputeProduction(Empire empire)
         {
             var empireRegions = _serviceProvider.GlobalState.Entities
                 .Query(new GetEmpireRegions(empire.Id));
@@ -41,22 +45,32 @@ namespace FSG.Commands.Handlers
             }
         }
 
+        private void ComputeUpkeep(Empire empire)
+        {
+            var empireRegions = _serviceProvider.GlobalState.Entities
+                .Query(new GetEmpireRegions(empire.Id));
+
+            foreach (var region in empireRegions)
+            {
+                var regionPops = _serviceProvider.GlobalState.Entities
+                    .Query(new GetRegionPops(region.Id));
+
+                foreach (var pop in regionPops)
+                {
+                    ComputePopUpkeep(pop, empire);
+                }
+            }
+        }
+
         private void ComputeRegionProduction(Region region, Empire empire)
         {
             var regionLands = _serviceProvider.GlobalState.Entities
                 .Query(new GetRegionLands(region.Id));
-            var regionPops = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionPops(region.Id));
 
             var empireModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(empire);
             var regionModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(region);
-
-            foreach (var pop in regionPops)
-            {
-                ComputePopProduction(pop, empire);
-            }
 
             foreach (var land in regionLands)
             {
@@ -67,15 +81,24 @@ namespace FSG.Commands.Handlers
                     ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
                 }
             }
+
+
+            foreach (var building in region.Capital.Buildings)
+            {
+                ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
+            }
         }
 
-        private void ComputePopProduction(Pop pop, Empire empire)
+        private void ComputePopUpkeep(Pop pop, Empire empire)
         {
             var strataDefinition = _serviceProvider.Definitions.Get<StrataDefinition>(pop.Strata);
 
             foreach (var resource in strataDefinition.Resources.Upkeep)
             {
-                empire.Production[resource.Key] -= resource.Value;
+                if (empire.Resources.Production.ContainsKey(resource.Key))
+                {
+                    empire.Resources.Upkeep[resource.Key] += resource.Value;
+                }
             }
         }
 
@@ -85,7 +108,10 @@ namespace FSG.Commands.Handlers
 
             foreach (var resource in landDefinition.Resources.Production)
             {
-                empire.Production[resource.Key] += resource.Value;
+                if (empire.Resources.Production.ContainsKey(resource.Key))
+                {
+                    empire.Resources.Production[resource.Key] += resource.Value;
+                }
             }
         }
 
@@ -113,7 +139,10 @@ namespace FSG.Commands.Handlers
                         regionModifiers
                     );
 
-                empire.Production[resource.Key] += totalBuildingResourceProduction;
+                if (empire.Resources.Production.ContainsKey(resource.Key))
+                {
+                    empire.Resources.Production[resource.Key] += totalBuildingResourceProduction;
+                }
             }
         }
     }

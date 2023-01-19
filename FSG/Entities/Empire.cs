@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FSG.Definitions;
 using FSG.Serialization;
 
 namespace FSG.Entities
@@ -11,8 +12,6 @@ namespace FSG.Entities
 
         public string Name { get; init; }
 
-        public Dictionary<string, int> Resources { get; init; }
-
-        public Dictionary<string, int> Production { get; init; }
+        public ResourceBlock Resources { get; init; }
     }
 }

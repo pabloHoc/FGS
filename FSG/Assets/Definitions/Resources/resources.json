@@ -1,17 +1,27 @@
 [
   {
-    "Name": "Food"
+    "Name": "Food",
+    "Scope": "Empire"
   },
   {
-    "Name": "Wood"
+    "Name": "Wood",
+    "Scope": "Empire"
   },
   {
-    "Name": "Stone"
+    "Name": "Stone",
+    "Scope": "Empire"
   },
   {
-    "Name": "Iron"
+    "Name": "Iron",
+    "Scope": "Empire"
   },
   {
-    "Name": "Growth"
+    "Name": "Growth",
+    "Scope": "Region",
+    "Actions": {
+      "CratePop": {
+        "Strata": "Peasant"
+      }
+    }
   }
 ]
