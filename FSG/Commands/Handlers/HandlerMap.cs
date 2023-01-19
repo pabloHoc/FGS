@@ -28,6 +28,7 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.CreateLand),  new CreateLand(serviceProvider) },
                 { typeof(Commands.CreateModifier),  new CreateModifier(serviceProvider) },
                 { typeof(Commands.CreatePlayer), new CreatePlayer(serviceProvider) },
+                { typeof(Commands.CreatePop), new CreatePop(serviceProvider) },
                 { typeof(Commands.CreateRegion), new CreateRegion(serviceProvider) },
                 { typeof(Commands.CreateSpell), new CreateSpell(serviceProvider) },
                 { typeof(Commands.EndTurn), new EndTurn(serviceProvider) },

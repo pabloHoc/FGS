@@ -45,11 +45,18 @@ namespace FSG.Commands.Handlers
         {
             var regionLands = _serviceProvider.GlobalState.Entities
                 .Query(new GetRegionLands(region.Id));
+            var regionPops = _serviceProvider.GlobalState.Entities
+                .Query(new GetRegionPops(region.Id));
 
             var empireModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(empire);
             var regionModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(region);
+
+            foreach (var pop in regionPops)
+            {
+                ComputePopProduction(pop, empire);
+            }
 
             foreach (var land in regionLands)
             {
@@ -59,6 +66,16 @@ namespace FSG.Commands.Handlers
                 {
                     ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
                 }
+            }
+        }
+
+        private void ComputePopProduction(Pop pop, Empire empire)
+        {
+            var strataDefinition = _serviceProvider.Definitions.Get<StrataDefinition>(pop.Strata);
+
+            foreach (var resource in strataDefinition.Resources.Upkeep)
+            {
+                empire.Production[resource.Key] -= resource.Value;
             }
         }
 

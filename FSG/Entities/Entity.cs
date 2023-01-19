@@ -9,10 +9,11 @@ namespace FSG.Entities
         Army,
         Empire,
         Land,
+        Modifier,
         Player,
+        Pop,
         Region,
         Spell,
-        Modifier
     }
 
     public interface IBaseEntity

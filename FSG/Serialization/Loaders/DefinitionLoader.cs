@@ -30,6 +30,7 @@ namespace FSG.Serialization
             this.LoadDefinition<LandDefinition>("../../../../FSG/Assets/Definitions/Lands/Lands.json");
             this.LoadDefinition<ScorerDefinition>("../../../../FSG/Assets/Definitions/Scorers/Scorers.json");
             this.LoadDefinition<SpellDefinition>("../../../../FSG/Assets/Definitions/Spells/Spells.json");
+            this.LoadDefinition<StrataDefinition>("../../../../FSG/Assets/Definitions/Stratas/Stratas.json");
             this.LoadDefinition<ResourceDefinition>("../../../../FSG/Assets/Definitions/Resources/Resources.json");
             this.LoadDefinition<TaskDefinition>("../../../../FSG/Assets/Definitions/Tasks/test.json");
         }

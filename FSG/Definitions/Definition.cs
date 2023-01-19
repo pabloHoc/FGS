@@ -9,6 +9,7 @@ namespace FSG.Definitions
         Land,
         Resource,
         Scorer,
+        Strata,
         Task
     }
 

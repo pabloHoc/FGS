@@ -3,7 +3,7 @@
     "Name": "Forest",
     "Resources": {
       "Production": {
-        "Wood": 1
+        "Wood": 5
       }
     }
   },
@@ -11,7 +11,7 @@
     "Name": "Grassland",
     "Resources": {
       "Production": {
-        "Food": 1
+        "Food": 5
       }
     }
   },
@@ -19,7 +19,7 @@
     "Name": "Mountain",
     "Resources": {
       "Production": {
-        "Iron": 1
+        "Stone": 5
       }
     }
   }

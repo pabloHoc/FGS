@@ -6,10 +6,10 @@
     "Resources": {
       "Category": "Buildings",
       "Cost": {
-        "Food": 5
+        "Wood": 5
       },
       "Production": {
-        "Food": 1
+        "Food": 2
       }
     }
   },
@@ -31,16 +31,16 @@
     }
   },
   {
-    "Name": "Mine",
+    "Name": "Quarry",
     "BuildingType": "LandBuilding",
     "BaseBuildTime": 2,
     "Resources": {
       "Category": "Buildings",
       "Cost": {
-        "Iron": 5
+        "Wood": 5
       },
       "Production": {
-        "Iron": 1
+        "Stone": 2
       }
     }
   }

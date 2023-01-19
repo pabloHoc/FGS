@@ -15,6 +15,7 @@ namespace FSG.Core
             public Dictionary<string, LandDefinition> LandDefinition { get; } = new Dictionary<string, LandDefinition>();
             public Dictionary<string, ScorerDefinition> ScorerDefinition { get; } = new Dictionary<string, ScorerDefinition>();
             public Dictionary<string, SpellDefinition> SpellDefinition { get; } = new Dictionary<string, SpellDefinition>();
+            public Dictionary<string, StrataDefinition> StrataDefinition { get; } = new Dictionary<string, StrataDefinition>();
             public Dictionary<string, ResourceDefinition> ResourceDefinition { get; } = new Dictionary<string, ResourceDefinition>();
             public Dictionary<string, TaskDefinition> TaskDefinition { get; } = new Dictionary<string, TaskDefinition>();
 

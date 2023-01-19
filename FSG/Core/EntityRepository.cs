@@ -13,14 +13,15 @@ namespace FSG.Core
     {
         public class EntityDictionaryMap
         {
-            public Dictionary<string, Player> Player { get; init; } = new Dictionary<string, Player>();
-            public Dictionary<string, Empire> Empire { get; init; } = new Dictionary<string, Empire>();
-            public Dictionary<string, Region> Region { get; init; } = new Dictionary<string, Region>();
-            public Dictionary<string, Land> Land { get; init; } = new Dictionary<string, Land>();
             public Dictionary<string, Agent> Agent { get; init; } = new Dictionary<string, Agent>();
             public Dictionary<string, Army> Army { get; init; } = new Dictionary<string, Army>();
-            public Dictionary<string, Spell> Spell { get; init; } = new Dictionary<string, Spell>();
+            public Dictionary<string, Empire> Empire { get; init; } = new Dictionary<string, Empire>();
+            public Dictionary<string, Land> Land { get; init; } = new Dictionary<string, Land>();
             public Dictionary<string, Modifier> Modifier { get; init; } = new Dictionary<string, Modifier>();
+            public Dictionary<string, Player> Player { get; init; } = new Dictionary<string, Player>();
+            public Dictionary<string, Pop> Pop { get; init; } = new Dictionary<string, Pop>();
+            public Dictionary<string, Region> Region { get; init; } = new Dictionary<string, Region>();
+            public Dictionary<string, Spell> Spell { get; init; } = new Dictionary<string, Spell>();
 
             public Dictionary<string, T> Get<T>() where T : IBaseEntity
             {

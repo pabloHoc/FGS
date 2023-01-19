@@ -14,6 +14,7 @@ namespace FSG.UI
         private readonly RegionInfoController _regionInfo;
         private readonly LandInfoController _landInfo;
         private readonly CapitalInfoController _capitalInfo;
+        private readonly PopulationInfoController _populationInfo;
         private readonly AgentInfoController _agentInfo;
         private readonly TabsController _tabs;
 
@@ -24,6 +25,7 @@ namespace FSG.UI
             _regionInfo = new RegionInfoController(serviceProvider, eventManager, assetManager);
             _landInfo = new LandInfoController(serviceProvider, eventManager, assetManager);
             _capitalInfo = new CapitalInfoController(serviceProvider, eventManager, assetManager);
+            _populationInfo = new PopulationInfoController(serviceProvider, eventManager, assetManager);
 
             _agentInfo = new AgentInfoController(serviceProvider, eventManager, assetManager);
 
@@ -34,6 +36,7 @@ namespace FSG.UI
                     { "Region", _regionInfo },
                     { "Land", _landInfo },
                     { "Capital", _capitalInfo },
+                    { "Population", _populationInfo },
                     { "Agent", _agentInfo },
                 });
 
@@ -71,6 +74,7 @@ namespace FSG.UI
             _regionInfo.Update();
             _landInfo.Update();
             _capitalInfo.Update();
+            _populationInfo.Update();
             _agentInfo.Update();
         }
     }

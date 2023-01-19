@@ -1,0 +1,6 @@
+﻿<Project>
+    <VerticalStackPanel Background="#000000">
+        <Label Id="Population" />
+        <VerticalStackPanel Id="PopList" />
+    </VerticalStackPanel>
+</Project>

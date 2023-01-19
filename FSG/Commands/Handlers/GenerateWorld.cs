@@ -19,6 +19,7 @@ namespace FSG.Commands.Handlers
             GenerateRoads(command.Options.Columns, command.Options.Rows);
             GenerateLands(command.Options.LandsPerRegion);
             GenerateAgents();
+            GeneratePops();
         }
 
         private void GeneratePlayersAndEmpires(int players)
@@ -218,20 +219,37 @@ namespace FSG.Commands.Handlers
 
         private void GenerateAgents()
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>()
+                .FindAll(region => region.EmpireId != null);
             var count = 0;
+
             foreach (var region in regions)
             {
-                if (region.EmpireId != null)
+                _serviceProvider.Dispatcher.Dispatch(new Commands.CreateAgent
                 {
-                    _serviceProvider.Dispatcher.Dispatch(new Commands.CreateAgent
-                    {
-                        AgentName = $"Agent #{count}",
-                        RegionId = region.Id,
-                        EmpireId = (EntityId<Empire>)region.EmpireId
-                    });
+                    AgentName = $"Agent #{count}",
+                    RegionId = region.Id,
+                    EmpireId = region.EmpireId
+                });
 
-                    count++;
+                count++;
+            }
+        }
+
+        private void GeneratePops()
+        {
+            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>()
+                .FindAll(region => region.EmpireId != null);
+
+            foreach (var region in regions)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    _serviceProvider.Dispatcher.Dispatch(new Commands.CreatePop
+                    {
+                        RegionId = region.Id,
+                        Strata = "Peasant"
+                    });
                 }
             }
         }
