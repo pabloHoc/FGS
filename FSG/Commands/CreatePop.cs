@@ -10,6 +10,12 @@ namespace FSG.Commands
 		public EntityId<Region> RegionId { get; init; }
 
 		public string Strata { get; init; }
-	}
+
+        public CreatePop(dynamic payload)
+        {
+            Strata = payload["Strata"];
+            RegionId = payload["RegionId"];
+        }
+    }
 }
 

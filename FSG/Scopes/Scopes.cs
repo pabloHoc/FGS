@@ -18,10 +18,10 @@ namespace FSG.Scopes
 		public IBaseEntity GetFrom(Scope scope, IBaseEntity from)
 		{
 			var entity = from;
-			switch(from)
+			switch(from.Type)
 			{
-				case Agent agent:
-					entity = _agentScope.GetFrom(agent, scope);
+				case EntityType.Agent:
+					entity = _agentScope.GetFrom((Agent)entity, scope);
 					break;
 			}
 			return entity;

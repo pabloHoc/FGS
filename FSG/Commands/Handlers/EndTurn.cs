@@ -20,6 +20,7 @@ namespace FSG.Commands.Handlers
             _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeRegionsProduction());
             _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateEmpiresResources());
             _serviceProvider.Dispatcher.Dispatch(new Commands.UpdateRegionsResources());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ProcessResourceLevels());
 
             _serviceProvider.GlobalState.nextTurn();
         }

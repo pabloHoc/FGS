@@ -19,8 +19,11 @@
     "Name": "Growth",
     "Scope": "Region",
     "Actions": {
-      "CratePop": {
-        "Strata": "Peasant"
+      "Region": {
+        "CreatePop": {
+          "Strata": "Peasant",
+          "RegionId": "This.Id"
+        }
       }
     }
   }

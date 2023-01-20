@@ -22,13 +22,5 @@
         }
       }
     }
-  },
-  {
-    "Name": "CreateAgent",
-    "BaseExecutionTime": 2,
-    "Duration": 3,
-    "Actions": {
-      "CreateAgent": "This"
-    }
   }
 ]

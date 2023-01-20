@@ -39,6 +39,7 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.ProcessBuildingQueues), new ProcessBuildingQueues(serviceProvider) },
                 { typeof(Commands.ProcessEntityActions<Agent>), new ProcessEntityActions<Agent>(serviceProvider) },
                 { typeof(Commands.ProcessPlayerAIs), new ProcessPlayerAIs(serviceProvider) },
+                { typeof(Commands.ProcessResourceLevels), new ProcessResourceLevels(serviceProvider) },
                 { typeof(Commands.ProcessSpells), new ProcessSpells(serviceProvider) },
                 { typeof(Commands.SetEntityCurrentAction<Agent>), new SetEntityCurrentAction<Agent>(serviceProvider) },
                 { typeof(Commands.SetLocation<Agent>), new SetLocation<Agent>(serviceProvider) },

@@ -7,34 +7,38 @@ namespace FSG.Commands
 {
     public class CommandMap
     {
-        // TODO: if we have lots of duplicated commands, we should use a switch
-        private readonly Dictionary<Type, Dictionary<string, Func<IBaseEntity, dynamic, ICommand>>> _commands =
-            new Dictionary<Type, Dictionary<string, Func<IBaseEntity, dynamic, ICommand>>>
+        private readonly Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> _agentCommands = new ()
+        {
+            { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
+            { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
+        };
+
+        private readonly Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> _regionCommands = new()
+        {
+            { "CreatePop", (IBaseEntity scope, dynamic payload) => new CreatePop(payload) }
+        };
+
+        private Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> GetCommandMapFor<T>(T entity) where T : IBaseEntity
+        {
+            switch (entity.Type)
             {
-                {
-                    typeof(Agent), new Dictionary<string, Func<IBaseEntity, dynamic, ICommand>>
-                    {
-                        { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
-                        { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
-                    }
-                }
-            };
+                case EntityType.Agent:
+                    return _agentCommands;
+                case EntityType.Region:
+                    return _regionCommands;
+            }
+            return null;
+        }
 
         public ICommand Get<T>(string command, T scope, object payload) where T : IBaseEntity
         {
-            return _commands[typeof(T)][command](scope, payload);
+            return GetCommandMapFor(scope)[command](scope, payload);
         }
 
-        public bool Has<T>(string command) where T : IBaseEntity
+        public bool Has<T>(string command, T scope) where T : IBaseEntity
         {
-            Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> entityCommands;
-
-            if (_commands.TryGetValue(typeof(T), out entityCommands))
-            {
-                return entityCommands.ContainsKey(command);
-            }
-
-            return false;
+            var commandMap = GetCommandMapFor(scope);
+            return (bool)(commandMap?.ContainsKey(command));
         }
     }
 }
