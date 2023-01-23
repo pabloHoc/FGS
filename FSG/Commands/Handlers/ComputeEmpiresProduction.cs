@@ -66,6 +66,8 @@ namespace FSG.Commands.Handlers
         {
             var regionLands = _serviceProvider.GlobalState.Entities
                 .Query(new GetRegionLands(region.Id));
+            var regionPops = _serviceProvider.GlobalState.Entities
+                .Query(new GetRegionPops(region.Id));
 
             var empireModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(empire);
@@ -82,22 +84,41 @@ namespace FSG.Commands.Handlers
                 }
             }
 
-
             foreach (var building in region.Capital.Buildings)
             {
                 ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
+            }
+
+            foreach (var pop in regionPops)
+            {
+                ComputePopProduction(pop, empire);
             }
         }
 
         private void ComputePopUpkeep(Pop pop, Empire empire)
         {
-            var strataDefinition = _serviceProvider.Definitions.Get<StrataDefinition>(pop.Strata);
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+                .Stratas.Find(strata => strata.Name == pop.Strata);
 
-            foreach (var resource in strataDefinition.Resources.Upkeep)
+            foreach (var resource in strata.Resources.Upkeep)
+            {
+                if (empire.Resources.Upkeep.ContainsKey(resource.Key))
+                {
+                    empire.Resources.Upkeep[resource.Key] += resource.Value;
+                }
+            }
+        }
+
+        private void ComputePopProduction(Pop pop, Empire empire)
+        {
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+                .Stratas.Find(strata => strata.Name == pop.Strata);
+
+            foreach (var resource in strata.Resources.Production)
             {
                 if (empire.Resources.Production.ContainsKey(resource.Key))
                 {
-                    empire.Resources.Upkeep[resource.Key] += resource.Value;
+                    empire.Resources.Production[resource.Key] += resource.Value;
                 }
             }
         }

@@ -18,22 +18,46 @@
     "Scope": "Empire"
   },
   {
-    "Name": "Culture",
+    "Name": "Tools",
     "Scope": "Empire"
   },
   {
-    "Name": "Research",
+    "Name": "Weapons",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Lore",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Magic",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Worship",
     "Scope": "Empire"
   },
   {
     "Name": "Training",
     "Scope": "Empire"
   },
+  {
+    "Name": "Gold",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Influence",
+    "Scope": "Empire"
+  },
   // Possible missing resources: faith, housing, amenities/goods, supplies, infrastructure
   // Region Resources
   {
-    "Name": "Loyalty", // "Happiness"
-    "Scope": "Region" // Check global vs local
+    "Name": "Order",
+    "Scope": "Region" 
+  },
+  {
+    "Name": "Health", 
+    "Scope": "Region"
   },
   {
     "Name": "Growth",

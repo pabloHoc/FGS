@@ -13,6 +13,8 @@ namespace FSG.Entities
         public EntityId<Region> RegionId { get; init; }
 
         public string Strata { get; init; }
+
+        public int Size { get; init; }
     }
 }
 

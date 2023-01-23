@@ -13,5 +13,7 @@ namespace FSG.Entities
         public string Name { get; init; }
 
         public ResourceBlock Resources { get; init; }
+
+        public string SocialStructure { get; init; }
     }
 }

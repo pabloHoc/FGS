@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
+using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -11,12 +12,19 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreatePop command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Pop
+            var pops = _serviceProvider.GlobalState.Entities.Query(new GetRegionPops(command.RegionId));
+            var strataPop = pops.Find(pop => pop.Strata == command.Strata);
+
+            if (strataPop == null)
             {
-                Id = new EntityId<Pop>(),
-                RegionId = command.RegionId,
-                Strata = command.Strata
-            });
+                _serviceProvider.GlobalState.Entities.Add(new Pop
+                {
+                    Id = new EntityId<Pop>(),
+                    RegionId = command.RegionId,
+                    Strata = command.Strata,
+                    Size = command.Size
+                });
+            }
         }
     }
 }

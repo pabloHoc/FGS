@@ -10,6 +10,7 @@ namespace FSG.Commands.Handlers
         public override void Handle(Commands.StartGame command)
         {
             _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeEmpiresProduction());
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ComputeRegionsProduction());
         }
     }
 }

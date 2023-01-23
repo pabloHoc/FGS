@@ -5,7 +5,7 @@ namespace FSG.Definitions
 {
     public class SpellDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.Building;
+        public DefinitionType Type => DefinitionType.Spell;
 
         public string Name { get; init; }
 

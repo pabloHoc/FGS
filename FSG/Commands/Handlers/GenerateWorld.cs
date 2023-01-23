@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
+using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -238,17 +239,21 @@ namespace FSG.Commands.Handlers
 
         private void GeneratePops()
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>()
-                .FindAll(region => region.EmpireId != null);
+            var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
 
             foreach (var region in regions)
             {
-                for (int i = 0; i < 5; i++)
+                var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
+                var socialStructure = _serviceProvider.Definitions
+                    .Get<SocialStructureDefinition>(empire.SocialStructure);
+
+                foreach (var strata in socialStructure.Stratas)
                 {
                     _serviceProvider.Dispatcher.Dispatch(new Commands.CreatePop
                     {
                         RegionId = region.Id,
-                        Strata = "Peasant"
+                        Strata = strata.Name,
+                        Size = 1
                     });
                 }
             }

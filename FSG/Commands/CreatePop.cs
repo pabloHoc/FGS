@@ -11,10 +11,13 @@ namespace FSG.Commands
 
 		public string Strata { get; init; }
 
+        public int Size { get; init; }
+
         public CreatePop(dynamic payload)
         {
-            Strata = payload["Strata"];
-            RegionId = payload["RegionId"];
+            Strata = payload.Strata;
+            RegionId = payload.RegionId;
+            Size = payload.Size;
         }
     }
 }

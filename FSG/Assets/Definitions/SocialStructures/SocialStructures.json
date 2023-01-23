@@ -1,0 +1,96 @@
+﻿[
+  {
+    "Name": "Feudal",
+    "Stratas": [
+      {
+        "Name": "Noble",
+        "Resources": {
+          "Production": {
+            "Gold": 3,
+            "Influence": 1
+          },
+          "Upkeep": {
+            "Food": 2
+          }
+        }
+      },
+      {
+        "Name": "Clergy",
+        "Resources": {
+          "Production": {
+            "Worship": 1,
+            "Health": 1
+          },
+          "Upkeep": {
+            "Food": 1
+          }
+        }
+      },
+      {
+        "Name": "Scholar",
+        "Resources": {
+          "Production": {
+            "Magic": 1,
+            "Lore": 1
+          },
+          "Upkeep": {
+            "Food": 1
+          }
+        }
+      },
+      {
+        "Name": "Soldier",
+        "Resources": {
+          "Production": {
+            "Training": 1,
+            "Order": 1
+          },
+          "Upkeep": {
+            "Food": 1
+          }
+        }
+      },
+      {
+        "Name": "Merchant",
+        "Resources": {
+          "Production": {
+            "Gold": 3
+          },
+          "Upkeep": {
+            "Food": 1
+          }
+        }
+      },
+      {
+        "Name": "Craftman",
+        "Resources": {
+          "Production": {
+            "Tools": 1,
+            "Weapons": 1
+          },
+          "Upkeep": {
+            "Food": 1
+          }
+        }
+      },
+      {
+        "Name": "Peasant",
+        "Resources": {
+          "Production": {
+            "Food": 3,
+            "Wood": 1,
+            "Stone": 1,
+            "Iron": 1
+          },
+          "Upkeep": {
+            "Food": 1,
+            "Tools": 1
+          }
+        }
+      }
+    ]
+
+
+  }
+]
+

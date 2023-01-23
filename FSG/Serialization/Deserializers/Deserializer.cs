@@ -10,6 +10,7 @@ namespace FSG.Serialization
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions
             {
                 IncludeFields = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
                 Converters =
                 {
                     new ValueObjectConverterFactory(),

@@ -38,6 +38,8 @@ namespace FSG.Commands.Handlers
         {
             var regionLands = _serviceProvider.GlobalState.Entities
                 .Query(new GetRegionLands(region.Id));
+            var regionPops = _serviceProvider.GlobalState.Entities
+                .Query(new GetRegionPops(region.Id));
 
             var regionModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(region);
@@ -56,6 +58,11 @@ namespace FSG.Commands.Handlers
             {
                 ComputeBuildingProduction(building, region, regionModifiers);
             }
+
+            foreach (var pop in regionPops)
+            {
+                ComputePopProduction(pop, region);
+            }
         }
 
         private void ComputeUpkeep(Region region)
@@ -71,13 +78,30 @@ namespace FSG.Commands.Handlers
 
         private void ComputePopUpkeep(Pop pop, Region region)
         {
-            var strataDefinition = _serviceProvider.Definitions.Get<StrataDefinition>(pop.Strata);
+            var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+                .Stratas.Find(strata => strata.Name == pop.Strata);
 
-            foreach (var resource in strataDefinition.Resources.Upkeep)
+            foreach (var resource in strata.Resources.Upkeep)
+            {
+                if (region.Resources.Upkeep.ContainsKey(resource.Key))
+                {
+                    region.Resources.Upkeep[resource.Key] += resource.Value;
+                }
+            }
+        }
+
+        private void ComputePopProduction(Pop pop, Region region)
+        {
+            var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+                .Stratas.Find(strata => strata.Name == pop.Strata);
+
+            foreach (var resource in strata.Resources.Production)
             {
                 if (region.Resources.Production.ContainsKey(resource.Key))
                 {
-                    region.Resources.Upkeep[resource.Key] += resource.Value;
+                    region.Resources.Production[resource.Key] += resource.Value;
                 }
             }
         }

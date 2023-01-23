@@ -9,7 +9,8 @@ namespace FSG.Definitions
         Land,
         Resource,
         Scorer,
-        Strata,
+        SocialStructure,
+        Spell,
         Task
     }
 
