@@ -3,6 +3,7 @@
     "Name": "Farm",
     "BuildingType": "LandBuilding",
     "BaseBuildTime": 2,
+    "Category": "Extraction",
     "Resources": {
       "Category": "Buildings",
       "Resources": {
@@ -17,6 +18,7 @@
     "Name": "Mill",
     "BuildingType": "LandBuilding",
     "BaseBuildTime": 2,
+    "Category": "Extraction",
     "Conditions": {
       "IsLandType": "Forest"
     },
@@ -34,6 +36,7 @@
     "Name": "Quarry",
     "BuildingType": "LandBuilding",
     "BaseBuildTime": 2,
+    "Category": "Extraction",
     "Resources": {
       "Category": "Buildings",
       "Resources": {
@@ -48,6 +51,7 @@
     "Name": "Mine",
     "BuildingType": "LandBuilding",
     "BaseBuildTime": 2,
+    "Category": "Extraction",
     "Resources": {
       "Category": "Buildings",
       "Resources": {

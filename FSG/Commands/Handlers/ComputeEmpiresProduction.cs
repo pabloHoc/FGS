@@ -104,7 +104,7 @@ namespace FSG.Commands.Handlers
             {
                 if (empire.Resources.Upkeep.ContainsKey(resource.Key))
                 {
-                    empire.Resources.Upkeep[resource.Key] += resource.Value;
+                    empire.Resources.Upkeep[resource.Key] += resource.Value * pop.Size;
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace FSG.Commands.Handlers
             {
                 if (empire.Resources.Production.ContainsKey(resource.Key))
                 {
-                    empire.Resources.Production[resource.Key] += resource.Value;
+                    empire.Resources.Production[resource.Key] += resource.Value * pop.Size;
                 }
             }
         }

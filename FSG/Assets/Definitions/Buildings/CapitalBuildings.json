@@ -3,6 +3,7 @@
     "Name": "Palace",
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
+    "Category": "Imperial",
     "Resources": {
       "Category": "Buildings",
       "Resources": {
@@ -17,6 +18,7 @@
     "Name": "Baths",
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
+    "Category": "Health",
     "Resources": {
       "Category": "Buildings",
       "Resources": {
@@ -31,6 +33,7 @@
     "Name": "Gardens",
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
+    "Category": "Splendor",
     "Conditions": {
       "IsLandType": "Forest"
     },
@@ -48,6 +51,7 @@
     "Name": "Market",
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
+    "Category":  "Comercial",
     "Resources": {
       "Category": "Buildings",
       "Cost": {

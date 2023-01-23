@@ -73,7 +73,8 @@ handle them separately
 [] Review names: Service, Actions
 [] Review name: Definition -> Data
 [] Rename core to services, and move out game from there
-[] Review refactoring type maps to string/enum maps (if possible)
+[] Rename Type to EntityType and DefinitionType so we can use Type as property
+[x] Review refactoring type maps to string/enum maps (if possible)
 [] Loggers (AI actions, etc) -> write in file
 
 [] World entity

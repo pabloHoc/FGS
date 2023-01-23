@@ -20,6 +20,8 @@ namespace FSG.Definitions
 
         public string Name { get; init; }
 
+        public string Category { get; init; }
+
         public int BaseBuildTime { get; init; }
 
         public ResourceBlock Resources { get; init; }

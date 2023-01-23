@@ -53,22 +53,14 @@
   // Region Resources
   {
     "Name": "Order",
-    "Scope": "Region" 
+    "Scope": "Region"
   },
   {
-    "Name": "Health", 
+    "Name": "Health",
     "Scope": "Region"
   },
   {
     "Name": "Growth",
-    "Scope": "Region",
-    "Actions": {
-      "Region": {
-        "CreatePop": {
-          "Strata": "Peasant",
-          "RegionId": "This.Id"
-        }
-      }
-    }
+    "Scope": "Region"
   }
 ]

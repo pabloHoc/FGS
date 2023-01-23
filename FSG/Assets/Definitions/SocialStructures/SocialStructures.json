@@ -4,6 +4,9 @@
     "Stratas": [
       {
         "Name": "Noble",
+        "GrowthFactors": {
+          "BuildingCategory": "Imperial"
+        },
         "Resources": {
           "Production": {
             "Gold": 3,
@@ -16,6 +19,9 @@
       },
       {
         "Name": "Clergy",
+        "GrowthFactors": {
+          "BuildingCategory": "Religion"
+        },
         "Resources": {
           "Production": {
             "Worship": 1,
@@ -28,6 +34,9 @@
       },
       {
         "Name": "Scholar",
+        "GrowthFactors": {
+          "BuildingCategory": "Research" // We need two types here
+        },
         "Resources": {
           "Production": {
             "Magic": 1,
@@ -40,6 +49,9 @@
       },
       {
         "Name": "Soldier",
+        "GrowthFactors": {
+          "BuildingCategory": "Military"
+        },
         "Resources": {
           "Production": {
             "Training": 1,
@@ -52,6 +64,9 @@
       },
       {
         "Name": "Merchant",
+        "GrowthFactors": {
+          "BuildingCategory": "Comercial"
+        },
         "Resources": {
           "Production": {
             "Gold": 3
@@ -63,6 +78,9 @@
       },
       {
         "Name": "Craftman",
+        "GrowthFactors": {
+          "BuildingCategory": "Production"
+        },
         "Resources": {
           "Production": {
             "Tools": 1,
@@ -75,6 +93,9 @@
       },
       {
         "Name": "Peasant",
+        "GrowthFactors": {
+          "BuildingCategory": "Extraction"
+        },
         "Resources": {
           "Production": {
             "Food": 3,

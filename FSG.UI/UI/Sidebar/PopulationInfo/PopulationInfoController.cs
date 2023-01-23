@@ -36,7 +36,7 @@ namespace FSG.UI
             {
                 _popList.Widgets.Add(new Label
                 {
-                    Text = $"{pop.Strata} ({pop.Size})"
+                    Text = $"{pop.Strata} ({pop.Size}) - GP: {pop.GrowthPoints}"
                 });
             }
         }

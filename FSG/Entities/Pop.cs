@@ -14,7 +14,9 @@ namespace FSG.Entities
 
         public string Strata { get; init; }
 
-        public int Size { get; init; }
+        public int Size { get; set; }
+
+        public int GrowthPoints { get; set; }
     }
 }
 

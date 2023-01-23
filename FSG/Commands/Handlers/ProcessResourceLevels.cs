@@ -23,7 +23,7 @@ namespace FSG.Commands.Handlers
                     var resourceDefinition = resourceDefinitions
                         .Find(definition => definition.Name == resource.Key);
 
-                    if (resource.Value > 20)
+                    if (resourceDefinition.Actions != null && resource.Value > 20)
                     {
                         // TODO: remove region.Id
                         _serviceProvider.ActionProcessor.Process(resourceDefinition.Actions, region, region.Id);
