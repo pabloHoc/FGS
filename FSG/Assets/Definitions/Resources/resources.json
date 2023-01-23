@@ -1,4 +1,6 @@
 [
+  // Empire Resources
+  // Maybe we should change scope to global/local
   {
     "Name": "Food",
     "Scope": "Empire"
@@ -14,6 +16,24 @@
   {
     "Name": "Iron",
     "Scope": "Empire"
+  },
+  {
+    "Name": "Culture",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Research",
+    "Scope": "Empire"
+  },
+  {
+    "Name": "Training",
+    "Scope": "Empire"
+  },
+  // Possible missing resources: faith, housing, amenities/goods, supplies, infrastructure
+  // Region Resources
+  {
+    "Name": "Loyalty", // "Happiness"
+    "Scope": "Region" // Check global vs local
   },
   {
     "Name": "Growth",

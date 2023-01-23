@@ -18,7 +18,8 @@ namespace FSG.Commands.Handlers
 
             foreach (var resource in resources)
             {
-                resourceBlock.Resources.Add(resource.Name, 0);
+                // TODO: make a config for initial resources
+                resourceBlock.Resources.Add(resource.Name, 100);
                 resourceBlock.Production.Add(resource.Name, 0);
                 resourceBlock.Upkeep.Add(resource.Name, 0);
             }

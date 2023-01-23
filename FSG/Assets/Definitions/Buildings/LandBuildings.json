@@ -43,5 +43,19 @@
         "Stone": 2
       }
     }
+  },
+  {
+    "Name": "Mine",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Resources": {
+      "Category": "Buildings",
+      "Resources": {
+        "Wood": 5
+      },
+      "Production": {
+        "Stone": 2
+      }
+    }
   }
 ]
