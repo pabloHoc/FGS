@@ -16,10 +16,10 @@ namespace FSG.Definitions
         public string Category { get; init; }
 
         // Cost for buildings, resources for empires/regions
-        public Dictionary<string, int> Resources { get; init; } = new Dictionary<string, int>();
+        public Dictionary<string, decimal> Resources { get; init; } = new();
 
-        public Dictionary<string, int> Upkeep { get; init; } = new Dictionary<string, int>();
+        public Dictionary<string, decimal> Upkeep { get; init; } = new();
 
-        public Dictionary<string, int> Production { get; init; } = new Dictionary<string, int>();
+        public Dictionary<string, decimal> Production { get; init; } = new();
     }
 }

@@ -10,11 +10,11 @@ namespace FSG.Services
     {
         private struct ModifierTotals
         {
-            public int Add;
+            public decimal Add;
 
-            public int Mult;
+            public decimal Mult;
 
-            public int Reduction;
+            public decimal Reduction;
         }
 
         private readonly ServiceProvider _serviceProvider;
@@ -46,21 +46,19 @@ namespace FSG.Services
             return total;
         }
 
-        public int Compute(
+        public decimal Compute(
             EconomicCategoryDefinition economicCategory,
             EconomicType economicType,
             string resource,
-            int baseValue,
+            decimal baseValue,
             List<Entities.Modifier> empireModifiers,
             List<Entities.Modifier> regionModifiers
         )
         {
-            var sanitizedEconomicType = economicType.ToString().ToLower();
-
             var modifierNames = new string[]
             {
-                $"{economicCategory.Name}_{resource}_{sanitizedEconomicType}", // e.g. empire_food_production
-                $"{economicCategory.Name}_{sanitizedEconomicType}" // e.g. region_cost
+                $"{economicCategory.Name}{resource}{economicType.ToString()}", // e.g. EmpireFoodProduction
+                $"{economicCategory.Name}{economicType.ToString()}" // e.g. EmpireProduction
             };
 
             Predicate<Modifier> modifierInModifierNames = m => Array.IndexOf(modifierNames, m.Name) != -1;

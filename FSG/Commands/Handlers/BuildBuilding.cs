@@ -11,6 +11,8 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.BuildBuilding command)
         {
+            var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName);
+
             switch (command.BuildingType)
             {
                 case BuildingType.LandBuilding:
@@ -33,6 +35,12 @@ namespace FSG.Commands.Handlers
                     });
                     break;
                 }
+            }
+
+            if (buildingDefinition.OnBuilt != null)
+            {
+                var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+                _serviceProvider.ActionProcessor.Process(buildingDefinition.OnBuilt, region, region.Id);
             }
         }
     }

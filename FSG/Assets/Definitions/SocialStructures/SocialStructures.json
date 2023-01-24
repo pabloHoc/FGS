@@ -2,110 +2,110 @@
   {
     "Name": "Feudal",
     "Stratas": [
-      {
-        "Name": "Noble",
-        "GrowthFactors": {
-          "BuildingCategory": "Imperial"
-        },
-        "Resources": {
-          "Production": {
-            "Gold": 3,
-            "Influence": 1
-          },
-          "Upkeep": {
-            "Food": 2
-          }
-        }
-      },
-      {
-        "Name": "Clergy",
-        "GrowthFactors": {
-          "BuildingCategory": "Religion"
-        },
-        "Resources": {
-          "Production": {
-            "Worship": 1,
-            "Health": 1
-          },
-          "Upkeep": {
-            "Food": 1
-          }
-        }
-      },
-      {
-        "Name": "Scholar",
-        "GrowthFactors": {
-          "BuildingCategory": "Research" // We need two types here
-        },
-        "Resources": {
-          "Production": {
-            "Magic": 1,
-            "Lore": 1
-          },
-          "Upkeep": {
-            "Food": 1
-          }
-        }
-      },
-      {
-        "Name": "Soldier",
-        "GrowthFactors": {
-          "BuildingCategory": "Military"
-        },
-        "Resources": {
-          "Production": {
-            "Training": 1,
-            "Order": 1
-          },
-          "Upkeep": {
-            "Food": 1
-          }
-        }
-      },
-      {
-        "Name": "Merchant",
-        "GrowthFactors": {
-          "BuildingCategory": "Comercial"
-        },
-        "Resources": {
-          "Production": {
-            "Gold": 3
-          },
-          "Upkeep": {
-            "Food": 1
-          }
-        }
-      },
-      {
-        "Name": "Craftman",
-        "GrowthFactors": {
-          "BuildingCategory": "Production"
-        },
-        "Resources": {
-          "Production": {
-            "Tools": 1,
-            "Weapons": 1
-          },
-          "Upkeep": {
-            "Food": 1
-          }
-        }
-      },
+      //{
+      //  "Name": "Noble",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Imperial"
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Gold": 3,
+      //      "Influence": 1
+      //    },
+      //    "Upkeep": {
+      //      "Food": 2
+      //    }
+      //  }
+      //},
+      //{
+      //  "Name": "Clergy",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Religion"
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Worship": 1,
+      //      "Health": 1
+      //    },
+      //    "Upkeep": {
+      //      "Food": 1
+      //    }
+      //  }
+      //},
+      //{
+      //  "Name": "Scholar",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Research" // We need two types here
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Magic": 1,
+      //      "Lore": 1
+      //    },
+      //    "Upkeep": {
+      //      "Food": 1
+      //    }
+      //  }
+      //},
+      //{
+      //  "Name": "Soldier",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Military"
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Training": 1,
+      //      "Order": 1
+      //    },
+      //    "Upkeep": {
+      //      "Food": 1
+      //    }
+      //  }
+      //},
+      //{
+      //  "Name": "Merchant",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Comercial"
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Gold": 3
+      //    },
+      //    "Upkeep": {
+      //      "Food": 1
+      //    }
+      //  }
+      //},
+      //{
+      //  "Name": "Craftman",
+      //  "GrowthFactors": {
+      //    "BuildingCategory": "Production"
+      //  },
+      //  "Resources": {
+      //    "Production": {
+      //      "Tools": 1,
+      //      "Weapons": 1
+      //    },
+      //    "Upkeep": {
+      //      "Food": 1
+      //    }
+      //  }
+      //},
       {
         "Name": "Peasant",
         "GrowthFactors": {
           "BuildingCategory": "Extraction"
         },
         "Resources": {
+          "Category": "Peasants",
           "Production": {
-            "Food": 3,
+            "Food": 2,
             "Wood": 1,
             "Stone": 1,
             "Iron": 1
           },
           "Upkeep": {
-            "Food": 1,
-            "Tools": 1
+            "Food": 1
           }
         }
       }

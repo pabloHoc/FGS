@@ -7,58 +7,16 @@
     "Resources": {
       "Category": "Buildings",
       "Resources": {
-        "Wood": 5
-      },
-      "Production": {
-        "Food": 2
+        "Wood": 50
       }
-    }
-  },
-  {
-    "Name": "Mill",
-    "BuildingType": "LandBuilding",
-    "BaseBuildTime": 2,
-    "Category": "Extraction",
-    "Conditions": {
-      "IsLandType": "Forest"
     },
-    "Resources": {
-      "Category": "Buildings",
-      "Resources": {
-        "Wood": 5
-      },
-      "Production": {
-        "Wood": 2
-      }
-    }
-  },
-  {
-    "Name": "Quarry",
-    "BuildingType": "LandBuilding",
-    "BaseBuildTime": 2,
-    "Category": "Extraction",
-    "Resources": {
-      "Category": "Buildings",
-      "Resources": {
-        "Wood": 5
-      },
-      "Production": {
-        "Stone": 2
-      }
-    }
-  },
-  {
-    "Name": "Mine",
-    "BuildingType": "LandBuilding",
-    "BaseBuildTime": 2,
-    "Category": "Extraction",
-    "Resources": {
-      "Category": "Buildings",
-      "Resources": {
-        "Wood": 5
-      },
-      "Production": {
-        "Stone": 2
+    "OnBuilt": {
+      "Modifiers": {
+        "Region": {
+          "Mult": {
+            "PeasantsFoodProduction": 0.1
+          }
+        }
       }
     }
   }

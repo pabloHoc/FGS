@@ -11,7 +11,7 @@ namespace FSG.Commands
 
 		public ModifierType ModifierType { get; init; }
 
-		public int Value { get; init; }
+		public decimal Value { get; init; }
 
 		public IEntityId TargetId { get; init; }
 

@@ -53,7 +53,7 @@ namespace FSG.Commands
                     {
                         ModifierName = modifier.Key,
                         ModifierType = modifierType,
-                        Value = (int)modifier.Value,
+                        Value = Convert.ToDecimal(modifier.Value),
                         TargetId = ((dynamic)scope).Id,
                         SourceId = sourceId
                     });

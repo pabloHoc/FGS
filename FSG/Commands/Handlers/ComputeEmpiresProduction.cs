@@ -76,7 +76,7 @@ namespace FSG.Commands.Handlers
 
             foreach (var land in regionLands)
             {
-                ComputeLandProduction(land, empire);
+                //ComputeLandProduction(land, empire);
 
                 foreach (var building in land.Buildings)
                 {
@@ -91,7 +91,7 @@ namespace FSG.Commands.Handlers
 
             foreach (var pop in regionPops)
             {
-                ComputePopProduction(pop, empire);
+                ComputePopProduction(pop, empire, empireModifiers, regionModifiers);
             }
         }
 
@@ -109,16 +109,33 @@ namespace FSG.Commands.Handlers
             }
         }
 
-        private void ComputePopProduction(Pop pop, Empire empire)
+        private void ComputePopProduction(
+            Pop pop,
+            Empire empire,
+            List<Modifier> empireModifiers,
+            List<Modifier> regionModifiers
+        )
         {
             var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
                 .Stratas.Find(strata => strata.Name == pop.Strata);
+            var economicCategoryDefinition = _serviceProvider.Definitions
+                .Get<EconomicCategoryDefinition>(strata.Resources.Category);
 
             foreach (var resource in strata.Resources.Production)
             {
                 if (empire.Resources.Production.ContainsKey(resource.Key))
                 {
-                    empire.Resources.Production[resource.Key] += resource.Value * pop.Size;
+                    var totalPopProduction =
+                        _serviceProvider.Services.EconomicCategoryService.Compute(
+                            economicCategoryDefinition,
+                            EconomicType.Production,
+                            resource.Key,
+                            resource.Value,
+                            empireModifiers,
+                            regionModifiers
+                        );
+
+                    empire.Resources.Production[resource.Key] += totalPopProduction * pop.Size;
                 }
             }
         }

@@ -46,7 +46,7 @@ namespace FSG.Commands.Handlers
 
             foreach (var land in regionLands)
             {
-                ComputeLandProduction(land, region);
+                //ComputeLandProduction(land, region);
 
                 foreach (var building in land.Buildings)
                 {
