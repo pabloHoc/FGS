@@ -45,6 +45,7 @@
     <None Remove="AI\InputValues\" />
     <None Remove="MonoGame.Extended.Input" />
     <None Remove="Assets\Definitions\SocialStructures\" />
+    <None Remove="Assets\Definitions\Configs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -79,6 +80,7 @@
     <Folder Include="AI\" />
     <Folder Include="AI\InputValues\" />
     <Folder Include="Assets\Definitions\SocialStructures\" />
+    <Folder Include="Assets\Definitions\Configs\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

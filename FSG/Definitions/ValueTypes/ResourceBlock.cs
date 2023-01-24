@@ -18,6 +18,8 @@ namespace FSG.Definitions
         // Cost for buildings, resources for empires/regions
         public Dictionary<string, decimal> Resources { get; init; } = new();
 
+        public Dictionary<string, decimal> Cost { get; init; } = new();
+
         public Dictionary<string, decimal> Upkeep { get; init; } = new();
 
         public Dictionary<string, decimal> Production { get; init; } = new();

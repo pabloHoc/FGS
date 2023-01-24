@@ -12,14 +12,14 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateEmpire command)
         {
+            var config = _serviceProvider.Definitions.Get<SetupConfigDefinition>("Default");
             var resources = _serviceProvider.Definitions.GetAll<ResourceDefinition>()
                 .FindAll(resource => resource.Scope == Scopes.Scope.Empire);
             var resourceBlock = new ResourceBlock();
 
             foreach (var resource in resources)
             {
-                // TODO: make a config for initial resources
-                resourceBlock.Resources.Add(resource.Name, 100);
+                resourceBlock.Resources.Add(resource.Name, config.StartingResources[resource.Name]);
                 resourceBlock.Production.Add(resource.Name, 0);
                 resourceBlock.Upkeep.Add(resource.Name, 0);
             }

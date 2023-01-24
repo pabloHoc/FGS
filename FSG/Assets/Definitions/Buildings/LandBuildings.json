@@ -6,7 +6,7 @@
     "Category": "Extraction",
     "Resources": {
       "Category": "Buildings",
-      "Resources": {
+      "Cost": {
         "Wood": 50
       }
     },
@@ -15,6 +15,69 @@
         "Region": {
           "Mult": {
             "PeasantsFoodProduction": 0.1
+          }
+        }
+      }
+    }
+  },
+  {
+    "Name": "Mine",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Category": "Extraction",
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Wood": 50
+      }
+    },
+    "OnBuilt": {
+      "Modifiers": {
+        "Region": {
+          "Mult": {
+            "PeasantsIronProduction": 0.1
+          }
+        }
+      }
+    }
+  },
+  {
+    "Name": "Quarry",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Category": "Extraction",
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Wood": 50
+      }
+    },
+    "OnBuilt": {
+      "Modifiers": {
+        "Region": {
+          "Mult": {
+            "PeasantsStoneProduction": 0.1
+          }
+        }
+      }
+    }
+  },
+  {
+    "Name": "Sawmill",
+    "BuildingType": "LandBuilding",
+    "BaseBuildTime": 2,
+    "Category": "Extraction",
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Wood": 50
+      }
+    },
+    "OnBuilt": {
+      "Modifiers": {
+        "Region": {
+          "Mult": {
+            "PeasantsWoodProduction": 0.1
           }
         }
       }

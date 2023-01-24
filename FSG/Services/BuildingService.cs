@@ -18,7 +18,7 @@ namespace FSG.Services
         public bool Allow(Empire empire, Land land, BuildingDefinition definition)
         {
             // TODO: if (empire.CanAfford(building))
-            foreach (var resource in definition.Resources.Resources)
+            foreach (var resource in definition.Resources.Cost)
             {
                 if (empire.Resources.Resources[resource.Key] < resource.Value)
                 {

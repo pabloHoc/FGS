@@ -246,6 +246,8 @@ namespace FSG.Commands.Handlers
                 var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
                 var socialStructure = _serviceProvider.Definitions
                     .Get<SocialStructureDefinition>(empire.SocialStructure);
+                var config = _serviceProvider.Definitions
+                    .Get<SetupConfigDefinition>("Default");
 
                 foreach (var strata in socialStructure.Stratas)
                 {
@@ -253,7 +255,7 @@ namespace FSG.Commands.Handlers
                     {
                         RegionId = region.Id,
                         Strata = strata.Name,
-                        Size = 1
+                        Size = config.StartingPops[strata.Name]
                     });
                 }
             }

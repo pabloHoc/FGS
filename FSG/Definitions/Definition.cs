@@ -9,6 +9,7 @@ namespace FSG.Definitions
         Land,
         Resource,
         Scorer,
+        SetupConfig,
         SocialStructure,
         Spell,
         Task

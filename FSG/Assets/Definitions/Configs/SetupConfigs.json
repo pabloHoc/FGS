@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Name": "Default",
+    "StartingResources": {
+      "Food": 100,
+      "Wood": 500,
+      "Iron": 100,
+      "Stone": 200
+    },
+    "StartingPops": {
+      "Peasant": 5
+    },
+    "GrowthPointLevels": {
+      "Peasant": 100
+    }
+  }
+]
+

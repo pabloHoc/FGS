@@ -13,10 +13,11 @@ namespace FSG.Core
             public Dictionary<string, BuildingDefinition> BuildingDefinition { get; } = new Dictionary<string, BuildingDefinition>();
             public Dictionary<string, EconomicCategoryDefinition> EconomicCategoryDefinition { get; } = new Dictionary<string, EconomicCategoryDefinition>();
             public Dictionary<string, LandDefinition> LandDefinition { get; } = new Dictionary<string, LandDefinition>();
+            public Dictionary<string, ResourceDefinition> ResourceDefinition { get; } = new Dictionary<string, ResourceDefinition>();
             public Dictionary<string, ScorerDefinition> ScorerDefinition { get; } = new Dictionary<string, ScorerDefinition>();
+            public Dictionary<string, SetupConfigDefinition> SetupConfigDefinition { get; } = new Dictionary<string, SetupConfigDefinition>();
             public Dictionary<string, SocialStructureDefinition> SocialStructureDefinition { get; } = new Dictionary<string, SocialStructureDefinition>();
             public Dictionary<string, SpellDefinition> SpellDefinition { get; } = new Dictionary<string, SpellDefinition>();
-            public Dictionary<string, ResourceDefinition> ResourceDefinition { get; } = new Dictionary<string, ResourceDefinition>();
             public Dictionary<string, TaskDefinition> TaskDefinition { get; } = new Dictionary<string, TaskDefinition>();
 
             public Dictionary<string, T> Get<T>() where T : IDefinition

@@ -30,6 +30,7 @@ namespace FSG.Serialization
             this.LoadDefinition<BuildingDefinition>("Buildings/Districts.json");
             this.LoadDefinition<EconomicCategoryDefinition>("EconomicCategories/EconomicCategories.json");
             this.LoadDefinition<LandDefinition>("Lands/Lands.json");
+            this.LoadDefinition<SetupConfigDefinition>("Configs/SetupConfigs.json");
             this.LoadDefinition<ScorerDefinition>("Scorers/Scorers.json");
             this.LoadDefinition<SocialStructureDefinition>("SocialStructures/SocialStructures.json");
             this.LoadDefinition<SpellDefinition>("Spells/Spells.json");

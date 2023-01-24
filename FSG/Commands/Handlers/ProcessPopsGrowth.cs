@@ -30,6 +30,7 @@ namespace FSG.Commands.Handlers
         {
             var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
             var buildingDefinitions = _serviceProvider.Definitions.GetAll<BuildingDefinition>();
+            var config = _serviceProvider.Definitions.Get<SetupConfigDefinition>("Default");
 
             foreach (var region in regions)
             {
@@ -52,7 +53,7 @@ namespace FSG.Commands.Handlers
                             pop.GrowthPoints++;
                         }
 
-                        if (pop.GrowthPoints > 0 && pop.GrowthPoints % 10 == 0)
+                        if (pop.GrowthPoints > 0 && pop.GrowthPoints % config.GrowthPointLevels[pop.Strata] == 0)
                         {
                             pop.Size++;
                         }

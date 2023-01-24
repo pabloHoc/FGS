@@ -16,51 +16,51 @@
   {
     "Name": "Iron",
     "Scope": "Empire"
-  },
-  {
-    "Name": "Tools",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Weapons",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Lore",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Magic",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Worship",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Training",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Gold",
-    "Scope": "Empire"
-  },
-  {
-    "Name": "Influence",
-    "Scope": "Empire"
-  },
-  // Possible missing resources: faith, housing, amenities/goods, supplies, infrastructure
-  // Region Resources
-  {
-    "Name": "Order",
-    "Scope": "Region"
-  },
-  {
-    "Name": "Health",
-    "Scope": "Region"
-  },
-  {
-    "Name": "Growth",
-    "Scope": "Region"
   }
+  //{
+  //  "Name": "Tools",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Weapons",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Lore",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Magic",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Worship",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Training",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Gold",
+  //  "Scope": "Empire"
+  //},
+  //{
+  //  "Name": "Influence",
+  //  "Scope": "Empire"
+  //},
+  //// Possible missing resources: faith, housing, amenities/goods, supplies, infrastructure
+  //// Region Resources
+  //{
+  //  "Name": "Order",
+  //  "Scope": "Region"
+  //},
+  //{
+  //  "Name": "Health",
+  //  "Scope": "Region"
+  //},
+  //{
+  //  "Name": "Growth",
+  //  "Scope": "Region"
+  //}
 ]
