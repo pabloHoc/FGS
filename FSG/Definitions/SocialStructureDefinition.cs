@@ -19,7 +19,7 @@ namespace FSG.Definitions
 
     public class SocialStructureDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.SocialStructure;
+        public DefinitionType DefinitionType => DefinitionType.SocialStructure;
 
         public string Name { get; init; }
 

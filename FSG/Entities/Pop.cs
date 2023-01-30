@@ -6,7 +6,7 @@ namespace FSG.Entities
 
 	public class Pop : IEntity<Pop>
 	{
-        public EntityType Type => EntityType.Pop;
+        public EntityType EntityType => EntityType.Pop;
 
         public EntityId<Pop> Id { get; init; }
 

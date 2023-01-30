@@ -6,7 +6,7 @@ namespace FSG.Entities
 {
     public class Player : IEntity<Player>
     {
-        public EntityType Type => EntityType.Player;
+        public EntityType EntityType => EntityType.Player;
 
         public EntityId<Player> Id { get; init; }
 

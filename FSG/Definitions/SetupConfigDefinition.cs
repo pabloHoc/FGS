@@ -5,7 +5,7 @@ namespace FSG.Definitions
 {
 	public class SetupConfigDefinition : IDefinition
 	{
-        public DefinitionType Type => DefinitionType.SetupConfig;
+        public DefinitionType DefinitionType => DefinitionType.SetupConfig;
 
         public string Name { get; init; }
 
@@ -14,6 +14,8 @@ namespace FSG.Definitions
         public Dictionary<string, int> StartingPops { get; init; }
 
         public Dictionary<string, int> GrowthPointLevels { get; init; }
+
+        public int LandMaxBuildings { get; init; }
     }
 }
 

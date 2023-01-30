@@ -18,7 +18,7 @@ namespace FSG.Entities
 
     public interface IBaseEntity
     {
-        public EntityType Type { get; }
+        public EntityType EntityType { get; }
     }
 
     public interface IEntity<T> : IBaseEntity where T : IEntity<T>

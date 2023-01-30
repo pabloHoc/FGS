@@ -6,7 +6,7 @@ namespace FSG.Definitions
 {
 	public class ScorerDefinition : IDefinition
 	{
-		public DefinitionType Type => DefinitionType.Scorer;
+		public DefinitionType DefinitionType => DefinitionType.Scorer;
 
         public string Name { get; init; }
 

@@ -6,7 +6,7 @@ namespace FSG.Entities
 {
     public class Empire : IEntity<Empire>, INameable
     {
-        public EntityType Type => EntityType.Empire;
+        public EntityType EntityType => EntityType.Empire;
 
         public EntityId<Empire> Id { get; init; }
 

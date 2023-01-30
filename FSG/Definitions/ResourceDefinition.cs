@@ -5,7 +5,7 @@ namespace FSG.Definitions
 {
     public class ResourceDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.Resource;
+        public DefinitionType DefinitionType => DefinitionType.Resource;
 
         public string Name { get; init; }
 

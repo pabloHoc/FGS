@@ -5,7 +5,7 @@ namespace FSG.Definitions
     // TODO: this should be generic (EntityAction) and have a entity
     public class AgentActionDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.AgentAction;
+        public DefinitionType DefinitionType => DefinitionType.AgentAction;
 
         public string Name { get; init; }
 

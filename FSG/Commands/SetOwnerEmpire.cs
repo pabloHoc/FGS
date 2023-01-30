@@ -14,7 +14,7 @@ namespace FSG.Commands
 		public EntityId<Empire> EmpireId { get; init; }
 
 		public SetOwnerEmpire(T entity, dynamic payload) {
-			EntityType = entity.Type;
+			EntityType = entity.EntityType;
 			EntityId = entity.Id;
 			EmpireId = payload.EmpireId;
 		}

@@ -15,7 +15,7 @@ namespace FSG.Definitions
 
     public class BuildingDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.Building;
+        public DefinitionType DefinitionType => DefinitionType.Building;
 
         public BuildingType BuildingType { get; init; }
 

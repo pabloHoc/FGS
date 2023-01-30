@@ -7,7 +7,7 @@ namespace FSG.Definitions
 {
 	public class TaskDefinition : IDefinition
 	{
-        public DefinitionType Type => DefinitionType.Task;
+        public DefinitionType DefinitionType => DefinitionType.Task;
 
         public string Name { get; init; }
 

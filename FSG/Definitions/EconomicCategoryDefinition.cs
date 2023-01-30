@@ -6,7 +6,7 @@ namespace FSG.Definitions
 {
     public class EconomicCategoryDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.EconomicCategory;
+        public DefinitionType DefinitionType => DefinitionType.EconomicCategory;
 
         public string Name { get; init; }
 

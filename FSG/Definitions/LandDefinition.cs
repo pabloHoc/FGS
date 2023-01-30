@@ -2,7 +2,7 @@ namespace FSG.Definitions
 {
     public class LandDefinition : IDefinition
     {
-        public DefinitionType Type => DefinitionType.Land;
+        public DefinitionType DefinitionType => DefinitionType.Land;
 
         public string Name { get; init; }
 

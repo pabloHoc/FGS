@@ -4,7 +4,7 @@ namespace FSG.Entities
 {
     public class Land : IEntity<Land>, INameable
     {
-        public EntityType Type => EntityType.Land;
+        public EntityType EntityType => EntityType.Land;
 
         public EntityId<Land> Id { get; init; }
 

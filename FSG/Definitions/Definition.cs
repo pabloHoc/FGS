@@ -17,7 +17,7 @@ namespace FSG.Definitions
 
     public interface IDefinition
     {
-        public DefinitionType Type { get; }
+        public DefinitionType DefinitionType { get; }
 
         public string Name { get; }
     }

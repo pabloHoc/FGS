@@ -12,7 +12,8 @@
     },
     "GrowthPointLevels": {
       "Peasant": 100
-    }
+    },
+    "LandMaxBuildings":  5
   }
 ]
 

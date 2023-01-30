@@ -2,7 +2,7 @@ namespace FSG.Entities
 {
     public class Spell : IEntity<Spell>, ITemporary
     {
-        public EntityType Type => EntityType.Spell;
+        public EntityType EntityType => EntityType.Spell;
 
         public EntityId<Spell> Id { get; set; }
 

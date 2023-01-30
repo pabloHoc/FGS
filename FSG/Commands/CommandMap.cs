@@ -20,7 +20,7 @@ namespace FSG.Commands
 
         private Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> GetCommandMapFor<T>(T entity) where T : IBaseEntity
         {
-            switch (entity.Type)
+            switch (entity.EntityType)
             {
                 case EntityType.Agent:
                     return _agentCommands;
