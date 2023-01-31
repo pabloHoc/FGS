@@ -28,6 +28,10 @@ namespace FSG.Entities
 
         public ResourceBlock Resources { get; init; }
 
+        public List<Land> Lands { get; init; }
+
+        public List<Pop> Pops { get; init; }
+
         public Region()
         {
             System.Console.WriteLine();

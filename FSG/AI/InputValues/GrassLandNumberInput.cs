@@ -16,8 +16,7 @@ namespace FSG.AI
 
         public int GetValue(IBaseEntity region)
 		{
-			return _context.Entities.Query(new GetRegionLands(((Region)region).Id))
-				.FindAll(land => land.Name == "Grassland").Count;
+			return ((Region)region).Lands.FindAll(land => land.Name == "Grassland").Count;
 		}
 	}
 }

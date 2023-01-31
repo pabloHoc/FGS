@@ -36,10 +36,7 @@ namespace FSG.Commands.Handlers
 
         private void ComputeProduction(Empire empire)
         {
-            var empireRegions = _serviceProvider.GlobalState.Entities
-                .Query(new GetEmpireRegions(empire.Id));
-
-            foreach (var region in empireRegions)
+            foreach (var region in empire.Regions)
             {
                 ComputeRegionProduction(region, empire);
             }
@@ -47,15 +44,9 @@ namespace FSG.Commands.Handlers
 
         private void ComputeUpkeep(Empire empire)
         {
-            var empireRegions = _serviceProvider.GlobalState.Entities
-                .Query(new GetEmpireRegions(empire.Id));
-
-            foreach (var region in empireRegions)
+            foreach (var region in empire.Regions)
             {
-                var regionPops = _serviceProvider.GlobalState.Entities
-                    .Query(new GetRegionPops(region.Id));
-
-                foreach (var pop in regionPops)
+                foreach (var pop in region.Pops)
                 {
                     ComputePopUpkeep(pop, empire);
                 }
@@ -64,17 +55,12 @@ namespace FSG.Commands.Handlers
 
         private void ComputeRegionProduction(Region region, Empire empire)
         {
-            var regionLands = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionLands(region.Id));
-            var regionPops = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionPops(region.Id));
-
             var empireModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(empire);
             var regionModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(region);
 
-            foreach (var land in regionLands)
+            foreach (var land in region.Lands)
             {
                 //ComputeLandProduction(land, empire);
 
@@ -89,7 +75,7 @@ namespace FSG.Commands.Handlers
                 ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
             }
 
-            foreach (var pop in regionPops)
+            foreach (var pop in region.Pops)
             {
                 ComputePopProduction(pop, empire, empireModifiers, regionModifiers);
             }

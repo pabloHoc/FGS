@@ -36,15 +36,10 @@ namespace FSG.Commands.Handlers
 
         private void ComputeProduction(Region region)
         {
-            var regionLands = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionLands(region.Id));
-            var regionPops = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionPops(region.Id));
-
             var regionModifiers = _serviceProvider.Services.ModifierService
                 .GetModifiersFor(region);
 
-            foreach (var land in regionLands)
+            foreach (var land in region.Lands)
             {
                 //ComputeLandProduction(land, region);
 
@@ -59,7 +54,7 @@ namespace FSG.Commands.Handlers
                 ComputeBuildingProduction(building, region, regionModifiers);
             }
 
-            foreach (var pop in regionPops)
+            foreach (var pop in region.Pops)
             {
                 ComputePopProduction(pop, region);
             }
@@ -67,10 +62,7 @@ namespace FSG.Commands.Handlers
 
         private void ComputeUpkeep(Region region)
         {
-            var regionPops = _serviceProvider.GlobalState.Entities
-                .Query(new GetRegionPops(region.Id));
-
-            foreach (var pop in regionPops)
+            foreach (var pop in region.Pops)
             {
                 ComputePopUpkeep(pop, region);
             }

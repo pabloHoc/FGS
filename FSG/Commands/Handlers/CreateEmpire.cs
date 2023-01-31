@@ -29,7 +29,8 @@ namespace FSG.Commands.Handlers
                 Id = new EntityId<Empire>(),
                 Name = command.EmpireName,
                 Resources = resourceBlock,
-                SocialStructure = "Feudal"
+                SocialStructure = "Feudal",
+                Regions = new List<Region>()
             });
         }
     }

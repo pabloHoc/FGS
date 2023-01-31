@@ -14,9 +14,8 @@ namespace FSG.Commands.Handlers
         private List<string> GetRegionBuidings(Region region)
         {
             var buildings = new List<string>();
-            var lands = _serviceProvider.GlobalState.Entities.Query(new GetRegionLands(region.Id));
 
-            foreach (var land in lands)
+            foreach (var land in region.Lands)
             {
                 buildings.AddRange(land.Buildings);
             }
@@ -37,9 +36,8 @@ namespace FSG.Commands.Handlers
                 var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
                 var socialStructure = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure);
                 var buildings = GetRegionBuidings(region);
-                var pops = _serviceProvider.GlobalState.Entities.Query(new GetRegionPops(region.Id));
 
-                foreach (var pop in pops)
+                foreach (var pop in region.Pops)
                 {
                     var buildingCategory = socialStructure.Stratas
                         .Find(strata => strata.Name == pop.Strata).GrowthFactors.BuildingCategory;

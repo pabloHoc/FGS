@@ -12,18 +12,20 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreatePop command)
         {
-            var pops = _serviceProvider.GlobalState.Entities.Query(new GetRegionPops(command.RegionId));
-            var strataPop = pops.Find(pop => pop.Strata == command.Strata);
+            var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+            var strataPop = region.Pops.Find(pop => pop.Strata == command.Strata);
 
             if (strataPop == null)
             {
-                _serviceProvider.GlobalState.Entities.Add(new Pop
+                var pop = new Pop
                 {
                     Id = new EntityId<Pop>(),
                     RegionId = command.RegionId,
                     Strata = command.Strata,
                     Size = command.Size
-                });
+                };
+                _serviceProvider.GlobalState.Entities.Add(pop);
+                region.Pops.Add(pop);
             }
         }
     }

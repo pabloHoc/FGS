@@ -30,9 +30,7 @@ namespace FSG.UI
         {
             _popList.Widgets.Clear();
 
-            var pops = _serviceProvider.GlobalState.Entities.Query(new GetRegionPops(region.Id));
-
-            foreach (var pop in pops)
+            foreach (var pop in region.Pops)
             {
                 _popList.Widgets.Add(new Label
                 {

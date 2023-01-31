@@ -76,7 +76,7 @@ namespace FSG.UI
                     .Get(new EntityId<Empire>(empireId));
 
                 // Clear Region and Land
-                if (SelectedRegion.EmpireId != SelectedEmpire.Id)
+                if (SelectedRegion != null && SelectedRegion.EmpireId != SelectedEmpire.Id)
                 {
                     SelectedRegion = null;
                     SelectedLand = null;

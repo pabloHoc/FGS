@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FSG.Commands;
 using FSG.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,6 +35,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
     private Viewport _viewportRight;
 
+    private double _elapsedTime = 0;
+
     public GameApp()
     {
         _game = new FSG.Core.Game();
@@ -41,6 +44,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _graphics = new GraphicsDeviceManager(this);
         _graphics.PreferredBackBufferWidth = 1280;
         _graphics.PreferredBackBufferHeight = 800;
+        _graphics.GraphicsProfile = GraphicsProfile.HiDef;
 
         _viewportLeft = new Viewport(0, 0, 400, 800);
         _viewportRight = new Viewport(400, 0, 880, 800);
@@ -49,6 +53,10 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
+        _graphics.SynchronizeWithVerticalRetrace = false;
+        IsFixedTimeStep = false;
+        _graphics.ApplyChanges();
     }
 
     protected override void LoadContent()
@@ -83,6 +91,14 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         base.Update(gameTime);
         _map.Update(gameTime);
+
+        _elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+        if (_elapsedTime >= 1000)
+        {
+            _elapsedTime = 0;
+            _game.ServiceProvider.Dispatcher.Dispatch(new EndTurn());
+        }
     }
 
     protected override void Draw(GameTime gameTime)
@@ -106,6 +122,9 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _spriteBatch.End();
 
         GraphicsDevice.Viewport = originalViewport;
+
+        // FPS
+        System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");
     }
 }
 

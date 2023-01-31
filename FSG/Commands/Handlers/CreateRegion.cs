@@ -23,7 +23,7 @@ namespace FSG.Commands.Handlers
                 resourceBlock.Upkeep.Add(resource.Name, 0);
             }
 
-            _serviceProvider.GlobalState.Entities.Add(new Region
+            var region = new Region
             {
                 Id = new EntityId<Region>(),
                 Name = command.RegionName,
@@ -33,8 +33,17 @@ namespace FSG.Commands.Handlers
                 ConnectedTo = new List<EntityId<Region>>(),
                 Capital = new Capital(),
                 BuildingQueue = new Queue<BuildingQueueItem>(),
-                Resources = resourceBlock
-            });
+                Resources = resourceBlock,
+                Lands = new List<Land>(),
+                Pops = new List<Pop>()
+            };
+
+            _serviceProvider.GlobalState.Entities.Add(region);
+
+            if (command.EmpireId != null)
+            {
+                _serviceProvider.GlobalState.Entities.Get(command.EmpireId).Regions.Add(region);
+            }
         }
     }
 }

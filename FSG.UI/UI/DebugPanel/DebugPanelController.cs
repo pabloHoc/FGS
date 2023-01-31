@@ -11,7 +11,7 @@ namespace FSG.UI
     public class DebugPanelController : UIController
     {
         private readonly CommandLogController _commandLog;
-        private readonly EntityListController<Region> _empireList;
+        private readonly EntityListController<Empire> _empireList;
         private readonly EntityListController<Region> _regionList;
         private readonly EntityListController<Agent> _agentList;
 
@@ -19,7 +19,7 @@ namespace FSG.UI
             : base("../../../UI/DebugPanel/DebugPanel.xaml", serviceProvider, eventManager, assetManager)
         {
             _commandLog = new CommandLogController(serviceProvider, eventManager, assetManager);
-            _empireList = new EntityListController<Region>(serviceProvider, eventManager, assetManager);
+            _empireList = new EntityListController<Empire>(serviceProvider, eventManager, assetManager);
             _regionList = new EntityListController<Region>(serviceProvider, eventManager, assetManager);
             _agentList = new EntityListController<Agent>(serviceProvider, eventManager, assetManager);
 

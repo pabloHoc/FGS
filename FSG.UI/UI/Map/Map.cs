@@ -14,8 +14,16 @@ using Myra.Graphics2D;
 
 namespace FSG.UI
 {
+
     public class Map
     {
+        struct Road
+        {
+            internal Vector2 Start { get; init; }
+
+            internal Vector2 End { get; init; }
+        }
+
         private readonly ServiceProvider _serviceProvider;
 
         private readonly UIEventManager _eventManager;
@@ -31,6 +39,8 @@ namespace FSG.UI
         private readonly List<MapLocation> _locations = new List<MapLocation>();
 
         private int _currentMouseWheelValue = 0;
+
+        private readonly List<Road> _roads = new List<Road>();
 
         public Map(
             ServiceProvider serviceProvider,
@@ -77,6 +87,20 @@ namespace FSG.UI
             foreach (var region in regions)
             {
                 _locations.Add(new MapLocation(region, _eventManager, _graphicsDevice, _spriteBatch, _camera));
+                GenerateRoads(region);
+            }
+        }
+
+        private void GenerateRoads(Region region)
+        {
+            foreach (var connectedRegionId in region.ConnectedTo)
+            {
+                var connectedRegion = _serviceProvider.GlobalState.Entities.Get(connectedRegionId);
+                _roads.Add(new Road
+                {
+                    Start = new Vector2(region.X, region.Y),
+                    End = new Vector2(connectedRegion.X, connectedRegion.Y),
+                });
             }
         }
 
@@ -99,24 +123,18 @@ namespace FSG.UI
             }
         }
 
-        private void DrawRoads(Region region)
+        private void DrawRoads()
         {
-            foreach (var connectedRegionId in region.ConnectedTo)
+            foreach (var road in _roads)
             {
-                var connectedRegion = _serviceProvider.GlobalState.Entities.Get(connectedRegionId);
-
-                // TODO: Conver to extension method
-                var start = new Vector2(region.X, region.Y);
-                var end = new Vector2(connectedRegion.X, connectedRegion.Y);
-
                 _spriteBatch.Draw(
                     _texture,
-                    start,
+                    road.Start,
                     null,
                     Color.Black,
-                    (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
+                    (float)Math.Atan2(road.End.Y - road.Start.Y, road.End.X - road.Start.X),
                     new Vector2(0f, (float)_texture.Height / 2),
-                    new Vector2(Vector2.Distance(start, end), 1f),
+                    new Vector2(Vector2.Distance(road.Start, road.End), 1f),
                     SpriteEffects.None,
                     0f
                 );
@@ -127,12 +145,7 @@ namespace FSG.UI
         {
             //DrawGrid();
 
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
-
-            foreach (var region in regions)
-            {
-                DrawRoads(region);
-            }
+            DrawRoads();
 
             foreach (var location in _locations)
             {
@@ -161,7 +174,7 @@ namespace FSG.UI
         private void UpdateCamera(GameTime gameTime)
         {
             // Movement
-            const float movementSpeed = 200;
+            const float movementSpeed = 500;
             _camera.Move(GetCameraMovementDirection() * movementSpeed * gameTime.GetElapsedSeconds());
 
             // Zoom

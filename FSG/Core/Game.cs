@@ -26,10 +26,10 @@ namespace FSG.Core
         {
             var options = new WorldGenerationOptions
             {
-                Players = 3,
+                Players = 20,
                 LandsPerRegion = 5,
-                Columns = 10,
-                Rows = 10
+                Columns = 50,
+                Rows = 50
             };
 
             ServiceProvider.Dispatcher.Dispatch(new GenerateWorld { Options = options });
