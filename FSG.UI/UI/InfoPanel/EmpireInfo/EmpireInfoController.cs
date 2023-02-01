@@ -17,7 +17,7 @@ namespace FSG.UI
         private readonly VerticalStackPanel _resourceList;
 
         public EmpireInfoController(ServiceProvider serviceProvider, UIEventManager eventManager,AssetManager assetManager)
-            : base("../../../UI/Sidebar/EmpireInfo/EmpireInfo.xaml", serviceProvider, eventManager, assetManager)
+            : base("../../../UI/InfoPanel/EmpireInfo/EmpireInfo.xaml", serviceProvider, eventManager, assetManager)
         {
             _empireNameLabel = (Label)Root.FindWidgetById("EmpireNameLabel");
             _resourceList = (VerticalStackPanel)Root.FindWidgetById("ResourceList");
@@ -70,9 +70,6 @@ namespace FSG.UI
                 _empireNameLabel.Text = empire.Name;
                 _regionList.Update();
                 UpdateResources(empire);
-            } else
-            {
-                
             }
         }
     }

@@ -6,7 +6,6 @@ using FSG;
 using FSG.Common;
 using FSG.Serialization;
 using FSG.Entities;
-using static FSG.Core.EntityRepository;
 using FSG.Core;
 
 var game = new Game();
@@ -31,7 +30,7 @@ string json = JsonSerializer.Serialize(world, serializerOptions);
 
 File.WriteAllText("../../../entities.json", json);
 
-var deserialized = JsonSerializer.Deserialize<EntityDictionaryMap>(json, serializerOptions);
+//var deserialized = JsonSerializer.Deserialize(json, serializerOptions);
 
 // NESTED DICTIONARY SERIALIZATION -----------------------------------
 

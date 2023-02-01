@@ -93,7 +93,7 @@ namespace FSG.UI
         {
             var mouseState = MouseExtended.GetState();
 
-            var worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X - 400, mouseState.Y));
+            var worldPosition = _camera.ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
 
             _hovered = worldPosition.X  > _position.X - REGION_SIZE / 2 &&
                     worldPosition.X < _position.X + REGION_SIZE / 2 &&

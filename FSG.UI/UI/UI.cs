@@ -13,6 +13,11 @@ namespace FSG.UI
 {
     public class UI
     {
+        public EventHandler OnUIMouseEntered;
+
+        public EventHandler OnUIMouseLeft;
+
+        //
         private readonly Desktop _desktop = new Desktop();
 
         private readonly ServiceProvider _serviceProvider;
@@ -25,11 +30,17 @@ namespace FSG.UI
 
         // Components
 
-        private SidebarController _sidebar;
+        private TopbarController _topbar;
+
+        private PanelInfoController _sidebar;
 
         private DebugPanelController _debugPanel;
 
         private TurnPanelController _turnPanel;
+
+        private Window _debugWindow;
+
+        private Window _infoWindow;
 
         // other
 
@@ -42,6 +53,14 @@ namespace FSG.UI
 
             _serviceProvider.Dispatcher.OnCommandDispatched += HandleCommandDispatched;
             _serviceProvider.Dispatcher.OnCommandProcessed += HandleCommandProcessed;
+
+            eventManager.OnRegionSelected += HandleRegionSelected;
+        }
+
+        private void HandleRegionSelected(object sender, Entities.Region e)
+        {
+            _debugWindow.Show(_desktop);
+            _infoWindow.Show(_desktop);
         }
 
         private void HandleCommandDispatched(object sender, ICommand command)
@@ -51,9 +70,10 @@ namespace FSG.UI
 
         private void HandleCommandProcessed(object sender, ICommand command)
         {
-            _sidebar.Update(command);
+            _topbar.Update();
+            _sidebar.Update();
             _debugPanel.Update(command);
-            _turnPanel.Update(command);
+            _turnPanel.Update();
         }
 
         public void Initialize()
@@ -61,18 +81,46 @@ namespace FSG.UI
             var assetResolver = new FileAssetResolver("../../../UI");
             var assetManager = new AssetManager(assetResolver);
 
-            _sidebar = new SidebarController(_serviceProvider, _eventManager, assetManager);
+            _topbar = new TopbarController(_serviceProvider, _eventManager, assetManager);
+            _sidebar = new PanelInfoController(_serviceProvider, _eventManager, assetManager);
             _debugPanel = new DebugPanelController(_serviceProvider, _eventManager, assetManager);
             _turnPanel = new TurnPanelController(_serviceProvider, _eventManager, assetManager);
 
-            var verticalPanel = new VerticalStackPanel();
-            verticalPanel.Proportions.Add(new Proportion { Type = ProportionType.Fill });
+            _debugWindow = new Window
+            {
+                Title = "Debug Panel"
+            };
 
-            verticalPanel.Widgets.Add(_sidebar.Root);
-            verticalPanel.Widgets.Add(_debugPanel.Root);
-            verticalPanel.Widgets.Add(_turnPanel.Root);
+            _debugWindow.Content = _debugPanel.Root;
+            _debugWindow.Show(_desktop);
+            _debugWindow.MouseEntered += HandleUIMouseEnter;
+            _debugWindow.MouseLeft += HandleUIMouseLeave;
 
-            _desktop.Widgets.Add(verticalPanel);
+            _infoWindow = new Window
+            {
+                Title = "Info Panel"
+            };
+
+            _infoWindow.Content = _sidebar.Root;
+            _infoWindow.Show(_desktop);
+            _infoWindow.MouseEntered += HandleUIMouseEnter;
+            _infoWindow.MouseLeft += HandleUIMouseLeave;
+
+            _topbar.Root.MouseEntered += HandleUIMouseEnter;
+            _topbar.Root.MouseLeft += HandleUIMouseLeave;
+
+            _desktop.Widgets.Add(_topbar.Root);
+            _desktop.Widgets.Add(_turnPanel.Root);
+        }
+
+        private void HandleUIMouseEnter(object sender, EventArgs e)
+        {
+            OnUIMouseEntered?.Invoke(sender, e);
+        }
+
+        private void HandleUIMouseLeave(object sender, EventArgs e)
+        {
+            OnUIMouseLeft?.Invoke(sender, e);
         }
 
         public void Draw()

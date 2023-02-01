@@ -14,7 +14,7 @@ namespace FSG.UI
             : base("../../../UI/TurnPanel/TurnPanel.xaml", serviceProvider, eventManager, assetManager)
         {
             _turnLabel = (Label)Root.FindWidgetById("TurnLabel");
-            var endTurnBtn= (TextButton)Root.FindWidgetById("EndTurnButton");
+            var endTurnBtn = (TextButton)Root.FindWidgetById("EndTurnButton");
             endTurnBtn.Click += HandleEndTurn;
         }
 
@@ -23,7 +23,7 @@ namespace FSG.UI
             _serviceProvider.Dispatcher.Dispatch(new EndTurn());
         }
 
-        public override void Update(ICommand command)
+        public override void Update()
         {
             var turn = _serviceProvider.GlobalState.Turn;
             _turnLabel.Text = $"Turn #{turn}";

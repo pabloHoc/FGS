@@ -1,12 +1,6 @@
 ﻿<Project>
-    <Panel Id="TurnPanel" Background="#000000" Padding="10" VerticalAlignment="Bottom">
-        <Grid ColumnSpacing="8" RowSpacing="8">
-            <Grid.ColumnsProportions>
-                <Proportion/>
-                <Proportion/>
-            </Grid.ColumnsProportions>
-            <Label Id="TurnLabel" Text="Turn #0" GridColumn="1" />
-            <TextButton Id="EndTurnButton" Text="End Turn" GridColumn="2" />
-        </Grid>
-    </Panel>
+    <HorizontalStackPanel Id="TurnPanel" Background="#000000" VerticalAlignment="Bottom" Height="30" Width="200">
+        <Label Id="TurnLabel" Text="Turn #0" />
+        <TextButton Id="EndTurnButton" Text="End Turn" />
+    </HorizontalStackPanel>
 </Project>

@@ -1,0 +1,7 @@
+﻿<Project>
+    <HorizontalStackPanel Id="Topbar" Background="#000000" Height="30">
+        <Label Id="EmpireNameLabel" />
+        <VerticalSeparator />
+        <HorizontalStackPanel Id="ResourceList" Background="#000000" Spacing="10" />
+    </HorizontalStackPanel>
+</Project>

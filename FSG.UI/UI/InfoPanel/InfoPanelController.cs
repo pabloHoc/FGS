@@ -8,18 +8,24 @@ using Myra.Graphics2D.UI;
 
 namespace FSG.UI
 {
-    public class SidebarController : UIController
+    public class PanelInfoController : UIController
     {
         private readonly EmpireInfoController _empireInfo;
+
         private readonly RegionInfoController _regionInfo;
+
         private readonly LandInfoController _landInfo;
+
         private readonly CapitalInfoController _capitalInfo;
+
         private readonly PopulationInfoController _populationInfo;
+
         private readonly AgentInfoController _agentInfo;
+
         private readonly TabsController _tabs;
 
-        public SidebarController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/Sidebar/Sidebar.xaml", serviceProvider, eventManager, assetManager)
+        public PanelInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
+            : base("../../../UI/InfoPanel/InfoPanel.xaml", serviceProvider, eventManager, assetManager)
         {
             _empireInfo = new EmpireInfoController(serviceProvider, eventManager, assetManager);
             _regionInfo = new RegionInfoController(serviceProvider, eventManager, assetManager);
@@ -68,7 +74,7 @@ namespace FSG.UI
             _tabs.SwitchTo("Agent");
         }
 
-        public override void Update(ICommand command)
+        public override void Update()
         {
             _empireInfo.Update();
             _regionInfo.Update();

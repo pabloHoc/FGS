@@ -23,7 +23,7 @@ namespace FSG.UI
             UIEventManager eventManager,
             AssetManager assetManager
         ) : base(
-            "../../../UI/Sidebar/LandInfo/LandInfo.xaml",
+            "../../../UI/InfoPanel/LandInfo/LandInfo.xaml",
             serviceProvider,
             eventManager,
             assetManager

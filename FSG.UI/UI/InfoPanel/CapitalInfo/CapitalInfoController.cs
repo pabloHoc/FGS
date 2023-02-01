@@ -19,7 +19,7 @@ namespace FSG.UI
         private readonly VerticalStackPanel _builtBuildingList;
 
         public CapitalInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/Sidebar/CapitalInfo/CapitalInfo.xaml", serviceProvider, eventManager, assetManager)
+            : base("../../../UI/InfoPanel/CapitalInfo/CapitalInfo.xaml", serviceProvider, eventManager, assetManager)
 		{
             //_districtList = (HorizontalStackPanel)Root.FindWidgetById("DistrictList");
             //_builtDistrictList = (VerticalStackPanel)Root.FindWidgetById("BuiltDistrictList");

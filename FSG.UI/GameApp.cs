@@ -31,9 +31,9 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
     private OrthographicCamera _camera;
 
-    private Viewport _viewportLeft;
+    //private Viewport _viewportLeft;
 
-    private Viewport _viewportRight;
+    //private Viewport _viewportRight;
 
     private double _elapsedTime = 0;
 
@@ -46,17 +46,13 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _graphics.PreferredBackBufferHeight = 800;
         _graphics.GraphicsProfile = GraphicsProfile.HiDef;
 
-        _viewportLeft = new Viewport(0, 0, 400, 800);
-        _viewportRight = new Viewport(400, 0, 880, 800);
+        //_viewportLeft = new Viewport(0, 0, 400, 800);
+        //_viewportRight = new Viewport(400, 0, 880, 800);
 
         _eventManager = new UIEventManager(_game.ServiceProvider);
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-
-        _graphics.SynchronizeWithVerticalRetrace = false;
-        IsFixedTimeStep = false;
-        _graphics.ApplyChanges();
     }
 
     protected override void LoadContent()
@@ -72,6 +68,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
         MyraEnvironment.Game = this;
         _ui = new FSG.UI.UI(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch);
         _ui.Initialize();
+        _ui.OnUIMouseEntered += HandleUIMouseEnter;
+        _ui.OnUIMouseLeft += HandleUIMouseLeave;
 
         // The game needs to be initialized after the UI is created so the UI
         // can subscribe to game events
@@ -81,6 +79,18 @@ public class GameApp : Microsoft.Xna.Framework.Game
         // regions
         _map = new Map(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch, _camera);
         _map.Initialize();
+    }
+
+    private void HandleUIMouseLeave(object sender, EventArgs e)
+    {
+        System.Console.WriteLine("Mouse Left");
+        _map.HandleInput = true;
+    }
+
+    private void HandleUIMouseEnter(object sender, EventArgs e)
+    {
+        System.Console.WriteLine("Mouse Entered");
+        _map.HandleInput = false;
     }
 
     protected override void Update(GameTime gameTime)
@@ -106,22 +116,26 @@ public class GameApp : Microsoft.Xna.Framework.Game
         base.Draw(gameTime);
         GraphicsDevice.Clear(Color.PaleTurquoise);
 
-        var originalViewport = GraphicsDevice.Viewport;
-
-        // Draw UI
-        GraphicsDevice.Viewport = _viewportLeft;
-        _spriteBatch.Begin();
-        _ui.Draw();
-        _spriteBatch.End();
+        //var originalViewport = GraphicsDevice.Viewport;
 
         // Draw Map
-        GraphicsDevice.Viewport = _viewportRight;
+        //GraphicsDevice.Viewport = _viewportRight;
+        //_map.Draw();
+        //_spriteBatch.End();
+
+        // Draw UI
+        //GraphicsDevice.Viewport = _viewportLeft;
+        //_spriteBatch.Begin();
         var transformMatrix = _camera.GetViewMatrix();
         _spriteBatch.Begin(transformMatrix: transformMatrix);
         _map.Draw();
         _spriteBatch.End();
 
-        GraphicsDevice.Viewport = originalViewport;
+        _spriteBatch.Begin();
+        _ui.Draw();
+        _spriteBatch.End();
+
+        //GraphicsDevice.Viewport = originalViewport;
 
         // FPS
         System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");

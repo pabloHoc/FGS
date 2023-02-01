@@ -21,7 +21,7 @@ namespace FSG.UI
         private readonly EntityListController<Land> _landList;
 
         public RegionInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/Sidebar/RegionInfo/RegionInfo.xaml", serviceProvider, eventManager, assetManager)
+            : base("../../../UI/InfoPanel/RegionInfo/RegionInfo.xaml", serviceProvider, eventManager, assetManager)
         {
             _regionNameLabel = (Label)Root.FindWidgetById("RegionNameLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");

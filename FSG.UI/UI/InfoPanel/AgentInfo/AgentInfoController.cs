@@ -17,7 +17,7 @@ namespace FSG.UI
         private readonly HorizontalStackPanel _spellPanel;
 
         public AgentInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/Sidebar/AgentInfo/AgentInfo.xaml", serviceProvider, eventManager, assetManager)
+            : base("../../../UI/InfoPanel/AgentInfo/AgentInfo.xaml", serviceProvider, eventManager, assetManager)
         {
             _agentNameLabel = (Label)Root.FindWidgetById("AgentNameLabel");
             _currentActionLabel = (Label)Root.FindWidgetById("CurrentActionLabel");

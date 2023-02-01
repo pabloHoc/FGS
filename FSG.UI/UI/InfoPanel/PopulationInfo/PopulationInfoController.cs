@@ -13,7 +13,7 @@ namespace FSG.UI
         private readonly VerticalStackPanel _popList;
 
         public PopulationInfoController(ServiceProvider serviceProvider, UIEventManager eventManager,AssetManager assetManager)
-            : base("../../../UI/Sidebar/PopulationInfo/PopulationInfo.xaml", serviceProvider, eventManager, assetManager)
+            : base("../../../UI/InfoPanel/PopulationInfo/PopulationInfo.xaml", serviceProvider, eventManager, assetManager)
         {
             _popList = (VerticalStackPanel)Root.FindWidgetById("PopList");
 

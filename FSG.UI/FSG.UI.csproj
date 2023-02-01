@@ -19,6 +19,7 @@
     <None Remove="MonoGame.Extended" />
     <None Remove="UI\Sidebar\CapitalInfo\" />
     <None Remove="UI\Sidebar\PopulationInfo\" />
+    <None Remove="UI\Topbar\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -36,8 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
-    <Folder Include="UI\Sidebar\CapitalInfo\" />
-    <Folder Include="UI\Sidebar\PopulationInfo\" />
+    <Folder Include="UI\InfoPanel\CapitalInfo\" />
+    <Folder Include="UI\InfoPanel\PopulationInfo\" />
+    <Folder Include="UI\Topbar\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

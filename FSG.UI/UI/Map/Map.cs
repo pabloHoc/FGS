@@ -14,7 +14,6 @@ using Myra.Graphics2D;
 
 namespace FSG.UI
 {
-
     public class Map
     {
         struct Road
@@ -41,6 +40,8 @@ namespace FSG.UI
         private int _currentMouseWheelValue = 0;
 
         private readonly List<Road> _roads = new List<Road>();
+
+        public bool HandleInput { get; set; } = true;
 
         public Map(
             ServiceProvider serviceProvider,
@@ -149,19 +150,16 @@ namespace FSG.UI
 
         public void Update(GameTime gameTime)
         {
-            var mouseState = MouseExtended.GetState();
-
-            if (mouseState.X > 400)
+            if (HandleInput)
             {
+                var mouseState = MouseExtended.GetState();
+
                 UpdateCamera(gameTime);
 
                 foreach (var location in _locations)
                 {
                     location.Update();
                 }   
-            } else
-            {
-                _currentMouseWheelValue = mouseState.ScrollWheelValue;
             }
         }
 
