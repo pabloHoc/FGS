@@ -43,6 +43,12 @@ namespace FSG.UI
 
         public bool HandleInput { get; set; } = true;
 
+        private readonly Vector2 _viewportCenter;
+
+        private Vector2 _lastMousePosition;
+
+        private bool _isPanning = false;
+
         public Map(
             ServiceProvider serviceProvider,
             UIEventManager eventManager,
@@ -58,6 +64,8 @@ namespace FSG.UI
             _camera = camera;
             _texture = new Texture2D(_graphicsDevice, 1, 1);
             _texture.SetData(new Color[] { Color.White });
+
+            _viewportCenter = new Vector2(_graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height / 2);
 
             _eventManager.OnRegionSecondaryAction += HandleRegionRightClick;
         }
@@ -154,6 +162,16 @@ namespace FSG.UI
             {
                 var mouseState = MouseExtended.GetState();
 
+                if (!_isPanning && mouseState.IsButtonDown(MouseButton.Left))
+                {
+                    _lastMousePosition = mouseState.Position.ToVector2();
+                    _isPanning = true;
+                }
+                if (mouseState.IsButtonUp(MouseButton.Left))
+                {
+                    _isPanning = false;
+                }
+
                 UpdateCamera(gameTime);
 
                 foreach (var location in _locations)
@@ -175,21 +193,31 @@ namespace FSG.UI
             var previousMouseWheelValue = _currentMouseWheelValue;
             _currentMouseWheelValue = MouseExtended.GetState().ScrollWheelValue;
 
+            var zoomCenter = _camera.ScreenToWorld(mouseState.Position.ToVector2());
+            var pastZoom = _camera.Zoom;
+
             if (_currentMouseWheelValue > previousMouseWheelValue)
             {
                 _camera.ZoomIn(1 / 12f);
+                // Move towards zoom position
+                _camera.Position += (zoomCenter - _camera.Origin - _camera.Position) * ((_camera.Zoom - pastZoom) / _camera.Zoom);
             }
 
             if (_currentMouseWheelValue < previousMouseWheelValue)
             {
                 _camera.ZoomOut(1 / 12f);
+                // Move towards zoom position
+                _camera.Position += (zoomCenter - _camera.Origin - _camera.Position) * ((_camera.Zoom - pastZoom) / _camera.Zoom);
             }
         }
 
-        private static Vector2 GetCameraMovementDirection()
+        private Vector2 GetCameraMovementDirection()
         {
             var movementDirection = Vector2.Zero;
             var state = Keyboard.GetState();
+            var mouseState = MouseExtended.GetState();
+            var mouseBorderArea = 20;
+
             if (state.IsKeyDown(Keys.Down))
             {
                 movementDirection += Vector2.UnitY;
@@ -206,6 +234,27 @@ namespace FSG.UI
             {
                 movementDirection += Vector2.UnitX;
             }
+
+            // Mouse is in border
+            // TODO: improve movement (inercia, acceleration, etc)
+            if (mouseState.Y > _graphicsDevice.Viewport.Height - mouseBorderArea ||
+                mouseState.Y < mouseBorderArea ||
+                mouseState.X < mouseBorderArea ||
+                mouseState.X > _graphicsDevice.Viewport.Width - mouseBorderArea
+                )
+            {
+                var vectorDistance = mouseState.Position.ToVector2() - _viewportCenter;
+                var vectorDirection = vectorDistance / vectorDistance.Length();
+                movementDirection += vectorDirection;
+            }
+
+            // TODO: improve panning (clamping, limit movement, etc)
+            if (_isPanning)
+            {
+                var vectorDistance = mouseState.Position.ToVector2() - _lastMousePosition;
+                movementDirection += Vector2.Clamp(vectorDistance, new Vector2(-2, -2), new Vector2(2, 2));
+            }
+
             return movementDirection;
         }
     }

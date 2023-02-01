@@ -29,10 +29,10 @@ namespace FSG.UI
 
             var tabs = new TabsController(serviceProvider, eventManager, assetManager, new Dictionary<string, UIController>
             {
-                { "Commands", _commandLog },
                 { "Empires", _empireList },
                 { "Regions", _regionList },
                 { "Agents", _agentList },
+                { "Commands", _commandLog },
             });
 
             ((Panel)Root).Widgets.Add(tabs.Root);

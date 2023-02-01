@@ -136,7 +136,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         //GraphicsDevice.Viewport = originalViewport;
 
         // FPS
-        System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");
+        //System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");
     }
 }
 
