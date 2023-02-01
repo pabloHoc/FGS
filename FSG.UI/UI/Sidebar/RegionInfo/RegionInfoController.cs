@@ -4,6 +4,7 @@ using FSG.Commands;
 using FSG.Entities;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
+using System.Collections.Generic;
 
 namespace FSG.UI
 {
@@ -29,7 +30,7 @@ namespace FSG.UI
 
             _eventManager.OnRegionSelected += HandleRegionSelected;
 
-            _landList = new EntityListController<Land>(serviceProvider, eventManager, assetManager, ((land) => land.RegionId == eventManager.SelectedRegion.Id));
+            _landList = new EntityListController<Land>(serviceProvider.GlobalState.World.Lands, serviceProvider, eventManager, assetManager, ((land) => land.Region == eventManager.SelectedRegion));
             _landList.EntityClickHandler = eventManager.SelectLand;
 
             var landListPanel = (VerticalStackPanel)Root.FindWidgetById("LandList");
@@ -49,11 +50,10 @@ namespace FSG.UI
 
         private void UpdateEmpire(Region region)
         {
-            if (region.EmpireId != null)
+            if (region.Empire != null)
             {
-                var empire = _serviceProvider.GlobalState.Entities.Get<Empire>(region.EmpireId);
-                _empireLabel.Id = empire.Id;
-                _empireLabel.Text = empire.Name;
+                _empireLabel.Id = region.Empire.Id;
+                _empireLabel.Text = region.Empire.Name;
                 _empireLabel.TouchDown += HandleEmpireClick;
             }
         }

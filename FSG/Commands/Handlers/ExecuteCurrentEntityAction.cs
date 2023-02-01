@@ -4,15 +4,17 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class ExecuteCurrentEntityAction<T> : CommandHandler<Commands.ExecuteCurrentEntityAction<T>> where T : IEntity<T>, IActor
+    public class ExecuteCurrentEntityAction : CommandHandler<Commands.ExecuteCurrentEntityAction>
     {
         public ExecuteCurrentEntityAction(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.ExecuteCurrentEntityAction<T> command)
+        public override void Handle(Commands.ExecuteCurrentEntityAction command)
         {
-            var entity = _serviceProvider.GlobalState.Entities.Get(command.EntityId);
+            var entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
+
             var action = entity.Actions.Dequeue();
-            _serviceProvider.Dispatcher.Dispatch(new Commands.ExecuteEntityAction<T>
+
+            _serviceProvider.Dispatcher.Dispatch(new Commands.ExecuteEntityAction
             {
                 EntityId = entity.Id,
                 ActionName = action.Name,

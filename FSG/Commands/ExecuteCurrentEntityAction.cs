@@ -3,11 +3,13 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public struct ExecuteCurrentEntityAction<T> : ICommand where T : IEntity<T>, IActor
+	public struct ExecuteCurrentEntityAction : ICommand
 	{
 		public string Name { get => "ExecuteCurrentEntityAction"; }
 
-		public EntityId<T> EntityId { get; init; }
+		public IEntityId EntityId { get; init; }
+
+		public EntityType EntityType { get; init; }
 	}
 }
 

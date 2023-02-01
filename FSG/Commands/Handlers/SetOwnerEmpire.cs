@@ -4,14 +4,27 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class SetOwnerEmpire<T> : CommandHandler<Commands.SetOwnerEmpire<T>> where T : IEntity<T>, IOwneable
+    public class SetOwnerEmpire : CommandHandler<Commands.SetOwnerEmpire>
     {
         public SetOwnerEmpire(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.SetOwnerEmpire<T> command)
+        public override void Handle(Commands.SetOwnerEmpire command)
         {
-            var entity = _serviceProvider.GlobalState.Entities.Get(command.EntityId);
-            entity.EmpireId = command.EmpireId;
+            IOwneable entity = null;
+            var empire = _serviceProvider.GlobalState.World.Empires.Find(empire => empire.Id == (EntityId<Empire>)command.EmpireId);
+
+            // TODO: turn this into a method
+            if (command.EntityType == EntityType.Agent)
+            {
+                entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
+            }
+
+            if (command.EntityType == EntityType.Region)
+            {
+                entity = _serviceProvider.GlobalState.World.Regions.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
+            }
+
+            entity.Empire = empire;
         }
     }
 }

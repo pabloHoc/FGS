@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-	public class ProcessEntityActions<T> : CommandHandler<Commands.ProcessEntityActions<T>> where T : IEntity<T>, IActor
+	public class ProcessEntityActions : CommandHandler<Commands.ProcessEntityActions>
 	{
         public ProcessEntityActions(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.ProcessEntityActions<T> command)
+        public override void Handle(Commands.ProcessEntityActions command)
         {
-            var entities = _serviceProvider.GlobalState.Entities.GetAll<T>();
+            var entities = _serviceProvider.GlobalState.World.Agents;
 
             foreach(var entity in entities)
             {
@@ -21,9 +22,10 @@ namespace FSG.Commands.Handlers
 
                     if (action.RemainingTurns == 0)
                     {
-                        _serviceProvider.Dispatcher.Dispatch(new Commands.ExecuteCurrentEntityAction<T>
+                        _serviceProvider.Dispatcher.Dispatch(new Commands.ExecuteCurrentEntityAction
                         {
-                            EntityId = entity.Id
+                            EntityId = entity.Id,
+                            EntityType = entity.EntityType
                         });
                     }
                 }

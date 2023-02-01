@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FSG.Core;
 using FSG.Entities;
 
@@ -10,7 +11,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessSpells command)
         {
-            var spells = _serviceProvider.GlobalState.Entities.GetAll<Spell>();
+            var spells = _serviceProvider.GlobalState.World.Spells;
 
             foreach (var spell in spells)
             {
@@ -18,16 +19,22 @@ namespace FSG.Commands.Handlers
 
                 if (spell.RemainingTurns == 0)
                 {
-                    // TODO: SpellService.Destroy()
-                    var spellModifiers = _serviceProvider.GlobalState.Entities
-                        .GetAll<Modifier>().FindAll(m => ((dynamic)m.SourceId).Value == spell.Id);
-
-                    foreach (var modifier in spellModifiers)
+                    if (spell.TargetType == EntityType.Empire)
                     {
-                        _serviceProvider.GlobalState.Entities.Remove(modifier);
+                        // TODO: SpellService.Destroy
+                        _serviceProvider.GlobalState.World.Empires
+                            .Find(empire => empire.Id == (EntityId<Empire>)spell.TargetId)
+                            .Modifiers.RemoveAll(modifier => (EntityId<Spell>)modifier.SourceId == spell.Id);
                     }
 
-                    _serviceProvider.GlobalState.Entities.Remove(spell);
+                    if (spell.TargetType == EntityType.Region)
+                    {
+                        _serviceProvider.GlobalState.World.Regions
+                            .Find(region => region.Id == (EntityId<Region>)spell.TargetId)
+                            .Modifiers.RemoveAll(modifier => (EntityId<Spell>)modifier.SourceId == spell.Id);
+                    }
+
+                    _serviceProvider.GlobalState.World.Spells.Remove(spell);
                 }
             }
         }

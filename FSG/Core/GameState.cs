@@ -8,7 +8,7 @@ namespace FSG.Core
     {
         private readonly InputValueMap _inputValueMap;
 
-        public EntityRepository Entities { get; } = new EntityRepository();
+        public World World { get; } = new();
 
         public int Turn { get; private set; } = 0;
 

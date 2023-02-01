@@ -37,7 +37,7 @@ namespace FSG.UI
             var spellBtn = (TextButton)sender;
             var spellDefinition = _serviceProvider.Definitions.Get<SpellDefinition>(spellBtn.Id);
 
-            _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction<Agent>
+            _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction
             {
                 EntityId = _eventManager.SelectedAgent.Id,
                 EntityType = EntityType.Agent,
@@ -84,17 +84,15 @@ namespace FSG.UI
 
         private void UpdateRegion(Agent agent)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get(agent.RegionId);
-            _currentRegionLabel.Id = region.Id;
-            _currentRegionLabel.Text = region.Name;
+            _currentRegionLabel.Id = agent.Region.Id;
+            _currentRegionLabel.Text = agent.Region.Name;
             _currentRegionLabel.TouchDown += HandleRegionClick;
         }
 
         private void UpdateEmpire(Agent agent)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get(agent.EmpireId);
-            _empireLabel.Id = empire.Id;
-            _empireLabel.Text = empire.Name;
+            _empireLabel.Id = agent.Empire.Id;
+            _empireLabel.Text = agent.Empire.Name;
             _empireLabel.TouchDown += HandleEmpireClick;
         }
 

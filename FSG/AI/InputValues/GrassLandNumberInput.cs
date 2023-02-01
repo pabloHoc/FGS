@@ -1,7 +1,6 @@
 ﻿using System;
 using FSG.Core;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.AI
 {

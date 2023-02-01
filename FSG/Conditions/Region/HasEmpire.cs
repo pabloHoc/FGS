@@ -15,7 +15,7 @@ namespace FSG.Conditions
 
 		public bool IsValid(GameState gameState, IBaseEntity region)
         {
-			return (((Region)region).EmpireId != null) == _value;
+			return (((Region)region).Empire != null) == _value;
 		}
     }
 }

@@ -9,13 +9,16 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateSpell command)
         {
-            this._serviceProvider.GlobalState.Entities.Add(new Spell
+            var spell = new Spell
             {
                 Id = new EntityId<Spell>(),
                 Name = command.SpellName,
                 TargetId = command.TargetId,
+                TargetType = command.TargetType,
                 RemainingTurns = command.Duration
-            });
+            };
+            this._serviceProvider.GlobalState.World.Spells.Add(spell);
+            this._serviceProvider.GlobalState.World.LastAddedEntityId = spell.Id;
         }
     }
 }

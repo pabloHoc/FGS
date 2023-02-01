@@ -2,7 +2,6 @@
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -12,7 +11,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessResourceLevels command)
         {
-            var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
+            var regions = _serviceProvider.GlobalState.World.Regions.FindAll(region => region.Empire != null);
             var resourceDefinitions = _serviceProvider.Definitions.GetAll<ResourceDefinition>();
 
             // TODO: process empires

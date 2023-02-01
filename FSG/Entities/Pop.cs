@@ -10,7 +10,7 @@ namespace FSG.Entities
 
         public EntityId<Pop> Id { get; init; }
 
-        public EntityId<Region> RegionId { get; init; }
+        public Region Region { get; init; }
 
         public string Strata { get; init; }
 

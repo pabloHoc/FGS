@@ -12,6 +12,8 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateRegion command)
         {
+            var empire = _serviceProvider.GlobalState.World.Empires
+                .Find(empire => empire.Id == command.EmpireId);
             var resources = _serviceProvider.Definitions.GetAll<ResourceDefinition>()
                 .FindAll(resource => resource.Scope == Scopes.Scope.Region);
             var resourceBlock = new ResourceBlock();
@@ -27,7 +29,7 @@ namespace FSG.Commands.Handlers
             {
                 Id = new EntityId<Region>(),
                 Name = command.RegionName,
-                EmpireId = command.EmpireId,
+                Empire = empire,
                 X = command.X,
                 Y = command.Y,
                 ConnectedTo = new List<EntityId<Region>>(),
@@ -38,11 +40,12 @@ namespace FSG.Commands.Handlers
                 Pops = new List<Pop>()
             };
 
-            _serviceProvider.GlobalState.Entities.Add(region);
+            _serviceProvider.GlobalState.World.Regions.Add(region);
+            _serviceProvider.GlobalState.World.LastAddedEntityId = region.Id;
 
-            if (command.EmpireId != null)
+            if (empire != null)
             {
-                _serviceProvider.GlobalState.Entities.Get(command.EmpireId).Regions.Add(region);
+                empire.Regions.Add(region);
             }
         }
     }

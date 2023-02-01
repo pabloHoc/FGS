@@ -19,9 +19,9 @@ namespace FSG.UI
             : base("../../../UI/DebugPanel/DebugPanel.xaml", serviceProvider, eventManager, assetManager)
         {
             _commandLog = new CommandLogController(serviceProvider, eventManager, assetManager);
-            _empireList = new EntityListController<Empire>(serviceProvider, eventManager, assetManager);
-            _regionList = new EntityListController<Region>(serviceProvider, eventManager, assetManager);
-            _agentList = new EntityListController<Agent>(serviceProvider, eventManager, assetManager);
+            _empireList = new EntityListController<Empire>(serviceProvider.GlobalState.World.Empires, serviceProvider, eventManager, assetManager);
+            _regionList = new EntityListController<Region>(serviceProvider.GlobalState.World.Regions, serviceProvider, eventManager, assetManager);
+            _agentList = new EntityListController<Agent>(serviceProvider.GlobalState.World.Agents, serviceProvider, eventManager, assetManager);
 
             _empireList.EntityClickHandler = eventManager.SelectEmpire;
             _regionList.EntityClickHandler = eventManager.SelectRegion;

@@ -14,7 +14,7 @@ namespace FSG.Entities
         public string Name { get; init; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public EntityId<Empire> EmpireId { get; set; }
+        public Empire Empire { get; set; }
 
         public int X { get; init; } // TODO: Change to a struct with { x, y } (Coords, Location) 
 
@@ -31,6 +31,8 @@ namespace FSG.Entities
         public List<Land> Lands { get; init; }
 
         public List<Pop> Pops { get; init; }
+
+        public List<Modifier> Modifiers { get; init; }
 
         public Region()
         {

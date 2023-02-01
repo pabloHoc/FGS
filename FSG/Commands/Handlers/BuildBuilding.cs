@@ -12,24 +12,24 @@ namespace FSG.Commands.Handlers
         public override void Handle(Commands.BuildBuilding command)
         {
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName);
+            var region = _serviceProvider.GlobalState.World.Regions
+                .Find(region => region.Id == command.RegionId);
 
             switch (command.BuildingType)
             {
                 case BuildingType.LandBuilding:
                 {
-                    var land = _serviceProvider.GlobalState.Entities.Get(command.LandId);
+                    var land = region.Lands.Find(land => land.Id == command.LandId);
                     land.Buildings.Add(command.BuildingName);
                     break;
                 }
                 case BuildingType.CapitalBuilding:
                 {
-                    var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
                     region.Capital.Buildings.Add(command.BuildingName);
                     break;
                 }
                 case BuildingType.District:
                 {
-                    var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
                     region.Capital.Districts.Add(new District {
                         Name = command.BuildingName,
                     });
@@ -39,7 +39,6 @@ namespace FSG.Commands.Handlers
 
             if (buildingDefinition.OnBuilt != null)
             {
-                var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
                 _serviceProvider.ActionProcessor.Process(buildingDefinition.OnBuilt, region, region.Id);
             }
         }

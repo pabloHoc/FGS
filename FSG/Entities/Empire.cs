@@ -17,5 +17,11 @@ namespace FSG.Entities
         public string SocialStructure { get; init; }
 
         public List<Region> Regions { get; init; }
+
+        public List<Agent> Agents { get; init; }
+
+        public List<Army> Armies { get; init; }
+
+        public List<Modifier> Modifiers { get; init; }
     }
 }

@@ -5,7 +5,6 @@ using FSG.Entities;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
 using System;
-using FSG.Entities.Queries;
 
 namespace FSG.UI
 {
@@ -46,7 +45,7 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedRegion?.EmpireId != null)
+            if (_eventManager.SelectedRegion?.Empire != null)
             {
                 UpdatePops(_eventManager.SelectedRegion);
             } else

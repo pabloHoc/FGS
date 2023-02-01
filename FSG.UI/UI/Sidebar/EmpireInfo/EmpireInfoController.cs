@@ -24,10 +24,11 @@ namespace FSG.UI
             _eventManager.OnEmpireSelected += HandleEmpireSelected;
 
             _regionList = new EntityListController<Region>(
+                serviceProvider.GlobalState.World.Regions,
                 serviceProvider,
                 eventManager,
                 assetManager,
-                ((region) => region.EmpireId == eventManager.SelectedEmpire.Id)
+                ((region) => region.Empire == eventManager.SelectedEmpire)
             );
             _regionList.EntityClickHandler = eventManager.SelectRegion;
 

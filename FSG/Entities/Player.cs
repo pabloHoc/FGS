@@ -12,7 +12,7 @@ namespace FSG.Entities
 
         public string Name { get; init; }
 
-        public EntityId<Empire> EmpireId { get; init; }
+        public Empire Empire { get; init; }
 
         public bool IsAI { get; init; }
 

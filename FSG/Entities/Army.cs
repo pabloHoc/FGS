@@ -14,8 +14,8 @@ namespace FSG.Entities
 
         public int Defense { get; init; }
 
-        public EntityId<Empire> EmpireId { get; set; }
+        public Empire Empire { get; set; }
 
-        public EntityId<Region> RegionId { get; set; }
+        public Region Region { get; set; }
     }
 }

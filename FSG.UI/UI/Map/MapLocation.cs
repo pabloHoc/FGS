@@ -48,7 +48,7 @@ namespace FSG.UI
         {
             _position = new Vector2(region.X, region.Y);
             _regionId = region.Id;
-            _hasEmpire = region.EmpireId != null;
+            _hasEmpire = region.Empire != null;
 
             _eventManager = eventManager;
             _spriteBatch = spriteBatch;

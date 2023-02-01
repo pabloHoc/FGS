@@ -10,7 +10,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.BuildBuildingFromQueue command)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+            var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == command.RegionId);
             var building = region.BuildingQueue.Dequeue();
 
             _serviceProvider.Dispatcher.Dispatch(new Commands.BuildBuilding

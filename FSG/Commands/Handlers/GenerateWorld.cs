@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -37,7 +36,7 @@ namespace FSG.Commands.Handlers
                 _serviceProvider.Dispatcher.Dispatch(new Commands.CreatePlayer
                 {
                     PlayerName = isPlayer ? "Player" : $"AI #{i}",
-                    EmpireId = _serviceProvider.GlobalState.Entities.GetLastAddedEntityId<Empire>(),
+                    EmpireId = (EntityId<Empire>)_serviceProvider.GlobalState.World.LastAddedEntityId,
                     IsAI = !isPlayer
                 });
             }
@@ -46,7 +45,7 @@ namespace FSG.Commands.Handlers
         private void GenerateRegions(int columns, int rows)
         {
             var count = 0;
-            var empires = _serviceProvider.GlobalState.Entities.GetAll<Empire>().ToArray();
+            var empires = _serviceProvider.GlobalState.World.Empires;
             var CHUNK_SIZE = 100;
             var BORDER_GAP = 20;
 
@@ -70,14 +69,14 @@ namespace FSG.Commands.Handlers
                             Y = y
                         };
 
-                        if (empires.Length > count)
+                        if (empires.Count > count)
                         {
                             createRegionCommand.EmpireId = empires[count].Id;
                         };
 
                         _serviceProvider.Dispatcher.Dispatch(createRegionCommand);
 
-                        var regionId = _serviceProvider.GlobalState.Entities.GetLastAddedEntityId<Region>();
+                        var regionId = (EntityId<Region>)_serviceProvider.GlobalState.World.LastAddedEntityId;
 
                         _chunks.Add(i * rows + j, regionId);
 
@@ -104,8 +103,8 @@ namespace FSG.Commands.Handlers
 
                     if (sameRow && close)
                     {
-                        var region = _serviceProvider.GlobalState.Entities.Get(_chunks[chunk]);
-                        var nextRegion = _serviceProvider.GlobalState.Entities.Get(_chunks[nextChunk]);
+                        var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[chunk]);
+                        var nextRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[nextChunk]);
 
                         region.ConnectedTo.Add(nextRegion.Id);
                         nextRegion.ConnectedTo.Add(region.Id);
@@ -125,7 +124,7 @@ namespace FSG.Commands.Handlers
                 var twoRowsBottomRightChunk = twoRowsBottomChunk + 1;
 
                 var regionId = _chunks[chunk];
-                var region = _serviceProvider.GlobalState.Entities.Get(_chunks[chunk]);
+                var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[chunk]);
 
                 var isLeftBorder = chunk % columns == 0;
                 var isRightBorder = (chunk + 1) % columns == 0;
@@ -189,7 +188,7 @@ namespace FSG.Commands.Handlers
 
                 foreach (var chunkToConnect in chunksToConnect)
                 {
-                    var nextRegion = _serviceProvider.GlobalState.Entities.Get(_chunks[chunkToConnect]);
+                    var nextRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[chunkToConnect]);
                     region.ConnectedTo.Add(nextRegion.Id);
                     nextRegion.ConnectedTo.Add(region.Id);
                 }
@@ -198,7 +197,7 @@ namespace FSG.Commands.Handlers
 
         private void GenerateLands(int landsPerRegion)
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+            var regions = _serviceProvider.GlobalState.World.Regions;
             var landDefinitions = _serviceProvider.Definitions.GetAll<LandDefinition>().ToArray();
             var random = new Random();
 
@@ -220,8 +219,8 @@ namespace FSG.Commands.Handlers
 
         private void GenerateAgents()
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>()
-                .FindAll(region => region.EmpireId != null);
+            var regions = _serviceProvider.GlobalState.World.Regions
+                .FindAll(region => region.Empire != null);
             var count = 0;
 
             foreach (var region in regions)
@@ -230,7 +229,7 @@ namespace FSG.Commands.Handlers
                 {
                     AgentName = $"Agent #{count}",
                     RegionId = region.Id,
-                    EmpireId = region.EmpireId
+                    EmpireId = region.Empire.Id
                 });
 
                 count++;
@@ -239,13 +238,12 @@ namespace FSG.Commands.Handlers
 
         private void GeneratePops()
         {
-            var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
+            var regions = _serviceProvider.GlobalState.World.Regions.FindAll(region => region.Empire != null);
 
             foreach (var region in regions)
             {
-                var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
                 var socialStructure = _serviceProvider.Definitions
-                    .Get<SocialStructureDefinition>(empire.SocialStructure);
+                    .Get<SocialStructureDefinition>(region.Empire.SocialStructure);
                 var config = _serviceProvider.Definitions
                     .Get<SetupConfigDefinition>("Default");
 

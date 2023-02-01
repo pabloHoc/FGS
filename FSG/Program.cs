@@ -14,7 +14,7 @@ game.Initialize();
 
 // REPOSITORY SERIALIZATION ----------------------------------- 
 
-var entities = game.ServiceProvider.GlobalState.Entities._entities;
+var world = game.ServiceProvider.GlobalState.World;
 
 var serializerOptions = new JsonSerializerOptions
 {
@@ -27,7 +27,7 @@ var serializerOptions = new JsonSerializerOptions
 };
 
 // act
-string json = JsonSerializer.Serialize(entities, serializerOptions);
+string json = JsonSerializer.Serialize(world, serializerOptions);
 
 File.WriteAllText("../../../entities.json", json);
 

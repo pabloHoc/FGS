@@ -20,7 +20,6 @@
     <None Remove="Noesis.GUI" />
     <None Remove="Noesis.App" />
     <None Remove="UI\TabComponent\" />
-    <None Remove="Entities\Queries\" />
     <None Remove="Conditions\" />
     <None Remove="Scopes\" />
     <None Remove="Assets\Definitions\" />
@@ -56,7 +55,6 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Queries\" />
     <Folder Include="Conditions\" />
     <Folder Include="Scopes\" />
     <Folder Include="Assets\Definitions\" />

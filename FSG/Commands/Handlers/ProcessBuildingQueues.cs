@@ -10,7 +10,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessBuildingQueues command)
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+            var regions = _serviceProvider.GlobalState.World.Regions;
 
             foreach(var region in regions)
             {

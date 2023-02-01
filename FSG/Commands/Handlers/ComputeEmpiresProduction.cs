@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -15,7 +14,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ComputeEmpiresProduction command)
         {
-            var empires = _serviceProvider.GlobalState.Entities.GetAll<Empire>();
+            var empires = _serviceProvider.GlobalState.World.Empires;
 
             foreach (var empire in empires)
             {

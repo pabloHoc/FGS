@@ -11,14 +11,19 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateAgent command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Agent
+            var empire = _serviceProvider.GlobalState.World.Empires.Find(empire => empire.Id == command.EmpireId);
+            var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == command.RegionId);
+
+            var agent = new Agent
             {
                 Id = new EntityId<Agent>(),
                 Name = command.AgentName,
-                EmpireId = command.EmpireId,
-                RegionId = command.RegionId,
+                Empire = empire,
+                Region = region,
                 Actions = new Queue<ActionQueueItem>()
-            });
+            };
+
+            _serviceProvider.GlobalState.World.Agents.Add(agent);
         }
     }
 }

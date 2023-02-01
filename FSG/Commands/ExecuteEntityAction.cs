@@ -3,7 +3,7 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public struct ExecuteEntityAction<T> : ICommand where T : IEntity<T>, IActor
+	public struct ExecuteEntityAction : ICommand
 	{
 		public string Name { get => "ExecuteEntityAction"; }
 
@@ -11,7 +11,9 @@ namespace FSG.Commands
 
 		public ActionType ActionType { get; init; }
 
-		public EntityId<T> EntityId { get; init; }
+		public IEntityId EntityId { get; init; }
+
+		public EntityType EntityType { get; init; }
 
 		public string Payload { get; init; }
 	}

@@ -16,7 +16,7 @@ namespace FSG.Services
 
         public List<Modifier> GetModifiersFor<T>(T entity) where T : IEntity<T>
 		{
-            return _serviceProvider.GlobalState.Entities.GetAll<Modifier>()
+            return _serviceProvider.GlobalState.World.Modifiers
                 .FindAll(m => ((dynamic)m.TargetId).Value == entity.Id.Value);
         }
     }

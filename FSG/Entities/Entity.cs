@@ -34,12 +34,12 @@ namespace FSG.Entities
 
     public interface ILocatable
     {
-        public EntityId<Region> RegionId { get; set; }
+        public Region Region { get; set; }
     }
 
     public interface IOwneable
     {
-        public EntityId<Empire> EmpireId { get; set; }
+        public Empire Empire { get; set; }
     }
 
     public interface INameable

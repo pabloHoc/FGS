@@ -4,13 +4,13 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class SetEntityCurrentAction<T> : CommandHandler<Commands.SetEntityCurrentAction<T>> where T : IEntity<T>, IActor
+    public class SetEntityCurrentAction : CommandHandler<Commands.SetEntityCurrentAction>
     {
         public SetEntityCurrentAction(ServiceProvider serviceProvider) : base(serviceProvider) { }
 
-        public override void Handle(Commands.SetEntityCurrentAction<T> command)
+        public override void Handle(Commands.SetEntityCurrentAction command)
         {
-            var entity = _serviceProvider.GlobalState.Entities.Get(command.EntityId);
+            var entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
             entity.Actions.Clear();
             entity.Actions.Enqueue(command.NewCurrentAction);
         }

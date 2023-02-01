@@ -37,7 +37,7 @@ namespace FSG.Services
                 Duration = definition.Duration
             });
 
-            var spellId = _serviceProvider.GlobalState.Entities.GetLastAddedEntityId<Spell>();
+            var spellId = _serviceProvider.GlobalState.World.LastAddedEntityId;
 
             if (definition.Actions != null)
             {

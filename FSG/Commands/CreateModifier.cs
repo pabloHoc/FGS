@@ -15,7 +15,11 @@ namespace FSG.Commands
 
 		public IEntityId TargetId { get; init; }
 
+		public EntityType TargetType { get; init; }
+
 		public IEntityId SourceId { get; init; }
+
+		public EntityType SourceType { get; init; }
 
 		public int Duration { get; init; }
 	}

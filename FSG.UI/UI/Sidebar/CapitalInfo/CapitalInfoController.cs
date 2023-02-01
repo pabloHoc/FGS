@@ -84,7 +84,7 @@ namespace FSG.UI
                 BuildingName = buildingBtn.Id,
                 RegionId = region.Id,
                 BuildingType = BuildingType.CapitalBuilding,
-                EmpireId = region.EmpireId,
+                EmpireId = region.Empire.Id,
             });
         }
 
@@ -99,7 +99,7 @@ namespace FSG.UI
                 BuildingName = districtBtn.Id,
                 RegionId = region.Id,
                 BuildingType = BuildingType.District,
-                EmpireId = region.EmpireId,
+                EmpireId = region.Empire.Id,
             });
         }
 

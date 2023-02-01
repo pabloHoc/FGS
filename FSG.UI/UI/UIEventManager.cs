@@ -4,9 +4,6 @@ using FSG.Entities;
 
 namespace FSG.UI
 {
-    // TODO: maybe we should store entities instead of ids so we are not searching
-    // for them every time
-
 	public class UIEventManager
 	{
         public event EventHandler<Empire> OnEmpireSelected;
@@ -37,7 +34,7 @@ namespace FSG.UI
 
         private void ClearLand()
         {
-            if (SelectedLand != null && SelectedLand.RegionId != SelectedRegion.Id)
+            if (SelectedLand != null && SelectedLand.Region != SelectedRegion)
             {
                 SelectedLand = null;
             }
@@ -45,23 +42,17 @@ namespace FSG.UI
 
         private void UpdateEmpireFromRegion()
         {
-            if (SelectedRegion.EmpireId != null && SelectedRegion.EmpireId != SelectedEmpire?.Id)
+            if (SelectedRegion.Empire != SelectedEmpire)
             {
-                SelectedEmpire = _serviceProvider.GlobalState.Entities
-                    .Get(new EntityId<Empire>(SelectedRegion.EmpireId));
-            }
-            else
-            {
-                SelectedEmpire = null;
+                SelectedEmpire = SelectedRegion.Empire;
             }
         }
 
-        private void UpdateRegion(EntityId<Region> RegionId)
+        private void UpdateRegion(Region region)
         {
-            if (RegionId != SelectedRegion?.Id)
+            if (region != SelectedRegion)
             {
-                SelectedRegion = _serviceProvider.GlobalState.Entities
-                    .Get(RegionId);
+                SelectedRegion = region;
 
                 UpdateEmpireFromRegion();
                 ClearLand();
@@ -72,11 +63,11 @@ namespace FSG.UI
         {
             if (empireId != SelectedEmpire?.Id)
             {
-                SelectedEmpire = _serviceProvider.GlobalState.Entities
-                    .Get(new EntityId<Empire>(empireId));
+                SelectedEmpire = _serviceProvider.GlobalState.World.Empires
+                    .Find(empire => empire.Id == empireId);
 
                 // Clear Region and Land
-                if (SelectedRegion != null && SelectedRegion.EmpireId != SelectedEmpire.Id)
+                if (SelectedRegion?.Empire != SelectedEmpire)
                 {
                     SelectedRegion = null;
                     SelectedLand = null;
@@ -88,7 +79,10 @@ namespace FSG.UI
 
         public void SelectRegion(string regionId)
         {
-            UpdateRegion(new EntityId<Region>(regionId));
+            var region = _serviceProvider.GlobalState.World.Regions
+                .Find(region => region.Id == regionId);
+
+            UpdateRegion(region);
 
             OnRegionSelected?.Invoke(null, SelectedRegion);
         }
@@ -96,8 +90,8 @@ namespace FSG.UI
         // TODO: change name
         public void SecondarySelectRegion(string regionId)
         {
-            var region = _serviceProvider.GlobalState.Entities
-                .Get<Region>(new EntityId<Region>(regionId));
+            var region = _serviceProvider.GlobalState.World.Regions
+                .Find(region => region.Id == regionId);
 
             OnRegionSecondaryAction?.Invoke(null, region);
         }
@@ -106,10 +100,9 @@ namespace FSG.UI
         {
             if (landId != SelectedLand?.Id)
             {
-                SelectedLand = _serviceProvider.GlobalState.Entities
-                    .Get<Land>(new EntityId<Land>(landId));
+                SelectedLand = SelectedRegion.Lands.Find(land => land.Id == landId);
 
-                UpdateRegion(SelectedLand.RegionId);
+                UpdateRegion(SelectedRegion);
             }
 
             OnLandSelected?.Invoke(null, SelectedLand);
@@ -119,10 +112,10 @@ namespace FSG.UI
         {
             if (agentId != SelectedAgent?.Id)
             {
-                SelectedAgent = _serviceProvider.GlobalState.Entities
-                    .Get<Agent>(new EntityId<Agent>(agentId));
+                SelectedAgent = _serviceProvider.GlobalState.World.Agents
+                    .Find(agent => agent.Id == agentId);
 
-                UpdateRegion(SelectedAgent.RegionId);
+                UpdateRegion(SelectedAgent.Region);
             }
 
             OnAgentSelected?.Invoke(null, SelectedAgent);

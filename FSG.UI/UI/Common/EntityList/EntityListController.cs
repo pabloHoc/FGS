@@ -13,29 +13,35 @@ namespace FSG.UI
     public class EntityListController<T> : UIController where T : IEntity<T>, INameable
     {
         private readonly Grid _list;
+
         private readonly Predicate<T> _predicate;
-        public Action<string> EntityClickHandler { get; set; } 
+
+        public Action<string> EntityClickHandler { get; set; }
+
+        private readonly List<T> _entities;
 
         public EntityListController(
+            List<T> entities,
             ServiceProvider serviceProvider,
             UIEventManager eventManager,
             AssetManager assetManager,
             Predicate<T> predicate = null
         ) : base("../../../UI/Common/EntityList/EntityList.xaml", serviceProvider, eventManager, assetManager)
         {
+            _entities = entities;
             _list = (Grid)Root.FindWidgetById("EntityListGrid");
             _predicate = predicate;
         }
 
         private void GenerateEntityList()
         {
-            var entities = _serviceProvider.GlobalState.Entities.GetAll<T>();
-            var queriedEntities = _predicate == null ? entities : entities.FindAll(_predicate);
             var count = 1;
 
             _list.Widgets.Clear();
 
-            foreach (var entity in queriedEntities)
+            var entities = _predicate != null ? _entities.FindAll(_predicate) : _entities;
+
+            foreach (var entity in entities)
             {
                 var entityLabel = new Label();
                 entityLabel.Id = entity.Id;

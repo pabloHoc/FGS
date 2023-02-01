@@ -1,7 +1,6 @@
 ﻿using System;
 using FSG.Core;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -11,7 +10,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.UpdateRegionsResources command)
         {
-            var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
+            var regions = _serviceProvider.GlobalState.World.Regions.FindAll(region => region.Empire != null);
 
             foreach (var region in regions)
             {

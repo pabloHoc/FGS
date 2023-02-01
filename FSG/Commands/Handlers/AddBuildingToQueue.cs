@@ -12,7 +12,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.AddBuildingToQueue command)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get(command.RegionId);
+            var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == command.RegionId);
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName);
 
             region.BuildingQueue.Enqueue(new BuildingQueueItem
@@ -27,7 +27,7 @@ namespace FSG.Commands.Handlers
             // Apply building costs
             // TODO: add economic category modifiers
 
-            var empire = _serviceProvider.GlobalState.Entities.Get(command.EmpireId);
+            var empire = _serviceProvider.GlobalState.World.Empires.Find(empire => empire.Id == command.EmpireId);
 
             foreach (var resource in buildingDefinition.Resources.Cost)
             {

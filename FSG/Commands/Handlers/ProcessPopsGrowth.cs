@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -27,14 +26,13 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessPopsGrowth command)
         {
-            var regions = _serviceProvider.GlobalState.Entities.Query(new GetRegionsWithEmpire());
+            var regions = _serviceProvider.GlobalState.World.Regions.FindAll(region => region.Empire != null);
             var buildingDefinitions = _serviceProvider.Definitions.GetAll<BuildingDefinition>();
             var config = _serviceProvider.Definitions.Get<SetupConfigDefinition>("Default");
 
             foreach (var region in regions)
             {
-                var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
-                var socialStructure = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure);
+                var socialStructure = _serviceProvider.Definitions.Get<SocialStructureDefinition>(region.Empire.SocialStructure);
                 var buildings = GetRegionBuidings(region);
 
                 foreach (var pop in region.Pops)

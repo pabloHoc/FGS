@@ -11,15 +11,19 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateLand command)
         {
+            var region = _serviceProvider.GlobalState.World.Regions
+                .Find(region => region.Id == command.RegionId);
+
             var land = new Land
             {
                 Id = new EntityId<Land>(),
                 Name = command.LandName,
-                RegionId = command.RegionId,
+                Region = region,
                 Buildings = new List<string>(),
             };
-            _serviceProvider.GlobalState.Entities.Add(land);
-            _serviceProvider.GlobalState.Entities.Get(command.RegionId).Lands.Add(land);
+
+            region.Lands.Add(land);
+            _serviceProvider.GlobalState.World.Lands.Add(land);
         }
     }
 }

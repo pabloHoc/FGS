@@ -3,17 +3,17 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public class SetOwnerEmpire<T> : ICommand where T : IEntity<T>, IOwneable
+	public struct SetOwnerEmpire : ICommand
 	{
 		public string Name { get => "SetOwnerEmpire"; }
 
 		public EntityType EntityType { get; init; }
 
-		public EntityId<T> EntityId { get; init; }
+		public IEntityId EntityId { get; init; }
 
 		public EntityId<Empire> EmpireId { get; init; }
 
-		public SetOwnerEmpire(T entity, dynamic payload) {
+		public SetOwnerEmpire(dynamic entity, dynamic payload) {
 			EntityType = entity.EntityType;
 			EntityId = entity.Id;
 			EmpireId = payload.EmpireId;

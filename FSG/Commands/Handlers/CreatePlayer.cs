@@ -9,11 +9,13 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreatePlayer command)
         {
+            var empire = _serviceProvider.GlobalState.World.Empires.Find(empire => empire.Id == command.EmpireId);
+
             var player = new Player
             {
                 Id = new EntityId<Player>(),
                 Name = command.PlayerName,
-                EmpireId = command.EmpireId,
+                Empire = empire,
                 IsAI = command.IsAI,
             };
 
@@ -22,7 +24,8 @@ namespace FSG.Commands.Handlers
                 player.AI = new AI.AI(player, _serviceProvider);
             }
 
-            this._serviceProvider.GlobalState.Entities.Add(player);
+            this._serviceProvider.GlobalState.World.Players.Add(player);
+            this._serviceProvider.GlobalState.World.LastAddedEntityId = player.Id;
         }
     }
 }

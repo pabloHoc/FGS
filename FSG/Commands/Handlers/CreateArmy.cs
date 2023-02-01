@@ -11,15 +11,20 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.CreateArmy command)
         {
-            _serviceProvider.GlobalState.Entities.Add(new Army
+            var empire = _serviceProvider.GlobalState.World.Empires.Find(empire => empire.Id == command.EmpireId);
+            var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == command.RegionId);
+
+            var army = new Army
             {
                 Id = new EntityId<Army>(),
                 Size = command.Size,
                 Attack = command.Attack,
                 Defense = command.Defense,
-                EmpireId = command.EmpireId,
-                RegionId = command.RegionId,
-            });
+                Empire = empire,
+                Region = region,
+            };
+
+            empire.Armies.Add(army);
         }
     }
 }

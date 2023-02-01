@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using FSG.Entities.Queries;
 
 namespace FSG.Commands.Handlers
 {
@@ -15,7 +14,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ComputeRegionsProduction command)
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+            var regions = _serviceProvider.GlobalState.World.Regions;
 
             foreach (var region in regions)
             {
@@ -70,8 +69,7 @@ namespace FSG.Commands.Handlers
 
         private void ComputePopUpkeep(Pop pop, Region region)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
-            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(region.Empire.SocialStructure)
                 .Stratas.Find(strata => strata.Name == pop.Strata);
 
             foreach (var resource in strata.Resources.Upkeep)
@@ -85,8 +83,7 @@ namespace FSG.Commands.Handlers
 
         private void ComputePopProduction(Pop pop, Region region)
         {
-            var empire = _serviceProvider.GlobalState.Entities.Get(region.EmpireId);
-            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
+            var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(region.Empire.SocialStructure)
                 .Stratas.Find(strata => strata.Name == pop.Strata);
 
             foreach (var resource in strata.Resources.Production)

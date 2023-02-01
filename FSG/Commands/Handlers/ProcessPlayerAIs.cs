@@ -10,7 +10,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ProcessPlayerAIs command)
         {
-            var aiPlayers = _serviceProvider.GlobalState.Entities.GetAll<Player>()
+            var aiPlayers = _serviceProvider.GlobalState.World.Players
                 .FindAll(player => player.IsAI);
 
             foreach (var player in aiPlayers)

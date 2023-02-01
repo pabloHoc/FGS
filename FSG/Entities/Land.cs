@@ -12,6 +12,6 @@ namespace FSG.Entities
 
         public List<string> Buildings { get; init; }
 
-        public EntityId<Region> RegionId { get; init; }
+        public Region Region { get; init; }
     }
 }

@@ -31,16 +31,12 @@ namespace FSG.Scopes
 
         private Region GetRegion(Agent agent)
         {
-            return _gameState.Entities.Get(agent.RegionId);
+            return agent.Region;
         }
 
         private Empire GetEmpire(Agent agent)
         {
-            if (agent.EmpireId != null)
-            {
-                return _gameState.Entities.Get(agent.EmpireId);
-            }
-            return null;
+            return agent.Empire;
         }
     }
 }

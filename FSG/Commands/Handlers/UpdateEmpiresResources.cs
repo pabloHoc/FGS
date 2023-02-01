@@ -10,7 +10,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.UpdateEmpiresResources command)
         {
-            var empires = _serviceProvider.GlobalState.Entities.GetAll<Empire>();
+            var empires = _serviceProvider.GlobalState.World.Empires;
 
             foreach (var empire in empires)
             {

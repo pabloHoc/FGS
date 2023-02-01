@@ -61,28 +61,22 @@ namespace FSG.UI
             _eventManager.OnRegionSecondaryAction += HandleRegionRightClick;
         }
 
-        private void HandleRegionRightClick(object sender, Region e)
+        private void HandleRegionRightClick(object sender, Region region)
         {
             if (_eventManager.SelectedAgent != null)
             {
-                _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction<Agent>
+                _serviceProvider.Dispatcher.Dispatch(new MoveEntity
                 {
                     EntityId = _eventManager.SelectedAgent.Id,
                     EntityType = EntityType.Agent,
-                    NewCurrentAction = new ActionQueueItem
-                    {
-                        ActionType = ActionType.Action,
-                        Name = "Move",
-                        RemainingTurns = 1,
-                        Payload = e.Id
-                    }
+                    RegionId = region.Id
                 });
             }
         }
 
         public void Initialize()
         {
-            var regions = _serviceProvider.GlobalState.Entities.GetAll<Region>();
+            var regions = _serviceProvider.GlobalState.World.Regions;
 
             foreach (var region in regions)
             {
@@ -95,7 +89,7 @@ namespace FSG.UI
         {
             foreach (var connectedRegionId in region.ConnectedTo)
             {
-                var connectedRegion = _serviceProvider.GlobalState.Entities.Get(connectedRegionId);
+                var connectedRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == connectedRegionId);
                 _roads.Add(new Road
                 {
                     Start = new Vector2(region.X, region.Y),

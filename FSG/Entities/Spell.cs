@@ -10,6 +10,8 @@ namespace FSG.Entities
 
         public IEntityId TargetId { get; init; }
 
+        public EntityType TargetType { get; init; }
+
         public int RemainingTurns { get; set; }
     }
 }

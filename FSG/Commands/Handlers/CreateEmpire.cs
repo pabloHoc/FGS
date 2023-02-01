@@ -24,14 +24,17 @@ namespace FSG.Commands.Handlers
                 resourceBlock.Upkeep.Add(resource.Name, 0);
             }
 
-            _serviceProvider.GlobalState.Entities.Add(new Empire
+            var empire = new Empire
             {
                 Id = new EntityId<Empire>(),
                 Name = command.EmpireName,
                 Resources = resourceBlock,
                 SocialStructure = "Feudal",
                 Regions = new List<Region>()
-            });
+            };
+
+            _serviceProvider.GlobalState.World.Empires.Add(empire);
+            _serviceProvider.GlobalState.World.LastAddedEntityId = empire.Id;
         }
     }
 }

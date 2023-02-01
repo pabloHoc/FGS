@@ -9,7 +9,7 @@ namespace FSG.Commands
     {
         private readonly Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> _agentCommands = new ()
         {
-            { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire<Agent>((Agent)scope, payload) },
+            { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire(scope, payload) },
             { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
         };
 

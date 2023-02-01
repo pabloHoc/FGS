@@ -85,9 +85,8 @@ namespace FSG.UI
 
         private void UpdateRegion(Land land)
         {
-            var region = _serviceProvider.GlobalState.Entities.Get<Region>(land.RegionId);
-            _regionLabel.Id = region.Id;
-            _regionLabel.Text = region.Name;
+            _regionLabel.Id = land.Region.Id;
+            _regionLabel.Text = land.Region.Name;
             _regionLabel.TouchDown += HandleRegionClick;
         }
 
