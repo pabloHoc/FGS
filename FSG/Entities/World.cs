@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FSG.Entities
 {
@@ -19,6 +20,7 @@ namespace FSG.Entities
 
         public List<Modifier> Modifiers { get; init; } = new();
 
+        [JsonIgnore]
         public IEntityId LastAddedEntityId { get; set; }
     }
 }

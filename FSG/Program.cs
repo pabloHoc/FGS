@@ -17,6 +17,7 @@ var world = game.ServiceProvider.GlobalState.World;
 
 var serializerOptions = new JsonSerializerOptions
 {
+    ReferenceHandler = ReferenceHandler.Preserve,
     Converters =
     {
         new ValueObjectConverterFactory(),
@@ -30,7 +31,7 @@ string json = JsonSerializer.Serialize(world, serializerOptions);
 
 File.WriteAllText("../../../entities.json", json);
 
-//var deserialized = JsonSerializer.Deserialize(json, serializerOptions);
+var deserialized = JsonSerializer.Deserialize<World>(json, serializerOptions);
 
 // NESTED DICTIONARY SERIALIZATION -----------------------------------
 

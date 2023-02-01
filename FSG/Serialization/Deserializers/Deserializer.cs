@@ -11,6 +11,7 @@ namespace FSG.Serialization
             {
                 IncludeFields = true,
                 ReadCommentHandling = JsonCommentHandling.Skip,
+                ReferenceHandler = ReferenceHandler.Preserve,
                 Converters =
                 {
                     new ValueObjectConverterFactory(),

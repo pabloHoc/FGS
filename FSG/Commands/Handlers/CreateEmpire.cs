@@ -30,7 +30,9 @@ namespace FSG.Commands.Handlers
                 Name = command.EmpireName,
                 Resources = resourceBlock,
                 SocialStructure = "Feudal",
-                Regions = new List<Region>()
+                Regions = new List<Region>(),
+                Agents = new List<Agent>(),
+                Armies = new List<Army>()
             };
 
             _serviceProvider.GlobalState.World.Empires.Add(empire);

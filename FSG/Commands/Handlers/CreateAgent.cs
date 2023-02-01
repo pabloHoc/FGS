@@ -24,6 +24,7 @@ namespace FSG.Commands.Handlers
             };
 
             _serviceProvider.GlobalState.World.Agents.Add(agent);
+            empire.Agents.Add(agent);
         }
     }
 }
