@@ -14,13 +14,10 @@ namespace FSG.UI
 
         private readonly EntityListController<Region> _regionList;
 
-        private readonly VerticalStackPanel _resourceList;
-
         public EmpireInfoController(ServiceProvider serviceProvider, UIEventManager eventManager,AssetManager assetManager)
             : base("../../../UI/InfoPanel/EmpireInfo/EmpireInfo.xaml", serviceProvider, eventManager, assetManager)
         {
             _empireNameLabel = (Label)Root.FindWidgetById("EmpireNameLabel");
-            _resourceList = (VerticalStackPanel)Root.FindWidgetById("ResourceList");
             _eventManager.OnEmpireSelected += HandleEmpireSelected;
 
             _regionList = new EntityListController<Region>(
@@ -41,25 +38,10 @@ namespace FSG.UI
             Update();
         }
 
-        private void UpdateResources(Empire empire)
-        {
-            _resourceList.Widgets.Clear();
-
-            foreach (var entry in empire.Resources.Resources)
-            {
-                _resourceList.Widgets.Add(new Label
-                {
-                    Text = $"{entry.Key}: {entry.Value} (+{empire.Resources.Production[entry.Key]} " +
-                        $"| -{empire.Resources.Upkeep[entry.Key]})"
-                });
-            }
-        }
-
         private void Clear()
         {
             _empireNameLabel.Text = "";
             _regionList.Clear();
-            _resourceList.Widgets.Clear();
         }
 
         public override void Update()
@@ -69,7 +51,6 @@ namespace FSG.UI
                 var empire = _eventManager.SelectedEmpire;
                 _empireNameLabel.Text = empire.Name;
                 _regionList.Update();
-                UpdateResources(empire);
             }
         }
     }

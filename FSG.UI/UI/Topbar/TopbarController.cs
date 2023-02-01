@@ -18,7 +18,13 @@ namespace FSG.UI
             _empireNameLabel = (Label)Root.FindWidgetById("EmpireNameLabel");
             _resourceList = (HorizontalStackPanel)Root.FindWidgetById("ResourceList");
 
+            _eventManager.OnRegionSelected += HandleRegionSelected;
             _eventManager.OnEmpireSelected += HandleEmpireSelected;
+        }
+
+        private void HandleRegionSelected(object sender, Region e)
+        {
+            Update();
         }
 
         private void HandleEmpireSelected(object sender, Empire e)
@@ -34,9 +40,10 @@ namespace FSG.UI
             {
                 _resourceList.Widgets.Add(new Label
                 {
-                    Text = $"{entry.Key}: {entry.Value} (+{empire.Resources.Production[entry.Key]} " +
-                        $"| -{empire.Resources.Upkeep[entry.Key]})",
+                    Text = $"{entry.Key}: {entry.Value} (+{empire.Resources.Production[entry.Key]}" +
+                        $",-{empire.Resources.Upkeep[entry.Key]})",
                 });
+                _resourceList.Widgets.Add(new VerticalSeparator());
             }
         }
 

@@ -36,6 +36,8 @@ namespace FSG.UI
 
         private readonly Color _hoveredColor = Color.CornflowerBlue;
 
+        private readonly Color _heroColor = Color.DarkGreen;
+
         private const int REGION_SIZE = 20;
 
         public MapLocation(
@@ -65,15 +67,8 @@ namespace FSG.UI
             _selected = _eventManager.SelectedRegion.Id == _regionId;
         }
 
-        public void Draw()
+        private Color GetColor()
         {
-            var rectangle = new Rectangle(
-                (int)_position.X - REGION_SIZE / 2,
-                (int)_position.Y - REGION_SIZE / 2,
-                REGION_SIZE,
-                REGION_SIZE
-            );
-
             var color = _hasEmpire ? _conqueredColor : _defaultColor;
 
             if (_hovered)
@@ -86,7 +81,24 @@ namespace FSG.UI
                 color = _selectedColor;
             }
 
-            _spriteBatch.Draw(_texture, rectangle, color);
+            if (_eventManager.SelectedAgent?.Region.Id == _regionId)
+            {
+                color = _heroColor;
+            }
+
+            return color;
+        }
+
+        public void Draw()
+        {
+            var rectangle = new Rectangle(
+                (int)_position.X - REGION_SIZE / 2,
+                (int)_position.Y - REGION_SIZE / 2,
+                REGION_SIZE,
+                REGION_SIZE
+            );
+
+            _spriteBatch.Draw(_texture, rectangle, GetColor());
         }
 
         private void CheckInput()

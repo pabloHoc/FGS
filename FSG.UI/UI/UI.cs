@@ -59,8 +59,15 @@ namespace FSG.UI
 
         private void HandleRegionSelected(object sender, Entities.Region e)
         {
-            _debugWindow.Show(_desktop);
-            _infoWindow.Show(_desktop);
+            if (!_desktop.Widgets.Contains(_debugWindow))
+            {
+                _debugWindow.Show(_desktop);
+            }
+
+            if (!_desktop.Widgets.Contains(_infoWindow))
+            {
+                _infoWindow.Show(_desktop);
+            }
         }
 
         private void HandleCommandDispatched(object sender, ICommand command)

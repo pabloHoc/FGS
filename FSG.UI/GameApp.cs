@@ -83,13 +83,11 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
     private void HandleUIMouseLeave(object sender, EventArgs e)
     {
-        System.Console.WriteLine("Mouse Left");
         _map.HandleInput = true;
     }
 
     private void HandleUIMouseEnter(object sender, EventArgs e)
     {
-        System.Console.WriteLine("Mouse Entered");
         _map.HandleInput = false;
     }
 

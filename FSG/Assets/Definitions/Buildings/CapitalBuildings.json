@@ -6,7 +6,7 @@
     "Category": "Imperial",
     "Resources": {
       "Category": "Buildings",
-      "Resources": {
+      "Cost": {
         "Food": 5
       },
       "Production": {
@@ -21,8 +21,8 @@
     "Category": "Health",
     "Resources": {
       "Category": "Buildings",
-      "Resources": {
-        "Stone": 3
+      "Cost": {
+        "Stone": 300
       },
       "Production": {
         "Growth": 1
@@ -39,8 +39,8 @@
     },
     "Resources": {
       "Category": "Buildings",
-      "Resources": {
-        "Wood": 5
+      "Cost": {
+        "Wood": 300
       },
       "Production": {
         "Wood": 2
@@ -55,7 +55,7 @@
     "Resources": {
       "Category": "Buildings",
       "Cost": {
-        "Iron": 5
+        "Iron": 500
       },
       "Production": {
         "Iron": 1
