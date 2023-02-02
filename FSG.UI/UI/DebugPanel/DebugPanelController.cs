@@ -15,19 +15,19 @@ namespace FSG.UI
         private readonly EntityListController<Region> _regionList;
         private readonly EntityListController<Agent> _agentList;
 
-        public DebugPanelController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/DebugPanel/DebugPanel.xaml", serviceProvider, eventManager, assetManager)
+        public DebugPanelController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/DebugPanel/DebugPanel.xaml", uiServiceProvider)
         {
-            _commandLog = new CommandLogController(serviceProvider, eventManager, assetManager);
-            _empireList = new EntityListController<Empire>(serviceProvider.GlobalState.World.Empires, serviceProvider, eventManager, assetManager);
-            _regionList = new EntityListController<Region>(serviceProvider.GlobalState.World.Regions, serviceProvider, eventManager, assetManager);
-            _agentList = new EntityListController<Agent>(serviceProvider.GlobalState.World.Agents, serviceProvider, eventManager, assetManager);
+            _commandLog = new CommandLogController(_uiServiceProvider);
+            _empireList = new EntityListController<Empire>(_serviceProvider.GlobalState.World.Empires, _uiServiceProvider);
+            _regionList = new EntityListController<Region>(_serviceProvider.GlobalState.World.Regions, _uiServiceProvider);
+            _agentList = new EntityListController<Agent>(_serviceProvider.GlobalState.World.Agents, _uiServiceProvider);
 
-            _empireList.EntityClickHandler = eventManager.SelectEmpire;
-            _regionList.EntityClickHandler = eventManager.SelectRegion;
-            _agentList.EntityClickHandler = eventManager.SelectAgent;
+            _empireList.EntityClickHandler = _uiServiceProvider.EventManager.SelectEmpire;
+            _regionList.EntityClickHandler = _uiServiceProvider.EventManager.SelectRegion;
+            _agentList.EntityClickHandler = _uiServiceProvider.EventManager.SelectAgent;
 
-            var tabs = new TabsController(serviceProvider, eventManager, assetManager, new Dictionary<string, UIController>
+            var tabs = new TabsController(_uiServiceProvider, new Dictionary<string, UIController>
             {
                 { "Empires", _empireList },
                 { "Regions", _regionList },

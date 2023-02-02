@@ -1,9 +1,7 @@
 ﻿using System;
 using FSG.Commands;
-using FSG.Core;
 using FSG.Definitions;
 using FSG.Entities;
-using Myra.Assets;
 using Myra.Graphics2D.UI;
 
 namespace FSG.UI
@@ -18,15 +16,15 @@ namespace FSG.UI
 
         private readonly VerticalStackPanel _builtBuildingList;
 
-        public CapitalInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/InfoPanel/CapitalInfo/CapitalInfo.xaml", serviceProvider, eventManager, assetManager)
+        public CapitalInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/CapitalInfo/CapitalInfo.xaml", uiServiceProvider)
 		{
             //_districtList = (HorizontalStackPanel)Root.FindWidgetById("DistrictList");
             //_builtDistrictList = (VerticalStackPanel)Root.FindWidgetById("BuiltDistrictList");
             _buildingList = (HorizontalStackPanel)Root.FindWidgetById("BuildingList");
             _builtBuildingList = (VerticalStackPanel)Root.FindWidgetById("BuiltBuildingList");
 
-            eventManager.OnRegionSelected += HandleRegionSelected;
+            uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
 		}
 
         private void HandleRegionSelected(object sender, Region e)
@@ -75,7 +73,7 @@ namespace FSG.UI
 
         private void HandleBuildBuildingClick(object sender, EventArgs e)
         {
-            var region = _eventManager.SelectedRegion;
+            var region = _uiServiceProvider.EventManager.SelectedRegion;
 
             var buildingBtn = (TextButton)sender;
 
@@ -90,7 +88,7 @@ namespace FSG.UI
 
         private void HandleBuildDistrictClick(object sender, EventArgs e)
         {
-            var region = _eventManager.SelectedRegion;
+            var region = _uiServiceProvider.EventManager.SelectedRegion;
 
             var districtBtn = (TextButton)sender;
 
@@ -131,7 +129,7 @@ namespace FSG.UI
 
         private void UpdateDistricts()
         {
-            var region = _eventManager.SelectedRegion;
+            var region = _uiServiceProvider.EventManager.SelectedRegion;
 
             UpdateBuiltDistrictList(region);
             UpdateDistrictList();
@@ -139,7 +137,7 @@ namespace FSG.UI
 
         private void UpdateBuildings()
         {
-            var region = _eventManager.SelectedRegion;
+            var region = _uiServiceProvider.EventManager.SelectedRegion;
 
             UpdateBuiltBuildingList(region);
             UpdateBuildingList();
@@ -147,7 +145,7 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedRegion != null)
+            if (_uiServiceProvider.EventManager.SelectedRegion != null)
             {
                 //UpdateDistricts();
                 UpdateBuildings();

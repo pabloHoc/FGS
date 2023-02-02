@@ -20,13 +20,7 @@ namespace FSG.UI
         //
         private readonly Desktop _desktop = new Desktop();
 
-        private readonly ServiceProvider _serviceProvider;
-
-        private readonly UIEventManager _eventManager;
-
-        private readonly GraphicsDevice _graphicsDevice;
-
-        private readonly SpriteBatch _spriteBatch;
+        private readonly UIServiceProvider _uiServiceProvider;
 
         // Components
 
@@ -44,17 +38,14 @@ namespace FSG.UI
 
         // other
 
-        public UI(ServiceProvider serviceProvider, UIEventManager eventManager, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        public UI(UIServiceProvider uiServiceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _eventManager = eventManager;
-            _graphicsDevice = graphicsDevice;
-            _spriteBatch = spriteBatch;
+            _uiServiceProvider = uiServiceProvider;
 
-            _serviceProvider.Dispatcher.OnCommandDispatched += HandleCommandDispatched;
-            _serviceProvider.Dispatcher.OnCommandProcessed += HandleCommandProcessed;
+            _uiServiceProvider.GameServiceProvider.Dispatcher.OnCommandDispatched += HandleCommandDispatched;
+            _uiServiceProvider.GameServiceProvider.Dispatcher.OnCommandProcessed += HandleCommandProcessed;
 
-            eventManager.OnRegionSelected += HandleRegionSelected;
+            _uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
         }
 
         private void HandleRegionSelected(object sender, Entities.Region e)
@@ -85,13 +76,10 @@ namespace FSG.UI
 
         public void Initialize()
         {
-            var assetResolver = new FileAssetResolver("../../../UI");
-            var assetManager = new AssetManager(assetResolver);
-
-            _topbar = new TopbarController(_serviceProvider, _eventManager, assetManager);
-            _sidebar = new PanelInfoController(_serviceProvider, _eventManager, assetManager);
-            _debugPanel = new DebugPanelController(_serviceProvider, _eventManager, assetManager);
-            _turnPanel = new TurnPanelController(_serviceProvider, _eventManager, assetManager);
+            _topbar = new TopbarController(_uiServiceProvider);
+            _sidebar = new PanelInfoController(_uiServiceProvider);
+            _debugPanel = new DebugPanelController(_uiServiceProvider);
+            _turnPanel = new TurnPanelController(_uiServiceProvider);
 
             _debugWindow = new Window
             {

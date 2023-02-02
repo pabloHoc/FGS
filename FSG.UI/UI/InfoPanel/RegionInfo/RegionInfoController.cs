@@ -1,10 +1,5 @@
-﻿using System.IO;
-using FSG.Core;
-using FSG.Commands;
-using FSG.Entities;
-using Myra.Assets;
+﻿using FSG.Entities;
 using Myra.Graphics2D.UI;
-using System.Collections.Generic;
 
 namespace FSG.UI
 {
@@ -20,18 +15,24 @@ namespace FSG.UI
 
         private readonly EntityListController<Land> _landList;
 
-        public RegionInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/InfoPanel/RegionInfo/RegionInfo.xaml", serviceProvider, eventManager, assetManager)
+        public RegionInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/RegionInfo/RegionInfo.xaml", uiServiceProvider)
         {
             _regionNameLabel = (Label)Root.FindWidgetById("RegionNameLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");
             _resourceList = (VerticalStackPanel)Root.FindWidgetById("ResourceList");
             _buildingQueue = (VerticalStackPanel)Root.FindWidgetById("BuildingQueue");
 
-            _eventManager.OnRegionSelected += HandleRegionSelected;
+            _uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
 
-            _landList = new EntityListController<Land>(serviceProvider.GlobalState.World.Lands, serviceProvider, eventManager, assetManager, ((land) => land.Region == eventManager.SelectedRegion));
-            _landList.EntityClickHandler = eventManager.SelectLand;
+            _landList = new EntityListController<Land>(
+                _serviceProvider.GlobalState.World.Lands,
+                _uiServiceProvider,
+                ((land) => land.Region == _uiServiceProvider.EventManager.SelectedRegion)
+            )
+            {
+                EntityClickHandler = uiServiceProvider.EventManager.SelectLand
+            };
 
             var landListPanel = (VerticalStackPanel)Root.FindWidgetById("LandList");
             landListPanel.Widgets.Add(_landList.Root);
@@ -45,7 +46,7 @@ namespace FSG.UI
         private void HandleEmpireClick(object sender, System.EventArgs e)
         {
             var label = (Label)sender;
-            _eventManager.SelectEmpire(label.Id);
+            _uiServiceProvider.EventManager.SelectEmpire(label.Id);
         }
 
         private void UpdateEmpire(Region region)
@@ -87,9 +88,9 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedRegion != null)
+            if (_uiServiceProvider.EventManager.SelectedRegion != null)
             {
-                var region = _eventManager.SelectedRegion;
+                var region = _uiServiceProvider.EventManager.SelectedRegion;
                 _regionNameLabel.Text = region.Name;
                 _landList.Update();
                 UpdateEmpire(region);

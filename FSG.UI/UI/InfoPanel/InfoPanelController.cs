@@ -24,18 +24,18 @@ namespace FSG.UI
 
         private readonly TabsController _tabs;
 
-        public PanelInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/InfoPanel/InfoPanel.xaml", serviceProvider, eventManager, assetManager)
+        public PanelInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/InfoPanel.xaml", uiServiceProvider)
         {
-            _empireInfo = new EmpireInfoController(serviceProvider, eventManager, assetManager);
-            _regionInfo = new RegionInfoController(serviceProvider, eventManager, assetManager);
-            _landInfo = new LandInfoController(serviceProvider, eventManager, assetManager);
-            _capitalInfo = new CapitalInfoController(serviceProvider, eventManager, assetManager);
-            _populationInfo = new PopulationInfoController(serviceProvider, eventManager, assetManager);
+            _empireInfo = new EmpireInfoController(uiServiceProvider);
+            _regionInfo = new RegionInfoController(uiServiceProvider);
+            _landInfo = new LandInfoController(uiServiceProvider);
+            _capitalInfo = new CapitalInfoController(uiServiceProvider);
+            _populationInfo = new PopulationInfoController(uiServiceProvider);
 
-            _agentInfo = new AgentInfoController(serviceProvider, eventManager, assetManager);
+            _agentInfo = new AgentInfoController(uiServiceProvider);
 
-            _tabs = new TabsController(serviceProvider, eventManager, assetManager,
+            _tabs = new TabsController(uiServiceProvider,
                 new Dictionary<string, UIController>
                 {
                     { "Empire", _empireInfo },
@@ -48,10 +48,10 @@ namespace FSG.UI
 
             ((Panel)Root).Widgets.Add(_tabs.Root);
 
-            eventManager.OnEmpireSelected += HandleEmpireSelected;
-            eventManager.OnRegionSelected += HandleRegionSelected;
-            eventManager.OnLandSelected += HandleLandSelected;
-            eventManager.OnAgentSelected += HandleAgentSelected;
+            _uiServiceProvider.EventManager.OnEmpireSelected += HandleEmpireSelected;
+            _uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
+            _uiServiceProvider.EventManager.OnLandSelected += HandleLandSelected;
+            _uiServiceProvider.EventManager.OnAgentSelected += HandleAgentSelected;
         }
 
         private void HandleEmpireSelected(object sender, Empire e)

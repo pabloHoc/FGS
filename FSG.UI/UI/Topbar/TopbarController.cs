@@ -12,14 +12,14 @@ namespace FSG.UI
 
         private readonly HorizontalStackPanel _resourceList;
 
-        public TopbarController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/Topbar/Topbar.xaml", serviceProvider, eventManager, assetManager)
+        public TopbarController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/Topbar/Topbar.xaml", uiServiceProvider)
         {
             _empireNameLabel = (Label)Root.FindWidgetById("EmpireNameLabel");
             _resourceList = (HorizontalStackPanel)Root.FindWidgetById("ResourceList");
 
-            _eventManager.OnRegionSelected += HandleRegionSelected;
-            _eventManager.OnEmpireSelected += HandleEmpireSelected;
+            _uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
+            _uiServiceProvider.EventManager.OnEmpireSelected += HandleEmpireSelected;
         }
 
         private void HandleRegionSelected(object sender, Region e)
@@ -55,11 +55,15 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedEmpire != null)
+            if (_uiServiceProvider.EventManager.SelectedEmpire != null)
             {
-                var empire = _eventManager.SelectedEmpire;
+                var empire = _uiServiceProvider.EventManager.SelectedEmpire;
                 _empireNameLabel.Text = empire.Name;
                 UpdateResources(empire);
+            }
+            else
+            {
+                Clear();
             }
         }
     }

@@ -1,10 +1,5 @@
-﻿using System.IO;
-using FSG.Core;
-using FSG.Commands;
-using FSG.Entities;
-using Myra.Assets;
+﻿using FSG.Entities;
 using Myra.Graphics2D.UI;
-using System;
 
 namespace FSG.UI
 {
@@ -12,12 +7,12 @@ namespace FSG.UI
     {
         private readonly VerticalStackPanel _popList;
 
-        public PopulationInfoController(ServiceProvider serviceProvider, UIEventManager eventManager,AssetManager assetManager)
-            : base("../../../UI/InfoPanel/PopulationInfo/PopulationInfo.xaml", serviceProvider, eventManager, assetManager)
+        public PopulationInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/PopulationInfo/PopulationInfo.xaml", uiServiceProvider)
         {
             _popList = (VerticalStackPanel)Root.FindWidgetById("PopList");
 
-            _eventManager.OnRegionSelected += HandleRegionSelected;
+            _uiServiceProvider.EventManager.OnRegionSelected += HandleRegionSelected;
         }
 
         private void HandleRegionSelected(object sender, Region region)
@@ -45,9 +40,9 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedRegion?.Empire != null)
+            if (_uiServiceProvider.EventManager.SelectedRegion?.Empire != null)
             {
-                UpdatePops(_eventManager.SelectedRegion);
+                UpdatePops(_uiServiceProvider.EventManager.SelectedRegion);
             } else
             {
                 Clear();

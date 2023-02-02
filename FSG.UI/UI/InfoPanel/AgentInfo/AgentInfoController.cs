@@ -1,9 +1,6 @@
-﻿using System.IO;
-using FSG.Core;
-using FSG.Commands;
+﻿using FSG.Commands;
 using FSG.Definitions;
 using FSG.Entities;
-using Myra.Assets;
 using Myra.Graphics2D.UI;
 
 namespace FSG.UI
@@ -16,15 +13,15 @@ namespace FSG.UI
         private readonly Label _empireLabel;
         private readonly HorizontalStackPanel _spellPanel;
 
-        public AgentInfoController(ServiceProvider serviceProvider, UIEventManager eventManager, AssetManager assetManager)
-            : base("../../../UI/InfoPanel/AgentInfo/AgentInfo.xaml", serviceProvider, eventManager, assetManager)
+        public AgentInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/AgentInfo/AgentInfo.xaml", uiServiceProvider)
         {
             _agentNameLabel = (Label)Root.FindWidgetById("AgentNameLabel");
             _currentActionLabel = (Label)Root.FindWidgetById("CurrentActionLabel");
             _currentRegionLabel = (Label)Root.FindWidgetById("CurrentRegionLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");
             _spellPanel = (HorizontalStackPanel)Root.FindWidgetById("SpellPanel");
-            _eventManager.OnAgentSelected += HandleAgentSelected;
+            _uiServiceProvider.EventManager.OnAgentSelected += HandleAgentSelected;
         }
 
         private void HandleAgentSelected(object sender, Agent agentId)
@@ -39,7 +36,7 @@ namespace FSG.UI
 
             _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction
             {
-                EntityId = _eventManager.SelectedAgent.Id,
+                EntityId = _uiServiceProvider.EventManager.SelectedAgent.Id,
                 EntityType = EntityType.Agent,
                 NewCurrentAction = new ActionQueueItem
                 {
@@ -53,13 +50,13 @@ namespace FSG.UI
         private void HandleRegionClick(object sender, System.EventArgs e)
         {
             var label = (Label)sender;
-            _eventManager.SelectRegion(label.Id);
+            _uiServiceProvider.EventManager.SelectRegion(label.Id);
         }
 
         private void HandleEmpireClick(object sender, System.EventArgs e)
         {
             var label = (Label)sender;
-            _eventManager.SelectEmpire(label.Id);
+            _uiServiceProvider.EventManager.SelectEmpire(label.Id);
         }
 
         private void UpdateSpellList(Agent agent)
@@ -98,9 +95,9 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedAgent != null)
+            if (_uiServiceProvider.EventManager.SelectedAgent != null)
             {
-                var agent = _eventManager.SelectedAgent;
+                var agent = _uiServiceProvider.EventManager.SelectedAgent;
 
                 _agentNameLabel.Text = agent.Name;
                 _currentActionLabel.Text = agent.Actions.Count > 0 ?

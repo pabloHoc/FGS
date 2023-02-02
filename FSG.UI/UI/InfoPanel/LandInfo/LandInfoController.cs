@@ -1,9 +1,6 @@
-﻿using System.IO;
-using FSG.Core;
-using FSG.Commands;
+﻿using FSG.Commands;
 using FSG.Definitions;
 using FSG.Entities;
-using Myra.Assets;
 using Myra.Graphics2D.UI;
 
 namespace FSG.UI
@@ -18,22 +15,17 @@ namespace FSG.UI
 
         private readonly HorizontalStackPanel _buildingList;
 
-        public LandInfoController(
-            ServiceProvider serviceProvider,
-            UIEventManager eventManager,
-            AssetManager assetManager
-        ) : base(
+        public LandInfoController(UIServiceProvider uiServiceProvider) :
+            base(
             "../../../UI/InfoPanel/LandInfo/LandInfo.xaml",
-            serviceProvider,
-            eventManager,
-            assetManager
+            uiServiceProvider
         )
         {
             _landNameLabel = (Label)Root.FindWidgetById("LandNameLabel");
             _regionLabel = (Label)Root.FindWidgetById("RegionLabel");
             _builtBuildingList = (VerticalStackPanel)Root.FindWidgetById("BuiltBuildingList");
             _buildingList = (HorizontalStackPanel)Root.FindWidgetById("BuildingList");
-            _eventManager.OnLandSelected += HandleLandSelected;
+            _uiServiceProvider.EventManager.OnLandSelected += HandleLandSelected;
         }
 
         private void HandleLandSelected(object sender, Land land)
@@ -44,7 +36,7 @@ namespace FSG.UI
         private void HandleRegionClick(object sender, System.EventArgs e)
         {
             var label = (Label)sender;
-            _eventManager.SelectRegion(label.Id);
+            _uiServiceProvider.EventManager.SelectRegion(label.Id);
         }
 
         private void UpdateBuiltBuildingList(Land land)
@@ -68,9 +60,9 @@ namespace FSG.UI
                 .FindAll(definition => definition.BuildingType == BuildingType.LandBuilding);
 
             // TODO: check there's an empire selected
-            var empire = _eventManager.SelectedEmpire;
+            var empire = _uiServiceProvider.EventManager.SelectedEmpire;
 
-            foreach(var building in buildingDefinitions)
+            foreach (var building in buildingDefinitions)
             {
                 var buildingBtn = new TextButton
                 {
@@ -96,9 +88,9 @@ namespace FSG.UI
             {
                 BuildingName = ((TextButton)sender).Id,
                 BuildingType = BuildingType.LandBuilding,
-                LandId = _eventManager.SelectedLand.Id,
-                RegionId = _eventManager.SelectedRegion.Id,
-                EmpireId = _eventManager.SelectedEmpire.Id
+                LandId = _uiServiceProvider.EventManager.SelectedLand.Id,
+                RegionId = _uiServiceProvider.EventManager.SelectedRegion.Id,
+                EmpireId = _uiServiceProvider.EventManager.SelectedEmpire.Id
             });
         }
 
@@ -111,15 +103,16 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedLand != null && _eventManager.SelectedEmpire != null)
+            if (_uiServiceProvider.EventManager.SelectedLand != null && _uiServiceProvider.EventManager.SelectedEmpire != null)
             {
-                var land = _eventManager.SelectedLand;
+                var land = _uiServiceProvider.EventManager.SelectedLand;
                 _landNameLabel.Text = land.Name;
 
                 UpdateBuiltBuildingList(land);
                 UpdateBuildingList(land);
                 UpdateRegion(land);
-            } else
+            }
+            else
             {
                 Clear();
             }

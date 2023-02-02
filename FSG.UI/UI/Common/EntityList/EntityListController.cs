@@ -22,11 +22,9 @@ namespace FSG.UI
 
         public EntityListController(
             List<T> entities,
-            ServiceProvider serviceProvider,
-            UIEventManager eventManager,
-            AssetManager assetManager,
+            UIServiceProvider uiServiceProvider,
             Predicate<T> predicate = null
-        ) : base("../../../UI/Common/EntityList/EntityList.xaml", serviceProvider, eventManager, assetManager)
+        ) : base("../../../UI/Common/EntityList/EntityList.xaml", uiServiceProvider)
         {
             _entities = entities;
             _list = (Grid)Root.FindWidgetById("EntityListGrid");
@@ -43,11 +41,13 @@ namespace FSG.UI
 
             foreach (var entity in entities)
             {
-                var entityLabel = new Label();
-                entityLabel.Id = entity.Id;
+                var entityLabel = new Label
+                {
+                    Id = entity.Id,
+                    Text = ((INameable)entity).Name,
+                    GridRow = count
+                };
                 entityLabel.TouchDown += HandleEntityClick;
-                entityLabel.Text = ((INameable)entity).Name;
-                entityLabel.GridRow = count;
                 _list.AddChild(entityLabel);
                 count++;
             }

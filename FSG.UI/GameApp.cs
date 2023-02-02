@@ -31,10 +31,6 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
     private OrthographicCamera _camera;
 
-    //private Viewport _viewportLeft;
-
-    //private Viewport _viewportRight;
-
     private double _elapsedTime = 0;
 
     public GameApp()
@@ -66,7 +62,13 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         // Initialize UI
         MyraEnvironment.Game = this;
-        _ui = new FSG.UI.UI(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch);
+
+        var assetResolver = new FileAssetResolver("../../../UI");
+        var assetManager = new AssetManager(assetResolver);
+
+        var serviceProvider = new UIServiceProvider(_game.ServiceProvider, _eventManager, GraphicsDevice, _spriteBatch, _camera, assetManager);
+
+        _ui = new UI(serviceProvider);
         _ui.Initialize();
         _ui.OnUIMouseEntered += HandleUIMouseEnter;
         _ui.OnUIMouseLeft += HandleUIMouseLeave;
@@ -114,16 +116,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
         base.Draw(gameTime);
         GraphicsDevice.Clear(Color.PaleTurquoise);
 
-        //var originalViewport = GraphicsDevice.Viewport;
-
-        // Draw Map
-        //GraphicsDevice.Viewport = _viewportRight;
-        //_map.Draw();
-        //_spriteBatch.End();
-
         // Draw UI
-        //GraphicsDevice.Viewport = _viewportLeft;
-        //_spriteBatch.Begin();
         var transformMatrix = _camera.GetViewMatrix();
         _spriteBatch.Begin(transformMatrix: transformMatrix);
         _map.Draw();
@@ -133,7 +126,6 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _ui.Draw();
         _spriteBatch.End();
 
-        //GraphicsDevice.Viewport = originalViewport;
 
         // FPS
         //System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");

@@ -1,10 +1,5 @@
-﻿using System.IO;
-using FSG.Core;
-using FSG.Commands;
-using FSG.Entities;
-using Myra.Assets;
+﻿using FSG.Entities;
 using Myra.Graphics2D.UI;
-using System;
 
 namespace FSG.UI
 {
@@ -14,20 +9,20 @@ namespace FSG.UI
 
         private readonly EntityListController<Region> _regionList;
 
-        public EmpireInfoController(ServiceProvider serviceProvider, UIEventManager eventManager,AssetManager assetManager)
-            : base("../../../UI/InfoPanel/EmpireInfo/EmpireInfo.xaml", serviceProvider, eventManager, assetManager)
+        public EmpireInfoController(UIServiceProvider uiServiceProvider)
+            : base("../../../UI/InfoPanel/EmpireInfo/EmpireInfo.xaml", uiServiceProvider)
         {
             _empireNameLabel = (Label)Root.FindWidgetById("EmpireNameLabel");
-            _eventManager.OnEmpireSelected += HandleEmpireSelected;
+            _uiServiceProvider.EventManager.OnEmpireSelected += HandleEmpireSelected;
 
             _regionList = new EntityListController<Region>(
-                serviceProvider.GlobalState.World.Regions,
-                serviceProvider,
-                eventManager,
-                assetManager,
-                ((region) => region.Empire == eventManager.SelectedEmpire)
-            );
-            _regionList.EntityClickHandler = eventManager.SelectRegion;
+                _serviceProvider.GlobalState.World.Regions,
+                _uiServiceProvider,
+                ((region) => region.Empire == _uiServiceProvider.EventManager.SelectedEmpire)
+            )
+            {
+                EntityClickHandler = _uiServiceProvider.EventManager.SelectRegion
+            };
 
             var regionListPanel = (VerticalStackPanel)Root.FindWidgetById("RegionList");
             regionListPanel.Widgets.Add(_regionList.Root);
@@ -46,11 +41,15 @@ namespace FSG.UI
 
         public override void Update()
         {
-            if (_eventManager.SelectedEmpire != null)
+            if (_uiServiceProvider.EventManager.SelectedEmpire != null)
             {
-                var empire = _eventManager.SelectedEmpire;
+                var empire = _uiServiceProvider.EventManager.SelectedEmpire;
                 _empireNameLabel.Text = empire.Name;
                 _regionList.Update();
+            }
+            else
+            {
+                Clear();
             }
         }
     }

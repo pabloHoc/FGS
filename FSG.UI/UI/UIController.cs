@@ -15,21 +15,23 @@ namespace FSG.UI
     public abstract class UIController
     {
         protected readonly UI _ui;
+
+        protected readonly UIServiceProvider _uiServiceProvider;
+
         protected readonly ServiceProvider _serviceProvider;
-        protected readonly UIEventManager _eventManager;
+
         public Widget Root { get; init; }
 
         public UIController(
             string xmlPath,
-            ServiceProvider serviceProvider,
-            UIEventManager eventManager,
-            AssetManager assetManager)
+            UIServiceProvider uiServiceProvider
+            )
         {
-            _serviceProvider = serviceProvider;
-            _eventManager = eventManager;
+            _uiServiceProvider = uiServiceProvider;
+            _serviceProvider = uiServiceProvider.GameServiceProvider;
 
             string data = File.ReadAllText(xmlPath);
-            Project project = Project.LoadFromXml(data, assetManager);
+            Project project = Project.LoadFromXml(data, uiServiceProvider.AssetManager);
             Root = project.Root;
         }
 

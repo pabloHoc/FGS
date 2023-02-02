@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Myra.Graphics2D.UI;
-using FSG.Core;
-using Myra.Assets;
 
 namespace FSG.UI
 {
@@ -14,11 +11,9 @@ namespace FSG.UI
         private readonly Panel _tabItemsContainer;
 
         public TabsController(
-            ServiceProvider serviceProvider,
-            UIEventManager eventManager,
-            AssetManager assetManager,
+            UIServiceProvider uiServiceProvider,
             Dictionary<string, UIController> tabs
-        ) : base("../../../UI/Common/Tabs/Tabs.xaml", serviceProvider, eventManager, assetManager)
+        ) : base("../../../UI/Common/Tabs/Tabs.xaml", uiServiceProvider)
         {
             var tabsContainer = (HorizontalStackPanel)Root.FindWidgetById("Tabs");
             _tabItemsContainer = (Panel)Root.FindWidgetById("TabItems");
