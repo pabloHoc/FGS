@@ -26,7 +26,7 @@ namespace FSG.UI
 
         private TopbarController _topbar;
 
-        private PanelInfoController _sidebar;
+        private PanelInfoController _infoPanel;
 
         private DebugPanelController _debugPanel;
 
@@ -69,7 +69,7 @@ namespace FSG.UI
         private void HandleCommandProcessed(object sender, ICommand command)
         {
             _topbar.Update();
-            _sidebar.Update();
+            _infoPanel.Update();
             _debugPanel.Update(command);
             _turnPanel.Update();
         }
@@ -77,9 +77,14 @@ namespace FSG.UI
         public void Initialize()
         {
             _topbar = new TopbarController(_uiServiceProvider);
-            _sidebar = new PanelInfoController(_uiServiceProvider);
+            _infoPanel = new PanelInfoController(_uiServiceProvider);
             _debugPanel = new DebugPanelController(_uiServiceProvider);
             _turnPanel = new TurnPanelController(_uiServiceProvider);
+
+            _topbar.Root.MouseEntered += HandleUIMouseEnter;
+            _topbar.Root.MouseLeft += HandleUIMouseLeave;
+            _turnPanel.Root.MouseEntered += HandleUIMouseEnter;
+            _turnPanel.Root.MouseLeft += HandleUIMouseLeave;
 
             _debugWindow = new Window
             {
@@ -96,7 +101,7 @@ namespace FSG.UI
                 Title = "Info Panel"
             };
 
-            _infoWindow.Content = _sidebar.Root;
+            _infoWindow.Content = _infoPanel.Root;
             _infoWindow.Show(_desktop);
             _infoWindow.MouseEntered += HandleUIMouseEnter;
             _infoWindow.MouseLeft += HandleUIMouseLeave;
@@ -121,6 +126,11 @@ namespace FSG.UI
         public void Draw()
         {
             _desktop.Render();
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            _turnPanel.Update(gameTime);
         }
     }
 }

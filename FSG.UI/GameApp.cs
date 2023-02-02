@@ -101,14 +101,7 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         base.Update(gameTime);
         _map.Update(gameTime);
-
-        _elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
-
-        if (_elapsedTime >= 1000)
-        {
-            _elapsedTime = 0;
-            _game.ServiceProvider.Dispatcher.Dispatch(new EndTurn());
-        }
+        _ui.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)

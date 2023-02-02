@@ -1,10 +1,11 @@
 ﻿<Project>
-    <HorizontalStackPanel Id="TurnPanel" Background="#000000" VerticalAlignment="Bottom" Height="30" Width="300" Spacing="12">
+    <HorizontalStackPanel Id="TurnPanel" Background="#000000" VerticalAlignment="Bottom" Height="30" Width="500" Spacing="12">
         <Label Id="TurnLabel" Text="Turn #0" />
         <VerticalSeparator />
         <TextButton Id="ReduceSpeedButton" Text="Slow" />
         <TextButton Id="PauseContinueButton" Text="Pause" />
         <TextButton Id="IncreaseSpeedButton" Text="Fast" />
         <TextButton Id="EndTurnButton" Text="End Turn" />
+        <Label Id="SpeedLabel" Text="Speed: 1x" />
     </HorizontalStackPanel>
 </Project>
