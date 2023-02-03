@@ -49,7 +49,7 @@ namespace FSG.AI
 					CostFromStart = 0,
 					TotalCost = 0,
 					EstimatedCostToEnd = 0,
-					ConnectedTo = region.ConnectedTo.ConvertAll<string>(regionId => regionId.Value)
+					ConnectedTo = region.ConnectedTo.ConvertAll<string>(region => region.Id)
 				});
 			}
 

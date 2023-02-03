@@ -106,8 +106,8 @@ namespace FSG.Commands.Handlers
                         var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[chunk]);
                         var nextRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[nextChunk]);
 
-                        region.ConnectedTo.Add(nextRegion.Id);
-                        nextRegion.ConnectedTo.Add(region.Id);
+                        region.ConnectedTo.Add(nextRegion);
+                        nextRegion.ConnectedTo.Add(region);
                     }
                 }
             }
@@ -189,8 +189,8 @@ namespace FSG.Commands.Handlers
                 foreach (var chunkToConnect in chunksToConnect)
                 {
                     var nextRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == _chunks[chunkToConnect]);
-                    region.ConnectedTo.Add(nextRegion.Id);
-                    nextRegion.ConnectedTo.Add(region.Id);
+                    region.ConnectedTo.Add(nextRegion);
+                    nextRegion.ConnectedTo.Add(region);
                 }
             }
         }

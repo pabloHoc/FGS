@@ -96,9 +96,8 @@ namespace FSG.UI
 
         private void GenerateRoads(Region region)
         {
-            foreach (var connectedRegionId in region.ConnectedTo)
+            foreach (var connectedRegion in region.ConnectedTo)
             {
-                var connectedRegion = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == connectedRegionId);
                 _roads.Add(new Road
                 {
                     Start = new Vector2(region.X, region.Y),

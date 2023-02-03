@@ -32,7 +32,7 @@ namespace FSG.Commands.Handlers
                 Empire = empire,
                 X = command.X,
                 Y = command.Y,
-                ConnectedTo = new List<EntityId<Region>>(),
+                ConnectedTo = new List<Region>(),
                 Capital = new Capital(),
                 BuildingQueue = new Queue<BuildingQueueItem>(),
                 Resources = resourceBlock,
