@@ -5,6 +5,8 @@ namespace FSG.Services
 {
 	public class ServiceMap
 	{
+        public ActionService ActionService { get; }
+
 		public BuildingService BuildingService { get; }
 
 		public EconomicCategoryService EconomicCategoryService { get; }
@@ -17,7 +19,8 @@ namespace FSG.Services
 
 		public ServiceMap(ServiceProvider serviceProvider)
 		{
-			BuildingService = new BuildingService(serviceProvider);
+            ActionService = new ActionService(serviceProvider);
+            BuildingService = new BuildingService(serviceProvider);
 			EconomicCategoryService = new EconomicCategoryService(serviceProvider);
 			ModifierService = new ModifierService(serviceProvider);
 			SpellService = new SpellService(serviceProvider);

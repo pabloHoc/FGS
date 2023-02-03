@@ -57,6 +57,12 @@ namespace FSG.UI
                 _empireLabel.Text = region.Empire.Name;
                 _empireLabel.TouchDown += HandleEmpireClick;
             }
+            else
+            {
+                _empireLabel.Id = null;
+                _empireLabel.Text = null;
+                _empireLabel.TouchDown -= HandleEmpireClick;
+            }
         }
 
         private void UpdateResources(Region region)

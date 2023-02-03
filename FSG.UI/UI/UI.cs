@@ -70,7 +70,7 @@ namespace FSG.UI
         {
             _topbar.Update();
             _infoPanel.Update();
-            _debugPanel.Update(command);
+            _debugPanel.Update();
             _turnPanel.Update();
         }
 

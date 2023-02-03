@@ -12,13 +12,11 @@ namespace FSG.UI
     {
         private readonly Vector2 _position;
 
-        private readonly EntityId<Region> _regionId;
+        private readonly Region _region;
 
         private bool _selected = false;
 
         private bool _hovered = false;
-
-        private readonly bool _hasEmpire = false;
 
         private readonly UIEventManager _eventManager;
 
@@ -49,8 +47,7 @@ namespace FSG.UI
         )
         {
             _position = new Vector2(region.X, region.Y);
-            _regionId = region.Id;
-            _hasEmpire = region.Empire != null;
+            _region = region;
 
             _eventManager = eventManager;
             _spriteBatch = spriteBatch;
@@ -64,12 +61,12 @@ namespace FSG.UI
 
         private void HandleRegionSelected(object sender, Region e)
         {
-            _selected = _eventManager.SelectedRegion.Id == _regionId;
+            _selected = _eventManager.SelectedRegion.Id == _region.Id;
         }
 
         private Color GetColor()
         {
-            var color = _hasEmpire ? _conqueredColor : _defaultColor;
+            var color = _region.Empire != null ? _conqueredColor : _defaultColor;
 
             if (_hovered)
             {
@@ -81,7 +78,7 @@ namespace FSG.UI
                 color = _selectedColor;
             }
 
-            if (_eventManager.SelectedAgent?.Region.Id == _regionId)
+            if (_eventManager.SelectedAgent?.Region.Id == _region.Id)
             {
                 color = _heroColor;
             }
@@ -115,12 +112,12 @@ namespace FSG.UI
             if (_hovered && mouseState.IsButtonDown(MouseButton.Left))
             {
                 _selected = _hovered;
-                _eventManager.SelectRegion(_regionId);
+                _eventManager.SelectRegion(_region.Id);
             }
 
             if (_hovered && mouseState.IsButtonDown(MouseButton.Right))
             {
-                _eventManager.SecondarySelectRegion(_regionId);
+                _eventManager.SecondarySelectRegion(_region.Id);
             }
         }
 

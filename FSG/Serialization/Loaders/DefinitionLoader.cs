@@ -25,6 +25,7 @@ namespace FSG.Serialization
 
         public void LoadDefinitions()
         {
+            this.LoadDefinition<AgentActionDefinition>("AgentActions/AgentActions.json");
             this.LoadDefinition<BuildingDefinition>("Buildings/LandBuildings.json");
             this.LoadDefinition<BuildingDefinition>("Buildings/CapitalBuildings.json");
             this.LoadDefinition<BuildingDefinition>("Buildings/Districts.json");

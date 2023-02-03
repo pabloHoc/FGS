@@ -65,7 +65,7 @@ namespace FSG.Commands
         private void ProcessCommands(KeyValuePair<string, object> commandEntry, IBaseEntity scope, ScopeContext scopeContext)
         {
             // Clone the payload to avoid modifying the original reference
-            var payload = new Dictionary<string, object>((Dictionary<string, object>)commandEntry.Value);
+            var payload = new Dictionary<string, object> { { commandEntry.Key, commandEntry.Value } };
 
             foreach (var payloadEntry in payload)
             {

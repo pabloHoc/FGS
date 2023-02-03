@@ -9,13 +9,13 @@ namespace FSG.Commands
     {
         private readonly Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> _agentCommands = new ()
         {
-            { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire(scope, payload) },
             { "CreateAgent", (IBaseEntity scope, dynamic payload) => new CreateAgent(payload) }
         };
 
         private readonly Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> _regionCommands = new()
         {
-            { "CreatePop", (IBaseEntity scope, dynamic payload) => new CreatePop(payload) }
+            { "CreatePop", (IBaseEntity scope, dynamic payload) => new CreatePop(payload) },
+            { "SetOwnerEmpire", (IBaseEntity scope, dynamic payload) => new SetOwnerEmpire(scope, payload) }
         };
 
         private Dictionary<string, Func<IBaseEntity, dynamic, ICommand>> GetCommandMapFor<T>(T entity) where T : IBaseEntity

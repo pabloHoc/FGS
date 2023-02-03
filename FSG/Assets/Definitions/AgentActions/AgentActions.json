@@ -1,0 +1,16 @@
+﻿[
+  {
+    "Name": "ConquestRegion",
+    "BaseExecutionTime": 2,
+    "Conditions": {
+      "Region": {
+        "HasEmpire": false
+      }
+    },
+    "Actions": {
+      "Region": {
+        "SetOwnerEmpire": "Root"
+      }
+    }
+  }
+]

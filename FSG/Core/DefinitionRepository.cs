@@ -8,8 +8,10 @@ namespace FSG.Core
 {
     public class DefinitionRepository
     {
+        // This could be turned into lists
         private class DefinitionDictionaryMap
         {
+            public Dictionary<string, AgentActionDefinition> AgentActionDefinition { get; } = new Dictionary<string, AgentActionDefinition>();
             public Dictionary<string, BuildingDefinition> BuildingDefinition { get; } = new Dictionary<string, BuildingDefinition>();
             public Dictionary<string, EconomicCategoryDefinition> EconomicCategoryDefinition { get; } = new Dictionary<string, EconomicCategoryDefinition>();
             public Dictionary<string, LandDefinition> LandDefinition { get; } = new Dictionary<string, LandDefinition>();

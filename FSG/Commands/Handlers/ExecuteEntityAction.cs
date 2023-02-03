@@ -14,11 +14,7 @@ namespace FSG.Commands.Handlers
         {
             var entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
 
-            if (command.ActionType == ActionType.Spell)
-            {
-                var spell = _serviceProvider.Definitions.Get<SpellDefinition>(command.ActionName);
-                _serviceProvider.Services.SpellService.Execute(entity, spell);
-            } else if (command.ActionName == "Move")
+            if (command.ActionName == "Move")
             {
                 _serviceProvider.Dispatcher.Dispatch(new Commands.SetLocation
                 {
@@ -26,6 +22,16 @@ namespace FSG.Commands.Handlers
                     EntityType = entity.EntityType,
                     RegionId = new EntityId<Region>(command.Payload)
                 });
+            }
+            else if (command.ActionType == ActionType.Spell)
+            {
+                var spell = _serviceProvider.Definitions.Get<SpellDefinition>(command.ActionName);
+                _serviceProvider.Services.SpellService.Execute(entity, spell);
+            }
+            else if (command.ActionType == ActionType.Action)
+            {
+                var action = _serviceProvider.Definitions.Get<AgentActionDefinition>(command.ActionName);
+                _serviceProvider.Services.ActionService.Execute(entity, action);
             }
         } 
     }

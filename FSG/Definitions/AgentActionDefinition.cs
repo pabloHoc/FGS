@@ -1,4 +1,5 @@
 ﻿using System;
+using FSG.Commands;
 
 namespace FSG.Definitions
 {
@@ -12,6 +13,8 @@ namespace FSG.Definitions
         public int BaseExecutionTime { get; init; }
 
         public FSG.Conditions.Conditions Conditions { get; init; }
+
+        public Actions Actions { get; init; }
     }
 }
 

@@ -11,6 +11,8 @@
         <Label Text="Current Action" />
         <Label Id="CurrentActionLabel" />
         <HorizontalSeparator />
+        <Label Text="Actions" />
+        <HorizontalStackPanel Id="ActionPanel" Spacing="8" />
         <Label Text="Spells" />
         <HorizontalStackPanel Id="SpellPanel" Spacing="8" />
     </VerticalStackPanel>

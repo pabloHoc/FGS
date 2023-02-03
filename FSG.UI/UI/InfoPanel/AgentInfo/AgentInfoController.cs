@@ -8,10 +8,16 @@ namespace FSG.UI
     public class AgentInfoController : UIController
     {
         private readonly Label _agentNameLabel;
+
         private readonly Label _currentActionLabel;
+
         private readonly Label _currentRegionLabel;
+
         private readonly Label _empireLabel;
+
         private readonly HorizontalStackPanel _spellPanel;
+
+        private readonly HorizontalStackPanel _actionPanel;
 
         public AgentInfoController(UIServiceProvider uiServiceProvider)
             : base("../../../UI/InfoPanel/AgentInfo/AgentInfo.xaml", uiServiceProvider)
@@ -21,6 +27,7 @@ namespace FSG.UI
             _currentRegionLabel = (Label)Root.FindWidgetById("CurrentRegionLabel");
             _empireLabel = (Label)Root.FindWidgetById("EmpireLabel");
             _spellPanel = (HorizontalStackPanel)Root.FindWidgetById("SpellPanel");
+            _actionPanel = (HorizontalStackPanel)Root.FindWidgetById("ActionPanel");
             _uiServiceProvider.EventManager.OnAgentSelected += HandleAgentSelected;
         }
 
@@ -43,6 +50,24 @@ namespace FSG.UI
                     ActionType = ActionType.Spell,
                     Name = spellDefinition.Name,
                     RemainingTurns = spellDefinition.BaseExecutionTime
+                }
+            });
+        }
+
+        private void HandleActionClick(object sender, System.EventArgs e)
+        {
+            var actionBtn = (TextButton)sender;
+            var actionDefinition = _serviceProvider.Definitions.Get<AgentActionDefinition>(actionBtn.Id);
+
+            _serviceProvider.Dispatcher.Dispatch(new SetEntityCurrentAction
+            {
+                EntityId = _uiServiceProvider.EventManager.SelectedAgent.Id,
+                EntityType = EntityType.Agent,
+                NewCurrentAction = new ActionQueueItem
+                {
+                    ActionType = ActionType.Action,
+                    Name = actionDefinition.Name,
+                    RemainingTurns = actionDefinition.BaseExecutionTime
                 }
             });
         }
@@ -79,6 +104,26 @@ namespace FSG.UI
             }
         }
 
+        private void UpdateActionList(Agent agent)
+        {
+            _actionPanel.Widgets.Clear();
+
+            var actionDefinitions = _serviceProvider.Definitions.GetAll<AgentActionDefinition>();
+
+            foreach (var action in actionDefinitions)
+            {
+                var actionBtn = new TextButton
+                {
+                    Id = action.Name,
+                    Text = action.Name,
+                    Enabled = _serviceProvider.Services.ActionService.Allow(agent, action)
+                };
+                actionBtn.Click += HandleActionClick;
+
+                _actionPanel.Widgets.Add(actionBtn);
+            }
+        }
+
         private void UpdateRegion(Agent agent)
         {
             _currentRegionLabel.Id = agent.Region.Id;
@@ -104,6 +149,7 @@ namespace FSG.UI
                     $"{agent.Actions.Peek().Name} ({agent.Actions.Peek().RemainingTurns})" : "";
 
                 UpdateSpellList(agent);
+                UpdateActionList(agent);
                 UpdateEmpire(agent);
                 UpdateRegion(agent);
             }

@@ -21,7 +21,7 @@ namespace FSG.Commands.Handlers
 
             if (command.EntityType == EntityType.Region)
             {
-                entity = _serviceProvider.GlobalState.World.Regions.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
+                entity = _serviceProvider.GlobalState.World.Regions.Find(agent => agent.Id == (EntityId<Region>)command.EntityId);
             }
 
             entity.Empire = empire;
