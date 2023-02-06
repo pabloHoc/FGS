@@ -34,9 +34,12 @@ namespace FSG.Services
         {
             var scorers = new List<Scorer>();
 
-            foreach (var scorerName in definition.Scorers)
+            if (definition.Scorers != null)
             {
-                scorers.Add(_serviceProvider.Definitions.Get<ScorerDefinition>(scorerName).Scorer);
+                foreach (var scorerName in definition.Scorers)
+                {
+                    scorers.Add(_serviceProvider.Definitions.Get<ScorerDefinition>(scorerName).Scorer);
+                }
             }
 
             return scorers;

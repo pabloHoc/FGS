@@ -19,12 +19,7 @@ namespace FSG.AI
 
 		public void PlayTurn()
 		{
-            IDomain<GameState, IBaseEntity> domain = new Domain(
-				_serviceProvider.Definitions.GetAll<TaskDefinition>(),
-				_serviceProvider.GlobalState, // TODO: this should be the instance the player knows
-				_player,
-				_serviceProvider.Services.TaskService
-			);
+            IDomain<GameState, IBaseEntity> domain = new Domain(_serviceProvider, _player);
 
 			var planner = new Planner<GameState, IBaseEntity>(domain);
 

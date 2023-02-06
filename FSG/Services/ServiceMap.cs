@@ -11,8 +11,6 @@ namespace FSG.Services
 
 		public EconomicCategoryService EconomicCategoryService { get; }
 
-		public ModifierService ModifierService { get; }
-
         public SpellService SpellService { get; }
 
 		public TaskService TaskService { get; }
@@ -22,7 +20,6 @@ namespace FSG.Services
             ActionService = new ActionService(serviceProvider);
             BuildingService = new BuildingService(serviceProvider);
 			EconomicCategoryService = new EconomicCategoryService(serviceProvider);
-			ModifierService = new ModifierService(serviceProvider);
 			SpellService = new SpellService(serviceProvider);
 			TaskService = new TaskService(serviceProvider);
 		}

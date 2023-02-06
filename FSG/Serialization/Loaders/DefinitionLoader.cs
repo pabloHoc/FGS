@@ -36,7 +36,7 @@ namespace FSG.Serialization
             this.LoadDefinition<SocialStructureDefinition>("SocialStructures/SocialStructures.json");
             this.LoadDefinition<SpellDefinition>("Spells/Spells.json");
             this.LoadDefinition<ResourceDefinition>("Resources/Resources.json");
-            this.LoadDefinition<TaskDefinition>("Tasks/test.json");
+            this.LoadDefinition<TaskDefinition>("Tasks/Tasks.json");
         }
     }
 }

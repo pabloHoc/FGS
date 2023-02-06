@@ -77,7 +77,7 @@ namespace FSG.UI
 
             var buildingBtn = (TextButton)sender;
 
-            _serviceProvider.Dispatcher.Dispatch(new AddBuildingToQueue
+            _serviceProvider.Dispatcher.Dispatch(new QueueBuilding
             {
                 BuildingName = buildingBtn.Id,
                 RegionId = region.Id,
@@ -92,7 +92,7 @@ namespace FSG.UI
 
             var districtBtn = (TextButton)sender;
 
-            _serviceProvider.Dispatcher.Dispatch(new AddBuildingToQueue
+            _serviceProvider.Dispatcher.Dispatch(new QueueBuilding
             {
                 BuildingName = districtBtn.Id,
                 RegionId = region.Id,

@@ -4,6 +4,7 @@ using FSG.Commands;
 using Myra.Assets;
 using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace FSG.UI
 {

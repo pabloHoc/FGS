@@ -20,18 +20,26 @@ namespace FSG.Commands.Handlers
                 RemainingTurns = command.Duration
             };
 
-            if (command.TargetType == EntityType.Region)
+            switch (command.TargetType)
             {
-                var region = _serviceProvider.GlobalState.World.Regions
-                    .Find(region => region.Id == (EntityId<Region>)command.TargetId);
-                region.Modifiers.Add(modifier);
-            }
-
-            if (command.TargetType == EntityType.Empire)
-            {
-                var region = _serviceProvider.GlobalState.World.Empires
-                    .Find(empire => empire.Id == (EntityId<Empire>)command.TargetId);
-                region.Modifiers.Add(modifier);
+                case EntityType.Region:
+                {
+                    var region = _serviceProvider.GlobalState.World.Regions
+                        .Find(region => region.Id == (EntityId<Region>)command.TargetId);
+                    region.Modifiers.Add(modifier);
+                    // TODO: check if it's production modifier
+                    region.ComputeProduction = true;
+                    break;
+                }
+                case EntityType.Empire:
+                {
+                    var empire = _serviceProvider.GlobalState.World.Empires
+                        .Find(empire => empire.Id == (EntityId<Empire>)command.TargetId);
+                    empire.Modifiers.Add(modifier);
+                    // TODO: check if it's production modifier
+                    empire.ComputeProduction = true;
+                    break;
+                }
             }
         }
     }

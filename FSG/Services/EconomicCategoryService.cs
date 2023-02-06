@@ -55,17 +55,15 @@ namespace FSG.Services
             List<Entities.Modifier> regionModifiers
         )
         {
-            var modifierNames = new string[]
-            {
-                $"{economicCategory.Name}{resource}{economicType.ToString()}", // e.g. EmpireFoodProduction
-                $"{economicCategory.Name}{economicType.ToString()}" // e.g. EmpireProduction
-            };
+            var economicTypeString = economicType.ToString();
+            var resourceModifier = $"{economicCategory.Name}{resource}{economicTypeString}"; // e.g. EmpireFoodProduction
+            var economicTypeModifier= $"{economicCategory.Name}{economicTypeString}"; // e.g. EmpireProduction
 
-            Predicate<Modifier> modifierInModifierNames = m => Array.IndexOf(modifierNames, m.Name) != -1;
+            bool ModifierInModifierNames(Modifier m) => m.Name == resource || m.Name == economicTypeModifier;
 
             var modifiers = new List<Entities.Modifier>();
-            modifiers.AddRange(empireModifiers.FindAll(modifierInModifierNames));
-            modifiers.AddRange(regionModifiers.FindAll(modifierInModifierNames));
+            modifiers.AddRange(empireModifiers.FindAll(ModifierInModifierNames));
+            modifiers.AddRange(regionModifiers.FindAll(ModifierInModifierNames));
 
             var total = GetModifierTotals(modifiers);
 

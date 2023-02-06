@@ -11,9 +11,9 @@ namespace FSG.Commands
 
 		public ActionType ActionType { get; init; }
 
-		public IEntityId EntityId { get; init; }
+		public IEntityId SourceEntityId { get; init; }
 
-		public EntityType EntityType { get; init; }
+		public EntityType SourceEntityType { get; init; }
 
 		public string Payload { get; init; }
 	}

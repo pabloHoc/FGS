@@ -13,7 +13,7 @@ namespace FSG.Definitions
 
 		public string TaskType { get; init; }
 
-		public List<string> SubTasks { get; init; }
+		public List<string> Subtasks { get; init; }
 
 		public double Weight { get; init; }
 

@@ -37,6 +37,8 @@ namespace FSG.Commands.Handlers
                 }
             }
 
+            region.ComputeProduction = true;
+
             if (buildingDefinition.OnBuilt != null)
             {
                 _serviceProvider.ActionProcessor.Process(buildingDefinition.OnBuilt, region, region.Id);

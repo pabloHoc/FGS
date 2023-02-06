@@ -46,6 +46,7 @@
     <None Remove="Assets\Definitions\SocialStructures\" />
     <None Remove="Assets\Definitions\Configs\" />
     <None Remove="Assets\Definitions\AgentActions\" />
+    <None Remove="AI\Tasks\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -81,6 +82,10 @@
     <Folder Include="Assets\Definitions\SocialStructures\" />
     <Folder Include="Assets\Definitions\Configs\" />
     <Folder Include="Assets\Definitions\AgentActions\" />
+    <Folder Include="AI\Tasks\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services\ModifierService.cs" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

@@ -16,7 +16,7 @@ namespace FSG.Commands.Handlers
 
             _serviceProvider.Dispatcher.Dispatch(new Commands.ExecuteEntityAction
             {
-                EntityId = entity.Id,
+                SourceEntityId = entity.Id,
                 ActionName = action.Name,
                 ActionType = action.ActionType,
                 Payload = action.Payload

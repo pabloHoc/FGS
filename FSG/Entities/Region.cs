@@ -27,6 +27,8 @@ namespace FSG.Entities
         public Queue<BuildingQueueItem> BuildingQueue { get; init; }
 
         public ResourceBlock Resources { get; init; }
+        
+        public bool ComputeProduction { get; set; } = false;
 
         public List<Land> Lands { get; init; }
 

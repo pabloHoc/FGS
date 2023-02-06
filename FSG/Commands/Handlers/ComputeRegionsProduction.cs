@@ -6,8 +6,7 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    // TODO: We should separate upkeep from production
-
+    // TODO: Separate production from upkeep
     public class ComputeRegionsProduction : CommandHandler<Commands.ComputeRegionsProduction>
     {
         public ComputeRegionsProduction(ServiceProvider serviceProvider) : base(serviceProvider) { }
@@ -18,9 +17,15 @@ namespace FSG.Commands.Handlers
 
             foreach (var region in regions)
             {
-                ClearProductionAndUpkeep(region);
-                ComputeProduction(region);
-                ComputeUpkeep(region);
+                if (region.ComputeProduction)
+                {
+                    ClearProductionAndUpkeep(region);
+                    ComputeProduction(region);
+                    ComputeUpkeep(region);
+                    
+                    region.ComputeProduction = false;
+                    region.Empire.ComputeProduction = true;
+                }
             }
         }
 
@@ -35,22 +40,19 @@ namespace FSG.Commands.Handlers
 
         private void ComputeProduction(Region region)
         {
-            var regionModifiers = _serviceProvider.Services.ModifierService
-                .GetModifiersFor(region);
-
             foreach (var land in region.Lands)
             {
                 //ComputeLandProduction(land, region);
 
                 foreach (var building in land.Buildings)
                 {
-                    ComputeBuildingProduction(building, region, regionModifiers);
+                    ComputeBuildingProduction(building, region);
                 }
             }
 
             foreach (var building in region.Capital.Buildings)
             {
-                ComputeBuildingProduction(building, region, regionModifiers);
+                ComputeBuildingProduction(building, region);
             }
 
             foreach (var pop in region.Pops)
@@ -110,8 +112,7 @@ namespace FSG.Commands.Handlers
 
         private void ComputeBuildingProduction(
             string building,
-            Region region,
-            List<Modifier> regionModifiers
+            Region region
         )
         {
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(building);
@@ -127,7 +128,7 @@ namespace FSG.Commands.Handlers
                         resource.Key,
                         resource.Value,
                         new List<Modifier>(),
-                        regionModifiers
+                        region.Modifiers
                     );
 
                 if (region.Resources.Production.ContainsKey(resource.Key))

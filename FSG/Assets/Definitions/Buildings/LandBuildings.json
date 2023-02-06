@@ -8,6 +8,9 @@
       "Category": "Buildings",
       "Cost": {
         "Wood": 50
+      },
+      "Production": {
+        "Food": 10
       }
     },
     "OnBuilt": {

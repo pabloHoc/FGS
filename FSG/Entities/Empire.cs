@@ -14,6 +14,8 @@ namespace FSG.Entities
 
         public ResourceBlock Resources { get; init; }
 
+        public bool ComputeProduction { get; set; } = false;
+
         public string SocialStructure { get; init; }
 
         public List<Region> Regions { get; init; }

@@ -25,6 +25,7 @@ namespace FSG.Commands.Handlers
                     Size = command.Size
                 };
                 region.Pops.Add(pop);
+                region.ComputeProduction = true;
             }
         }
     }

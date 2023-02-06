@@ -18,9 +18,14 @@ namespace FSG.Commands.Handlers
 
             foreach (var empire in empires)
             {
-                ClearProductionAndUpkeep(empire);
-                ComputeProduction(empire);
-                ComputeUpkeep(empire);
+                if (empire.ComputeProduction)
+                {
+                    ClearProductionAndUpkeep(empire);
+                    ComputeProduction(empire);
+                    ComputeUpkeep(empire);
+
+                    empire.ComputeProduction = false;
+                }
             }
         }
 
@@ -54,29 +59,24 @@ namespace FSG.Commands.Handlers
 
         private void ComputeRegionProduction(Region region, Empire empire)
         {
-            var empireModifiers = _serviceProvider.Services.ModifierService
-                .GetModifiersFor(empire);
-            var regionModifiers = _serviceProvider.Services.ModifierService
-                .GetModifiersFor(region);
-
             foreach (var land in region.Lands)
             {
                 //ComputeLandProduction(land, empire);
 
                 foreach (var building in land.Buildings)
                 {
-                    ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
+                    ComputeBuildingProduction(building, region, empire);
                 }
             }
 
             foreach (var building in region.Capital.Buildings)
             {
-                ComputeBuildingProduction(building, region, empire, empireModifiers, regionModifiers);
+                ComputeBuildingProduction(building, region, empire);
             }
 
             foreach (var pop in region.Pops)
             {
-                ComputePopProduction(pop, empire, empireModifiers, regionModifiers);
+                ComputePopProduction(pop, region, empire);
             }
         }
 
@@ -96,9 +96,8 @@ namespace FSG.Commands.Handlers
 
         private void ComputePopProduction(
             Pop pop,
-            Empire empire,
-            List<Modifier> empireModifiers,
-            List<Modifier> regionModifiers
+            Region region,
+            Empire empire
         )
         {
             var strata = _serviceProvider.Definitions.Get<SocialStructureDefinition>(empire.SocialStructure)
@@ -116,8 +115,8 @@ namespace FSG.Commands.Handlers
                             EconomicType.Production,
                             resource.Key,
                             resource.Value,
-                            empireModifiers,
-                            regionModifiers
+                            empire.Modifiers,
+                            region.Modifiers
                         );
 
                     empire.Resources.Production[resource.Key] += totalPopProduction * pop.Size;
@@ -141,9 +140,7 @@ namespace FSG.Commands.Handlers
         private void ComputeBuildingProduction(
             string building,
             Region region,
-            Empire empire,
-            List<Modifier> empireModifiers,
-            List<Modifier> regionModifiers
+            Empire empire
         )
         {
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(building);
@@ -158,8 +155,8 @@ namespace FSG.Commands.Handlers
                         EconomicType.Production,
                         resource.Key,
                         resource.Value,
-                        empireModifiers,
-                        regionModifiers
+                        empire.Modifiers,
+                        region.Modifiers
                     );
 
                 if (empire.Resources.Production.ContainsKey(resource.Key))

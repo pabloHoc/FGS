@@ -5,12 +5,12 @@ using FSG.Entities;
 
 namespace FSG.Commands.Handlers
 {
-    public class AddBuildingToQueue : CommandHandler<Commands.AddBuildingToQueue>
+    public class QueueBuilding : CommandHandler<Commands.QueueBuilding>
     {
-        public AddBuildingToQueue(ServiceProvider serviceProvider)
+        public QueueBuilding(ServiceProvider serviceProvider)
             : base(serviceProvider) { }
 
-        public override void Handle(Commands.AddBuildingToQueue command)
+        public override void Handle(Commands.QueueBuilding command)
         {
             var region = _serviceProvider.GlobalState.World.Regions.Find(region => region.Id == command.RegionId);
             var buildingDefinition = _serviceProvider.Definitions.Get<BuildingDefinition>(command.BuildingName);

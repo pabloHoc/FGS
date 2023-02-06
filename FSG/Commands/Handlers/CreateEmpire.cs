@@ -32,7 +32,8 @@ namespace FSG.Commands.Handlers
                 SocialStructure = "Feudal",
                 Regions = new List<Region>(),
                 Agents = new List<Agent>(),
-                Armies = new List<Army>()
+                Armies = new List<Army>(),
+                Modifiers = new List<Modifier>()
             };
 
             _serviceProvider.GlobalState.World.Empires.Add(empire);

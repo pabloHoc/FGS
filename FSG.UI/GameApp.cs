@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using FSG.Commands;
 using FSG.UI;
@@ -49,6 +50,9 @@ public class GameApp : Microsoft.Xna.Framework.Game
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        
+        _graphics.SynchronizeWithVerticalRetrace = false;
+        this.IsFixedTimeStep = false;
     }
 
     protected override void LoadContent()
@@ -118,10 +122,8 @@ public class GameApp : Microsoft.Xna.Framework.Game
         _spriteBatch.Begin();
         _ui.Draw();
         _spriteBatch.End();
-
-
         // FPS
-        //System.Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");
+        Console.WriteLine($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds}");
     }
 }
 

@@ -4,9 +4,9 @@ using FSG.Entities;
 
 namespace FSG.Commands
 {
-	public struct AddBuildingToQueue : ICommand
+	public struct QueueBuilding : ICommand
 	{
-		public string Name { get => "AddBuildingToQueue"; }
+		public string Name { get => "QueueBuilding"; }
 
 		public BuildingType BuildingType { get; init; }
 

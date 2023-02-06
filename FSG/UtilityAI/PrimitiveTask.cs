@@ -18,13 +18,16 @@ namespace FSG.UtilityAI
 
         private readonly Func<Context, Target, bool> _validator;
 
+        private readonly Operation<Context, Target> _operation;
+
         public PrimitiveTask(
             string name,
             double weight,
             Func<Context, Target, bool> validator,
             List<Scorer> scorers,
             Context context,
-            Target target
+            Target target,
+            Operation<Context, Target> operation = null
         )
         {
             Name = name;
@@ -33,6 +36,7 @@ namespace FSG.UtilityAI
             _scorers = scorers;
             _context = context;
             _target = target;
+            _operation = operation;
         }
 
         // There could be different ways to score scorers:
@@ -61,7 +65,7 @@ namespace FSG.UtilityAI
 
         public void Execute()
         {
-
+            _operation.Execute(_context, _target);
         }
     }
 }

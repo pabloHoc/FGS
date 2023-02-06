@@ -2,7 +2,7 @@
   {
     "Name": "WinGame",
     "TaskType": "HighestScore",
-    "Subtasks": [ "EvaluateRegionsToConquest", "SendAgentToConquestRegion" ],
+    "Subtasks": [ "SendAgentToConquestRegion" ],
     "IsRoot": true,
     "Target": "Empire"
   },

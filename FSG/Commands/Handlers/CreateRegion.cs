@@ -37,7 +37,8 @@ namespace FSG.Commands.Handlers
                 BuildingQueue = new Queue<BuildingQueueItem>(),
                 Resources = resourceBlock,
                 Lands = new List<Land>(),
-                Pops = new List<Pop>()
+                Pops = new List<Pop>(),
+                Modifiers = new List<Modifier>()
             };
 
             _serviceProvider.GlobalState.World.Regions.Add(region);

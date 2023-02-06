@@ -84,7 +84,7 @@ namespace FSG.UI
 
         private void HandleBuildingClick(object sender, System.EventArgs e)
         {
-            _serviceProvider.Dispatcher.Dispatch(new AddBuildingToQueue
+            _serviceProvider.Dispatcher.Dispatch(new QueueBuilding
             {
                 BuildingName = ((TextButton)sender).Id,
                 BuildingType = BuildingType.LandBuilding,

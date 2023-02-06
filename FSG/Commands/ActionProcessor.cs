@@ -55,6 +55,7 @@ namespace FSG.Commands
                         ModifierType = modifierType,
                         Value = Convert.ToDecimal(modifier.Value),
                         TargetId = ((dynamic)scope).Id,
+                        TargetType = ((dynamic)scope).EntityType,
                         SourceId = sourceId
                     });
                 }

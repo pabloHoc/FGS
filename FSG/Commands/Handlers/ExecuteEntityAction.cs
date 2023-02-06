@@ -12,7 +12,7 @@ namespace FSG.Commands.Handlers
 
         public override void Handle(Commands.ExecuteEntityAction command)
         {
-            var entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.EntityId);
+            var entity = _serviceProvider.GlobalState.World.Agents.Find(agent => agent.Id == (EntityId<Agent>)command.SourceEntityId);
 
             if (command.ActionName == "Move")
             {

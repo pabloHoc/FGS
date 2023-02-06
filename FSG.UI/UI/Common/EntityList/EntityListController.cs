@@ -35,21 +35,27 @@ namespace FSG.UI
         {
             var count = 1;
 
-            _list.Widgets.Clear();
-
             var entities = _predicate != null ? _entities.FindAll(_predicate) : _entities;
 
-            foreach (var entity in entities)
+            // TODO: we are assuming that entities doesn't change,
+            // only get added/deleted, we could have some "dirty" check
+            // or a changed flag
+            if (_list.Widgets.Count != entities.Count)
             {
-                var entityLabel = new Label
+                Clear();
+
+                foreach (var entity in entities)
                 {
-                    Id = entity.Id,
-                    Text = ((INameable)entity).Name,
-                    GridRow = count
-                };
-                entityLabel.TouchDown += HandleEntityClick;
-                _list.AddChild(entityLabel);
-                count++;
+                    var entityLabel = new Label
+                    {
+                        Id = entity.Id,
+                        Text = ((INameable)entity).Name,
+                        GridRow = count
+                    };
+                    entityLabel.TouchDown += HandleEntityClick;
+                    _list.AddChild(entityLabel);
+                    count++;
+                }
             }
         }
 
