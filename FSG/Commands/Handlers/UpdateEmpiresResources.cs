@@ -38,7 +38,7 @@ namespace FSG.Commands.Handlers
                             _serviceProvider.ActionProcessor.Process(resourceDefinition.OnDeficit, empire, empire.Id);
                         } else if (hadDeficit && !hasDeficit)
                         {
-                            // TODO: Revert modifier   
+                            _serviceProvider.ActionProcessor.Revert(resourceDefinition.OnDeficit, empire, empire.Id);
                         }
                     }
                 }

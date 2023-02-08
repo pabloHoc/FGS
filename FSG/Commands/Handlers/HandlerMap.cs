@@ -31,6 +31,7 @@ namespace FSG.Commands.Handlers
                 { typeof(Commands.CreatePop), new CreatePop(serviceProvider) },
                 { typeof(Commands.CreateRegion), new CreateRegion(serviceProvider) },
                 { typeof(Commands.CreateSpell), new CreateSpell(serviceProvider) },
+                { typeof(Commands.DeleteModifier), new DeleteModifier(serviceProvider) },
                 { typeof(Commands.EndTurn), new EndTurn(serviceProvider) },
                 { typeof(Commands.ExecuteCurrentEntityAction), new ExecuteCurrentEntityAction(serviceProvider) },
                 { typeof(Commands.ExecuteEntityAction), new ExecuteEntityAction(serviceProvider) },

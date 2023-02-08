@@ -27,40 +27,54 @@ namespace FSG.Commands
             _serviceProvider = serviceProvider;
         }
 
-        private bool IsModifierBlock(string str)
+        private static bool IsModifierBlock(string str)
         {
             return str == "Modifiers";
         }
 
-        private bool IsModifierTypeBlock(string str)
+        private static bool IsModifierTypeBlock(string str)
         {
-            return str == "Add" || str == "Mult" || str == "Reduction";
+            return str is "Add" or "Mult" or "Reduction";
         }
 
-        private object GetEntityFromScopeContextKey(ScopeContext scopeContext, string key)
+        private static object GetEntityFromScopeContextKey(ScopeContext scopeContext, string key)
         {
             var property = scopeContext.GetType().GetProperty(key);
             return property?.GetValue(scopeContext);
         }
 
-        private void ProcessModifiers(KeyValuePair<string, object> entry, IBaseEntity scope, IEntityId sourceId)
+        private void ProcessModifiers(KeyValuePair<string, object> entry, IBaseEntity scope, IEntityId sourceId, bool remove)
         {
             if (Enum.TryParse(entry.Key, out ModifierType modifierType))
             {
                 foreach (var modifier in (Dictionary<string, object>)entry.Value)
                 {
-                    _serviceProvider.Dispatcher.Dispatch(new CreateModifier
+                    if (!remove)
                     {
-                        ModifierName = modifier.Key,
-                        ModifierType = modifierType,
-                        Value = Convert.ToDecimal(modifier.Value),
-                        TargetId = ((dynamic)scope).Id,
-                        TargetType = ((dynamic)scope).EntityType,
-                        SourceId = sourceId
-                    });
+                        _serviceProvider.Dispatcher.Dispatch(new CreateModifier
+                        {
+                            ModifierName = modifier.Key,
+                            ModifierType = modifierType,
+                            Value = Convert.ToDecimal(modifier.Value),
+                            TargetId = ((dynamic)scope).Id,
+                            TargetType = ((dynamic)scope).EntityType,
+                            SourceId = sourceId
+                        });
+                    }
+                    else
+                    {
+                        _serviceProvider.Dispatcher.Dispatch(new DeleteModifier
+                        {
+                            ModifierName = modifier.Key,
+                            ModifierType = modifierType,
+                            Value = Convert.ToDecimal(modifier.Value),
+                            TargetId = ((dynamic)scope).Id,
+                            TargetType = ((dynamic)scope).EntityType,
+                            SourceId = sourceId
+                        });
+                    }
                 }
             }
-
         }
 
         private void ProcessCommands(KeyValuePair<string, object> commandEntry, IBaseEntity scope, ScopeContext scopeContext)
@@ -90,7 +104,7 @@ namespace FSG.Commands
             _serviceProvider.Dispatcher.Dispatch(command);
         }
 
-        private void ProcessActions<T, U, V>(T actions, U scope, ScopeContext scopeContext, V sourceId)
+        private void ProcessActions<T, U, V>(T actions, U scope, ScopeContext scopeContext, V sourceId, bool revert)
             where T : Dictionary<string, object>
             where U : IBaseEntity
             where V : IEntityId
@@ -108,25 +122,32 @@ namespace FSG.Commands
                 {
                     var newScope = _serviceProvider.Scopes.GetFrom(scopeKey, scope);
                     scopeContext.Prev = scope;
-                    ProcessActions((Dictionary<string, object>)entry.Value, newScope, scopeContext, sourceId);
+                    ProcessActions((Dictionary<string, object>)entry.Value, newScope, scopeContext, sourceId, revert);
                 }
                 else if (IsModifierBlock(entry.Key))
                 {
-                    ProcessActions((Dictionary<string, object>)entry.Value, scope, scopeContext, sourceId);
+                    ProcessActions((Dictionary<string, object>)entry.Value, scope, scopeContext, sourceId, revert);
                 }
                 else if (IsModifierTypeBlock(entry.Key))
                 {
-                    ProcessModifiers(entry, scope, sourceId);
+                    ProcessModifiers(entry, scope, sourceId, revert);
                 }
             }
         }
 
-        // TODO: remove mandatory sourceId
+        // TODO: remove mandatory sourceId, sourceId is only used for modifiers and spells
         public void Process<T, U>(Actions actions, T scope, U sourceId) where T : IEntity<T> where U : IEntityId
         {
             var scopeContext = new ScopeContext { Root = scope, This = scope };
-            ProcessActions(actions, scope, scopeContext, sourceId);
+            ProcessActions(actions, scope, scopeContext, sourceId, false);
 		}
-	}
+        
+        // Only removes modifiers (for now)
+        public void Revert<T, U>(Actions actions, T scope, U sourceId) where T : IEntity<T> where U : IEntityId
+        {
+            var scopeContext = new ScopeContext { Root = scope, This = scope };
+            ProcessActions(actions, scope, scopeContext, sourceId, true);
+        }
+    }
 }
 

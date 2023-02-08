@@ -7,6 +7,8 @@ namespace FSG.Entities
         Reduction
     }
 
+    // TODO: this doesn't need an Id, we could remove it by value
+    
     public class Modifier : IEntity<Modifier>, ITemporary
     {
         public EntityType EntityType => EntityType.Modifier;
