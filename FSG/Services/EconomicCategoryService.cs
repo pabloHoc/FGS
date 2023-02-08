@@ -67,7 +67,7 @@ namespace FSG.Services
 
             var total = GetModifierTotals(modifiers);
 
-            return ((baseValue + total.Add) * (1 + total.Mult) * (1 + total.Reduction));
+            return ((baseValue + total.Add) * (1 + total.Mult) / (1 + total.Reduction));
         }
     }
 }

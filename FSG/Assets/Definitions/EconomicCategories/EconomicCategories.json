@@ -10,6 +10,10 @@
     "Name": "Buildings"
   },
   {
-    "Name": "Peasants"
+    "Name": "Pops"
+  },
+  {
+    "Name": "Peasants",
+    "Parent": "Pops"
   }
 ]

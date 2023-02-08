@@ -105,7 +105,8 @@
             "Iron": 1
           },
           "Upkeep": {
-            "Food": 1
+            "Food": 1,
+            "Housing": 1
           }
         }
       }

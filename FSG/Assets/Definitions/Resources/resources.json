@@ -3,19 +3,35 @@
   // Maybe we should change scope to global/local
   {
     "Name": "Food",
-    "Scope": "Empire"
+    "Scope": "Empire",
+    "IsStockpiled": true
   },
   {
     "Name": "Wood",
-    "Scope": "Empire"
+    "Scope": "Empire",
+    "IsStockpiled": true
   },
   {
     "Name": "Stone",
-    "Scope": "Empire"
+    "Scope": "Empire",
+    "IsStockpiled": true
   },
   {
     "Name": "Iron",
-    "Scope": "Empire"
+    "Scope": "Empire",
+    "IsStockpiled": true
+  },
+  {
+    "Name": "Housing",
+    "Scope": "Region",
+    "IsStockpiled": false,
+    "OnDeficit": {
+      "Modifiers": {
+        "Reduction": {
+          "PeasantsProduction": 1
+        }
+      }
+    }
   }
   //{
   //  "Name": "Tools",

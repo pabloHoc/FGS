@@ -80,7 +80,7 @@
       "Modifiers": {
         "Region": {
           "Mult": {
-            "PeasantsWoodProduction": 0.1
+            "PeasantWoodProduction": 0.1
           }
         }
       }

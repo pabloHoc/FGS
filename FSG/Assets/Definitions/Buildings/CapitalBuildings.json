@@ -34,9 +34,6 @@
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
     "Category": "Splendor",
-    "Conditions": {
-      "IsLandType": "Forest"
-    },
     "Resources": {
       "Category": "Buildings",
       "Cost": {
@@ -51,7 +48,7 @@
     "Name": "Market",
     "BuildingType": "CapitalBuilding",
     "BaseBuildTime": 2,
-    "Category":  "Comercial",
+    "Category":  "Commercial",
     "Resources": {
       "Category": "Buildings",
       "Cost": {
@@ -59,6 +56,22 @@
       },
       "Production": {
         "Iron": 1
+      }
+    }
+  },  
+  {
+    "Name": "Village",
+    "BuildingType": "CapitalBuilding",
+    "BaseBuildTime": 2,
+    "Category": "Housing",
+    "Resources": {
+      "Category": "Buildings",
+      "Cost": {
+        "Wood": 300,
+        "Stone": 500
+      },
+      "Production": {
+        "Housing": 10
       }
     }
   }

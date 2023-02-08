@@ -12,5 +12,9 @@ namespace FSG.Definitions
         public Scope Scope { get; init; }
 
         public Actions Actions { get; init; }
+        
+        public Actions OnDeficit { get; init; }
+
+        public bool IsStockpiled { get; init; }
     }
 }
